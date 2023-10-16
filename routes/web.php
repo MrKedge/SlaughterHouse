@@ -16,7 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::get('/log-in', [AuthController::class, 'ShowLogin']);
-Route::get('/sign-up', [AuthController::class, 'ShowSignUp']);
+Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log-in');
+Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign-up');
+
+Route::POST('sign-up/store', [AuthController::class, 'StoreAccount'])->name("admin.store-account");
+Route::POST('login/authenticate', [AuthController::class, 'Authenticate'])->name('login.authenticate');
