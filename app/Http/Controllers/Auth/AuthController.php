@@ -16,9 +16,14 @@ class AuthController extends Controller
         return view('auth.log-in');
     }
 
+    public function ShowClientSignUp()
+    {
+        return view('auth.client-sign-up');
+    }
+
     public function ShowSignUp()
     {
-        return view('auth.sign-up');
+        return view('auth.admin-sign-up');
     }
 
     public function StoreAccount(Request $request)
@@ -36,6 +41,29 @@ class AuthController extends Controller
         $user->first_name = $request->firstName;
         $user->last_name = $request->lastName;
         $user->role = $request->role;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+
+        $user->save();
+        return redirect()->route('log-in');
+    }
+
+    //for other sign up
+    public function StoreClientAccount(Request $request)
+    {
+        $request->validate([
+            'firstName' => 'min:3|required',
+            'lastName' => 'min:3|required',
+
+            'email' => 'required|unique:users,email',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        $user = new User();
+
+        $user->first_name = $request->firstName;
+        $user->last_name = $request->lastName;
+        $user->role = "Client";
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
 

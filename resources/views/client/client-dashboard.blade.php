@@ -27,8 +27,6 @@
                     <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
                 </a>
             </div>
-
-            <p class="pl-3 text-gray-500">TABLE</p>
             <div class="pl-16 my-8">
                 <div class="relative">
                     <a href="">
@@ -44,44 +42,21 @@
                         <h1 class="my-6">ANIMAL</h1>
                     </a>
                 </div>
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/user-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">OWNER</h1>
-                    </a>
-                </div>
+
             </div>
-            <p class="pl-3  text-gray-500">REPORTS</p>
+
             <div class="pl-16 my-8">
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/report-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">LRME</h1>
-                    </a>
-                </div>
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/report-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">SSHPDP</h1>
-                    </a>
-                </div>
+
             </div>
-            <p class="pl-3  text-gray-500">SETTINGS</p>
+
             <div class="pl-16 my-8">
-                <a href="">
-                    <img src="{{ asset('images/account-white-icon.png') }}" alt="image"
-                        class="absolute right-[180px] w-[]">
-                    <h1 class="my-6">ACCOUNT</h1>
-                </a>
+
             </div>
             <hr class="mx-auto w-3/4">
         </div>
         <div class="ml-[240px] h-[40px] bg-white z-10 flex justify-start">
             <div class="px-4 pt-2 font-extrabold text-[#0E7BBB]">
-                <h1>ADMIN</h1>
+                <h1>OWNER</h1>
             </div>
             <form action="" class="flex relative">
                 <input type="text" placeholder="Search..."
@@ -94,17 +69,18 @@
             </form>
         </div>
 
-        <div class="flex justify-between ml-[240px] m-10 mb-5">
+        <div class="flex justify-start ml-[240px] m-10 mb-5">
             <div
-                class="h-40 bg-white w-[250px] ml-10 rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
+                class="h-40 bg-white w-[250px] ml-10 rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative mr-8">
                 <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">REGISTRATION</h1>
+                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">PENDING</h1>
 
                     <img src="{{ asset('images/register-icon.png') }}" alt="image"
                         class="z-40 absolute right-[10px] top-[5px] ">
                 </a>
             </div>
-            <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
+            <div
+                class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative mr-8">
                 <a href="">
                     <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">ANIMAL</h1>
 
@@ -114,50 +90,37 @@
             </div>
             <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
                 <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">OWNER</h1>
-                    <img src="{{ asset('images/user-icon.png') }}" alt="image"
-                        class="z-40 absolute right-[10px] top-[5px] ">
-                </a>
-            </div>
-            <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
-                <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">ACCOUNT</h1>
-                    <img src="{{ asset('images/user-account-icon.png') }}" alt="image"
+                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">APPROVED</h1>
+                    <img src="{{ asset('images/approved-icon.png') }}" alt="image"
                         class="z-40 absolute right-[10px] top-[5px]">
                 </a>
             </div>
         </div>4
         <div class="flex justify-center">
             <div class="h-[400px] w-[1200px] bg-white  ml-[240px] rounded-2xl  mb-[55px]">
-                <header class="font-extrabold p-4 text-[#EE6C4D]">RECENT REGISTRATION</header>
+                <header class="font-extrabold p-4 text-[#EE6C4D]">SCHEDULE OF SLAUGHTER</header>
                 <div>
                     <table class="w-full text-center p-11">
                         <thead>
                             <tr>
-                                <th>Number</th>
                                 <th>Date</th>
-                                <th>Owner's Name</th>
-                                <th>Address</th>
-                                <th>Status</th>
+                                <th>No. of Animals</th>
+                                <th>Schedule of Slaughter</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>1</td>
                                 <td>2023-10-16</td>
-                                <td>John Doe</td>
-                                <td>123 Main St, City, State</td>
-                                <td>Active</td>
-                                <td><button>Edit</button><button>Delete</button></td>
+                                <td>10</td>
+                                <td>Morning</td>
+                                <td><button>Details</button></td>
                             </tr>
                             <tr>
-                                <td>2</td>
                                 <td>2023-10-17</td>
-                                <td>Jane Smith</td>
-                                <td>456 Elm St, City, State</td>
-                                <td>Inactive</td>
-                                <td><button>Edit</button><button>Delete</button></td>
+                                <td>15</td>
+                                <td>Afternoon</td>
+                                <td><button>Details</button></td>
                             </tr>
                             <!-- Add more rows as needed -->
                         </tbody>

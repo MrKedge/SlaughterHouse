@@ -20,7 +20,7 @@
     <div class="z-0 md:z-40 relative mx-auto w-[400px] bg-white mt-[200px] h-2/3 rounded-[25px] shadow-2xl">
         <h1 class="text-center text-4xl font-bold pt-5 pb-5">Sign Up</h1>
         <div class="font-semibold text-[20px]">
-            <form class="" action="{{ route('admin.store-account') }}" method="POST">
+            <form class="" action="{{ route('client.store-account') }}" method="POST">
                 @csrf
                 <div class="flex justify-center p-2">
                     <div class="text-left mr-1"><label for="">First Name</label></div>
@@ -30,24 +30,6 @@
                     <div class=" text-center mr-1"><label for="">Last Name</label></div>
                     <div><input type="text" name="lastName" class="rounded-[25px] bg-gray-200"></div>
                 </div>
-                <div class="flex justify-between mx-4">
-                    <div class="w-4/12 px-2">
-                        <h1>Role</h1>
-
-                    </div>
-
-                    <div class="w-10/12 mx-2">
-                        <select name="role" id=""
-                            class="w-full h-[30px] text-center  rounded-[20px] bg-gray-200">
-                            <option value="client">Client</option>
-                            <option value="abbatoir">Abbatoir</option>
-                            <option value="inspector">Inspector</option>
-                            <option value="butcher">Butcher</option>
-                        </select>
-                    </div>
-                </div>
-
-
                 <div class="flex justify-center p-2">
                     <div class="w-[100px] text-centers"><label for="email">Email</label></div>
                     <div><input type="email" name="email" class="rounded-[25px] bg-gray-200"></div>
