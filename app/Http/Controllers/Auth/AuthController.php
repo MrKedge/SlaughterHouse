@@ -16,14 +16,17 @@ class AuthController extends Controller
         return view('auth.log-in');
     }
 
-    public function ShowClientSignUp()
+    public function LogOut(Request $request)
     {
-        return view('auth.client-sign-up');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateTOken();
+        return redirect('log-in')->with('status', 'Logout Successful');
     }
 
     public function ShowSignUp()
     {
-        return view('auth.admin-sign-up');
+        return view('auth.sign-up');
     }
 
     public function StoreAccount(Request $request)
@@ -45,7 +48,7 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
 
         $user->save();
-        return redirect()->route('log-in');
+        return redirect()->route('log.in');
     }
 
     //for other sign up
@@ -63,23 +66,36 @@ class AuthController extends Controller
 
         $user->first_name = $request->firstName;
         $user->last_name = $request->lastName;
-        $user->role = "Client";
+        $user->role = $request->role;
         $user->email = $request->email;
+        $user->address = $request->address;
         $user->password = Hash::make($request->password);
 
         $user->save();
-        return redirect()->route('log-in');
+        return redirect()->route('log.in');
     }
 
+    //login try
     public function Authenticate(Request $request)
     {
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('home');
+
+            // Check the user's role
+            $user = Auth::user();
+            if ($user->role === 'admin') {
+                // Redirect admin to admin dashboard
+                return redirect()->route('admin.dashboard');
+            } elseif ($user->role === 'client') {
+                // Redirect client to client overview
+                return redirect()->route('client.overview');
+            }
         }
+        return redirect()->route('log.in')->with('error', 'Invalid email or password');
     }
 }

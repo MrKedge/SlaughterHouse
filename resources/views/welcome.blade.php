@@ -4,14 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     @vite('resources/css/app.css')
+    <title>under develop</title>
 </head>
 
 <body>
-    Welcome There is nothing Here!!
+
+
+
 </body>
 
 </html>

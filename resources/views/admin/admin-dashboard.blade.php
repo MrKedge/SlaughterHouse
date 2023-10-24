@@ -4,97 +4,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     @vite('resources/css/app.css')
+    <title>admin dashboard</title>
 </head>
 
-<body>
-    <main class=" bg-[#D5DFE8]">
-        <div class="w-[240px] fixed bg-[#293241] h-full text-white">
-            <div class="">
-                <header class="text-center py-8 relative font-bold">
-                    <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image"
-                        class="z-40 absolute  top-2 p-1">
-                    <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
-                </header>
-            </div>
-            <div>
-                <a href="">
-                    <img src="{{ asset('images/dashboard-white-icon.png') }}" alt="image"
-                        class="absolute right-[180px] w-[]">
-                    <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
-                </a>
-            </div>
+<body class="bg-[#D5DFE8] h-full w-full overflow-y-hidden">
 
-            <p class="pl-3 text-gray-500">TABLE</p>
-            <div class="pl-16 my-8">
+
+    <div class="ml-[240px] h-[40px] bg-white z-10 flex justify-start fixed top-0 w-full">
+        {{-- header --}}
+        <div class="px-4 pt-2 font-extrabold text-[#0E7BBB] flex">
+            <h1>ADMIN</h1>
+
+        </div>
+    </div>
+    <div class="">
+        <div class="fixed left-0 h-full w-[240px] bg-[#293241] text-white">
+            <header class="text-center py-8 relative font-bold">
+                <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
+                <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
+            </header>
+            <a href="">
                 <div class="relative">
-                    <a href="">
-                        <img src="{{ asset('images/register-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">REGISTRATION</h1>
-                    </a>
+                    <span class="absolute left-8"><box-icon name='dashboard' type='solid'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
                 </div>
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/cow-animal-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">ANIMAL</h1>
-                    </a>
+            </a>
+            <p class="pl-3 text-gray-500">TABLE</p>
+            <a href="{{ route('admin.view.animal.reg.list') }}">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='pencil' type='solid'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">REGISTRATION</h1>
                 </div>
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/user-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">OWNER</h1>
-                    </a>
+            </a>
+            <a href="">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='list-ul' color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">ANIMAL</h1>
                 </div>
-            </div>
-            <p class="pl-3  text-gray-500">REPORTS</p>
-            <div class="pl-16 my-8">
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/report-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">LRME</h1>
-                    </a>
+            </a>
+            <a href="">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='user-circle' type='solid'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">OWNER</h1>
                 </div>
-                <div>
-                    <a href="">
-                        <img src="{{ asset('images/report-white-icon.png') }}" alt="image"
-                            class="absolute right-[180px] w-[]">
-                        <h1 class="my-6">SSHPDP</h1>
-                    </a>
+            </a>
+            <p class="pl-3 text-gray-500">REPORTS</p>
+            <a href="">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">LRME</h1>
                 </div>
-            </div>
-            <p class="pl-3  text-gray-500">SETTINGS</p>
-            <div class="pl-16 my-8">
-                <a href="">
-                    <img src="{{ asset('images/account-white-icon.png') }}" alt="image"
-                        class="absolute right-[180px] w-[]">
-                    <h1 class="my-6">ACCOUNT</h1>
-                </a>
-            </div>
+            </a>
+            <a href="">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">SSHPDP</h1>
+                </div>
+            </a>
+            <p class="pl-3 text-gray-500">OPTION</p>
+            <a href="">
+                <div class="relative">
+                    <span class="absolute left-8"><box-icon name='group' type='solid'
+                            color='#ffffff'></box-icon></span>
+                    <h1 class="my-6 pl-[65px]">USER ACCOUNTS</h1>
+                </div>
+            </a>
             <hr class="mx-auto w-3/4">
         </div>
-        <div class="ml-[240px] h-[40px] bg-white z-10 flex justify-start">
-            <div class="px-4 pt-2 font-extrabold text-[#0E7BBB]">
-                <h1>ADMIN</h1>
-            </div>
-            <form action="" class="flex relative">
-                <input type="text" placeholder="Search..."
-                    class="rounded-2xl m-0 my-2 border-gray-700 border p-1 text-center">
-                <div class="p-2 pl-1">
-                    <button>
-                        <img src="{{ asset('images/search-icon.png') }}" alt="Image" class="absolute top-2">
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <div class="flex justify-between ml-[240px] m-10 mb-5">
+        {{-- this is for the table inside --}}
+    </div>
+    <section class="pt-[80px] pr-[40px]">
+        {{-- baba ng uluhan --}}
+        <div class="flex justify-between ml-[240px]">
             <div
                 class="h-40 bg-white w-[250px] ml-10 rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
                 <a href="">
@@ -103,6 +92,9 @@
                     <img src="{{ asset('images/register-icon.png') }}" alt="image"
                         class="z-40 absolute right-[10px] top-[5px] ">
                 </a>
+                <div class="flex justify-center align-middle">
+                    <p class="text-center text-6xl pt-5 text-gray-400">100</p>
+                </div>
             </div>
             <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
                 <a href="">
@@ -126,48 +118,54 @@
                         class="z-40 absolute right-[10px] top-[5px]">
                 </a>
             </div>
-        </div>4
-        <div class="flex justify-center">
-            <div class="h-[400px] w-[1200px] bg-white  ml-[240px] rounded-2xl  mb-[55px]">
-                <header class="font-extrabold p-4 text-[#EE6C4D]">RECENT REGISTRATION</header>
-                <div>
-                    <table class="w-full text-center p-11">
+        </div>
+    </section>
+    <div class="ml-[240px] pt-[40px]">
+        <section class=" flex justify-center  h-screen">
+            <div class="bg-white h-[400px] w-[1200px] rounded-2xl">
+                <h1 class="text-center font-extrabold text-[#EE6C4D] pb-8 pt-4 text-2xl">RECENT REGISTRATION</h1>
+                <div class="flex justify-center relative px-4">
+                    {{-- table goes here --}}
+
+                    <table class="w-full text-center p-11 ">
                         <thead>
-                            <tr>
-                                <th>Number</th>
-                                <th>Date</th>
-                                <th>Owner's Name</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                            <tr class="">
+                                <th class="border border-black p-2">No.</th>
+                                <th class="border border-black p-2">Date</th>
+                                <th class="border border-black p-2">Owner's Name</th>
+                                <th class="border border-black p-2">Address</th>
+                                <th class="border border-black p-2">Status</th>
+                                <th class="border border-black p-2">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="">
                             <tr>
-                                <td>1</td>
-                                <td>2023-10-16</td>
-                                <td>John Doe</td>
-                                <td>123 Main St, City, State</td>
-                                <td>Active</td>
-                                <td><button>Edit</button><button>Delete</button></td>
+                                <td class="py-4">1</td>
+                                <td class="py-4">2023-10-16</td>
+                                <td class="py-4">John Doe</td>
+                                <td class="py-4">123 Main St, City, State</td>
+                                <td class="py-4 font-semibold">Active</td>
+                                <td class="py-4">
+                                    <a
+                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-0">
+                                        View
+                                    </a>
+
+                                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mx-1 py-0">
+                                        delete
+                                    </a>
+
+                                </td>
                             </tr>
                             <tr>
-                                <td>2</td>
-                                <td>2023-10-17</td>
-                                <td>Jane Smith</td>
-                                <td>456 Elm St, City, State</td>
-                                <td>Inactive</td>
-                                <td><button>Edit</button><button>Delete</button></td>
+
                             </tr>
                             <!-- Add more rows as needed -->
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-
-
-    </main>
+        </section>
+    </div>
 </body>
 
 </html>

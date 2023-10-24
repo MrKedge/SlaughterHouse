@@ -6,47 +6,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     @vite('resources/css/app.css')
     <title>log-in</title>
 </head>
 
-<body>
-    <div class="absolute text-white flex justify-end w-full z-10">
-        <span class="mr-1">About</span>
-        <span class="mr-1">Contact</span>
-    </div>
-    <div class="">
-        <img src="{{ asset('images/CowBg.png') }}" alt="image" class="z-0 absolute h-full w-full">
-
-        <div class="absolute bg-white text-center top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div>
-                <h1>LOG IN</h1>
-            </div>
-            <form action="{{ route('login.authenticate') }}" method="POST">
-                @csrf
-                <div class="flex">
-                    <div class=""><label for="email">Email</label></div>
-                    <div><input type="email" name="email"></div>
-                </div>
-                <div class="flex">
-                    <div><label for="password">Password</label></div>
-                    <div><input type="password" name="password"></div>
-                    <div></div>
-                </div>
-                <div>
-                    <a href="">Forgot Password?</a>
-                </div>
-                <div>
-                    <button class="p-1 bg-blue-500 p-[2px] rounded-lg" type="submit">LOG IN</button>
-                </div>
-                <div>
-                    <p>Don't have an Account?</p>
-                    <a href="">Create an Account</a>
-                </div>
-            </form>
+<body class="overflow-hidden">
+    <div class="flex justify-center items-center h-screen">
+        <div class="z-40 absolute top-0 left-0 w-full h-4 text-end font-sans font-semibold text-gray-800"><span><a
+                    href="">About
+                    us</a></span>
+            <span class="px-4"><a href="">Contact</a></span>
         </div>
-    </div>
+        <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image">
+        <section
+            class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+            <h1 class="text-center text-4xl font-bold py-8 ">LOG IN</h1>
+            <div class="flex justify-center">
+                <form action="{{ route('login.authenticate') }}" method="POST"
+                    class="text-lg font-semibold text-center">
+                    @csrf
+                    <div class="pb-5 relative">
 
+                        <input type="email" name="email" placeholder="Email" required
+                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
+                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='envelope'
+                                type='solid'></box-icon></span>
+                    </div>
+                    <div class="pb-5 relative">
+
+                        <input type="password" name="password" placeholder="Password" required
+                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
+                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
+                                name='lock'></box-icon></span>
+                    </div>
+
+                    <div class="block text-center p-2 pb-3"><button class=" bg-[#293241] text-white w-[300px]"
+                            type="submit">LOG IN
+                        </button>
+                        <div class="py-4">
+                            <h1 class="text-center font-semibold">Don't have an account?
+                            </h1>
+                            <h1 class="text-center font-semibold"><a href="{{ route('sign.up') }}"
+                                    class="text-[#0E7BBB]">Create
+                                    an account? </a>
+                            </h1>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
 
 </body>
 
