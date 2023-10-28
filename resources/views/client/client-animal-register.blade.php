@@ -128,7 +128,9 @@ value="{{ auth()->user()->address }}" @endauth
                                         <div><label for="">Butcher</label></div>
                                         <select name="butcher" id="" required
                                             class="bg-gray-200 gap-3 [300px]">
-                                            <option value="lorem">lorem</option>
+                                            <option value="lorem">butcher1</option>
+                                            <option value="lorem">butcher2</option>
+                                            <option value="lorem">butcher3</option>
                                             <option value="private">PRIVATE</option>
 
                                         </select>

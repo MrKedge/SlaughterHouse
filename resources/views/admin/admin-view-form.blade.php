@@ -33,7 +33,7 @@
                 </div>
             </a>
             <p class="pl-3 text-gray-500">TABLE</p>
-            <a href="">
+            <a href="{{ route('admin.view.animal.reg.list') }}">
                 <div class="relative">
                     <span class="absolute left-8"><box-icon name='pencil' type='solid'
                             color='#ffffff'></box-icon></span>
@@ -97,13 +97,14 @@
                                     <div class=" gap-2">
                                         <div><label for="">Owner Name</label></div>
                                         <div>
-                                            <p class="bg-gray-200 w-[300px]">Doe</p>
+                                            <p class="bg-gray-200 w-[300px] capitalize">{{ $user->first_name }}
+                                                {{ $user->last_name }}</p>
                                         </div>
                                     </div>
                                     <div class=" gap-2">
                                         <div><label for="">Address</label></div>
                                         <div>
-                                            <p class="bg-gray-200 w-[300px]">lorem</p>
+                                            <p class="bg-gray-200 w-[300px] capitalize">{{ $user->address }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +143,9 @@
                                     <div>
                                         <div><label for="">Butcher</label></div>
                                         <div>
-                                            <p class="bg-gray-200 w-[300px] ">lorem</p>
+                                            <p class="bg-gray-200 w-[300px] ">
+                                                {{ $animal->first()->butcher }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -154,14 +157,21 @@
                                     <div class=" gap-2">
                                         <div><label for="">Age Classification</label></div>
                                         <div>
-                                            <p class="bg-gray-200 w-[300px] ">lorem</p>
+                                            @foreach ($user->animals as $animal)
+                                                @if ($animal->id == $user->id)
+                                                    <p class="bg-gray-200 w-[300px]">
+                                                        {{ $animal->butcher }}
+                                                    </p>
+                                                @endif
+                                            @endforeach
                                         </div>
                                     </div>
                                     <div class=" gap-2">
                                         <div><label for="">Destination
                                             </label></div>
                                         <div>
-                                            <p class="bg-gray-200 w-[300px]">lorem</p>
+                                            <p class="bg-gray-200 w-[300px]">{{ $user->animals->first()->destination }}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
@@ -172,19 +182,22 @@
                                         <div class="pl-3">
                                             <div><label for="">Gender</label></div>
                                             <div>
-                                                <p class="bg-gray-200 gap-3 w-12">lorem</p>
+                                                <p class="bg-gray-200 gap-3 w-12">{{ $user->animals->first()->gender }}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="pl-3">
                                             <div><label for="">Age</label></div>
                                             <div>
-                                                <p class="bg-gray-200 gap-3 w-12">lorem</p>
+                                                <p class="bg-gray-200 gap-3 w-12">{{ $user->animals->first()->age }}
+                                                </p>
                                             </div>
                                         </div>
                                         <div class="pl-3">
                                             <div><label for="">Live Weight</label></div>
                                             <div>
-                                                <p class="bg-gray-200 gap-3 w-24">lorem</p>
+                                                <p class="bg-gray-200 gap-3 w-24">
+                                                    {{ $user->animals->first()->live_weight }}</p>
                                             </div>
                                         </div>
 
@@ -199,13 +212,13 @@
 
                         </div>
                         <div class="absolute bottom-0 right-3 mb-[-60px]">
-                            <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                APPROVE
-                            </button>
-
-                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                REJECT
-                            </button>
+                            {{-- <form action="" method="POST">
+                                @csrf
+                                <input type="hidden" name="id" value="">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                    APPROVE
+                                </button>
+                            </form> --}}
                         </div>
                     </div>
                 </div>

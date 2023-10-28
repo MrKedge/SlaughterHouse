@@ -25,16 +25,20 @@ Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
 Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign.up');
 Route::get('/log-out', [AuthController::class, 'LogOut'])->name('log-out');
 
-Route::POST('/sign-up/store/admin', [AuthController::class, 'StoreAccount'])->name("admin.store.account");
-Route::POST('/sign-up/store/client', [AuthController::class, 'StoreClientAccount'])->name("client.store.account");
-Route::POST('/login/authenticate', [AuthController::class, 'Authenticate'])->name('login.authenticate');
+
+Route::POST('/sign-up/store/account', [AuthController::class, 'StoreAccount'])->name("store.account");
+Route::POST('/log-in/authenticate', [AuthController::class, 'Authenticate'])->name('login.authenticate');
 Route::POST('/store/animal', [ClientController::class, 'Register'])->name('store.animal');
+Route::post('/update/status/animal/{id}', [AdminController::class, 'ApproveAnimalRegistration'])->name('animals.update.status');
+
 
 //admin pages
 Route::get('/admin/dashboard', [AdminController::class, 'ShowAdminDashboardOverview'])->name('admin.dashboard');
-Route::get('/admin/receive/animal/reg', [AdminController::class, 'ShowReceiveRegistrationForm'])->name('admin.receive.animal.registration');
+// admin to view form of client animal
+Route::get('/admin/view/animal/reg/form/{id}', [AdminController::class, 'ShowRegistrationForm'])->name('admin.view.animal.reg.form');
 Route::get('/admin/view/animal/reg/list', [AdminController::class, 'ShowRegistrationList'])->name('admin.view.animal.reg.list');
 Route::get('/admin/edit/registration', [AdminController::class, 'ShowEditRegistration'])->name('admin.edit.registration');
+
 
 //Client pages 
 Route::get('/client/overview', [ClientController::class, 'ShowClientDashboardOverview'])->name('client.overview');

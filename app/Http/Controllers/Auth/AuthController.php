@@ -34,29 +34,6 @@ class AuthController extends Controller
         $request->validate([
             'firstName' => 'min:3|required',
             'lastName' => 'min:3|required',
-            'role' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required|confirmed|min:6',
-        ]);
-
-        $user = new User();
-
-        $user->first_name = $request->firstName;
-        $user->last_name = $request->lastName;
-        $user->role = $request->role;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->password);
-
-        $user->save();
-        return redirect()->route('log.in');
-    }
-
-    //for other sign up
-    public function StoreClientAccount(Request $request)
-    {
-        $request->validate([
-            'firstName' => 'min:3|required',
-            'lastName' => 'min:3|required',
 
             'email' => 'required|unique:users,email',
             'password' => 'required|confirmed|min:6',

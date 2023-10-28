@@ -90,8 +90,8 @@
             </div>
         </section>
         <div class="ml-[240px] pt-[40px]">
-            <section class=" flex justify-center  h-screen">
-                <div class="bg-white h-[400px] w-[1200px] rounded-2xl overflow-y-auto">
+            <section class=" flex justify-center">
+                <div class="bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
                     <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">RECENT REGISTRATION</h1>
                     <div class="flex justify-center relative px-4">
                         {{-- table goes here --}}

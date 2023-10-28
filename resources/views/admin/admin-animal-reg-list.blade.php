@@ -10,7 +10,7 @@
     <title>view list registration</title>
 </head>
 
-<body class="bg-[#D5DFE8] h-full w-full overflow-y-hidden">
+<body class="bg-[#D5DFE8] h-full w-full">
 
 
     <div class="ml-[240px] h-[40px] bg-white z-10 flex justify-start fixed top-0 w-full">
@@ -82,7 +82,7 @@
         {{-- this is for the table inside --}}
     </div>
     <div class="ml-[240px] pt-[80px]">
-        <section class=" flex justify-center  h-screen">
+        <section class=" flex justify-center">
             <div class="bg-white h-auto w-[1200px] rounded-2xl">
                 <h1 class="text-center font-extrabold text-[#EE6C4D] pb-8 pt-4 text-2xl">REGISTRATION LIST</h1>
                 <div class="flex justify-center relative">
@@ -91,7 +91,7 @@
                     <table class="w-full text-center p-11">
                         <thead>
                             <tr>
-                                <th>Number</th>
+                                <th>No.</th>
                                 <th>Animal</th>
                                 <th>Owner Name</th>
                                 <th>Date</th>
@@ -105,11 +105,27 @@
                             @foreach ($users as $user)
                                 @foreach ($user->animals as $animal)
                                     <tr class="">
-                                        <td>{{ ++$index }}</td>
+                                        <td class="py-4">{{ ++$index }}</td>
                                         <td class="py-4">{{ $animal->type }}</td>
+                                        <td class="py-4">{{ $user->first_name }} {{ $user->last_name }}</td>
                                         <td class="py-4">{{ $animal->created_at }}</td>
-                                        <td class="py-4">working for this</td>
-                                        <td>{{ $user->first_name }}</td>
+                                        <td class="py-4">{{ $user->address }}</td>
+                                        <td class="py-4"
+                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approve' ? 'green' : 'black') }}">
+                                            {{ $animal->status }}</td>
+                                        <td class="py-4">
+
+                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $user->id]) }}"
+                                                class="bg-blue-500 hover-bg-blue-700 text-white font-bold p-1  w-14 mx-1 py-0">
+                                                View
+                                            </a>
+
+                                            <a class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 mx-1 py-0">
+                                                delete
+                                            </a>
+
+                                        </td>
+
                                     </tr>
                                 @endforeach
                             @endforeach

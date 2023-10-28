@@ -23,8 +23,7 @@
             class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
             <h1 class="text-center text-4xl font-bold py-8 ">SIGN UP</h1>
             <div class="flex justify-center">
-                <form action="{{ route('client.store.account') }}" method="POST"
-                    class="text-lg font-semibold text-center">
+                <form action="{{ route('store.account') }}" method="POST" class="text-lg font-semibold text-center">
                     @csrf
                     <div class="pb-5 relative">
 

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('animals', function (Blueprint $table) {
+
             $table->id();
             $table->timestamps();
 
@@ -24,6 +25,7 @@ return new class extends Migration
             $table->string('destination')->nullable();
             $table->string('butcher')->nullable();
             $table->string('age_classify')->nullable();
+            $table->string('status')->default('pending')->nullable();
         });
     }
 
