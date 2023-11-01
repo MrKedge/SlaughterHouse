@@ -22,9 +22,9 @@
     </div>
     <div class="">
         <div class="fixed left-0 h-full w-[240px] bg-[#293241] text-white">
-            <header class="text-center py-8 relative font-bold">
-                <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
-                <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
+            <header class="text-center py-8  font-bold">
+
+                <h1><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
             </header>
             <a href="{{ route('admin.dashboard') }}">
                 <div class="relative">
@@ -84,54 +84,60 @@
     <div class="ml-[240px] pt-[80px]">
         <section class=" flex justify-center">
             <div class="bg-white h-auto w-[1200px] rounded-2xl">
-                <h1 class="text-center font-extrabold text-[#EE6C4D] pb-8 pt-4 text-2xl">REGISTRATION LIST</h1>
-                <div class="flex justify-center relative">
-                    {{-- table goes here --}}
+                <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">REGISTRATION LIST</h1>
+                <div class="p-4">
+                    <div class="flex justify-center relative px-4 max-h-[500px] overflow-y-auto">
+                        {{-- table goes here --}}
 
-                    <table class="w-full text-center p-11">
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Animal</th>
-                                <th>Owner Name</th>
-                                <th>Date</th>
-                                <th>Address</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @php $index = 0 @endphp
-                            @foreach ($users as $user)
-                                @foreach ($user->animals as $animal)
-                                    <tr class="">
-                                        <td class="py-4">{{ ++$index }}</td>
-                                        <td class="py-4">{{ $animal->type }}</td>
-                                        <td class="py-4">{{ $user->first_name }} {{ $user->last_name }}</td>
-                                        <td class="py-4">{{ $animal->created_at }}</td>
-                                        <td class="py-4">{{ $user->address }}</td>
-                                        <td class="py-4"
-                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approve' ? 'green' : 'black') }}">
-                                            {{ $animal->status }}</td>
-                                        <td class="py-4">
+                        <table class="w-full text-center">
+                            <thead>
+                                <tr>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">No.</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner Name</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Address</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status</th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $index = 0 @endphp
+                                @foreach ($users as $user)
+                                    @foreach ($user->animals as $animal)
+                                        <tr class="">
+                                            <td class="py-4 border-b border-black">{{ ++$index }}.</td>
+                                            <td class="py-4 border-b border-black uppercase font-semibold">
+                                                {{ $animal->type }}</td>
+                                            <td class="py-4 border-b border-black capitalize">{{ $user->first_name }}
+                                                {{ $user->last_name }}</td>
+                                            <td class="py-4 border-b border-black">{{ $animal->created_at }}</td>
+                                            <td class="py-4 border-b border-black capitalize">{{ $user->address }}</td>
+                                            <td class="py-4 border-b border-black font-bold uppercase"
+                                                style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
+                                                {{ $animal->status }}
+                                            </td>
+                                            <td class="py-4 border-b border-black">
 
-                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $user->id]) }}"
-                                                class="bg-blue-500 hover-bg-blue-700 text-white font-bold p-1  w-14 mx-1 py-0">
-                                                View
-                                            </a>
+                                                <a href="{{ route('admin.view.animal.reg.form', ['id' => $animal->id]) }}"
+                                                    class="bg-blue-500 hover-bg-blue-700 text-white font-bold p-1  w-14 mx-1 py-0">
+                                                    View
+                                                </a>
 
-                                            <a class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 mx-1 py-0">
-                                                delete
-                                            </a>
+                                                <a
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 mx-1 py-0">
+                                                    delete
+                                                </a>
 
-                                        </td>
+                                            </td>
 
-                                    </tr>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
-                            @endforeach
-                            <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
+                                <!-- Add more rows as needed -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
         </section>
     </div>

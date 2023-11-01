@@ -41,7 +41,7 @@
                 <div class="relative">
                     <span class="absolute left-8"><box-icon name='pencil' type='solid'
                             color='#FFFFFF'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">REGISTRATION</h1>
+                    <h1 class="my-6 pl-[65px]">REGISTER ANIMAL</h1>
                 </div>
             </a>
             <a href="{{ route('client.animal.list.register') }}">
@@ -92,47 +92,56 @@
         <div class="ml-[240px] pt-[40px]">
             <section class=" flex justify-center">
                 <div class="bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
-                    <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">RECENT REGISTRATION</h1>
-                    <div class="flex justify-center relative px-4">
-                        {{-- table goes here --}}
-
-                        <table class="w-full text-center p-11 ">
-                            <thead>
-                                <tr class="">
-                                    <th class="border border-black p-2">No.</th>
-                                    <th class="border border-black p-2">Animal</th>
-                                    <th class="border border-black p-2">Date</th>
-                                    <th class="border border-black p-2">Status</th>
-                                    <th class="border border-black p-2">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php $index = 1 @endphp
-                                @foreach ($user->animals as $animal)
-                                    <tr class="">
-                                        <td class="py-4">{{ $index }}</td>
-                                        <td class="py-4">{{ $animal->type }}</td>
-                                        <td class="py-4">{{ $animal->created_at }}</td>
-                                        <td class="py-4">working for this</td>
-                                        <td class="py-4">
-
-                                            <a
-                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-0">
-                                                View
-                                            </a>
-
-                                            <a
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mx-1 py-0">
-                                                delete
-                                            </a>
-
-                                        </td>
-
+                    <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT REGISTRATION</h1>
+                    <div class="p-4 ">
+                        <div class="flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
+                            <table class="w-full text-center">
+                                <thead class="">
+                                    <tr>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2 ">No.</th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
+                                        </th>
                                     </tr>
-                                    @php $index++ @endphp
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody class="">
+
+                                    @php $index = 1 @endphp
+                                    @foreach ($user->animals as $animal)
+                                        <tr class="">
+                                            <td class="py-4 border-b border-black">{{ $index }}.</td>
+                                            <td class="py-4 border-b border-black uppercase font-semibold">
+                                                {{ $animal->type }}
+                                            </td>
+                                            <td class="py-4 border-b border-black">{{ $animal->created_at }}</td>
+                                            <td class="py-4 font-semibold border-b border-black uppercase"
+                                                style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : 'black') }}">
+                                                {{ $animal->status }}</td>
+                                            <td class="py-4 border-b border-black">
+
+                                                <a href="{{ route('client.view.animal.form', ['id' => $animal->id]) }}"
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-0">
+                                                    View
+                                                </a>
+
+                                                <a
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mx-1 py-0">
+                                                    delete
+                                                </a>
+
+                                            </td>
+
+                                        </tr>
+                                        @php $index++ @endphp
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
             </section>
         </div>

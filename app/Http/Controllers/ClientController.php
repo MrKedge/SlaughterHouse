@@ -15,6 +15,7 @@ class ClientController extends Controller
         return view('client.client-overview', compact('user'));
     }
 
+
     public function ShowAnimalListReg()
     {
 
@@ -22,12 +23,22 @@ class ClientController extends Controller
         return view('client.client-animal-list-registration', compact('user'));
     }
 
+
     public function ShowAnimalRegForm()
     {
         return view('client.client-animal-register');
     }
 
-    public function Register(Request $request)
+
+    public function ShoRegistrationFormClient($id)
+    {
+        $animal = Animal::with('user')->find($id);
+        $user = User::findOrFail($animal->user_id);
+        return view('client.client-view-animal-form', compact('animal', 'user'));
+    }
+
+
+    public function Register(Request $request)      //for registering the animal//-----------------------------------------
     {
 
         $request->validate([
@@ -54,6 +65,6 @@ class ClientController extends Controller
         $animal->live_weight = $request->liveWeight;
         $animal->save();
 
-        return redirect()->route('client.animal.list.register'); //redirect to register list
+        return redirect()->route('client.animal.list.register');
     }
 }

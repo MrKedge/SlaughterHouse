@@ -15,7 +15,7 @@ class AdminController extends Controller
 
 
 
-    public function ShowRegistrationList()
+    public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
         $users = User::with('animals')->get();
         return view('admin.admin-animal-reg-list', compact('users'));
@@ -27,27 +27,31 @@ class AdminController extends Controller
     }
 
 
-    public function ShowRegistrationForm($id) //for viewing the form with specific client along with their animal//
+    public function ShowRegistrationForm($id)       //for viewing the animal form in reg table//----------------------------
     {
-
-        $animal = Animal::with('user_id')->get($id);
-        return view('admin.admin-view-form', compact('animal'));
+        $animal = Animal::with('user')->find($id);
+        $user = User::findOrFail($animal->user_id);
+        return view('admin.admin-view-form', compact('animal', 'user'));
     }
 
-    public function ApproveAnimalRegistration($id) //for approving the animal registration form//
+
+    public function ApproveAnimalRegistration($id)      //for approving the animal registration form//----------------------
     {
-        // Find the animal by ID
-        $animal = Animal::find($id);
 
-        // Check if the animal exists
-        if (!$animal) {
-            return redirect()->back()->with('error', 'Animal not found');
-        }
+        $animal = Animal::find($id)->where('status', 'pending')->first();
 
-        // Update the status of the animal
-        $animal->update(['status' => 'approved']);
 
-        // Redirect back with a success message
-        return redirect()->route('admin.view.animal.reg.form');
+        // Update the status to 'approved' or perform any other necessary actions
+        $animal->status = 'approved';
+        $animal->save();
+        return redirect()->route('admin.view.animal.reg.form', ['id' => $id]);
+    }
+
+    public function RejectAnimalRegistration($id)
+    {
+        $animal = Animal::find($id)->where('status', 'pending')->first();
+        $animal->status = 'rejected';
+        $animal->save();
+        return redirect()->route('admin.view.animal.reg.list', ['id' => $id]);
     }
 }

@@ -40,7 +40,7 @@
                 <div class="relative">
                     <span class="absolute left-8"><box-icon name='pencil' type='solid'
                             color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">REGISTRATION</h1>
+                    <h1 class="my-6 pl-[65px]">REGISTER ANIMAL</h1>
                 </div>
             </a>
             <a href="{{ route('client.animal.list.register') }}">
@@ -117,20 +117,22 @@ value="{{ auth()->user()->address }}" @endauth
                                     <div class="gap-2 w-[300px]">
                                         <div><label for="">Kind of Animal</label></div>
                                         <select name="kindOfAnimal" id="" required class="bg-gray-200 gap-3">
-                                            <option value="cow">COW</option>
-                                            <option value="goat">GOAT</option>
-                                            <option value="horse">HORSE</option>
-                                            <option value="swine">SWINE</option>
-                                            <option value="carabao">CARABAO</option>
+                                            <option value="" disabled selected>select</option>
+                                            <option value="cow">Cow</option>
+                                            <option value="goat">Goat</option>
+                                            <option value="horse">Horse</option>
+                                            <option value="swine">Swine</option>
+                                            <option value="carabao">Carabao</option>
                                         </select>
                                     </div>
                                     <div>
                                         <div><label for="">Butcher</label></div>
                                         <select name="butcher" id="" required
                                             class="bg-gray-200 gap-3 [300px]">
-                                            <option value="lorem">butcher1</option>
-                                            <option value="lorem">butcher2</option>
-                                            <option value="lorem">butcher3</option>
+                                            <option value="" disabled selected>select</option>
+                                            <option value="butcher1">butcher1</option>
+                                            <option value="butcher2">butcher2</option>
+                                            <option value="butcher3">butcher3</option>
                                             <option value="private">PRIVATE</option>
 
                                         </select>
@@ -143,14 +145,18 @@ value="{{ auth()->user()->address }}" @endauth
                                 <div class="flex justify-between gap-3">
                                     <div class=" gap-2">
                                         <div><label for="">Age Classification</label></div>
-                                        <div><input type="text" name="ageClassify" required
-                                                class="bg-gray-200 w-[300px]">
-                                        </div>
+                                        <select name="ageClassify" id="" required
+                                            class="bg-gray-200 gap-3 [300px]">
+                                            <option value="" disabled selected>select</option>
+                                            <option value="fattener">Fattener</option>
+                                            <option value="grower">Grower</option>
+                                            <option value="culled sow/boar">Culled sow/boar</option>
+                                        </select>
                                     </div>
                                     <div class=" gap-2 w-[300px]">
                                         <div><label for="">Destination</label></div>
-                                        <select name="destination" id="" required
-                                            class="bg-gray-200 gap-3 [300px]">
+                                        <select name="destination" id="" required class="bg-gray-200 gap-3">
+                                            <option value="" disabled selected>select</option>
                                             <option value="wet market">Wet Market</option>
                                             <option value="meat shops">Meat Shops</option>
                                             <option value="meat cutting">Meat Cutting</option>
@@ -169,6 +175,7 @@ value="{{ auth()->user()->address }}" @endauth
                                             <div><label for="">Gender</label></div>
                                             <div><select name="gender" id="" required
                                                     class="bg-gray-200 gap-3">
+                                                    <option value="" disabled selected>select</option>
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
                                                 </select></div>
@@ -197,13 +204,15 @@ value="{{ auth()->user()->address }}" @endauth
 
                         </div>
                         <div class="absolute bottom-0 right-3 mb-[-60px]">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                            <button type="submit"
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                 Register
                             </button>
 
-                            <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                            <a href="{{ route('client.overview') }}"
+                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                 Cancel
-                            </button>
+                            </a>
                         </div>
                 </form>
             </div>
