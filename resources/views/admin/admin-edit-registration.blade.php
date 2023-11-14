@@ -26,7 +26,7 @@
                 <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
                 <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
             </header>
-            <a href="">
+            <a href="{{ route('admin.dashboard') }}">
                 <div class="relative">
                     <span class="absolute left-8"><box-icon name='dashboard' type='solid'
                             color='#ffffff'></box-icon></span>

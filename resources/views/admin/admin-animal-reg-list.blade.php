@@ -38,7 +38,7 @@
                 <div class="relative">
                     <span class="absolute left-8"><box-icon name='pencil' type='solid'
                             color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">REGISTRATION</h1>
+                    <h1 class="my-6 pl-[65px]">REGISTER LIST</h1>
                 </div>
             </a>
             <a href="">
@@ -103,37 +103,39 @@
                             </thead>
                             <tbody>
                                 @php $index = 0 @endphp
-                                @foreach ($users as $user)
-                                    @foreach ($user->animals as $animal)
-                                        <tr class="">
-                                            <td class="py-4 border-b border-black">{{ ++$index }}.</td>
-                                            <td class="py-4 border-b border-black uppercase font-semibold">
-                                                {{ $animal->type }}</td>
-                                            <td class="py-4 border-b border-black capitalize">{{ $user->first_name }}
-                                                {{ $user->last_name }}</td>
-                                            <td class="py-4 border-b border-black">{{ $animal->created_at }}</td>
-                                            <td class="py-4 border-b border-black capitalize">{{ $user->address }}</td>
-                                            <td class="py-4 border-b border-black font-bold uppercase"
-                                                style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
-                                                {{ $animal->status }}
-                                            </td>
-                                            <td class="py-4 border-b border-black">
 
-                                                <a href="{{ route('admin.view.animal.reg.form', ['id' => $animal->id]) }}"
-                                                    class="bg-blue-500 hover-bg-blue-700 text-white font-bold p-1  w-14 mx-1 py-0">
-                                                    View
-                                                </a>
+                                @foreach ($animals as $animal)
+                                    <tr class="">
+                                        <td class="py-4 border-b border-black">{{ ++$index }}.</td>
+                                        <td class="py-4 border-b border-black uppercase font-semibold">
+                                            {{ $animal->type }}</td>
+                                        <td class="py-4 border-b border-black capitalize">
+                                            {{ $animal->user->first_name }} {{ $animal->user->last_name }}
+                                        </td>
+                                        <td class="py-4 border-b border-black">{{ $animal->created_at }}</td>
+                                        <td class="py-4 border-b border-black capitalize">{{ $animal->user->address }}
+                                        </td>
+                                        <td class="py-4 border-b border-black font-bold uppercase"
+                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
+                                            {{ $animal->status }}
+                                        </td>
+                                        <td class="py-4 border-b border-black">
 
-                                                <a
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 mx-1 py-0">
+                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $animal->id]) }}"
+                                                class="bg-blue-700 hover:bg-blue-900 text-white font-bold p-1  w-14 mx-1 py-0">
+                                                View
+                                            </a>
+
+                                            {{-- <a
+                                                    class="bg-red-700 hover:bg-red-900 text-white font-bold p-1 mx-1 py-0">
                                                     delete
-                                                </a>
+                                                </a> --}}
 
-                                            </td>
+                                        </td>
 
-                                        </tr>
-                                    @endforeach
+                                    </tr>
                                 @endforeach
+
                                 <!-- Add more rows as needed -->
                             </tbody>
                         </table>

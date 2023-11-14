@@ -55,7 +55,7 @@
                     </div>
                     <div id="addressDiv" style="display: none;" class="pb-5 relative">
 
-                        <input type="text" name="address" placeholder="Address"
+                        <input id="addressInput" type="text" name="address" placeholder="Address"
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='bank'
                                 type='solid'></box-icon></span>
@@ -99,11 +99,14 @@
         function toggleAddressField() {
             var roleSelect = document.getElementById("role");
             var addressField = document.getElementById("addressDiv");
+            var addressInput = document.getElementById("addressInput");
 
             if (roleSelect.value === "client") {
-                addressField.style.display = "block"; // Show the address field
+                addressField.style.display = "block";
+                addressInput.required = true;
             } else {
-                addressField.style.display = "none"; // Hide the address field
+                addressField.style.display = "none";
+                addressInput.required = false;
             }
         }
 

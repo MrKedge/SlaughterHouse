@@ -17,70 +17,73 @@
         {{-- header --}}
         <div class="px-4 pt-2 font-extrabold text-[#0E7BBB] flex">
             <h1>ADMIN</h1>
+        </div>
+    </div>
 
-        </div>
+    <div class="fixed left-0 h-full w-[240px] bg-[#293241] text-white">
+        <header class="text-center py-8 relative font-bold">
+            <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
+            <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
+        </header>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='dashboard' type='solid'
+                        color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
+            </div>
+        </a>
+        <p class="pl-3 text-gray-500">TABLE</p>
+        <a href="{{ route('admin.view.animal.reg.list') }}">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='pencil' type='solid' color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">REGISTER LIST</h1>
+            </div>
+        </a>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='list-ul' color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">ANIMAL</h1>
+            </div>
+        </a>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='user-circle' type='solid'
+                        color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">OWNER</h1>
+            </div>
+        </a>
+        <p class="pl-3 text-gray-500">REPORTS</p>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
+                        color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">LRME</h1>
+            </div>
+        </a>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
+                        color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">SSHPDP</h1>
+            </div>
+        </a>
+        <p class="pl-3 text-gray-500">OPTION</p>
+        <a href="">
+            <div class="relative">
+                <span class="absolute left-8"><box-icon name='group' color='#ffffff'></box-icon></span>
+                <h1 class="my-6 pl-[65px]">USER ACCOUNTS</h1>
+            </div>
+        </a>
+        <hr class="mx-auto w-3/4">
+        <a href="{{ route('log-out') }}" id="show-log-out">
+            <div class="relative">
+                <span class="absolute left-8"> <box-icon name='log-out' color='#ffffff'></box-icon></box-icon></span>
+                <h1 class="my-6 pl-[65px]">Log Out</h1>
+            </div>
+        </a>
     </div>
-    <div class="">
-        <div class="fixed left-0 h-full w-[240px] bg-[#293241] text-white">
-            <header class="text-center py-8 relative font-bold">
-                <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
-                <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
-            </header>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='dashboard' type='solid'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
-                </div>
-            </a>
-            <p class="pl-3 text-gray-500">TABLE</p>
-            <a href="{{ route('admin.view.animal.reg.list') }}">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='pencil' type='solid'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">REGISTRATION</h1>
-                </div>
-            </a>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='list-ul' color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">ANIMAL</h1>
-                </div>
-            </a>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='user-circle' type='solid'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">OWNER</h1>
-                </div>
-            </a>
-            <p class="pl-3 text-gray-500">REPORTS</p>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">LRME</h1>
-                </div>
-            </a>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">SSHPDP</h1>
-                </div>
-            </a>
-            <p class="pl-3 text-gray-500">OPTION</p>
-            <a href="">
-                <div class="relative">
-                    <span class="absolute left-8"><box-icon name='group' type='solid'
-                            color='#ffffff'></box-icon></span>
-                    <h1 class="my-6 pl-[65px]">USER ACCOUNTS</h1>
-                </div>
-            </a>
-            <hr class="mx-auto w-3/4">
-        </div>
-        {{-- this is for the table inside --}}
-    </div>
+    {{-- this is for the table inside --}}
+
     <section class="pt-[80px] pr-[40px]">
         {{-- baba ng uluhan --}}
         <div class="flex justify-between ml-[240px]">
@@ -166,6 +169,22 @@
                 </div>
         </section>
     </div>
+    <nav id="pop-up"
+        class="fixed bg-white w-[300px] h-auto left-1/2 top-1/2 text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
+        style="display: none;">
+        <div class="">
+            <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
+            <div class="py-9 flex justify-center w-full gap-6 mx-auto">
+                <a href="{{ route('log-out') }}" id="alertLogout"
+                    class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
+                <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
+            </div>
+        </div>
+    </nav>
+    <script src="{{ asset('js/animalForm.js') }}"></script>
+    <script>
+        logoutUser();
+    </script>
 </body>
 
 </html>

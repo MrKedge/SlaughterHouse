@@ -16,7 +16,8 @@ class Animal extends Model
         'live_weight',
         'destination',
         'butcher',
-        'age_classify'
+        'age_classify',
+        'remarks'
     ];
 
     public function user()

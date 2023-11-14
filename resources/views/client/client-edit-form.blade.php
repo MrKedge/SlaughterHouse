@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>viewing animal form</title>
+    <title>edit animal form</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -45,18 +45,19 @@
 
                 <div class="flex bg-white px-20 pb-20 ">
 
-                    <form action="{{ route('store.animal') }}" method="POST" class="flex justify-center relative">
+                    <form action="{{ route('update.form', ['id' => $animal->id]) }}" method="POST"
+                        class="flex justify-center relative">
                         @csrf
                         <div class=" space-y-8 ">
 
-                            <div class="grid grid-flow-row md:grid-flow-col md:gap-10">{{-- owner info --}}
+                            <div class="grid grid-flow-row  md:grid-flow-col md:gap-10">{{-- owner info --}}
                                 <div class="">
                                     <h1 class="font-bold pointer-events-none text-lg">Owner Information</h1>
 
                                     <label class="block" for="ownerName">Owner Name:</label>
 
                                     <p id="ownerName"
-                                        class="text-center capitalize border-2 border-black rounded-md w-full">
+                                        class="text-center capitalize border-2 border-black rounded-md w-full ">
                                         @auth
                                             {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                         @endauth
@@ -97,36 +98,56 @@
                                     <div>
                                         <h1 class="font-bold text-lg">Animal Information</h1>
                                         <label class="block" for="">Kind of Animal:</label>
-
-                                        <p class=" border-2 border-black rounded-md text-center uppercase ">
-                                            {{ $animal->type }}</p>
+                                        <select name="kindOfAnimal" id="typeOfAnimal" required
+                                            class=" border-2 border-black rounded-md">
+                                            <option value="{{ $animal->type }}">{{ $animal->type }}</option>
+                                            <option value="cow">Cow</option>
+                                            <option value="goat">Goat</option>
+                                            <option value="horse">Horse</option>
+                                            <option value="swine">Swine</option>
+                                            <option value="carabao">Carabao</option>
+                                        </select>
                                     </div>
                                     <div class="flex gap-8">
                                         <div>
                                             <label class="block" for="">Gender:</label>
-
-                                            <p class=" border-2 border-black rounded-md text-center uppercase px-1">
-                                                {{ $animal->gender }}</p>
+                                            <select name="gender" id="" required
+                                                class="border-2 border-black rounded-md w-full">
+                                                <option value="{{ $animal->gender }}">{{ $animal->gender }}</option>
+                                                <option value="male">Male</option>
+                                                <option value="female">Female</option>
+                                            </select>
                                         </div>
                                         <div>
                                             <label class="block" for="">Age:</label>
-
-                                            <p class="border-2 border-black rounded-md max-w-max text-center px-1">
-                                                {{ $animal->age }}mos.</p>
+                                            <input type="number" name="age" required min="0"
+                                                value="{{ $animal->age }}"
+                                                class="border-2 border-black rounded-md w-12  ">
+                                            <label for="">mos.</label>
                                         </div>
                                         <div>
                                             <label class="block" for="">Live Wt.</label>
-                                            <p class="border-2 border-black rounded-md text-center max-w-max px-1">
-                                                {{ $animal->live_weight }}kg.</p>
+                                            <input type="number" name="liveWeight" required min="0"
+                                                value="{{ $animal->live_weight }}"
+                                                class="border-2 border-black rounded-md w-12">
+                                            <label for="">kg.</label>
                                         </div>
                                     </div>
 
                                     <div>
                                         <label class="block" for="">Destination:</label>
-
-                                        <p class="border-2 border-black rounded-md w-full text-center uppercase">
-                                            {{ $animal->destination }}
-                                        </p>
+                                        <select name="destination" id="" required
+                                            class="border-2 border-black rounded-md w-full">
+                                            <option value="{{ $animal->destination }}">{{ $animal->destination }}
+                                            </option>
+                                            <option value="wet market">Wet Market</option>
+                                            <option value="meat shops">Meat Shops</option>
+                                            <option value="meat cutting">Meat Cutting</option>
+                                            <option value="hotel and restaurants">Hotel and Restaurants</option>
+                                            <option value="super market">Super Market</option>
+                                            <option value="meat processing plant">Meat Processing Plant</option>
+                                            <option value="cold storage">Cold Storage</option>
+                                        </select>
                                     </div>
 
                                 </div>
@@ -135,48 +156,41 @@
                                     <div>
                                         <h1 class="font-bold opacity-0 text-lg">Animal Information</h1>
                                         <label class="block" for="">Butcher:</label>
+                                        <select name="butcher" id="" required
+                                            class="border-2 border-black rounded-md [300px]">
+                                            <option value="{{ $animal->butcher }}">{{ $animal->butcher }}</option>
+                                            <option value="butcher1">butcher1</option>
+                                            <option value="butcher2">butcher2</option>
+                                            <option value="butcher3">butcher3</option>
+                                            <option value="private">PRIVATE</option>
 
-                                        <p class="border-2 border-black rounded-md [300px] text-center capitalize">
-                                            {{ $animal->butcher }}</p>
+                                        </select>
                                     </div>
 
                                     <div class="flex justify-between gap-3">
-                                        <div class=" gap-2" id="ageClassifyDiv">
+                                        <div class=" gap-2 hidden" id="ageClassifyDiv">
                                             <div><label for="">Age Classification</label></div>
-
-                                            <p
-                                                class="border-2 border-black rounded-md w-full text-center uppercase px-1">
-                                                {{ $animal->age_classify }}
-                                            </p>
+                                            <select name="ageClassify" id="putAgeClassify"
+                                                class="border-2 border-black rounded-md w-full">
+                                                <option value="" disabled selected>select</option>
+                                                <option value="fattener">Fattener</option>
+                                                <option value="grower">Grower</option>
+                                                <option value="culled sow/boar">Culled sow/boar</option>
+                                            </select>
                                         </div>
                                     </div>
 
-                                    <div class="flex justify-between gap-3">
-                                        <div class=" gap-2">
-                                            <div><label
-                                                    class="uppercase text-red-700 font-extrabold text-2xl">{{ $animal->status }}</label>
-                                            </div>
-
-                                            <p
-                                                class="border-2 border-black rounded-md w-full text-center uppercase px-1 p-4">
-
-                                                {{ $animal->remarks }}
-                                            </p>
-                                        </div>
-                                    </div>
-                                    {{-- <div class="absolute bottom-0 right-3 mb-[-60px]">
+                                    <div class="absolute bottom-0 right-3 mb-[-60px]">
                                         <button type="submit"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                            Register
+                                            Update
                                         </button>
 
                                         <a href="{{ route('client.overview') }}"
                                             class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                             Cancel
                                         </a>
-                                    </div> --}}
-
-
+                                    </div>
                                 </div>
 
                             </div>
