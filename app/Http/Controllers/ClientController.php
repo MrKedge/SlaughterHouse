@@ -6,13 +6,21 @@ use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Carbon;
 
 class ClientController extends Controller
 {
     public function ShowClientDashboardOverview()
     {
-        $recent = Animal::where('user_id', Auth::id())->latest('created_at')->limit(5)->get();
         $animals = Animal::where('user_id', Auth::id())->get();
+
+        $recent = Animal::where('user_id', Auth::id())
+            ->where('status', '!=', 'archived')
+            ->where('created_at', '>=', Carbon::now()->subHours(8))
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
+
 
         return view('client.client-overview', compact('recent', 'animals'));
     }
@@ -27,7 +35,11 @@ class ClientController extends Controller
     public function ShowAnimalListReg()
     {
         $user = User::with('animals')->find(Auth::id());
-        return view('client.client-animal-list-registration', compact('user'));
+
+        // Retrieve only non-archived animals
+        $animals = $user->animals->where('status', '!=', 'archived');
+
+        return view('client.client-animal-list-registration', compact('user', 'animals'));
     }
 
     public function ShowAnimalRegForm()
@@ -44,6 +56,22 @@ class ClientController extends Controller
         return view('client.client-view-animal-form', compact('animal', 'user'));
     }
 
+
+    public function ShowArchiveList()
+    {
+        $user = User::with('animals')->find(Auth::id());
+        $animal = $user->animals->where('status', 'archived');
+        return view('client.client-animal-archive', compact('animal', 'user'));
+    }
+
+    public function ArchiveForm($id)
+    {
+        $animal = Animal::where('status', 'pending')->find($id);
+        // Update the status to 'archive' or perform any other necessary actions
+        $animal->status = 'archived';
+        $animal->save();
+        return redirect()->route('client.archive.list', ['id' => $id]);
+    }
 
     public function Register(Request $request)      //for registering the animal//-----------------------------------------
     {

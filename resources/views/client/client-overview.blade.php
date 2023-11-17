@@ -8,122 +8,165 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#D5DFE8] overflow-hidden ">
 
-    <div> {{-- wrapper --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[40px] sticky top-0">
-            {{-- header --}}
-            <div class="text-center font-bold w-[240px] bg-[#293241] h-full p-2">
+
+    <div>
+        {{-- HEADER --}}
+        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
+
+            <div
+                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
                 <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
             </div>
-            <div>
+            <div class="sticky top-">
                 @auth
-                    <p class="font-extrabold capitalize px-4 text-[#293241] ">
+                    <a href="#" class="font-extrabold capitalize px-4 text-[#293241] flex items-center gap-1">
+                        <div id="open-div"><box-icon type='solid' name='down-arrow' size='14px'></div>
+                        </box-icon>
+                        <div id="close-div" class="hidden"><box-icon type='solid' name='up-arrow'
+                                size='14px'></box-icon>
+                        </div>
                         {{ auth()->user()->first_name }}
-                    </p>
+                    </a>
                 @endauth
+                <nav id="toggle-settings"
+                    class="space-y-4 py-2 h-auto absolute hidden rounded-md shadow-2xl bg-white bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border right-[50px]">
+                    <a href="#" id="" class="px-6 w-36 gap-2 flex font-bold"><box-icon
+                            name='user-circle'></box-icon>profile</a>
+                    <a href="#" id="show-log-out" class="px-6 w-36 gap-2 flex font-bold"><box-icon
+                            name='log-out'></box-icon>log-out</a>
+                </nav>
             </div>
+        </div>
+        {{-- end header --}}
 
-        </div> {{-- end header --}}
-        @include('client.layout.sidepanel')
 
-        <section class="flex justify-center mx-auto pt-10 overflow-x-auto">{{-- wrapper --}}
-            <div class="flex gap-10">
-                <div class="h-24 bg-white w-auto rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
 
-                    <h1 class="text-center px-9 pt-4 text-[#EE6C4D] font-bold">PENDING</h1>
 
-                    {{-- <span class=" absolute top-0 right-0"><box-icon name='hand' type='solid' color='#ee6c4d'
-                                    style="width: 32px; height: 32px;"></box-icon></span> --}}
+        {{-- main content --}}
+        <div class="flex">
 
-                    <p class="text-center text-4xl text-gray-400">
-                        {{ $animals->where('status', 'pending')->count() }}</p>
 
-                </div>
-                <div class="h-24 bg-white w-auto rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
+            <div class="inline-block"> @include('client.layout.sidepanel')</div>
 
-                    <h1 class="text-center px-9 pt-4 text-[#EE6C4D] font-bold">APPROVED</h1>
 
-                    {{-- <span class=" absolute top-0 right-0"><box-icon name='check-double' color='#ee6c4d'
-                                    style="width: 64px; height: 64px;"></box-icon></span> --}}
-                    <p class="text-center text-4xl text-gray-400">
-                        {{ $animals->where('status', 'approved')->count() }}</p>
-                </div>
-                <div class="h-24 bg-white w-auto rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
+            <div class="flex flex-col w-full gap-3"> {{-- below header wrapper --}}
+                <section
+                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+                    {{-- wrapper --}}
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
 
-                    <h1 class="text-center px-9 pt-4 text-[#EE6C4D] font-bold">SLAUTHERED</h1>
-                    {{-- <span class=" absolute top-0 right-0"><box-icon name='list-ul' color='#ee6c4d'
-                                style="width: 64px; height: 64px;"></box-icon></span> --}}
-                    <p class="text-center text-4xl text-gray-400">
-                        {{ $animals->where('status', 'slaughtered')->count() }}</p>
-                </div>
-            </div>
-        </section>
-    </div>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
-    <div class="pt-[40px] ml-[60px]">
-        <section class=" flex justify-center">
-            <div class="bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
-                <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT REGISTRATION</h1>
-                <div class="p-4 ">
-                    <div class="flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
-                        <table class="w-full text-center">
-                            <thead class="">
-                                <tr>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Destination
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="">
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
+                                type='solid' color='#ee6c4d' style="width: 32px; height: 32px;"></box-icon>
+                            {{ $animals->where('status', 'pending')->count() }}</div>
 
-                                @php $index = 1 @endphp
-                                @foreach ($recent as $animal)
-                                    <tr class="">
+                    </div>
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
 
-                                        <td class="py-4 border-b border-black uppercase font-semibold">
-                                            {{ $animal->type }}
-                                        </td>
-                                        <td class="py-4 border-b border-black">{{ $animal->created_at }}</td>
-                                        <td class="py-4 font-semibold border-b border-black uppercase"
-                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
-                                            {{ $animal->status }}</td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
-                                            {{ $animal->destination }}
-                                        </td>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
-                                    </tr>
-                                    @php $index++ @endphp
-                                @endforeach
-                            </tbody>
-                        </table>
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='check-double' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                            {{ $animals->where('status', 'approved')->count() }}</div>
+                    </div>
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='list-check' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                            {{ $animals->where('status', 'slaughtered')->count() }}</div>
+                    </div>
+                </section>
+
+
+                <div class="flex justify-center items-center">
+                    <nav id="pop-up"
+                        class="absolute top-1/2 z-40  bg-white w-[300px] h-auto text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
+                        style="display: none;">
+                        <div class="rounded-2xl shadow-2xl bg-opacity-5 bg-blur-lg  backdrop-filter backdrop-blur-lg">
+                            <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
+                            <div class="py-9 flex justify-center w-full gap-6 mx-auto">
+                                <a href="{{ route('log-out') }}" id="alertLogout"
+                                    class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
+                                <a href="#" id="hide-log-out"
+                                    class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
+                            </div>
+                        </div>
+                    </nav>
+
+
+                    <div class="z-30 "> {{-- table wrapper --}}
+                        <section class=" flex justify-center">
+                            <div class="bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
+                                <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
+                                    REGISTRATION
+                                </h1>
+                                <div class="p-4 ">
+                                    <div
+                                        class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
+                                        <table class="w-full text-center">
+                                            <thead class="">
+                                                <tr>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Animal
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Status
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Destination
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="">
+
+                                                @php $index = 1 @endphp
+                                                @foreach ($recent as $animal)
+                                                    <tr class="{{ $index % 2 === 0 ? 'bg-gray-100' : 'bg-white' }}">
+                                                        <td class="py-4 border-b border-black uppercase font-semibold">
+                                                            {{ $animal->type }}
+                                                        </td>
+                                                        <td class="py-4 border-b border-black">{{ $animal->created_at }}
+                                                        </td>
+                                                        <td class="py-4 font-semibold border-b border-black uppercase"
+                                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
+                                                            {{ $animal->status }}</td>
+                                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                                            {{ $animal->destination }}
+                                                        </td>
+
+                                                    </tr>
+                                                    @php $index++ @endphp
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
+
             </div>
-        </section>
+        </div>
+
     </div>
-    <div class="flex justify-center items-center">
-        <nav id="pop-up"
-            class="absolute top-1/2  bg-white w-[300px] h-auto text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
-            style="display: none;">
-            <div class="rounded-2xl shadow-2xl bg-opacity-5 bg-blur-lg  backdrop-filter backdrop-blur-lg">
-                <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
-                <div class="py-9 flex justify-center w-full gap-6 mx-auto">
-                    <a href="{{ route('log-out') }}" id="alertLogout"
-                        class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
-                    <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
-                </div>
-            </div>
-        </nav>
-    </div>
+
     </div>
     <script>
         logoutUser();

@@ -112,17 +112,3 @@
 
 
 <script src="{{ asset('js/slaughterhouse.js') }}"></script>
-
-
-<script>
-    sidePanel();
-</script>
-<script>
-    dropDown();
-</script>
-<script>
-    logoutUser();
-</script>
-<script>
-    dropDownDiv();
-</script>

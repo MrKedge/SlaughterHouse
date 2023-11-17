@@ -10,177 +10,139 @@
     <title>admin dashboard</title>
 </head>
 
-<body class="bg-[#D5DFE8] h-full w-full overflow-y-hidden">
+<body class="bg-[#D5DFE8] overflow-hidden">
+
+    <div>{{-- wrapper --}}
 
 
-    <div class="ml-[240px] h-[40px] bg-white z-10 flex justify-start fixed top-0 w-full">
-        {{-- header --}}
-        <div class="px-4 pt-2 font-extrabold text-[#0E7BBB] flex">
-            <h1>ADMIN</h1>
-        </div>
-    </div>
 
-    <div class="fixed left-0 h-full w-[240px] bg-[#293241] text-white">
-        <header class="text-center py-8 relative font-bold">
-            <img src="{{ asset('images/butcher-logo-icon.png') }}" alt="image" class="z-40 absolute  top-2 p-1">
-            <h1><span class="text-[#EE6C4D] pl-10">SLAUGHTER</span>HOUSE</h1>
-        </header>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='dashboard' type='solid'
-                        color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">DASHBOARD</h1>
-            </div>
-        </a>
-        <p class="pl-3 text-gray-500">TABLE</p>
-        <a href="{{ route('admin.view.animal.reg.list') }}">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='pencil' type='solid' color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">REGISTER LIST</h1>
-            </div>
-        </a>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='list-ul' color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">ANIMAL</h1>
-            </div>
-        </a>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='user-circle' type='solid'
-                        color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">OWNER</h1>
-            </div>
-        </a>
-        <p class="pl-3 text-gray-500">REPORTS</p>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
-                        color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">LRME</h1>
-            </div>
-        </a>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='report' type='solid' flip='horizontal'
-                        color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">SSHPDP</h1>
-            </div>
-        </a>
-        <p class="pl-3 text-gray-500">OPTION</p>
-        <a href="">
-            <div class="relative">
-                <span class="absolute left-8"><box-icon name='group' color='#ffffff'></box-icon></span>
-                <h1 class="my-6 pl-[65px]">USER ACCOUNTS</h1>
-            </div>
-        </a>
-        <hr class="mx-auto w-3/4">
-        <a href="{{ route('log-out') }}" id="show-log-out">
-            <div class="relative">
-                <span class="absolute left-8"> <box-icon name='log-out' color='#ffffff'></box-icon></box-icon></span>
-                <h1 class="my-6 pl-[65px]">Log Out</h1>
-            </div>
-        </a>
-    </div>
-    {{-- this is for the table inside --}}
+        {{-- HEADER --}}
+        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
 
-    <section class="pt-[80px] pr-[40px]">
-        {{-- baba ng uluhan --}}
-        <div class="flex justify-between ml-[240px]">
-            <div
-                class="h-40 bg-white w-[250px] ml-10 rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
-                <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">REGISTRATION</h1>
-
-                    <img src="{{ asset('images/register-icon.png') }}" alt="image"
-                        class="z-40 absolute right-[10px] top-[5px] ">
-                </a>
-                <div class="flex justify-center align-middle">
-                    <p class="text-center text-6xl pt-5 text-gray-400">100</p>
-                </div>
+            <div class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
+                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
             </div>
-            <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
-                <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">ANIMAL</h1>
-
-                    <img src="{{ asset('images/cow-animal-icon.png') }}" alt="image"
-                        class="z-40 absolute right-[10px] top-[5px] w-[64px]">
-                </a>
-            </div>
-            <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
-                <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">OWNER</h1>
-                    <img src="{{ asset('images/user-icon.png') }}" alt="image"
-                        class="z-40 absolute right-[10px] top-[5px] ">
-                </a>
-            </div>
-            <div class="h-40 bg-white w-[250px] rounded-r-2xl border-l-[16px] border-[#EE6C4D] rounded-l-2xl relative">
-                <a href="">
-                    <h1 class="pl-8 pt-4 text-[#EE6C4D] font-bold">ACCOUNT</h1>
-                    <img src="{{ asset('images/user-account-icon.png') }}" alt="image"
-                        class="z-40 absolute right-[10px] top-[5px]">
-                </a>
+            <div class="sticky top-">
+                @auth
+                    <a href="#" class="font-extrabold capitalize px-4 text-[#293241] flex items-center gap-1">
+                        <div id="open-div"><box-icon type='solid' name='down-arrow' size='14px'></div>
+                        </box-icon>
+                        <div id="close-div" class="hidden"><box-icon type='solid' name='up-arrow'
+                                size='14px'></box-icon>
+                        </div>
+                        {{ auth()->user()->first_name }}
+                    </a>
+                @endauth
+                <nav id="toggle-settings"
+                    class="space-y-4 py-2 h-auto absolute hidden rounded-md shadow-2xl bg-white bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border right-[50px]">
+                    <a href="#" id="" class="px-6 w-36 gap-2 flex font-bold"><box-icon
+                            name='user-circle'></box-icon>profile</a>
+                    <a href="#" id="show-log-out" class="px-6 w-36 gap-2 flex font-bold"><box-icon
+                            name='log-out'></box-icon>log-out</a>
+                </nav>
             </div>
         </div>
-    </section>
-    <div class="ml-[240px] pt-[40px]">
-        <section class=" flex justify-center">
-            <div class="bg-white h-auto w-[1200px] rounded-2xl">
-                <h1 class="text-center font-extrabold text-[#EE6C4D] pb-8 pt-4 text-2xl">RECENT REGISTRATION</h1>
-                <div class="flex justify-center relative px-4">
-                    {{-- table goes here --}}
+        {{-- end header --}}
 
-                    <table class="w-full text-center p-11 ">
-                        <thead>
-                            <tr class="">
-                                <th class="border border-black p-2">No.</th>
-                                <th class="border border-black p-2">Date</th>
-                                <th class="border border-black p-2">Owner's Name</th>
-                                <th class="border border-black p-2">Address</th>
-                                <th class="border border-black p-2">Status</th>
-                                <th class="border border-black p-2">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="">
-                            <tr>
-                                <td class="py-4">1</td>
-                                <td class="py-4">2023-10-16</td>
-                                <td class="py-4">John Doe</td>
-                                <td class="py-4">123 Main St, City, State</td>
-                                <td class="py-4 font-semibold">Active</td>
-                                <td class="py-4">
-                                    <a
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-0">
-                                        View
-                                    </a>
 
-                                    <a class="bg-red-500 hover:bg-red-700 text-white font-bold p-1 rounded mx-1 py-0">
-                                        delete
-                                    </a>
+        <div class="flex">{{-- middle content wrapper --}}
 
-                                </td>
-                            </tr>
-                            <tr>
+            <div class="inline-block">@include('admin.layout.admin-sidepanel')</div>
 
-                            </tr>
-                            <!-- Add more rows as needed -->
-                        </tbody>
-                    </table>
-                </div>
-        </section>
-    </div>
-    <nav id="pop-up"
-        class="fixed bg-white w-[300px] h-auto left-1/2 top-1/2 text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
-        style="display: none;">
-        <div class="">
-            <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
-            <div class="py-9 flex justify-center w-full gap-6 mx-auto">
-                <a href="{{ route('log-out') }}" id="alertLogout"
-                    class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
-                <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
+            {{-- this is for the table inside --}}
+
+
+            <div class="flex flex-col w-full gap-3">{{-- Inside wrapper --}}
+
+
+                <section
+                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+                    {{-- wrapper --}}
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
+                                type='solid' color='#ee6c4d' style="width: 32px; height: 32px;"></box-icon>
+                        </div>
+
+                    </div>
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='check-double' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                        </div>
+                    </div>
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='list-check' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                        </div>
+                    </div>
+                </section>
+
+
+                <section
+                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+
+
+
+                </section>
+
+
+
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </div>
-    </nav>
+
+
+
+    </div>{{-- End wrapper --}}
+
+
+
+
+
+
+
+
     <script src="{{ asset('js/animalForm.js') }}"></script>
     <script>
         logoutUser();
@@ -188,3 +150,14 @@
 </body>
 
 </html>
+{{-- <nav id="pop-up"
+    class="fixed bg-white w-[300px] h-auto left-1/2 top-1/2 text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
+    style="display: none;">
+    <div class="">
+        <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
+        <div class="py-9 flex justify-center w-full gap-6 mx-auto">
+            <a href="{{ route('log-out') }}" id="alertLogout" class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
+            <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
+        </div>
+    </div>
+</nav> --}}

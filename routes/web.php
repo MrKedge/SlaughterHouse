@@ -49,3 +49,7 @@ Route::get('/client/animal/list/register', [ClientController::class, 'ShowAnimal
 Route::get('/client/animal/register', [ClientController::class, 'ShowAnimalRegForm'])->name('client.animal.register');
 Route::get('/client/view/animal/form/{id}', [ClientController::class, 'ShowRegistrationFormClient'])->name('client.view.animal.form');
 Route::get('/client/edit/animal/form/{id}', [ClientController::class, 'ShowEditFormClient'])->name('client.edit.animal.form');
+Route::get('/client/archive/list/', [ClientController::class, 'ShowArchiveList'])->name('client.archive.list');
+
+//post clients
+Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name('archive.form');

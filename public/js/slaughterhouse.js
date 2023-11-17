@@ -16,8 +16,26 @@ function ageClassify() {
 var typeOfAnimalDropdown = document.getElementById("typeOfAnimal");
 typeOfAnimalDropdown.addEventListener("change", ageClassify);
 
-//logout pop up
 
+function dropDownDiv() {
+    var openTriangle = document.getElementById("open-div");
+    var closeTriangle = document.getElementById("close-div");
+    var navSettings = document.getElementById("toggle-settings");
+
+    openTriangle.addEventListener("click", ()=> {
+        navSettings.style.display = "block";
+        closeTriangle.style.display = "block";
+        openTriangle.style.display = "none";
+    });
+    closeTriangle.addEventListener("click", ()=> {
+        navSettings.style.display = "none";
+        openTriangle.style.display = "block";
+        closeTriangle.style.display = "none";
+    });
+}
+
+
+//logout pop up
 function logoutUser() {
     var showLogout = document.getElementById("show-log-out");
     var hideLogout = document.getElementById("hide-log-out");
@@ -98,7 +116,3 @@ closeRemark.addEventListener("click", ()=> {
 });
 
 }
-rejectRemark()
-sidePanel();
-dropDown();
-logoutUser();

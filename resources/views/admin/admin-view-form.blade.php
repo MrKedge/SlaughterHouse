@@ -165,7 +165,7 @@
                                         <div><label for="">Age Classification</label></div>
                                         <div>
                                             <p class="bg-gray-200 w-[300px] text-center">
-                                                {{ $animal->age_classify }}
+                                                {{ $animal->age_classify ?? 'None' }}
                                             </p>
 
                                         </div>

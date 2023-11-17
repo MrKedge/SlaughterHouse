@@ -1,0 +1,18 @@
+
+  /* Custom styles for scrollbar gutter */
+  .scrollbar-gutter::-webkit-scrollbar {
+    width: 12px; /* Set the width of the scrollbar */
+  }
+
+  .scrollbar-gutter::-webkit-scrollbar-thumb {
+    background-color: #4a5568; /* Set the color of the scrollbar thumb */
+    border-radius: 6px; /* Set the border-radius of the scrollbar thumb */
+  }
+
+  .scrollbar-gutter::-webkit-scrollbar-track {
+    background-color: #cbd5e0; /* Set the color of the scrollbar track */
+   
+  }
+  .scrollbar-gutter {
+    scrollbar-gutter: stable;
+  }
