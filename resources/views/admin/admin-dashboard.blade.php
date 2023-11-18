@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
     <title>admin dashboard</title>
 </head>
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#D5DFE8]">
 
     <div>{{-- wrapper --}}
 
@@ -19,7 +20,8 @@
         {{-- HEADER --}}
         <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
 
-            <div class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
+            <div
+                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
                 <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
             </div>
             <div class="sticky top-">
@@ -47,21 +49,21 @@
 
         <div class="flex">{{-- middle content wrapper --}}
 
-            <div class="inline-block">@include('admin.layout.admin-sidepanel')</div>
+            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
 
             {{-- this is for the table inside --}}
 
 
-            <div class="flex flex-col w-full gap-3">{{-- Inside wrapper --}}
+            <div class="flex flex-col w-full overflow-y-auto ml-[240px]">{{-- Inside wrapper --}}
 
 
                 <section
-                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+                    class="flex justify-center gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
                     {{-- wrapper --}}
                     <div
                         class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">REGISTRATION</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
                                 type='solid' color='#ee6c4d' style="width: 32px; height: 32px;"></box-icon>
@@ -71,7 +73,7 @@
                     <div
                         class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='check-double' type='solid' color='#ee6c4d'
@@ -81,7 +83,17 @@
                     <div
                         class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">OWNER</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='list-check' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                        </div>
+                    </div>
+                    <div
+                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ACCOUNT</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#ee6c4d'
@@ -92,11 +104,60 @@
 
 
                 <section
-                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+                    class="flex justify-center gap-3 py-8 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
 
+                    <div class="z-30 "> {{-- table wrapper --}}
+                        <section class=" flex justify-center">
+                            <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
+                                <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
+                                    REGISTRATION
+                                </h1>
+                                <div class="p-4 ">
+                                    <div
+                                        class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
+                                        <table class="w-full text-center">
+                                            <thead class="">
+                                                <tr>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Animal
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Status
+                                                    </th>
+                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                        Destination
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="">
 
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
 
                 </section>
+
+
+                <div class="flex gap-3 m-4 justify-between items-center">
+
+                    <div class="w-[400px] h-[400px] bg-white">
+
+                    </div>
+
+
+                    <div class="w-[400px] h-[400px] bg-white">
+
+                    </div>
+
+                </div>
+
+
 
 
 
@@ -104,60 +165,26 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
-
-
-
     </div>{{-- End wrapper --}}
 
+    <div class="flex justify-center">
+        <nav id="pop-up"
+            class="hidden absolute top-1/2 z-40  bg-white w-[300px] h-auto text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border">
+            <div class="rounded-2xl shadow-2xl bg-opacity-5 bg-blur-lg  backdrop-filter backdrop-blur-lg">
+                <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
+                <div class="py-9 flex justify-center w-full gap-6 mx-auto">
+                    <a href="{{ route('log-out') }}" id="alertLogout"
+                        class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
+                    <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
+                </div>
+            </div>
+        </nav>
+    </div>
 
-
-
-
-
-
-
-    <script src="{{ asset('js/animalForm.js') }}"></script>
     <script>
         logoutUser();
     </script>
 </body>
 
 </html>
-{{-- <nav id="pop-up"
-    class="fixed bg-white w-[300px] h-auto left-1/2 top-1/2 text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
-    style="display: none;">
-    <div class="">
-        <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
-        <div class="py-9 flex justify-center w-full gap-6 mx-auto">
-            <a href="{{ route('log-out') }}" id="alertLogout" class="bg-[#293241] w-24 text-white py-2 rounded">YES</a>
-            <a href="#" id="hide-log-out" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
-        </div>
-    </div>
-</nav> --}}

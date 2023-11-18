@@ -124,13 +124,13 @@
                                     <label class="block" for="">Age:</label>
                                     <p class="bg-white w-full text-[#484848] font-semibold capitalize p-1 rounded-sm">
                                         @auth
-                                            {{ $animal->age }} months
+                                            {{ $animal->age }} mos.
                                         @endauth
                                     </p>
                                 </div>
 
                                 <div>
-                                    <label class="block" for="">Live weight:</label>
+                                    <label class="block" for="">Live wt.</label>
                                     <p class="bg-white w-full text-[#484848] font-semibold capitalize p-1 rounded-sm">
                                         @auth
                                             {{ $animal->live_weight }} kg.

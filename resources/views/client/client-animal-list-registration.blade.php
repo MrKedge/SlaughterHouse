@@ -135,7 +135,7 @@
                                                 </tr>
                                             @else
                                                 @foreach ($animals as $animal)
-                                                    <tr class="{{ $index % 2 === 0 ? 'bg-gray-100' : 'bg-white' }}">
+                                                    <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
 
                                                         <td class="py-4 border-b border-black">{{ $index }}.</td>
                                                         <td class="py-4 border-b border-black uppercase font-semibold">

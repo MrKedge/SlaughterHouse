@@ -118,9 +118,6 @@
     sidePanel();
 </script>
 <script>
-    dropDown();
-</script>
-<script>
     logoutUser();
 </script>
 <script>

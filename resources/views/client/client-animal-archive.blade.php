@@ -84,10 +84,7 @@
                         <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
                             <div class="flex justify-between p-2 items-center">
                                 <h1 class="text-[#293241] font-extrabold py-2 px-4 text-2xl">Archives</h1>
-                                <div>
-                                    <button type="submit" value="ADD"
-                                        class="bg-[#0E7BBB] text-white px-4 py-1 rounded-2xl">ADD</button>
-                                </div>
+
                             </div>
                             <div class="p-4 ">
                                 <div

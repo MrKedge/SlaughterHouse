@@ -94,8 +94,7 @@
 
                 <div class="flex justify-center items-center">
                     <nav id="pop-up"
-                        class="absolute top-1/2 z-40  bg-white w-[300px] h-auto text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border"
-                        style="display: none;">
+                        class="hidden absolute top-1/2 z-40  bg-white w-[300px] h-auto text-center  rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg  backdrop-filter backdrop-blur-lg border">
                         <div class="rounded-2xl shadow-2xl bg-opacity-5 bg-blur-lg  backdrop-filter backdrop-blur-lg">
                             <h1 class="pt-4 text-2xl font-bold">Continue Log-out?</h1>
                             <div class="py-9 flex justify-center w-full gap-6 mx-auto">
@@ -136,23 +135,44 @@
                                             <tbody class="">
 
                                                 @php $index = 1 @endphp
-                                                @foreach ($recent as $animal)
-                                                    <tr class="{{ $index % 2 === 0 ? 'bg-gray-100' : 'bg-white' }}">
-                                                        <td class="py-4 border-b border-black uppercase font-semibold">
-                                                            {{ $animal->type }}
-                                                        </td>
-                                                        <td class="py-4 border-b border-black">{{ $animal->created_at }}
-                                                        </td>
-                                                        <td class="py-4 font-semibold border-b border-black uppercase"
-                                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
-                                                            {{ $animal->status }}</td>
-                                                        <td class="py-4 border-b border-black font-semibold capitalize">
-                                                            {{ $animal->destination }}
-                                                        </td>
 
+                                                @if ($animals->isEmpty())
+                                                    <tr>
+                                                        <td colspan="5"
+                                                            class="py-4 border-b border-black text-center">
+                                                            <h1 class="font-semibold italic pb-3">No Recent Register
+                                                                Animal
+                                                            </h1>
+                                                            <a href="{{ route('client.animal.register') }}"
+                                                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
+                                                                <box-icon name='pencil'
+                                                                    color='#ffffff'></box-icon><span>Register
+                                                                    Animal</span>
+                                                            </a>
+                                                        </td>
                                                     </tr>
-                                                    @php $index++ @endphp
-                                                @endforeach
+                                                @else
+                                                    @foreach ($recent as $animal)
+                                                        <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
+                                                            <td
+                                                                class="py-4 border-b border-black uppercase font-semibold">
+                                                                {{ $animal->type }}
+                                                            </td>
+                                                            <td class="py-4 border-b border-black">
+                                                                {{ $animal->created_at }}
+                                                            </td>
+                                                            <td class="py-4 font-semibold border-b border-black uppercase"
+                                                                style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
+                                                                {{ $animal->status }}</td>
+                                                            <td
+                                                                class="py-4 border-b border-black font-semibold capitalize">
+                                                                {{ $animal->destination }}
+                                                            </td>
+
+                                                        </tr>
+                                                        @php $index++ @endphp
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                     </div>

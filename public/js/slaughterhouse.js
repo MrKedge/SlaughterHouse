@@ -116,3 +116,17 @@ closeRemark.addEventListener("click", ()=> {
 });
 
 }
+
+function approvePopUp(){
+    var approveNav = document.getElementById("approve-pop-up");
+    var openRemark = document.getElementById("show-approve-nav");
+    var closeRemark = document.getElementById("close-approve");
+
+openRemark.addEventListener("click", ()=> {
+    approveNav.style.display = "block";
+});
+closeRemark.addEventListener("click", ()=> {
+    approveNav.style.display = "none";
+});
+
+}
