@@ -32,24 +32,26 @@
         </div> {{-- end header --}} {{-- end header --}}
 
 
-        <div class="flex">
+        <div class="flex w-full">
 
             <div class=""> @include('client.layout.sidepanel')</div>
 
             {{-- main content --}}
 
-            <section class="flex flex-col h-full mx-auto pt-8">
+            <section class="flex flex-col h-full pt-8 w-full mx-6">
 
 
-                <div class=" bg-white pl-20 pr-10 rounded-2xl  shadow-2xl py-6">
+                <div class=" bg-white px-10 rounded-2xl  shadow-2xl py-6">
                     <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">EDIT REGISTRATION
                     </h1>
-                    <form action="{{ route('store.animal') }}" method="POST" class="flex justify-center relative">
+                    <form action="{{ route('update.form', ['id' => $animal->id]) }}" method="POST"
+                        class="flex w-full justify-center relative">
                         @csrf
-                        <div class="">
+                        <div class="w-full">
                             <div class="scrollbar-gutter pr-5 pb-20 overflow-y-auto h-[500px] space-y-10">
 
-                                <div class="grid grid-flow-row  md:grid-flow-col gap-10">{{-- owner info --}}
+                                <div class="grid grid-flow-row  md:grid-flow-col gap-10 w-full">
+                                    {{-- owner info --}}
                                     <div class="">
                                         <h1 class="font-bold pointer-events-none text-lg italic">Owner Information</h1>
 
@@ -99,7 +101,7 @@
                                             <h1 class="font-bold text-lg italic">Animal Information</h1>
                                             <label class="block pb-1 pt-3" for="">Animal:</label>
                                             <select name="kindOfAnimal" id="typeOfAnimal" required
-                                                class=" border-2 border-black rounded-md p-1">
+                                                class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->type }}">{{ $animal->type }}</option>
                                                 <option value="cow">Cow</option>
                                                 <option value="goat">Goat</option>
@@ -112,32 +114,32 @@
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Gender:</label>
                                                 <select name="gender" id="" required
-                                                    class="border-2 border-black rounded-md w-full p-1">
+                                                    class=" border-2 border-black rounded-md p-2 w-full">
                                                     <option value="{{ $animal->gender }}">{{ $animal->gender }}</option>
                                                     <option value="male">Male</option>
                                                     <option value="female">Female</option>
                                                 </select>
                                             </div>
                                             <div>
-                                                <label class="block pb-1 pt-3" for="">Age:</label>
+                                                <label class="block pb-1 pt-3" for="">Age: (Months)</label>
                                                 <input type="number" name="age" required min="0"
                                                     value="{{ $animal->age }}"
-                                                    class="border-2 border-black rounded-md w-20 p-1">
-                                                <label for="">mos.</label>
+                                                    class=" border-2 border-black rounded-md p-2 w-full">
+
                                             </div>
                                             <div>
-                                                <label class="block pb-1 pt-3" for="">Live Wt.</label>
+                                                <label class="block pb-1 pt-3" for="">Live Wt.
+                                                    (Kilogram)</label>
                                                 <input type="number" name="liveWeight" required min="0"
                                                     value="{{ $animal->live_weight }}"
-                                                    class="border-2 border-black rounded-md w-20 p-1">
-                                                <label for="">kg.</label>
+                                                    class=" border-2 border-black rounded-md p-2 w-full">
                                             </div>
                                         </div>
 
                                         <div>
                                             <label class="block pb-1 pt-3" for="">Destination:</label>
                                             <select name="destination" id="" required
-                                                class="border-2 border-black rounded-md w-full p-1">
+                                                class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->destination }}">{{ $animal->destination }}
                                                 </option>
                                                 <option value="wet market">Wet Market</option>
@@ -157,7 +159,7 @@
                                             <h1 class="font-bold opacity-0 text-lg">Animal Information</h1>
                                             <label class="block pb-1 pt-3" for="">Butcher:</label>
                                             <select name="butcher" id="" required
-                                                class="border-2 border-black rounded-md [300px] p-1">
+                                                class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->butcher }}">{{ $animal->butcher }}
                                                 </option>
                                                 <option value="butcher1">butcher1</option>
@@ -171,7 +173,7 @@
                                         <div class="hidden" id="ageClassifyDiv">
                                             <label for="" class="block pb-1 pt-3">Age Classification:</label>
                                             <select name="ageClassify" id="putAgeClassify"
-                                                class="border-2 border-black rounded-md w-full p-1">
+                                                class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->age_classify }}">
                                                     {{ $animal->age_classify }}</option>
                                                 <option value="fattener">Fattener</option>

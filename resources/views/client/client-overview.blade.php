@@ -15,9 +15,9 @@
 <body class="bg-[#D5DFE8] overflow-hidden ">
 
 
-    <div>
+    <div class="min-h-screen ">
         {{-- HEADER --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
+        <div class="z-10 flex items-center justify-between bg-transparent h-[50px] sticky top-0">
 
             <div
                 class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
@@ -49,18 +49,16 @@
 
 
         {{-- main content --}}
-        <div class="flex">
+        <div class="flex w-full">
 
 
             <div class="inline-block"> @include('client.layout.sidepanel')</div>
 
 
             <div class="flex flex-col w-full gap-3"> {{-- below header wrapper --}}
-                <section
-                    class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto bg-[#293241] w-full border-l border-t h-auto">
+                <section class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto w-auto border-l h-auto">
                     {{-- wrapper --}}
-                    <div
-                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
@@ -69,8 +67,7 @@
                             {{ $animals->where('status', 'pending')->count() }}</div>
 
                     </div>
-                    <div
-                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
@@ -79,8 +76,7 @@
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'approved')->count() }}</div>
                     </div>
-                    <div
-                        class="h-24 bg-white w-[200px] rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
 
@@ -107,79 +103,76 @@
                     </nav>
 
 
-                    <div class="z-30 "> {{-- table wrapper --}}
-                        <section class=" flex justify-center">
-                            <div class="bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
-                                <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
-                                    REGISTRATION
-                                </h1>
-                                <div class="p-4 ">
-                                    <div
-                                        class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
-                                        <table class="w-full text-center">
-                                            <thead class="">
+                    {{-- table wrapper --}}
+                    <section class="w-full">
+                        <div class="bg-white h-auto rounded-md overflow-y-auto mx-6">
+                            <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
+                                REGISTRATION
+                            </h1>
+                            <div class="p-4 ">
+                                <div
+                                    class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
+                                    <table class="w-full text-center">
+                                        <thead class="">
+                                            <tr>
+                                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                    Animal
+                                                </th>
+                                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
+                                                </th>
+                                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                    Status
+                                                </th>
+                                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                                    Destination
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="">
+
+                                            @php $index = 1 @endphp
+
+                                            @if ($animals->isEmpty())
                                                 <tr>
-                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                        Animal
-                                                    </th>
-                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
-                                                    </th>
-                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                        Status
-                                                    </th>
-                                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                        Destination
-                                                    </th>
+                                                    <td colspan="5" class="py-4 border-b border-black text-center">
+                                                        <h1 class="font-semibold italic pb-3">No Recent Register
+                                                            Animal
+                                                        </h1>
+                                                        <a href="{{ route('client.animal.register') }}"
+                                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
+                                                            <box-icon name='pencil'
+                                                                color='#ffffff'></box-icon><span>Register
+                                                                Animal</span>
+                                                        </a>
+                                                    </td>
                                                 </tr>
-                                            </thead>
-                                            <tbody class="">
-
-                                                @php $index = 1 @endphp
-
-                                                @if ($animals->isEmpty())
-                                                    <tr>
-                                                        <td colspan="5"
-                                                            class="py-4 border-b border-black text-center">
-                                                            <h1 class="font-semibold italic pb-3">No Recent Register
-                                                                Animal
-                                                            </h1>
-                                                            <a href="{{ route('client.animal.register') }}"
-                                                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
-                                                                <box-icon name='pencil'
-                                                                    color='#ffffff'></box-icon><span>Register
-                                                                    Animal</span>
-                                                            </a>
+                                            @else
+                                                @foreach ($recent as $animal)
+                                                    <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
+                                                        <td class="py-4 border-b border-black uppercase font-semibold">
+                                                            {{ $animal->type }}
                                                         </td>
-                                                    </tr>
-                                                @else
-                                                    @foreach ($recent as $animal)
-                                                        <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
-                                                            <td
-                                                                class="py-4 border-b border-black uppercase font-semibold">
-                                                                {{ $animal->type }}
-                                                            </td>
-                                                            <td class="py-4 border-b border-black">
-                                                                {{ $animal->created_at }}
-                                                            </td>
-                                                            <td class="py-4 font-semibold border-b border-black uppercase"
-                                                                style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
-                                                                {{ $animal->status }}</td>
-                                                            <td
-                                                                class="py-4 border-b border-black font-semibold capitalize">
-                                                                {{ $animal->destination }}
-                                                            </td>
+                                                        <td class="py-4 border-b border-black">
+                                                            {{ $animal->created_at }}
+                                                        </td>
+                                                        <td class="py-4 font-semibold border-b border-black uppercase"
+                                                            style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
+                                                            {{ $animal->status }}</td>
+                                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                                            {{ $animal->destination }}
+                                                        </td>
 
-                                                        </tr>
-                                                        @php $index++ @endphp
-                                                    @endforeach
-                                                @endif
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    </tr>
+                                                    @php $index++ @endphp
+                                                @endforeach
+                                            @endif
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                        </section>
-                    </div>
+                        </div>
+                    </section>
+
                 </div>
 
             </div>

@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class AdminController extends Controller
 {
     public function ShowAdminDashboardOverview()
     {
-        return view('admin.admin-dashboard');
+        $animal = Animal::with('user')->get();
+        $user = User::with('animals')->get();
+        $recent = Animal::whereIn('status', ['pending', 'approved',])
+            ->where('created_at', '>=', Carbon::now()->subHours(8))
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
+
+        return view('admin.admin-dashboard', compact('recent', 'animal', 'user'));
     }
 
 
@@ -18,7 +27,7 @@ class AdminController extends Controller
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
         //$users = User::with('animals')->get();
-        $animals = Animal::with('user')->get();
+        $animals = Animal::with('user')->where('status', '!=', 'archived')->get();
         return view('admin.admin-animal-reg-list', compact('animals'));
     }
 

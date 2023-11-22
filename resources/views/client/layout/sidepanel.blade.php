@@ -38,7 +38,7 @@
 
                 </div>
 
-                <a href="{{ route('client.animal.register') }}">
+                <a href="{{ route('client.drafts') }}">
                     <h1 class="panel-text flex items-center">REGISTER ANIMAL</h1>
                 </a>
 
@@ -86,7 +86,7 @@
 
             </li>
 
-            <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
+            {{-- <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">
 
                 <div>
                     <div class="flex items-center"><box-icon name='save' type='solid' color='#ffffff'></box-icon>
@@ -99,7 +99,7 @@
                     <h1 class="panel-text flex items-center">DRAFTS</h1>
                 </a>
 
-            </li>
+            </li> --}}
 
         </ul>
 

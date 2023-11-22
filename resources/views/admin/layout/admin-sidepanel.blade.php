@@ -1,16 +1,6 @@
 <div id="side-panel" class="h-screen w-[240px] bg-[#293241] text-white shadow-2xl">
     {{-- side panel --}}
 
-    <div class="relative">{{-- button side panel --}}
-        <button type="button"
-            class=" absolute right-[-17.5px] top-[40px] h-[35px] w-[35px] pt-1 bg-[#293241] hover:bg-[#1b2538] rounded-full border">
-            <span id="open-icon" class="hidden"><box-icon name='chevrons-right' type='solid'
-                    color='#ffffff'></box-icon></span>
-            <span id="close-icon"><box-icon name='chevrons-left' type='solid' color='#ffffff'></box-icon></span>
-        </button>
-    </div>
-
-
 
     <div class="flex justify-start pl-6">
         <ul class="pt-[70px] grid grid-flow-row space-y-2">

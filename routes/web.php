@@ -32,7 +32,7 @@ Route::POST('/store/animal', [ClientController::class, 'Register'])->name('store
 Route::POST('/approve/status/animal/{id}', [AdminController::class, 'ApproveAnimalRegistration'])->name('approve.status');
 Route::POST('/reject/status/animal/{id}', [AdminController::class, 'RejectAnimalRegistration'])->name('reject.status');
 Route::post('/update/client/animal/form/{id}', [ClientController::class, 'UpdateAnimalForm'])->name('update.form');
-
+Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
 //admin pages
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'ShowAdminDashboardOverview'])->name('admin.dashboard');
@@ -50,6 +50,7 @@ Route::get('/client/animal/register', [ClientController::class, 'ShowAnimalRegFo
 Route::get('/client/view/animal/form/{id}', [ClientController::class, 'ShowRegistrationFormClient'])->name('client.view.animal.form');
 Route::get('/client/edit/animal/form/{id}', [ClientController::class, 'ShowEditFormClient'])->name('client.edit.animal.form');
 Route::get('/client/archive/list/', [ClientController::class, 'ShowArchiveList'])->name('client.archive.list');
+Route::get('/client/drafts', [ClientController::class, 'ShowDrafts'])->name('client.drafts');
 
 //post clients
 Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name('archive.form');
