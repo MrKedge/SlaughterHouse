@@ -18,8 +18,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return redirect()->route('log.in');
-})->name('home');
+    return view('welcome');
+});
 
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
 Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign.up');
@@ -39,6 +39,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/view/animal/reg/form/{id}', [AdminController::class, 'ShowRegistrationForm'])->name('admin.view.animal.reg.form');
     Route::get('/admin/view/animal/reg/list', [AdminController::class, 'ShowRegistrationList'])->name('admin.view.animal.reg.list');
     Route::get('/admin/edit/registration', [AdminController::class, 'ShowEditRegistration'])->name('admin.edit.registration');
+    Route::get('/admin/approve/list', [AdminController::class, 'ShowApproveList'])->name('admin.approve.list');
 });
 
 

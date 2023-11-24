@@ -12,49 +12,70 @@
 
 </head>
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-gray-100">
 
+    <div class="flex h-screen">
+        <!-- Side Panel -->
+        <aside class="w-64 bg-gray-800 text-white">
+            <div class="p-4">
+                <h1 class="text-2xl font-semibold mb-4">Side Panel</h1>
 
+                <!-- First Dropdown Trigger -->
+                <div class="relative group mb-4">
+                    <button class="w-full py-2 px-4 bg-gray-700 hover:bg-gray-600 text-left">
+                        Dropdown 1
+                    </button>
 
+                    <!-- First Dropdown Content -->
+                    <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0">
+                        <ul class="py-2 bg-gray-800">
+                            <li class="hover:bg-gray-700 px-4 py-2">Item 1</li>
+                            <li class="hover:bg-gray-700 px-4 py-2">Item 2</li>
+                            <!-- Add more items as needed -->
+                        </ul>
+                    </div>
+                </div>
 
+                <!-- Second Dropdown Trigger -->
+                <div class="relative group">
+                    <button class="w-full py-2 px-4 bg-gray-700 hover:bg-gray-600 text-left">
+                        Dropdown 2
+                    </button>
 
+                    <!-- Second Dropdown Content -->
+                    <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0">
+                        <ul class="py-2 bg-gray-800">
+                            <li class="hover:bg-gray-700 px-4 py-2">Item A</li>
+                            <li class="hover:bg-gray-700 px-4 py-2">Item B</li>
+                            <!-- Add more items as needed -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </aside>
 
-
-    <form action="{{ route('store.animal') }}" method="POST" class="flex w-full justify-center relative">
-        @csrf
-        <h1 class="font-bold text-lg italic">Animal Information</h1>
-        <label class="block pb-1 pt-3" for="">Animal:</label>
-        <select name="kindOfAnimal" id="typeOfAnimal" required class=" border-2 border-black rounded-md p-2 w-full">
-            <option value="" disabled selected>select</option>
-            <option value="cow">Cow</option>
-            <option value="goat">Goat</option>
-            <option value="horse">Horse</option>
-            <option value="swine">Swine</option>
-            <option value="carabao">Carabao</option>
-        </select>
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Register
-        </button>
-
-        <a href="{{ route('client.overview') }}"
-            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-            Cancel
-        </a>
-        <div class="flex justify-center">
-            <canvas class="border-2 border-black " id="canvas"></canvas>
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <!-- Your main content goes here -->
         </div>
+    </div>
 
-        </div>
-        </div>
-    </form>
+    <script>
+        // JavaScript for Dropdown Toggles
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdownTriggers = document.querySelectorAll('.group button');
+            const dropdownContents = document.querySelectorAll('.group > .transition-all');
 
-
-
-
-
-
-
-
+            dropdownTriggers.forEach((trigger, index) => {
+                trigger.addEventListener('click', function() {
+                    dropdownContents[index].classList.toggle(
+                        'max-h-40'); // Adjust the max height based on your content
+                    dropdownContents[index].classList.toggle('opacity-100');
+                    dropdownContents[index].classList.toggle('opacity-0');
+                });
+            });
+        });
+    </script>
 
 </body>
 

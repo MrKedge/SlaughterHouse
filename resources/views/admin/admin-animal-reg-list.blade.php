@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
     <title>view list registration</title>
@@ -18,26 +19,9 @@
 
 
         {{-- HEADER --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
-
-            <div
-                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <a href="#" class="font-extrabold capitalize px-4 text-[#293241] flex items-center gap-1">
-                        <div id="open-div"><box-icon type='solid' name='down-arrow' size='14px'></div>
-                        </box-icon>
-                        <div id="close-div" class="hidden"><box-icon type='solid' name='up-arrow'
-                                size='14px'></box-icon>
-                        </div>
-                        {{ auth()->user()->first_name }}
-                    </a>
-                @endauth
-            </div>
-        </div>
+        @include('admin.layout.admin-header')
         {{-- end header --}}
+
 
 
         <div class="flex">{{-- middle content wrapper --}}

@@ -14,22 +14,11 @@
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
-    <div class="">{{-- wrapperr --}}
-        <div class="z-10 flex items-center justify-between h-[50px] sticky top-0">
+    <div class="min-h-screen w-screen ">
 
-            <div
-                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">S</span>H</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <p class="font-extrabold capitalize px-4 text-[#293241] ">
-                        {{ auth()->user()->first_name }}
-                    </p>
-                @endauth
-            </div>
-        </div>
-
+        {{-- header --}}
+        @include('client.layout.client-header')
+        {{-- header --}}
 
         <div class="flex">
 

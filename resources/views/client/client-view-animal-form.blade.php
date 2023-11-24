@@ -17,23 +17,9 @@
         {{-- <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image"> --}}
 
 
-        {{-- HEADER --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
-
-            <div
-                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <p class="font-extrabold capitalize px-4 text-[#293241] ">
-                        {{ auth()->user()->first_name }}
-                    </p>
-                @endauth
-            </div>
-
-        </div>
-        {{-- end header --}}
+        {{-- header --}}
+        @include('client.layout.client-header')
+        {{-- header --}}
 
 
         <div class="flex">
@@ -181,7 +167,7 @@
                             <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks</h1>
                             <section class="min-h-[350px] border-dashed border border-black ">
                                 <img class="w-full" src="{{ asset('storage/marked-animal/' . $animal->animal_mark) }}"
-                                    alt="">
+                                    alt="animal image">
                             </section>
                         </div>
 
@@ -220,8 +206,7 @@
                                         style="
                             @if ($animal->status == 'pending') color: orange;
                             @elseif ($animal->status == 'approved') color: green;
-                            @elseif ($animal->status == 'rejected') color: red; @endif
-                        ">{{ $animal->status }}</span>
+                            @elseif ($animal->status == 'rejected') color: red; @endif">{{ $animal->status }}</span>
                                 </h1>
                             </div>
 
@@ -262,11 +247,6 @@
     </div>
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
-    <script>
-        sidePanel();
-        dropDown();
-    </script>
-
 </body>
 
 </html>

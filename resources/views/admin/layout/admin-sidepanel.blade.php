@@ -2,8 +2,8 @@
     {{-- side panel --}}
 
 
-    <div class="flex justify-start pl-6">
-        <ul class="pt-[70px] grid grid-flow-row space-y-2">
+    <div class="flex p-3">
+        <ul class="pt-[70px] grid grid-flow-row space-y-2 w-full">
 
             <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
 
@@ -30,8 +30,8 @@
     <p class="pl-3 text-gray-500 pt-4">REGISTRATION</p>
 
 
-    <div class="flex justify-start pl-6">
-        <ul class="pt-4 grid grid-flow-row space-y-2">
+    <div class="flex p-3">
+        <ul class="pt-4 grid grid-flow-row space-y-2 w-full">
 
             <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
 
@@ -48,18 +48,22 @@
 
             </li>
 
-            <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
+            <li class="group relative ">{{-- this for icon --}}
 
-                <div>
-                    <div class="flex items-center"><box-icon name='list-ul' color='#ffffff'></box-icon>
-                    </div>
+                <button class="flex justify-between items-center w-full panel-text hover:bg-[#3D5A80] p-2 rounded-md">
+                    <div class="flex items-center justify-start gap-4"><box-icon name='list-ul'
+                            color='#ffffff'></box-icon>ON PROCESS</div>
+                    <i class='arrow bx bxs-chevron-right' style='color:#ffffff'></i>
+                </button>
 
-
+                <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0">
+                    <ul class="py-2">
+                        <a href="{{ route('admin.approve.list') }}" class="hover:bg-gray-700 px-4 py-2">Approve</a>
+                        <li class="hover:bg-gray-700 px-4 py-2"></li>
+                        <li class="hover:bg-gray-700 px-4 py-2">Scheduled</li>
+                        <li class="hover:bg-gray-700 px-4 py-2">Scheduled</li>
+                    </ul>
                 </div>
-
-                <a href="">
-                    <h1 class="panel-text flex items-center whitespace-nowrap">ANIMAL</h1>
-                </a>
 
             </li>
 
@@ -85,8 +89,8 @@
     <p class="pl-3 text-gray-500 pt-4">REPORTS</p>
 
 
-    <div class="flex justify-start pl-6">
-        <ul class="pt-4 grid grid-flow-row space-y-2">
+    <div class="flex p-3">
+        <ul class="pt-4 grid grid-flow-row space-y-2 w-full">
 
             <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
 
@@ -128,8 +132,8 @@
     <p class="pl-3 text-gray-500 pt-4">OPTION</p>
 
 
-    <div class="flex justify-start pl-6">
-        <ul class="pt-4 grid grid-flow-row space-y-2">
+    <div class="flex p-3">
+        <ul class="pt-4 grid grid-flow-row space-y-2 w-full">
 
             <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
 
@@ -148,15 +152,23 @@
         </ul>
 
     </div>
-    <div class="pt-4">
-        <hr class="mx-auto w-3/4">
-    </div>
-</div>
 
-<script src="{{ asset('js/slaughterhouse.js') }}"></script>
+
+</div>
 <script>
-    logoutUser();
-</script>
-<script>
-    dropDownDiv();
+    // JavaScript for Dropdown Toggles
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropdownTriggers = document.querySelectorAll('.group button');
+        const dropdownContents = document.querySelectorAll('.group > .transition-all');
+        const arrowIcons = document.querySelectorAll('.group i.arrow');
+
+        dropdownTriggers.forEach((trigger, index) => {
+            trigger.addEventListener('click', function() {
+                dropdownContents[index].classList.toggle('max-h-40');
+                dropdownContents[index].classList.toggle('opacity-100');
+                dropdownContents[index].classList.toggle('opacity-0');
+                arrowIcons[index].classList.toggle('bx-rotate-90');
+            });
+        });
+    });
 </script>

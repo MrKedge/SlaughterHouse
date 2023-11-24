@@ -122,12 +122,12 @@ class ClientController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'liveWeight' => 'required',
-            'drawingData' => 'required', // Validate the drawing data
+            'drawingData' => 'required',
         ]);
 
-        // Extract the image name from the data URL
+
         $imageData = $request->drawingData;
-        $imageName = time() . '_' . uniqid() . '.png'; // Generate a unique image name, you may customize this
+        $imageName = time() . '_' . uniqid() . '.png';
 
         // Decode the data URL and save the image
         $imageData = substr($imageData, strpos($imageData, ',') + 1);
@@ -136,17 +136,16 @@ class ClientController extends Controller
 
         $animal = new Animal();
 
-        // Assuming 'kindOfAnimal', 'butcher', 'destination', 'gender', 'age', 'liveWeight' are your regular form fields
+
         $animal->type = $request->kindOfAnimal;
         $animal->user_id = Auth::user()->id;
         $animal->butcher = $request->butcher;
-        $animal->age_classify = $request->ageClassify; // Ensure you have ageClassify in your form
+        $animal->age_classify = $request->ageClassify;
         $animal->destination = $request->destination;
         $animal->gender = $request->gender;
         $animal->age = $request->age;
         $animal->live_weight = $request->liveWeight;
-        $animal->animal_mark = $imageName; // Save the image name to the database
-
+        $animal->animal_mark = $imageName;
         $animal->save();
 
         return redirect()->route('client.animal.list.register');
@@ -187,12 +186,13 @@ class ClientController extends Controller
 
         $animal = Animal::findOrFail($id);
 
-        $animal->type = $request->kindOfAnimal; // Corrected the field name
+        $animal->type = $request->kindOfAnimal;
         $animal->gender = $request->gender;
         $animal->age = $request->age;
-        $animal->live_weight = $request->liveWeight; // Adjusted the field name
+        $animal->live_weight = $request->liveWeight;
         $animal->butcher = $request->butcher;
         $animal->age_classify = $request->age_classify;
+        $animal->status = 'pending';
         $animal->save();
 
         return redirect()->route('client.animal.list.register');

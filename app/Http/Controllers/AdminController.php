@@ -22,12 +22,20 @@ class AdminController extends Controller
         return view('admin.admin-dashboard', compact('recent', 'animal', 'user'));
     }
 
-
+    public function ShowApproveList()
+    {
+        $animal = Animal::with('user')
+            ->where('status', 'approve')
+            ->get();
+        return view('admin.admin-approve-list', compact('animal'));
+    }
 
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
         //$users = User::with('animals')->get();
-        $animals = Animal::with('user')->where('status', '!=', 'archived')->get();
+        $animals = Animal::with('user')
+            ->where('status', 'pending')
+            ->get();
         return view('admin.admin-animal-reg-list', compact('animals'));
     }
 

@@ -14,22 +14,11 @@
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
-    <div>{{-- wrapperr --}}
+    <div class="min-h-screen w-screen ">
         {{-- <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image"> --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
-
-            <div
-                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <p class="font-extrabold capitalize px-4 text-[#293241] ">
-                        {{ auth()->user()->first_name }}
-                    </p>
-                @endauth
-            </div>
-        </div> {{-- end header --}} {{-- end header --}}
+        {{-- header --}}
+        @include('client.layout.client-header')
+        {{-- header --}}
 
 
         <div class="flex w-full">

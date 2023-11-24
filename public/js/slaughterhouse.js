@@ -16,93 +16,6 @@ function ageClassify() {
 var typeOfAnimalDropdown = document.getElementById("typeOfAnimal");
 typeOfAnimalDropdown.addEventListener("change", ageClassify);
 
-
-function dropDownDiv() {
-    var openTriangle = document.getElementById("open-div");
-    var closeTriangle = document.getElementById("close-div");
-    var navSettings = document.getElementById("toggle-settings");
-
-    openTriangle.addEventListener("click", ()=> {
-        navSettings.style.display = "block";
-        closeTriangle.style.display = "block";
-        openTriangle.style.display = "none";
-    });
-    closeTriangle.addEventListener("click", ()=> {
-        navSettings.style.display = "none";
-        openTriangle.style.display = "block";
-        closeTriangle.style.display = "none";
-    });
-}
-
-
-//logout pop up
-function logoutUser() {
-    var showLogout = document.getElementById("show-log-out");
-    var hideLogout = document.getElementById("hide-log-out");
-    var logoutPopUp = document.getElementById("pop-up");
-
-    showLogout.addEventListener("click", function() {
-        logoutPopUp.style.display = "block";
-    });
-    hideLogout.addEventListener("click", function() {
-        logoutPopUp.style.display = "none";
-    });
-}
-
-
-function sidePanel(){
-    var panel = document.getElementById("side-panel");//side panel--------------------------------------------------------------------
-    var openBtn = document.getElementById("open-icon");
-    var closeBtn = document.getElementById("close-icon");
-    var panelTextElements = document.querySelectorAll(".panel-text");
-    
-
-    openBtn.addEventListener("click", ()=> {
-        panel.style.transition = "width 0.3s ease";
-        for (var i = 0; i < panelTextElements.length; i++) {
-            panelTextElements[i].style.transition = "opacity 0.3s ease " + (i * 200) + "ms";
-            panelTextElements[i].style.display = "block";
-            
-        }
-        panel.style.width = "240px";
-        openBtn.style.display = "none";
-        closeBtn.style.display = "block";
-        
-    });
-
-    closeBtn.addEventListener("click", () => {
-        panel.style.transition = "width 0.3s ease";
-    
-        for (var i = 0; i < panelTextElements.length; i++) {
-            panelTextElements[i].style.transition = "opacity 0.3s ease " + (i * 200) + "ms";
-            panelTextElements[i].style.display = "none";
-    
-        }
-
-        panel.style.width = "55px";
-        openBtn.style.display = "block";
-        closeBtn.style.display = "none";
-    });
-}
-
-function dropDown(){
-    var dropdownBtns = document.querySelectorAll(".dropdown-btn");
-    
-
-dropdownBtns.forEach(function(btn) {
-    btn.addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-            
-        } else {
-            dropdownContent.style.display = "block";
-        }
-    });
-});
-}
-
 function rejectRemark(){
     var remark = document.getElementById("remarks-pop-up");
     var openRemark = document.getElementById("show-remarks");
@@ -121,7 +34,7 @@ function approvePopUp(){
     var approveNav = document.getElementById("approve-pop-up");
     var openRemark = document.getElementById("show-approve-nav");
     var closeRemark = document.getElementById("close-approve");
-
+    
 openRemark.addEventListener("click", ()=> {
     approveNav.style.display = "block";
 });
@@ -226,3 +139,19 @@ document.addEventListener("DOMContentLoaded", function() {
         this.submit();
     });
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    const dropdownTriggers = document.querySelectorAll('.group button');
+    const dropdownContents = document.querySelectorAll('.group > .transition-all');
+  
+    dropdownTriggers.forEach((trigger, index) => {
+      trigger.addEventListener('click', function () {
+        dropdownContents[index].classList.toggle('max-h-40'); // Adjust the max height based on your content
+        dropdownContents[index].classList.toggle('opacity-100');
+        dropdownContents[index].classList.toggle('opacity-0');
+      });
+    });
+});
+
+
+

@@ -19,20 +19,9 @@
 
 
 
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
-
-            <div
-                class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <p class="font-extrabold capitalize px-4 text-[#293241] ">
-                        {{ auth()->user()->first_name }}
-                    </p>
-                @endauth
-            </div>
-        </div> {{-- end header --}}
+        {{-- header --}}
+        @include('client.layout.client-header')
+        {{-- header --}}
 
 
         {{-- main content --}}
@@ -198,14 +187,12 @@
 
 
                                 <div class="flex justify-center">
-                                    {{-- <input type="hidden" id="imageData" name="imageData" value=""> --}}
-                                    {{-- <button type="submit">Save Image</button> --}}
+
 
                                     <div class="flex justify-center">
                                         <canvas class="border-2 border-black" id="canvas"></canvas>
                                     </div>
-
-                                    <!-- Hidden input to store drawing data -->
+                                    <header>Animal Marks</header>
                                     <input type="hidden" name="drawingData" id="drawingData" value="">
 
                                 </div>
@@ -224,19 +211,13 @@
     <script>
         var imageUrls = {
             cow: "{{ asset('images/cow.png') }}",
-            goat: "{{ asset('images/goat.png') }}",
             horse: "{{ asset('images/horse.png') }}",
-            swine: "{{ asset('images/swine.png') }}",
             carabao: "{{ asset('images/carabao.png') }}",
         };
     </script>
 
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
-    <script>
-        sidePanel();
-        dropDown();
-    </script>
 </body>
 
 </html>

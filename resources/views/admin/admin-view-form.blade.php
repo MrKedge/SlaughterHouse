@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @vite('resources/css/app.css')
     <title>Receive registration</title>
 </head>
@@ -16,24 +17,8 @@
 
 
         {{-- HEADER --}}
-        <div class="z-10 flex items-center justify-between bg-white h-[50px] sticky top-0">
-
-            <div class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-                <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
-            </div>
-            <div class="sticky top-">
-                @auth
-                    <a href="#" class="font-extrabold capitalize px-4 text-[#293241] flex items-center gap-1">
-                        <div id="open-div"><box-icon type='solid' name='down-arrow' size='14px'></div>
-                        </box-icon>
-                        <div id="close-div" class="hidden"><box-icon type='solid' name='up-arrow'
-                                size='14px'></box-icon>
-                        </div>
-                        {{ auth()->user()->first_name }}
-                    </a>
-                @endauth
-            </div>
-        </div>
+        @include('admin.layout.admin-header')
+        {{-- end header --}}
 
 
 
@@ -180,7 +165,8 @@
                             {{-- Mark of animal --}}
                             <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks</h1>
                             <section class="min-h-[350px] border-dashed border border-black ">
-
+                                <img class="w-full" src="{{ asset('storage/marked-animal/' . $animal->animal_mark) }}"
+                                    alt="animal image">
                             </section>
                         </div>
 
@@ -271,13 +257,13 @@
 
 
         <nav id="remarks-pop-up"
-            class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter backdrop-blur-lg">
+            class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl">
             <form method="post" action="{{ route('reject.status', ['id' => $animal->id]) }}">
                 <div class="p-3">
 
                     <textarea name="remarks" placeholder="Write a Remarks..." required
-                        class="w-full h-[100px] mt-3 resize-none border-b-4 rounded-t-xl bg-gray-200 border-blue-500 p-2"></textarea>
-                    <h1 class="block font-semibold text-xl py-5">Do you want to <span
+                        class="w-full h-[100px]  resize-none border-b-4 rounded-t-xl bg-gray-200 border-blue-500 p-2"></textarea>
+                    <h1 class="block font-semibold text-xl py-1">Do you want to <span
                             class="text-red-600 font-semibold">REJECT</span>
                         this?
                     </h1>
@@ -296,7 +282,8 @@
         <nav id="approve-pop-up"
             class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
             <div class="">
-                <h1 class="block font-semibold text-xl py-5">Do you want to <em class="text-green-600 ">APPROVE</em>
+                <h1 class="block font-semibold text-xl py-5">Do you want to <span
+                        class="text-green-600 ">APPROVE</span>
                     this?</h1>
                 <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
                     <form method="post" action="{{ route('approve.status', ['id' => $animal->id]) }}">

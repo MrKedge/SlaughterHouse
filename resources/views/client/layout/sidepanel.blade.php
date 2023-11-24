@@ -1,12 +1,12 @@
-<div id="side-panel" class="h-screen w-[240px] bg-[#293241] text-white shadow-2xl inline-block">
+<div id="side-panel" class="h-screen w-[240px] bg-[#293241] text-white shadow-2xl inline-block transition-width">
     {{-- side panel --}}
 
     <div class="relative">{{-- button side panel --}}
-        <button type="button"
-            class=" absolute right-[-17.5px] top-[40px] h-[35px] w-[35px] pt-1 bg-[#293241] hover:bg-[#1b2538] rounded-full border">
-            <span id="open-icon" class="hidden"><box-icon name='chevrons-right' type='solid'
+        <button type="button" id="toggleButton"
+            class="absolute right-[-17.5px] top-[40px] h-[35px] w-[35px] pt-1 bg-[#293241] hover:bg-[#1b2538] rounded-full border">
+            <span id="open-sidepanel" class="hidden"><box-icon name='chevrons-right' type='solid'
                     color='#ffffff'></box-icon></span>
-            <span id="close-icon"><box-icon name='chevrons-left' type='solid' color='#ffffff'></box-icon></span>
+            <span id="close-sidepanel"><box-icon name='chevrons-left' type='solid' color='#ffffff'></box-icon></span>
         </button>
     </div>
 
@@ -24,7 +24,7 @@
                 </div>
 
                 <a href="{{ route('client.overview') }}">
-                    <h1 class="panel-text flex items-center">HOME</h1>
+                    <h1 class="panel-text items-center">HOME</h1>
                 </a>
 
             </li>
@@ -110,16 +110,31 @@
 </div>
 
 
-
-<script src="{{ asset('js/slaughterhouse.js') }}"></script>
-
-
 <script>
-    sidePanel();
-</script>
-<script>
-    logoutUser();
-</script>
-<script>
-    dropDownDiv();
+    document.addEventListener("DOMContentLoaded", function() {
+        var toggleButton = document.getElementById("toggleButton");
+        var sidePanel = document.getElementById("side-panel");
+        var panelText = document.querySelectorAll('.panel-text');
+
+        toggleButton.addEventListener("click", function() {
+            var openPanel = document.getElementById("open-sidepanel");
+            var closePanel = document.getElementById("close-sidepanel");
+
+            openPanel.classList.toggle("hidden");
+            closePanel.classList.toggle("hidden");
+
+            // Iterate through each element in the panelText NodeList
+            panelText.forEach(function(element) {
+                element.classList.toggle("hidden");
+            });
+
+            // Toggle the width of the side panel with transition
+            sidePanel.style.width = sidePanel.style.width === "55px" ? "240px" : "55px";
+
+            // Add transition effect to the elements with the "hidden" class
+            panelText.forEach(function(element) {
+                element.style.transition = "opacity 1s ease-in-out";
+            });
+        });
+    });
 </script>
