@@ -58,17 +58,6 @@
                 </a>
 
             </li>
-        </ul>
-
-    </div>
-
-
-    <div class="pt-4">
-        <hr class="mx-auto w-3/4">
-    </div>
-
-    <div class="flex justify-center">
-        <ul class="pt-4 grid grid-flow-row space-y-2">
 
             <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">{{-- this for icon --}}
 
@@ -85,28 +74,16 @@
                 </a>
 
             </li>
-
-            {{-- <li class="flex gap-4 hover:bg-[#3D5A80] p-2 rounded-md">
-
-                <div>
-                    <div class="flex items-center"><box-icon name='save' type='solid' color='#ffffff'></box-icon>
-                    </div>
-
-
-                </div>
-
-                <a href="">
-                    <h1 class="panel-text flex items-center">DRAFTS</h1>
-                </a>
-
-            </li> --}}
-
         </ul>
 
     </div>
-    <div class="pt-4">
-        <hr class="mx-auto w-3/4">
+
+    <div class="flex justify-center">
+
     </div>
+    {{-- <div class="pt-4">
+        <hr class="mx-auto w-3/4">
+    </div> --}}
 </div>
 
 

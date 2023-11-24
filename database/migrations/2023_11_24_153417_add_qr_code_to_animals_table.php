@@ -12,10 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('animals', function (Blueprint $table) {
-            $table->timestamp('approved_at')->nullable();
-            $table->timestamp('scheduled_at')->nullable();
-            $table->timestamp('slaughtered_at')->nullable();
-            $table->timestamp('arrived_at')->nullable();
+            $table->string('qr_code')->nullable();
         });
     }
 
@@ -25,10 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('animals', function (Blueprint $table) {
-            $table->dropColumn('approved_at');
-            $table->dropColumn('scheduled_at');
-            $table->dropColumn('slaughtered_at');
-            $table->dropColumn('arrived_at');
+            $table->dropColumn('qr_code');
         });
     }
 };

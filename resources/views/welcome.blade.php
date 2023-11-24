@@ -68,10 +68,20 @@
 
             dropdownTriggers.forEach((trigger, index) => {
                 trigger.addEventListener('click', function() {
-                    dropdownContents[index].classList.toggle(
-                        'max-h-40'); // Adjust the max height based on your content
+                    // Toggle the active class for the clicked dropdown
+                    dropdownContents[index].classList.toggle('active');
+                    // Toggle the clicked dropdown
+                    dropdownContents[index].classList.toggle('max-h-40');
                     dropdownContents[index].classList.toggle('opacity-100');
                     dropdownContents[index].classList.toggle('opacity-0');
+
+                    // Close other dropdowns and remove active class
+                    dropdownContents.forEach((content, i) => {
+                        if (i !== index) {
+                            content.classList.remove('max-h-40', 'opacity-100', 'active');
+                            content.classList.add('opacity-0');
+                        }
+                    });
                 });
             });
         });

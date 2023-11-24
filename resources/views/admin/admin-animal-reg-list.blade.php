@@ -37,9 +37,9 @@
                 <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
-                        class="h-28  bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">PENDING</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
                                 type='solid' color='#293241'
@@ -48,9 +48,9 @@
 
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl   ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">APPROVE</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='check-double' type='solid' color='#293241'
@@ -58,9 +58,9 @@
                         </div>
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUGHTERED</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">SLAUGHTERED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#293241'
@@ -68,9 +68,9 @@
                         </div>
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">BUTCHER</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">BUTCHER</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#293241'
@@ -114,7 +114,7 @@
                                             @if ($animals->isEmpty())
                                                 <tr>
                                                     <td colspan="7" class="py-4 border-b border-black text-center">
-                                                        <h1 class="font-semibold italic pb-3">No Register Animal</h1>
+                                                        <h1 class="font-semibold italic pb-3">No Pending Animal</h1>
                                                     </td>
                                                 </tr>
                                             @else
@@ -161,27 +161,7 @@
                     </section>
                 </div>
 
-
-
-
-
-
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         </div>
 

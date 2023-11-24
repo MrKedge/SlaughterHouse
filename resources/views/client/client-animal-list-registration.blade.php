@@ -81,8 +81,8 @@
 
 
 
-                <section class="w-full ml-6">
-                    <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto">
+                <section class="px-6">
+                    <div class="scrollbar-gutter bg-white h-auto rounded-2xl overflow-y-auto w-full">
                         <div class="flex justify-between p-2 items-center">
                             <h1 class="text-[#293241] font-extrabold py-2 px-4 text-2xl">LIST OF REGISTRATION</h1>
 

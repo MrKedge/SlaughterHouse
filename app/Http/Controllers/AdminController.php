@@ -25,7 +25,7 @@ class AdminController extends Controller
     public function ShowApproveList()
     {
         $animal = Animal::with('user')
-            ->where('status', 'approve')
+            ->where('status', 'approved')
             ->get();
         return view('admin.admin-approve-list', compact('animal'));
     }
@@ -61,6 +61,7 @@ class AdminController extends Controller
 
         // Update the status to 'approved' or perform any other necessary actions
         $animal->status = 'approved';
+        $animal->approved_at = now();
         $animal->save();
         return redirect()->route('admin.view.animal.reg.list', ['id' => $id]);
     }
