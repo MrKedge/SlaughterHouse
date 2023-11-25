@@ -33,6 +33,8 @@ Route::POST('/approve/status/animal/{id}', [AdminController::class, 'ApproveAnim
 Route::POST('/reject/status/animal/{id}', [AdminController::class, 'RejectAnimalRegistration'])->name('reject.status');
 Route::post('/update/client/animal/form/{id}', [ClientController::class, 'UpdateAnimalForm'])->name('update.form');
 Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
+Route::post('/set/schedule/animal/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
+
 //admin pages
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'ShowAdminDashboardOverview'])->name('admin.dashboard');

@@ -6,6 +6,7 @@ use App\Models\Animal;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Illuminate\Validation\Rules\Can;
 
 class AdminController extends Controller
 {
@@ -88,5 +89,43 @@ class AdminController extends Controller
         $animal->save();
 
         return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal registration rejected successfully.');
+    }
+
+    public function SetSchedule(Request $request, $id)
+    {
+        // $arrivalDate = $request->input('dateOfArrival');
+        // $arrivalTime = $request->input('timeOfArrival');
+
+        // $slaughterDate = $request->input('dateOfSlaughter');
+        // $slaughterTime = $request->input('timeOfSlaughter');
+
+        // $arrivalDateTime = Carbon::parse("$arrivalDate $arrivalTime");
+        // $slaughterDateTime = Carbon::parse("$slaughterDate $slaughterTime");
+
+
+        $request->validate([
+            'dateOfArrival' => 'nullable',
+            'timeOfArrival' => 'nullable',
+            'dateOfSlaughter' => 'nullable',
+            'timeOfSlaughter' => 'nullable',
+        ]);
+
+        // Find the animal
+        $animal = Animal::where('status', 'approved')->findorfail($id);
+
+        // Combine date and time for arrival
+        $arrivalDateTime = Carbon::parse($request->input('dateOfArrival') . ' ' . $request->input('timeOfArrival'));
+
+        // Combine date and time for slaughter
+        $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
+
+        // Update the animal's fields
+        $animal->arrived_at = $arrivalDateTime;
+        $animal->scheduled_at = $slaughterDateTime;
+
+        // Save the changes
+        $animal->save();
+
+        return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal scheduled successfully.');
     }
 }
