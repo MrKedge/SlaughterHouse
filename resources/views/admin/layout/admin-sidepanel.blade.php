@@ -62,6 +62,10 @@
                                 <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">APPROVE</h1>
                             </a>
                         </li>
+                        <li><a href="{{ route('admin.schedule.list') }}">
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">SCHEDULE</h1>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 

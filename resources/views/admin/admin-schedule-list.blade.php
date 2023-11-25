@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
-    <title>Animal Approve List</title>
+    <title>Animal Schedule List</title>
 </head>
 
 <body class="bg-[#D5DFE8]">

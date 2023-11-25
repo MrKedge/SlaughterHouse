@@ -4,43 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blur Background on Button Click</title>
-    <!-- Include Tailwind CSS from CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <style>
-        /* Add a CSS class for blurred background */
-        .blur-background {
-            filter: blur(8px);
-            /* Adjust the blur intensity as needed */
-        }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    @vite('resources/css/app.css')
+    <title>under develop</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
 
-<body class="flex items-center justify-center h-screen bg-gray-200">
+<body class="bg-gray-100 h-screen flex items-center justify-center">
 
-    <!-- Your page content goes here -->
-
-    <!-- Button to trigger the blur effect -->
-    <button id="blurButton" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Blur Background
-    </button>
-
-    <!-- Popup (hidden by default) -->
-    <div id="popup"
-        class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-8 rounded shadow-lg">
-        <!-- Popup content goes here -->
-        This is the popup content
+    <div class="bg-white p-6 rounded shadow-md">
+        <p>Original Date: 2023-11-24 20:20:48</p>
+        <p>Formatted Date: <span id="formattedDate"></span></p>
     </div>
 
-    <!-- Include Tailwind CSS from CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.js"></script>
-
-    <!-- Your JavaScript code goes here -->
     <script>
-        document.getElementById('blurButton').addEventListener('click', function() {
-            document.body.classList.toggle('blur-background');
-            document.getElementById('popup').classList.toggle('hidden');
+        const originalDate = new Date("2023-11-24T20:20:59");
+        const formattedDate = originalDate.toLocaleString('en-US', {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: 'numeric',
+            minute: '2-digit',
+            hour12: true
         });
+
+        document.getElementById('formattedDate').textContent = formattedDate;
     </script>
 
 </body>

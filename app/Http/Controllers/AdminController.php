@@ -27,6 +27,7 @@ class AdminController extends Controller
     {
         $animal = Animal::with('user')
             ->where('status', 'approved')
+            ->whereNull('arrived_at')
             ->get();
         return view('admin.admin-approve-list', compact('animal'));
     }
@@ -110,22 +111,27 @@ class AdminController extends Controller
             'timeOfSlaughter' => 'nullable',
         ]);
 
-        // Find the animal
         $animal = Animal::where('status', 'approved')->findorfail($id);
 
-        // Combine date and time for arrival
+
         $arrivalDateTime = Carbon::parse($request->input('dateOfArrival') . ' ' . $request->input('timeOfArrival'));
 
-        // Combine date and time for slaughter
+
         $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
 
-        // Update the animal's fields
         $animal->arrived_at = $arrivalDateTime;
         $animal->scheduled_at = $slaughterDateTime;
 
-        // Save the changes
+
         $animal->save();
 
         return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal scheduled successfully.');
+    }
+
+    public function ShowScheduleList()
+    {
+        $animal = Animal::whereNotNull('scheduled_at')->get();
+
+        return view('admin.admin-schedule-list', compact('animal'));
     }
 }

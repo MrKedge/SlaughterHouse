@@ -42,6 +42,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/view/animal/reg/list', [AdminController::class, 'ShowRegistrationList'])->name('admin.view.animal.reg.list');
     Route::get('/admin/edit/registration', [AdminController::class, 'ShowEditRegistration'])->name('admin.edit.registration');
     Route::get('/admin/approve/list', [AdminController::class, 'ShowApproveList'])->name('admin.approve.list');
+    Route::get('/admin/schedule/list', [AdminController::class, 'ShowScheduleList'])->name('admin.schedule.list');
 });
 
 
