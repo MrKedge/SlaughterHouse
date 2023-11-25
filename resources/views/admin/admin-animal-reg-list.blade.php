@@ -83,7 +83,7 @@
                 {{-- table section --}}
                 <div class="z-30 px-4"> {{-- table wrapper --}}
                     <section class=" flex justify-center">
-                        <div class="scrollbar-gutter bg-white h-auto w-full rounded-md overflow-y-auto ">
+                        <div class=" bg-white h-auto w-full rounded-md ">
                             <h1 class="text-center font-extrabold text-[#293241] pb-2 pt-4 text-3xl">REGISTRATION LIST
                             </h1>
                             <div class="p-4">

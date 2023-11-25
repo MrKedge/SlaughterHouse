@@ -33,64 +33,78 @@
 
             <div class="w-full px-6">
                 <section
-                    class="scrollbar-gutter ml-[240px] bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+                    class=" ml-[240px] bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
+                    <div class="flex">
+                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Scheduling
+                            Queue
+                        </h1>
+                        <div class="">
 
-                    <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Scheduling
-                        Queue
-                    </h1>
-
-
-                    <table class="w-full text-center">
-                        <thead class="">
-                            <tr>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                    Owner
-                                </th>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
-                                </th>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                    Status
-                                </th>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                    Approved Time
-                                </th>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                    Time of Arrival
-                                </th>
-                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                    Time of Slaughter
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody class="">
-
-
-                            @php $index = 1 @endphp
-                            @foreach ($animal as $animals)
-                                <tr
-                                    class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
-                                    <td class="py-4 border-b border-black uppercase font-semibold">
-                                        {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                    </td>
-                                    <td class="py-4 border-b border-black uppercase font-semibold">
-                                        {{ $animals->type }}
-                                    </td>
-                                    <td class="py-4 font-semibold border-b border-black uppercase"
-                                        style="color: {{ $animals->status === 'pending' ? 'orange' : ($animals->status === 'approved' ? 'green' : ($animals->status === 'rejected' ? 'red' : 'black')) }}">
-                                        {{ $animals->status }}</td>
-                                    <td class="py-4 border-b border-black font-semibold capitalize">
-                                        {{ $animals->approved_at }}
-                                    </td>
-
+                        </div>
+                    </div>
+                    <div class="scrollbar-gutter overflow-y-auto h-[500px]">
+                        <table class="w-full text-center">
+                            <thead class="">
+                                <tr>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Owner
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Status
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Approved Time
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Time of Arrival
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Time of Slaughter
+                                    </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Action
+                                    </th>
                                 </tr>
-                                @php $index++ @endphp
-                            @endforeach
-
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody class="">
 
 
+                                @php $index = 1 @endphp
+                                @foreach ($animal as $animals)
+                                    <tr
+                                        class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
+                                        <td class="py-4 border-b border-black capitalize font-semibold">
+                                            {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                        </td>
+                                        <td class="py-4 border-b border-black uppercase font-semibold">
+                                            {{ $animals->type }}
+                                        </td>
+                                        <td class="py-4 font-semibold border-b border-black uppercase"
+                                            style="color: {{ $animals->status === 'pending' ? 'orange' : ($animals->status === 'approved' ? 'green' : ($animals->status === 'rejected' ? 'red' : 'black')) }}">
+                                            {{ $animals->status }}</td>
+                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                            {{ $animals->approved_at }}
+                                        </td>
+                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                            {{ $animals->arrived_at }}
+                                        </td>
+                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                            {{ $animals->scheduled_at }}
+                                        </td>
+                                        <td class="py-4 border-b border-black font-semibold capitalize">
+
+                                        </td>
+
+                                    </tr>
+                                    @php $index++ @endphp
+                                @endforeach
+
+                            </tbody>
+                        </table>
+                    </div>
                 </section>
             </div>
 

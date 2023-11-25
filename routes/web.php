@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.log-in');
+    return view('welcome');
 });
 
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
