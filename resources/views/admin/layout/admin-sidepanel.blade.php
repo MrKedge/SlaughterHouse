@@ -33,7 +33,7 @@
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
                 <div>
-                    <div class="flex items-center"><box-icon name='pencil' type='solid' color='#ffffff'></box-icon>
+                    <div class="flex items-center"><i class='bx bx-check-circle' style='font-size: 24px;'></i>
                     </div>
 
 
@@ -50,7 +50,7 @@
                 <button
                     class="flex justify-between items-center w-full panel-text hover:bg-gray-700 p-2 rounded-md group">
                     <div class="flex items-center justify-start gap-4">
-                        <box-icon name='list-ul' color='#ffffff'></box-icon>ON PROCESS
+                        <i class='bx bx-registered' style='color: #ffffff; font-size: 24px;'></i>ON PROCESS
                     </div>
                     <i class='arrow bx bxs-chevron-right transform transition-transform duration-300'
                         style='color:#ffffff'></i>
@@ -66,6 +66,10 @@
                                 <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">SCHEDULE</h1>
                             </a>
                         </li>
+                        <li><a href="{{ route('admin.for.slaughter.list') }}">
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">FOR SLAUGHTER</h1>
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -74,8 +78,8 @@
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
                 <div>
-                    <div class="flex items-center"><box-icon name='user-circle' type='solid'
-                            color='#ffffff'></box-icon>
+                    <div class="flex items-center"><i class='bx bx-user-circle'
+                            style='color: #ffffff; font-size: 24px;'></i>
                     </div>
 
 

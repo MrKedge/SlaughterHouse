@@ -23,6 +23,12 @@ class AdminController extends Controller
         return view('admin.admin-dashboard', compact('recent', 'animal', 'user'));
     }
 
+    public function ShowForSlaughterList()
+    {
+        $animal = Animal::whereNotNull('scheduled_at')->get();
+        return view('admin.admin-for-slaughter-list', compact('animal'));
+    }
+
     public function ShowApproveList()
     {
         $animal = Animal::with('user')

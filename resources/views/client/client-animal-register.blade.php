@@ -8,6 +8,8 @@
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
@@ -74,15 +76,29 @@
                                 <div class="grid grid-flow-row md:grid-flow-col md:gap-10">{{-- document info --}}
                                     <div>
                                         <h1 class="font-bold pointer-events-none text-lg italic">Documents</h1>
-                                        <label class="block pb-1 pt-3" for="">Certificate of Ownership:</label>
-                                        <input type="file" name="certOfOwner" id="fileToUpload" class="">
+
+                                        <p class="block pb-1 pt-3">Certificate of Ownership:</p>
+                                        <label for=""
+                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                                    style='font-size: 2em;'></i> Add
+                                                image</span>
+                                            <input type="file" class="hidden">
+                                        </label>
                                     </div>
 
                                     <div>
-                                        <h1 class="font-bold opacity-0 text-lg">Documents</h1>
-                                        <label class="block pb-1 pt-3" for="">Cert. of Transfer of Large
-                                            Cattle:</label>
-                                        <input type="file" name="certOfTransfer" id="fileToUpload" class="">
+                                        <h1 class="font-bold pointer-events-none text-lg italic opacity-0">Documents
+                                        </h1>
+
+                                        <p class="block pb-1 pt-3">Cert. of Transfer of Large Cattle:</p>
+                                        <label for=""
+                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                                    style='font-size: 2em;'></i> Add
+                                                image</span>
+                                            <input type="file" class="hidden">
+                                        </label>
                                     </div>
                                 </div>
 
@@ -103,15 +119,25 @@
                                                 <option value="carabao">Carabao</option>
                                             </select>
                                         </div>
-                                        <div class="flex justify-evenly gap-3">
+                                        <div class="flex justify-start gap-7">
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Gender:</label>
-                                                <select name="gender" id="" required
-                                                    class="border-2 border-black rounded-md p-2">
-                                                    <option value="" disabled selected>select</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                </select>
+                                                <div class="">
+                                                    <div>
+                                                        <input type="radio" id="male" name="gender"
+                                                            value="male"
+                                                            class="border-2 border-black rounded-md p-2 inline-block"
+                                                            required>
+                                                        <label for="male">Male</label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" id="female" name="gender"
+                                                            value="female" class="border-2 border-black rounded-md p-2"
+                                                            required>
+                                                        <label for="female">Female</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Age: (Months)</label>
@@ -189,10 +215,13 @@
                                 <div class="flex justify-center">
 
 
-                                    <div class="flex justify-center">
-                                        <canvas class="border-2 border-black" id="canvas"></canvas>
+                                    <div class="text-center">
+                                        <label class="font-semibold text-[#293241] pt-2 text-2xl">Animal
+                                            Marks</label>
+                                        <div class="pt-3"><canvas class="border-2 border-black"
+                                                id="canvas"></canvas></div>
                                     </div>
-                                    <header>Animal Marks</header>
+
                                     <input type="hidden" name="drawingData" id="drawingData" value="">
 
                                 </div>

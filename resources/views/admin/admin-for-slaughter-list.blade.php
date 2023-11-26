@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
-    <title>Animal Schedule List</title>
+    <title>For Slaughter</title>
 </head>
 
 <body class="bg-[#D5DFE8]">
@@ -37,7 +37,7 @@
                     class=" ml-[240px] bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                     <div class="flex">
-                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Schedule
+                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">For Slaughter
                         </h1>
                         <div class="">
                             <label for=""></label>
@@ -52,15 +52,6 @@
                                         Owner
                                     </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Time of Arrival
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Time of Slaughter
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Permit To Slaughter
                                     </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Action
@@ -81,22 +72,13 @@
                                             {{ $animals->type }}
                                         </td>
                                         <td class="py-4 border-b border-black font-semibold capitalize">
-                                            {{ $animals->arrived_at }}
-                                        </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
-                                            {{ $animals->scheduled_at }}
-                                        </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
-                                            <img src="" alt="permit image">
-                                        </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
                                             <div class="flex justify-center gap-3">
                                                 <a data-animal-id="{{ $animals->id }}"
-                                                    class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
-                                                    <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
+                                                    class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                                    <i class='bx bx-timer' style='color:#ffffff; font-size: 24px;'></i>
                                                 </a>
                                                 <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded flex items-center">
+                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
                                                     <box-icon name='navigation'
                                                         color='#ffffff'></box-icon><span>View</span>
                                                 </a>
