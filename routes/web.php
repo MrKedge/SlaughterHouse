@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,7 @@ Route::POST('/reject/status/animal/{id}', [AdminController::class, 'RejectAnimal
 Route::post('/update/client/animal/form/{id}', [ClientController::class, 'UpdateAnimalForm'])->name('update.form');
 Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
 Route::post('/set/schedule/animal/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
+Route::post('/generate/qr/code/{id}', [QrCodeController::class, 'GenerateQRCode'])->name('generate.qr.code');
 
 //admin pages
 Route::middleware(['admin'])->group(function () {
