@@ -140,4 +140,9 @@ class AdminController extends Controller
 
         return view('admin.admin-schedule-list', compact('animal'));
     }
+
+    public function ShowMaintenanceForm()
+    {
+        return view('admin.admin-maintenance-form');
+    }
 }

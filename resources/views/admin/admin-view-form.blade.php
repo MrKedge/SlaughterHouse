@@ -188,11 +188,15 @@
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                         REJECT
                                     </a>
-                                @else
-                                    <a href="{{ route('admin.view.animal.reg.list') }}"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                        <box-icon name='left-arrow-alt' color='#ffffff'></box-icon><span>Back</span>
-                                    </a>
+                                @elseif($animal->scheduled_at !== null && $animal->arrived_at !== null && $animal->qr_code === null)
+                                    <form action="{{ route('generate.qr.code', ['id' => $animal->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
+                                            <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
+                                        </button>
+                                    </form>
                                 @endif
 
                             </div>
@@ -204,11 +208,30 @@
 
                     <div>
 
+                        @if ($animal->qr_code !== null)
+                            @csrf
+                            <div
+                                class="mx-4 mt-10 h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
+                                <div class=" text-[#293241]">
+
+                                    <div class="text-[#293241] text-center">
+
+                                        <div class="">
+                                            <img class="mx-auto"
+                                                src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
+                                                alt="animal image">
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        @endif
+
 
                         <div
-                            class=" mx-4 mt-10 right-1 h-[280px] bg-white px-8 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">
+                            class="pl-4 mx-4 w-[250px] mt-10 h-auto bg-white px-1 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">
                             <div class=" text-[#293241]">
-                                <h1 class="font-semibold text-xl ">Status: <span class="uppercase"
+                                <h1 class="font-semibold text-xl">Status: <span class="uppercase"
                                         style="
                             @if ($animal->status == 'pending') color: orange;
                             @elseif ($animal->status == 'approved') color: green;
@@ -216,12 +239,30 @@
                         ">{{ $animal->status }}</span>
                                 </h1>
                             </div>
+                            @if ($animal->scheduled_at !== null && $animal->arrived_at !== null)
+                                @csrf
+                                <div class="text-[#293241]">
+                                    <h1 class="font-semibold text-xl ">Arrival Time:</h1>
+                                    <p>{{ $animal->arrived_at }}</p>
 
-                            <div class="text-[#293241]">
-                                <h1 class="font-semibold text-xl ">Time of Slaughter: <span class="uppercase"></span>
-                                </h1>
-                            </div>
+                                </div>
+                                <div class="text-[#293241]">
+                                    <h1 class="font-semibold text-xl ">Slaughter Time:</h1>
+                                    <p>{{ $animal->scheduled_at }}</p>
 
+                                </div>
+                            @else
+                                <div class="text-[#293241]">
+                                    <h1 class="font-semibold text-xl ">Arrival Time:</h1>
+                                    <p class="text-xl">(Not Arrived)</p>
+
+                                </div>
+                                <div class="text-[#293241]">
+                                    <h1 class="font-semibold text-xl ">Slaughter Time:</h1>
+                                    <p class="text-xl">(No Schedule)</p>
+
+                                </div>
+                            @endif
                             @if ($animal->status === 'rejected')
                                 <div class="text-[#293241]">
                                     <h1 class="font-semibold text-xl pb-2">Remarks:</h1>
@@ -232,17 +273,6 @@
 
                                 </div>
                             @endif
-                        </div>
-
-                        <div
-                            class=" mx-4 mt-10 right-1 h-[280px] bg-white px-8 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">
-                            <div class=" text-[#293241]">
-
-                                <div class="text-[#293241] text-center">
-                                    <h1 class="font-semibold text-xl ">Qr code:<span class="uppercase"></span></h1>
-                                </div>
-
-                            </div>
                         </div>
 
                     </div>

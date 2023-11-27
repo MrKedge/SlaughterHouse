@@ -33,6 +33,21 @@
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
                 <div>
+                    <div class="flex items-center"><i class='bx bxs-edit' style='font-size: 24px; color: #ffffff;'></i>
+                    </div>
+
+
+                </div>
+
+                <a href="{{ route('admin.form.maintenance') }}">
+                    <h1 class="panel-text flex items-center">MAINTENANCE</h1>
+                </a>
+
+            </li>
+
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <div>
                     <div class="flex items-center"><i class='bx bx-check-circle' style='font-size: 24px;'></i>
                     </div>
 

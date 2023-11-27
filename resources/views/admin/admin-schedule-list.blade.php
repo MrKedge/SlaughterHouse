@@ -89,7 +89,7 @@
                                         <td class="py-4 border-b border-black font-semibold capitalize">
                                             <img src="" alt="permit image">
                                         </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                        <td class="border-b border-black font-semibold capitalize">
                                             <div class="flex justify-center gap-3">
                                                 <form action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
                                                     method="post">

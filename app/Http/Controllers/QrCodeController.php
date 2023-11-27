@@ -10,7 +10,7 @@ use App\Models\Animal;
 use App\Models\User;
 use chillerlan\QRCode\QRCode;
 use chillerlan\QRCode\QROptions;
-
+use Illuminate\Support\Facades\Storage;
 
 class QrCodeController extends Controller
 {
@@ -28,7 +28,6 @@ class QrCodeController extends Controller
             'version'         => 5,
             'outputType'      => QRCode::OUTPUT_IMAGE_PNG,
             'eccLevel'        => QRCode::ECC_L,
-            'scale'           => 5,
             'addQuietzone'    => true,
             'imageBase64'     => false,
             'imageTransparent' => true,
@@ -40,10 +39,10 @@ class QrCodeController extends Controller
         $qrCodeImage = $qrcode->render($animal->id);
 
         // Save the QR code image to the public storage
-        $qrName = 'QRcode_'  . $animal->id . time() . '.png';
-        $qrPath = 'app/public/qr_code/' . $qrName;
+        $qrName = 'animal_QRcode_' . $animal->id . time() . '.png';
+        $qrPath = 'public/qr-code/' . $qrName;
 
-        file_put_contents(storage_path($qrPath), $qrCodeImage);
+        Storage::put($qrPath, $qrCodeImage);
 
         // Store the image name in the database
         $animal->qr_code = $qrName;
@@ -51,5 +50,6 @@ class QrCodeController extends Controller
 
         // Optionally, return a response or redirect as needed
         // For example: return response()->json(['message' => 'QR code generated successfully']);
+        return redirect()->route('admin.schedule.list');
     }
 }

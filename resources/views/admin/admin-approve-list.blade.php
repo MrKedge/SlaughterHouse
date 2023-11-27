@@ -82,9 +82,9 @@
                                             style="color: {{ $animals->status === 'pending' ? 'orange' : ($animals->status === 'approved' ? 'green' : ($animals->status === 'rejected' ? 'red' : 'black')) }}">
                                             {{ $animals->status }}</td>
                                         <td class="py-4 border-b border-black font-semibold capitalize">
-                                            {{ $animals->approved_at }}
+                                            {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y h:i:s A') }}
                                         </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                        <td class=" border-b border-black font-semibold capitalize">
                                             <div class="flex justify-center gap-3">
                                                 <a data-animal-id="{{ $animals->id }}"
                                                     class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">

@@ -46,6 +46,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/approve/list', [AdminController::class, 'ShowApproveList'])->name('admin.approve.list');
     Route::get('/admin/schedule/list', [AdminController::class, 'ShowScheduleList'])->name('admin.schedule.list');
     Route::get('/admin/for/slaughter/list/', [AdminController::class, 'ShowForSlaughterList'])->name('admin.for.slaughter.list');
+    Route::get('/admin/form/maintenance/', [AdminController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
 });
 
 

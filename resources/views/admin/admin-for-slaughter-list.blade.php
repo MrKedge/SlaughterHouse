@@ -71,7 +71,7 @@
                                         <td class="py-4 border-b border-black uppercase font-semibold">
                                             {{ $animals->type }}
                                         </td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
+                                        <td class=" border-b border-black font-semibold capitalize">
                                             <div class="flex justify-center gap-3">
                                                 <a data-animal-id="{{ $animals->id }}"
                                                     class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">

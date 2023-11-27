@@ -42,7 +42,7 @@
                         <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">PENDING</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
-                                type='solid' color='#293241'
+                                type='solid' color='#EE6C4D'
                                 style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'pending')->count() }}
                         </div>
 
@@ -53,7 +53,7 @@
                         <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">APPROVE</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='check-double' type='solid' color='#293241'
+                                name='check-double' type='solid' color='#EE6C4D'
                                 style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'approved')->count() }}
                         </div>
                     </div>
@@ -63,7 +63,7 @@
                         <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">SLAUGHTERED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#293241'
+                                name='list-check' type='solid' color='#EE6C4D'
                                 style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'slaughtered')->count() }}
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                         <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">BUTCHER</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#293241'
+                                name='list-check' type='solid' color='#EE6C4D'
                                 style="width: 32px; height: 32px;"></box-icon>0
                         </div>
                     </div>
@@ -83,7 +83,7 @@
                 {{-- table section --}}
                 <div class="z-30 px-4"> {{-- table wrapper --}}
                     <section class=" flex justify-center">
-                        <div class=" bg-white h-auto w-full rounded-md ">
+                        <div class=" bg-white h-[500px] w-full rounded-md ">
                             <h1 class="text-center font-extrabold text-[#293241] pb-2 pt-4 text-3xl">REGISTRATION LIST
                             </h1>
                             <div class="p-4">
