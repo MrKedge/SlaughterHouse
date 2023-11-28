@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\QrCodeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.log-in');
 });
 
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
@@ -36,6 +37,9 @@ Route::post('/update/client/animal/form/{id}', [ClientController::class, 'Update
 Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
 Route::post('/set/schedule/animal/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/generate/qr/code/{id}', [QrCodeController::class, 'GenerateQRCode'])->name('generate.qr.code');
+Route::post('/form/maintenance/', [FormMaintenanceController::class, 'FormMaintenance'])->name('form.maintenance');
+Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'])->name('delete.on.form');
+
 
 //admin pages
 Route::middleware(['admin'])->group(function () {

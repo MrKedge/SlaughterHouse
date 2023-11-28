@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>client overview</title>
+    <title>Overview</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
@@ -32,8 +34,8 @@
             <div class="inline-block"> @include('client.layout.sidepanel')</div>
 
 
-            <div class="flex flex-col w-full gap-3"> {{-- below header wrapper --}}
-                <section class="flex justify-start gap-3 pl-6  py-3 overflow-x-auto w-auto border-l h-auto">
+            <div class="flex flex-col w-full mt-10"> {{-- below header wrapper --}}
+                <section class="flex justify-evenly gap-3 py-3 overflow-x-auto w-auto h-auto">
                     {{-- wrapper --}}
                     <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
@@ -62,14 +64,23 @@
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'slaughtered')->count() }}</div>
                     </div>
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+
+                        <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
+                                name='list-check' type='solid' color='#ee6c4d'
+                                style="width: 32px; height: 32px;"></box-icon>
+                            {{ $animals->where('status', 'slaughtered')->count() }}</div>
+                    </div>
                 </section>
 
 
-                <div class="flex justify-center items-center">
+                <div class="flex justify-center items-center px-3">
 
                     {{-- table wrapper --}}
                     <section class="w-full">
-                        <div class="bg-white h-auto rounded-md overflow-y-auto mx-6">
+                        <div class="bg-white h-auto rounded-md overflow-y-auto">
                             <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
                                 REGISTRATION
                             </h1>
@@ -96,7 +107,7 @@
 
                                             @php $index = 1 @endphp
 
-                                            @if ($animals->isEmpty())
+                                            @if ($recent->isEmpty())
                                                 <tr>
                                                     <td colspan="5" class="py-4 border-b border-black text-center">
                                                         <h1 class="font-semibold italic pb-3">No Recent Register

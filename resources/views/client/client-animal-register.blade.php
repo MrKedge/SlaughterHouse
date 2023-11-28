@@ -110,13 +110,15 @@
                                             <h1 class="font-bold text-lg italic">Animal Information</h1>
                                             <label class="block pb-1 pt-3" for="">Animal:</label>
                                             <select name="kindOfAnimal" id="typeOfAnimal" required
-                                                class=" border-2 border-black rounded-md p-2 w-full">
-                                                <option value="" disabled selected>select</option>
-                                                <option value="cow">Cow</option>
-                                                <option value="goat">Goat</option>
-                                                <option value="horse">Horse</option>
-                                                <option value="swine">Swine</option>
-                                                <option value="carabao">Carabao</option>
+                                                class="border-2 border-black rounded-md w-full p-2">
+                                                <option value="" disabled selected>Select</option>
+                                                @foreach ($animal as $animals)
+                                                    @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
+                                                        <option value="{{ $animals->animal_type }}">
+                                                            {{ $animals->animal_type }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="flex justify-start gap-7">
@@ -158,13 +160,13 @@
                                             <select name="destination" id="" required
                                                 class="border-2 border-black rounded-md w-full p-2">
                                                 <option value="" disabled selected>select</option>
-                                                <option value="wet market">Wet Market</option>
-                                                <option value="meat shops">Meat Shops</option>
-                                                <option value="meat cutting">Meat Cutting</option>
-                                                <option value="hotel and restaurants">Hotel and Restaurants</option>
-                                                <option value="super market">Super Market</option>
-                                                <option value="meat processing plant">Meat Processing Plant</option>
-                                                <option value="cold storage">Cold Storage</option>
+                                                @foreach ($animal as $animals)
+                                                    @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
+                                                        <option value="{{ $animals->animal_destination }}">
+                                                            {{ $animals->animal_destination }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -176,12 +178,14 @@
                                             <label class="block pb-1 pt-3" for="">Butcher:</label>
                                             <select name="butcher" id="" required
                                                 class="border-2 border-black rounded-md w-full p-2">
-                                                <option value="" disabled selected>select</option>
-                                                <option value="butcher1">butcher1</option>
-                                                <option value="butcher2">butcher2</option>
-                                                <option value="butcher3">butcher3</option>
-                                                <option value="private">PRIVATE</option>
-
+                                                <option value="" disabled selected>Select</option>
+                                                @foreach ($animal as $animals)
+                                                    @if (!is_null($animals->animal_butcher) && $animals->animal_butcher !== '')
+                                                        <option value="{{ $animals->animal_butcher }}">
+                                                            {{ $animals->animal_butcher }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -190,9 +194,13 @@
                                             <select name="ageClassify" id="putAgeClassify"
                                                 class="border-2 border-black rounded-md w-full p-2">
                                                 <option value="" disabled selected>select</option>
-                                                <option value="fattener">Fattener</option>
-                                                <option value="grower">Grower</option>
-                                                <option value="culled sow/boar">Culled sow/boar</option>
+                                                @foreach ($animal as $animals)
+                                                    @if (!is_null($animals->animal_ageclassify) && $animals->animal_ageclassify !== '')
+                                                        <option value="{{ $animals->animal_type }}">
+                                                            {{ $animals->animal_ageclassify }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use App\Models\User;
+use App\Models\FormMaintenance;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
@@ -44,7 +45,8 @@ class ClientController extends Controller
 
     public function ShowAnimalRegForm()
     {
-        return view('client.client-animal-register');
+        $animal = FormMaintenance::all();
+        return view('client.client-animal-register', compact('animal'));
     }
 
 
@@ -147,7 +149,6 @@ class ClientController extends Controller
         $animal->live_weight = $request->liveWeight;
         $animal->animal_mark = $imageName;
         $animal->save();
-
         return redirect()->route('client.animal.list.register');
     }
 
