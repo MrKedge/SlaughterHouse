@@ -67,41 +67,50 @@
                             </thead>
                             <tbody class="">
 
-
-                                @php $index = 1 @endphp
-                                @foreach ($animal as $animals)
-                                    <tr
-                                        class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
-                                        <td class="py-4 border-b border-black capitalize font-semibold">
-                                            {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                @if ($animal->isEmpty())
+                                    <tr>
+                                        <td colspan="5" class="py-4 border-b border-black text-center">
+                                            <h1 class="font-semibold italic pb-3">No Approve
+                                                Animal
+                                            </h1>
                                         </td>
-                                        <td class="py-4 border-b border-black uppercase font-semibold">
-                                            {{ $animals->type }}
-                                        </td>
-                                        <td class="py-4 font-semibold border-b border-black uppercase"
-                                            style="color: {{ $animals->status === 'pending' ? 'orange' : ($animals->status === 'approved' ? 'green' : ($animals->status === 'rejected' ? 'red' : 'black')) }}">
-                                            {{ $animals->status }}</td>
-                                        <td class="py-4 border-b border-black font-semibold capitalize">
-                                            {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y h:i:s A') }}
-                                        </td>
-                                        <td class=" border-b border-black font-semibold capitalize">
-                                            <div class="flex justify-center gap-3">
-                                                <a data-animal-id="{{ $animals->id }}"
-                                                    class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                                    <i class='bx bx-timer' style='color:#ffffff; font-size: 24px;'></i>
-                                                </a>
-                                                <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                                    <box-icon name='navigation'
-                                                        color='#ffffff'></box-icon><span>View</span>
-                                                </a>
-                                            </div>
-                                        </td>
-
                                     </tr>
-                                    @php $index++ @endphp
-                                @endforeach
+                                @else
+                                    @php $index = 1 @endphp
+                                    @foreach ($animal as $animals)
+                                        <tr
+                                            class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
+                                            <td class="py-4 border-b border-black capitalize font-semibold">
+                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                            </td>
+                                            <td class="py-4 border-b border-black uppercase font-semibold">
+                                                {{ $animals->type }}
+                                            </td>
+                                            <td class="py-4 font-semibold border-b border-black uppercase"
+                                                style="color: {{ $animals->status === 'pending' ? 'orange' : ($animals->status === 'approved' ? 'green' : ($animals->status === 'rejected' ? 'red' : 'black')) }}">
+                                                {{ $animals->status }}</td>
+                                            <td class="py-4 border-b border-black font-semibold capitalize">
+                                                {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y h:i:s A') }}
+                                            </td>
+                                            <td class=" border-b border-black font-semibold capitalize">
+                                                <div class="flex justify-center gap-3">
+                                                    <a data-animal-id="{{ $animals->id }}"
+                                                        class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                                        <i class='bx bx-timer'
+                                                            style='color:#ffffff; font-size: 24px;'></i>
+                                                    </a>
+                                                    <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                                        <box-icon name='navigation'
+                                                            color='#ffffff'></box-icon><span>View</span>
+                                                    </a>
+                                                </div>
+                                            </td>
 
+                                        </tr>
+                                        @php $index++ @endphp
+                                    @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>

@@ -25,7 +25,7 @@ class AdminController extends Controller
 
     public function ShowForSlaughterList()
     {
-        $animal = Animal::whereNotNull('scheduled_at')->get();
+        $animal = Animal::where('status', 'for slaughter')->get();
         return view('admin.admin-for-slaughter-list', compact('animal'));
     }
 
@@ -72,6 +72,15 @@ class AdminController extends Controller
         $animal->approved_at = now();
         $animal->save();
         return redirect()->route('admin.view.animal.reg.list', ['id' => $id]);
+    }
+
+    public function ForSlaughterAnimal($id)      //for approving the animal registration form//----------------------
+    {
+
+        $animal = Animal::where('qr_code', '!=', null)->find($id);
+        $animal->status = 'for slaughter';
+        $animal->save();
+        return redirect()->back()->with('success', ['id' => $id]);
     }
 
     public function RejectAnimalRegistration(Request $request, $id)
@@ -131,7 +140,7 @@ class AdminController extends Controller
 
         $animal->save();
 
-        return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal scheduled successfully.');
+        return redirect()->route('admin.approve.list')->with('success', 'Animal scheduled successfully.');
     }
 
     public function ShowScheduleList()

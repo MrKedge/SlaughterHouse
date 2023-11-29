@@ -197,6 +197,16 @@
                                             <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
                                         </button>
                                     </form>
+                                @elseif($animal->qr_code !== null)
+                                    <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
+                                            <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>Send to
+                                                Butcher</span>
+                                        </button>
+                                    </form>
                                 @endif
 
                             </div>
