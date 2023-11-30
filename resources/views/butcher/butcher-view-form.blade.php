@@ -8,7 +8,7 @@
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     @vite('resources/css/app.css')
-    <title>Receive registration</title>
+    <title>Butcher View Form</title>
 </head>
 
 <body class="bg-[#D5DFE8]">
@@ -17,7 +17,7 @@
 
 
         {{-- HEADER --}}
-        @include('admin.layout.admin-header')
+        @include('butcher.layout.butcher-header')
         {{-- end header --}}
 
 
@@ -26,7 +26,7 @@
         {{-- this is for the table inside --}}
         <div class="flex">
 
-            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
+            <div class="fixed">@include('butcher.layout.butcher-panel')</div>
             <div class="mx-auto w-full">
 
                 {{-- main content --}}
@@ -173,42 +173,17 @@
                         <div class="">{{-- buttons --}}
 
                             <div class="flex gap-3 my-10 pr-10 justify-end">
-                                @if ($animal->status != 'approved' && $animal->status != 'rejected' && $animal->status != 'for slaughter')
-                                    @csrf
-
-                                    <a id="show-approve-nav"
-                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                        <box-icon name='checkbox-checked'
-                                            color='#ffffff'></box-icon><span>Approve</span>
-                                    </a>
-
-
-
-                                    <a id="show-remarks"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                        REJECT
-                                    </a>
-                                @elseif($animal->scheduled_at !== null && $animal->arrived_at !== null && $animal->qr_code === null)
-                                    <form action="{{ route('generate.qr.code', ['id' => $animal->id]) }}"
+                                @if ($animal->status !== 'slaughtered')
+                                    <form action="{{ route('butcher.slaughter.animal', ['id' => $animal->id]) }}"
                                         method="post">
                                         @csrf
-                                        <button type="submit"
-                                            class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
-                                            <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
-                                        </button>
-                                    </form>
-                                @elseif($animal->qr_code !== null && $animal->status !== 'for slaughter')
-                                    <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
-                                        method="post">
-                                        @csrf
-                                        <button type="submit"
-                                            class="bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
-                                            <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>Send to
-                                                Butcher</span>
+                                        <button id="show-approve-nav" type="submit"
+                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                            <box-icon name='checkbox-checked'
+                                                color='#ffffff'></box-icon><span>SLAUGHTERED</span>
                                         </button>
                                     </form>
                                 @endif
-
                             </div>
 
                         </div>
@@ -217,26 +192,6 @@
 
 
                     <div>
-
-                        @if ($animal->qr_code !== null)
-                            @csrf
-                            <div
-                                class="mx-4 mt-10 h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
-                                <div class=" text-[#293241]">
-
-                                    <div class="text-[#293241] text-center">
-
-                                        <div class="">
-                                            <img class="mx-auto"
-                                                src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
-                                                alt="animal image">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endif
-
 
                         <div
                             class="pl-4 mx-4 w-[250px] mt-10 h-auto bg-white px-1 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">
@@ -296,7 +251,7 @@
         </div>
 
 
-        <nav id="remarks-pop-up"
+        {{-- <nav id="remarks-pop-up"
             class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl">
             <form method="post" action="{{ route('reject.status', ['id' => $animal->id]) }}">
                 <div class="p-3">
@@ -317,9 +272,9 @@
                     </div>
                 </div>
             </form>
-        </nav>
+        </nav> --}}
 
-        <nav id="approve-pop-up"
+        {{-- <nav id="approve-pop-up"
             class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
             <div class="">
                 <h1 class="block font-semibold text-xl py-5">Do you want to <span
@@ -333,13 +288,9 @@
                     <a id="close-approve" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
                 </div>
             </div>
-        </nav>
+        </nav> --}}
 
         <script src="{{ asset('js/slaughterhouse.js') }}"></script>
-        <script>
-            rejectRemark();
-            approvePopUp();
-        </script>
 </body>
 
 </html>

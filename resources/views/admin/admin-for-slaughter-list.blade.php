@@ -53,6 +53,8 @@
                                     </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                     </th>
+                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Schedule
+                                    </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Action
                                     </th>
@@ -63,7 +65,7 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td colspan="7" class="py-4 border-b border-black text-center">
+                                        <td colspan="6" class="py-4 border-b border-black text-center">
                                             <h1 class="font-semibold italic pb-3">No Scheduled Animal</h1>
                                         </td>
                                     </tr>
@@ -77,13 +79,16 @@
                                             <td class="py-4 border-b border-black uppercase font-semibold">
                                                 {{ $animals->type }}
                                             </td>
+                                            <td class="py-4 border-b border-black uppercase font-semibold">
+                                                {{ $animals->scheduled_at }}
+                                            </td>
                                             <td class=" border-b border-black font-semibold capitalize">
                                                 <div class="flex justify-center gap-3">
-                                                    <a data-animal-id="{{ $animals->id }}"
+                                                    {{-- <a data-animal-id="{{ $animals->id }}"
                                                         class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
                                                         <i class='bx bx-timer'
                                                             style='color:#ffffff; font-size: 24px;'></i>
-                                                    </a>
+                                                    </a> --}}
                                                     <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center">
                                                         <box-icon name='navigation'
@@ -108,7 +113,7 @@
             {{-- End wrapper --}}
         </div>
 
-        @foreach ($animal as $animals)
+        {{-- @foreach ($animal as $animals)
             <nav id="schedule-nav{{ $animals->id }}"
                 class="bg-white absolute h-auto p-8 pb- rounded-md hidden text-[#293241] top-1/3  right-1/3 ">
 
@@ -141,9 +146,9 @@
                     </div>
                 </form>
             </nav>
-        @endforeach
+        @endforeach --}}
 
-        <script>
+        {{-- <script>
             document.addEventListener("DOMContentLoaded", function() {
                 var showNavBtns = document.querySelectorAll(".btnForSchedNav");
                 var scheduleNavs = document.querySelectorAll("[id^='schedule-nav']");
@@ -180,7 +185,7 @@
                     });
                 });
             });
-        </script>
+        </script> --}}
 
         <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>

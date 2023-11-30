@@ -69,7 +69,8 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td colspan="5" class="py-4 border-b border-black text-center">
+                                        <td rowspan="5" colspan="5"
+                                            class="py-4 border-b border-black text-center">
                                             <h1 class="font-semibold italic pb-3">No Approve
                                                 Animal
                                             </h1>

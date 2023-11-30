@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list of animal</title>
+    <title>Overview</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
@@ -31,14 +33,14 @@
             {{-- main content --}}
 
 
-            <div class="flex flex-col w-full gap-3">
+            <div class="flex flex-col w-full">
 
 
                 <section class="flex justify-evenly gap-3 pl-6  py-3 overflow-x-auto  w-full h-auto pr-6">
                     {{-- wrapper --}}
 
                     {{-- wrapper --}}
-                    <div class="w-full h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
@@ -47,29 +49,27 @@
                             {{ $animals->where('status', 'pending')->count() }}</div>
 
                     </div>
-                    <div class="w-full h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='check-double' type='solid' color='#ee6c4d'
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'approved')->count() }}</div>
                     </div>
-                    <div class="w-full h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED
-                        </h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SCHEDULED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#ee6c4d'
                                 style="width: 32px; height: 32px;"></box-icon>
-                            {{ $animals->where('status', 'slaughtered')->count() }}</div>
+                            {{ $animals->where('scheduled_at', '!=', null)->count() }}</div>
                     </div>
-                    <div class="w-full h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED
-                        </h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUGHTERED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#ee6c4d'
@@ -99,9 +99,8 @@
                                 </form>
                             </div>
                         </div>
-                        <div class="p-4 ">
-                            <div
-                                class="scrollbar-gutter flex justify-center relative px-4 max-h-[400px] overflow-y-auto">
+                        <div class="p-4 h-[475px]">
+                            <div class="scrollbar-gutter flex justify-center relative px-4  overflow-y-auto">
                                 <table class="w-full text-center">
                                     <thead class="">
                                         <tr>
@@ -126,7 +125,7 @@
                                         @if ($animals->isEmpty())
                                             <tr>
                                                 <td colspan="5" class="py-4 border-b border-black text-center">
-                                                    <h1 class="font-semibold italic pb-3">No Register Animal</h1>
+                                                    <h1 class="font-semibold italic pb-3">No Pending Animal</h1>
                                                     <a href="{{ route('client.animal.register') }}"
                                                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
                                                         <box-icon name='pencil'

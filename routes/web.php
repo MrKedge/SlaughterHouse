@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\QrCodeController;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +66,15 @@ Route::get('/client/view/animal/form/{id}', [ClientController::class, 'ShowRegis
 Route::get('/client/edit/animal/form/{id}', [ClientController::class, 'ShowEditFormClient'])->name('client.edit.animal.form');
 Route::get('/client/archive/list/', [ClientController::class, 'ShowArchiveList'])->name('client.archive.list');
 Route::get('/client/drafts', [ClientController::class, 'ShowDrafts'])->name('client.drafts');
-
+Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
+Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
+Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
 //post clients
 Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name('archive.form');
+
+
+//butcher
+Route::get('/butcher/overview/', [ButcherController::class, 'ShowButcherOverview'])->name('butcher.overview');
+Route::get('/butcher/animals/', [ButcherController::class, 'ShowButcherAnimal'])->name('butcher.animal');
+Route::get('/butcher/view/form/{id}', [ButcherController::class, 'ShowButcherForm'])->name('butcher.view.form');
+Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');

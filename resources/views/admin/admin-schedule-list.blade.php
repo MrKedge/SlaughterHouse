@@ -71,9 +71,8 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td colspan="5" class="py-4 border-b border-black text-center">
+                                        <td colspan="6" class="py-4 border-b border-black text-center">
                                             <h1 class="font-semibold italic pb-3">No Scheduled Animal
-                                                Animal
                                             </h1>
                                         </td>
                                     </tr>
@@ -99,16 +98,18 @@
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize">
                                                 <div class="flex justify-center gap-3">
-                                                    <form
-                                                        action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        <button type="submit"
-                                                            class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
-                                                            <i class='bx bx-qr'
-                                                                style='color: #ffffff; font-size: 28px;'></i>
-                                                        </button>
-                                                    </form>
+                                                    @if ($animals->qr_code === null)
+                                                        <form
+                                                            action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
+                                                                <i class='bx bx-qr'
+                                                                    style='color: #ffffff; font-size: 28px;'></i>
+                                                            </button>
+                                                        </form>
+                                                    @endif
                                                     <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded flex items-center">
                                                         <box-icon name='navigation'

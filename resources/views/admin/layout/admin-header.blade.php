@@ -1,7 +1,7 @@
 <div class="z-10 flex items-center justify-between bg-transparent h-[50px] sticky top-0">
 
     <div class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
-        <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1>
+        <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
     </div>
     <div class="sticky top-">
         @auth

@@ -4,10 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>viewing animal form</title>
+    <title>Animal Form</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
 
@@ -174,21 +177,22 @@
                         <div class="">{{-- buttons --}}
 
                             <div class="flex gap-3 my-10 pr-10 justify-end">
-                                <form action="{{ route('archive.form', ['id' => $animal->id]) }}" method="post">
-                                    @csrf
-                                    @if ($animal->status != 'archived')
+                                @if ($animal->status === 'pending')
+                                    <form action="{{ route('archive.form', ['id' => $animal->id]) }}" method="post">
+                                        @csrf
+
                                         <button type="submit"
                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-2 rounded flex items-center gap-1">
                                             <box-icon name='archive-in' color='#ffffff'></box-icon><span>Archive</span>
                                         </button>
-                                    @endif
-                                </form>
 
-                                <a href="{{ route('client.edit.animal.form', ['id' => $animal->id]) }}"
-                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                    <box-icon name='pencil' color='#ffffff'></box-icon><span>Edit</span>
-                                </a>
+                                    </form>
 
+                                    <a href="{{ route('client.edit.animal.form', ['id' => $animal->id]) }}"
+                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                        <box-icon name='pencil' color='#ffffff'></box-icon><span>Edit</span>
+                                    </a>
+                                @endif
                             </div>
 
                         </div>

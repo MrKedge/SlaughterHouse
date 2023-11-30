@@ -31,10 +31,10 @@
         <div class="flex w-full">
 
 
-            <div class="inline-block"> @include('client.layout.sidepanel')</div>
+            <div class="mx-auto"> @include('client.layout.sidepanel')</div>
 
 
-            <div class="flex flex-col w-full mt-10"> {{-- below header wrapper --}}
+            <div class="flex flex-col w-full"> {{-- below header wrapper --}}
                 <section class="flex justify-evenly gap-3 py-3 overflow-x-auto w-auto h-auto">
                     {{-- wrapper --}}
                     <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
@@ -48,7 +48,7 @@
                     </div>
                     <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='check-double' type='solid' color='#ee6c4d'
@@ -57,16 +57,16 @@
                     </div>
                     <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SCHEDULED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#ee6c4d'
                                 style="width: 32px; height: 32px;"></box-icon>
-                            {{ $animals->where('status', 'slaughtered')->count() }}</div>
+                            {{ $animals->where('scheduled_at', '!=', null)->count() }}</div>
                     </div>
                     <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUTHERED</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUGHTERED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
                                 name='list-check' type='solid' color='#ee6c4d'

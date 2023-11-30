@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register animal</title>
+    <title>Overview</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -144,13 +144,14 @@
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Age: (Months)</label>
                                                 <input type="number" name="age" required min="0"
+                                                    max="2000" step="0.01"
                                                     class="border-2 border-black rounded-md p-2">
                                             </div>
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Live Wt.
                                                     (Kilogram)</label>
-                                                <input type="number" name="liveWeight" required min="0"
-                                                    class="border-2 border-black rounded-md p-2">
+                                                <input type="number" max="2000" name="liveWeight" required
+                                                    min="0" class="border-2 border-black rounded-md p-2">
 
                                             </div>
                                         </div>

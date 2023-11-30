@@ -1,92 +1,85 @@
-<div id="side-panel" class="h-screen w-[240px] bg-[#293241] text-white shadow-2xl inline-block transition-width">
+<button id="toggleButton" class="fixed z-40 top-0 pt-1">
+    <span id="open-sidepanel" class=""><i class='bx bx-menu' style='font-size: 40px; color: #ffffff;'></i></span>
+</button>
+<div id="side-panel" class="h-screen w-[240px] bg-[#293241] text-white shadow-2xl inline-block">
     {{-- side panel --}}
 
     {{-- <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1> --}}
 
-    <div class="relative">{{-- button side panel --}}
-        <button id="toggleButton" class="absolute pt-1 bg-[#293241] hover:bg-[#1b2538]">
-            <span id="open-sidepanel" class=""><i class='bx bx-menu' style='font-size: 40px;'></i></span>
-        </button>
+    <div class="panel-text pt-6 border-white">
+        <a href="{{ route('client.animal.register') }}">
+            <div class="flex items-center whitespace-nowrap text-white"><box-icon name='file-plus' type='solid'
+                    color='#ffffff' size='64px'></box-icon>
+                Add Animal</div>
+        </a>
     </div>
+    <div class="flex">
+        <ul class="pt-[20px] grid grid-flow-row w-full px-2">
 
-
-    <div class="flex justify-center">
-
-        <ul class="pt-[70px] grid grid-flow-row space-y-2">
-
-            <li class="flex gap-4 pl-6 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
-
-                <div>
-                    <div class="flex items-center"><box-icon name='home' type='solid' color='#ffffff'></box-icon>
-                    </div>
-
-
-                </div>
-
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
                 <a href="{{ route('client.overview') }}">
-                    <h1 class="panel-text items-center">HOME</h1>
-                </a>
-
-            </li>
-
-            <li class="flex gap-4 pl-6 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
-
-                <div>
-                    <div class="flex items-center"><box-icon name='pencil' type='solid' color='#ffffff'></box-icon>
+                    <div class="flex items-center panel-text gap-2"><box-icon name='home' type='solid'
+                            color='#ffffff'></box-icon><span class=" items-center">HOME</span>
                     </div>
-
-
-                </div>
-
+                </a>
+            </li>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
                 <a href="{{ route('client.drafts') }}">
-                    <h1 class="panel-text flex items-center">REGISTER ANIMAL</h1>
-                </a>
-
-            </li>
-
-            <li class="flex gap-4 pl-6 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
-
-                <div>
-                    <div class="flex items-center"><box-icon name='list-ul' color='#ffffff'></box-icon>
+                    <div class="flex items-center panel-text gap-2"><box-icon name='pencil' type='solid'
+                            color='#ffffff'></box-icon><span class=" flex items-center">REGISTER ANIMAL</span>
                     </div>
-
-
-                </div>
+                </a>
+            </li>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
                 <a href="{{ route('client.animal.list.register') }}">
-                    <h1 class="panel-text flex items-center whitespace-nowrap">REGISTRATION LIST</h1>
+                    <div class="flex items-center panel-text gap-2"><box-icon name='data' type='solid'
+                            color='#ffffff'></box-icon><span class=" flex items-center whitespace-nowrap">REGISTRATION
+                            LIST</span>
+                    </div>
                 </a>
+            </li>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
+                <a href="{{ route('client.approve.list') }}">
+                    <div class="flex items-center panel-text gap-2"><i class='bx bxs-check-circle'
+                            style='font-size: 24px;'></i>
+                        <span class=" flex items-center">APPROVED</span>
+                    </div>
+                </a>
+            </li>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <a href="{{ route('client.schedule.list') }}">
+                    <div class="flex items-center panel-text gap-2"><i class='bx bx-calendar'
+                            style='font-size: 24px; color: #ffffff;'></i>
+                        <span class=" flex items-center">SCHEDULE</span>
+                    </div>
+                </a>
             </li>
 
-            <li class="flex gap-4 pl-6 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
-                <div>
-                    <div class="flex items-center"><box-icon name='archive-in' type='solid'
-                            color='#ffffff'></box-icon>
+                <a href="{{ route('client.slaughter.list') }}">
+                    <div class="flex items-center panel-text gap-2"><i class='bx bx-cart-download'
+                            style='font-size: 24px; color: #ffffff;'></i>
+                        <span class=" flex items-center">SLAUGHTERED</span>
                     </div>
+                </a>
+            </li>
 
-
-                </div>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
                 <a href="{{ route('client.archive.list') }}">
-                    <h1 class="panel-text flex items-center">ARCHIVE</h1>
+                    <div class="flex items-center panel-text gap-2"><box-icon name='archive-in' type='solid'
+                            color='#ffffff'></box-icon>
+                        <span class=" flex items-center">ARCHIVE</span>
+                    </div>
                 </a>
-
             </li>
         </ul>
-
     </div>
-
-    <div class="flex justify-center">
-
-    </div>
-    {{-- <div class="pt-4">
-        <hr class="mx-auto w-3/4">
-    </div> --}}
 </div>
-
-
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var toggleButton = document.getElementById("toggleButton");
@@ -94,22 +87,13 @@
         var panelText = document.querySelectorAll('.panel-text');
 
         toggleButton.addEventListener("click", function() {
+            sidePanel.style.width = sidePanel.style.width === "0px" ? "240px" : "0px";
 
-            openPanel.classList.toggle("hidden");
-            closePanel.classList.toggle("hidden");
-
-            // Iterate through each element in the panelText NodeList
+            // Toggle the visibility of the elements with the "panel-text" class
             panelText.forEach(function(element) {
                 element.classList.toggle("hidden");
             });
-
-            // Toggle the width of the side panel with transition
-            sidePanel.style.width = sidePanel.style.width === "55px" ? "240px" : "55px";
-
-            // Add transition effect to the elements with the "hidden" class
-            panelText.forEach(function(element) {
-                element.style.transition = "opacity 1s ease-in-out";
-            });
+            sidePanel.style.transition = "width 0.3s ease-in-out";
         });
     });
 </script>

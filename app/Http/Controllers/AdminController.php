@@ -80,7 +80,7 @@ class AdminController extends Controller
         $animal = Animal::where('qr_code', '!=', null)->find($id);
         $animal->status = 'for slaughter';
         $animal->save();
-        return redirect()->back()->with('success', ['id' => $id]);
+        return redirect()->route('admin.schedule.list')->with('success', ['id' => $id]);
     }
 
     public function RejectAnimalRegistration(Request $request, $id)
@@ -145,7 +145,8 @@ class AdminController extends Controller
 
     public function ShowScheduleList()
     {
-        $animal = Animal::whereNotNull('scheduled_at')->get();
+        $animal = Animal::wherenotnull('scheduled_at')->where('status', '!=', 'for slaughter')
+            ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));
     }

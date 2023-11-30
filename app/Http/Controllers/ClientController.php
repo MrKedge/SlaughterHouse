@@ -35,7 +35,7 @@ class ClientController extends Controller
         $user = User::with('animals')->find(Auth::id());
 
         // Retrieve only non-archived animals
-        $animals = $user->animals->where('status', '!=', 'archived');
+        $animals = $user->animals->where('status', '=', 'pending');
 
         return view('client.client-animal-list-registration', compact('user', 'animals'));
     }
@@ -70,6 +70,26 @@ class ClientController extends Controller
     }
 
 
+    public function ShowClientApprove()
+    {
+        $user = User::with('animals')->find(Auth::id());
+        $animal = $user->animals->where('status', 'approved');
+        return view('client.client-approve-list', compact('animal'));
+    }
+
+    public function ShowClientSchedule()
+    {
+        $user = User::with('animals')->find(Auth::id());
+        $animal = $user->animals->wherenotnull('scheduled_at');
+        return view('client.client-schedule-list', compact('animal'));
+    }
+
+    public function ShowClientSlaughter()
+    {
+        $user = User::with('animals')->find(Auth::id());
+        $animal = $user->animals->where('status', 'slaughtered');
+        return view('client.client-slaughter-list', compact('animal'));
+    }
 
 
     public function ArchiveForm($id)

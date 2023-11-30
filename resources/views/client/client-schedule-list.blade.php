@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Archive</title>
+    <title>Schedule</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
@@ -70,17 +70,19 @@
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
                         class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                        <h1 class="text-2xl font-bold py-3 text-[#293241]">Archives</h1>
+                        <h1 class="text-2xl font-bold py-3 text-[#293241]">Animal Schedule</h1>
                         <div class="scrollbar-gutter overflow-y-auto h-[420px]">
-                            <table class="w-full">
+                            <table class="w-full text-center">
                                 <thead>
                                     <tr>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">No.</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Time of
+                                            Slaughter
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Permit to
+                                            Slaughter
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
                                         </th>
@@ -95,23 +97,23 @@
                                     @if ($animal->isEmpty())
                                         <tr>
                                             <td colspan="5" class="py-4 border-b border-black text-center">
-                                                <h1 class="font-bold italic pb-3">No Archives</h1>
+                                                <h1 class="font-bold italic pb-3">No Schedule</h1>
 
                                             </td>
                                         </tr>
                                     @else
                                         @foreach ($animal as $animals)
-                                            <tr class="">
+                                            <tr
+                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
                                                 <td class="py-4 border-b border-black">{{ $index }}.</td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
-                                                    {{ $animals->created_at }}
+                                                    {{ $animals->scheduled_at }}
                                                 </td>
-                                                <td
-                                                    class="py-4 font-semibold border-b text-[#7393B3] border-black uppercase">
-                                                    {{ $animals->status }}
+                                                <td class="py-4 border-b border-black">
+                                                    <img src="" alt="permit to slaughter">
                                                 </td>
                                                 <td class="py-4 border-b border-black">
                                                     <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"

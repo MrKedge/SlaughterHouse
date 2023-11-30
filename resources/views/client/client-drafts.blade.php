@@ -4,10 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>list of animal</title>
+    <title>Drafts</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     @vite('resources/css/app.css')
 </head>
@@ -38,8 +40,7 @@
                         <a href="{{ route('client.animal.register') }}">
                             <div class="flex items-center text-white"><box-icon name='file-plus' type='solid'
                                     color='#293241' size='64px'></box-icon><span class="text-[#293241]">
-                                    NEW
-                                    FORM</span></div>
+                                </span></div>
                         </a>
                     </div>
 
