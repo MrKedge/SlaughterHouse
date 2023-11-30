@@ -169,7 +169,7 @@
 
                 </div>
 
-                <a href="{{ route('client.archive.list') }}">
+                <a href="">
                     <h1 class="panel-text flex items-center">USER ACCOUNTS</h1>
                 </a>
 

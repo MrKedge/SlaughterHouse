@@ -1,12 +1,14 @@
-<div class=" flex items-center justify-between bg-transparent h-[50px] sticky top-0">
+<div class="z-10 flex items-center justify-between bg-transparent h-[50px] sticky top-0">
 
     <div class="text-center font-bold w-[240px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
         <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
     </div>
-    <div class="sticky top-">
+    <div class="sticky">
+
         @auth
             <a href="#" class="font-extrabold capitalize px-4 text-[#293241] flex items-center gap-1">
-                <div id="open-icon" class=""><box-icon type='solid' name='down-arrow' size='14px'></box-icon></div>
+                <div id="open-icon" class=""><box-icon type='solid' name='down-arrow' size='14px'></box-icon>
+                </div>
                 <div id="close-icon" class="hidden"><box-icon type='solid' name='up-arrow' size='14px'></box-icon>
                 </div>
                 {{ auth()->user()->first_name }}

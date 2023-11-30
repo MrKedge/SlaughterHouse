@@ -145,20 +145,25 @@ class ClientController extends Controller
             'age' => 'required',
             'liveWeight' => 'required',
             'drawingData' => 'required',
+            'certOwnership' => 'required',
+            'certTransfer'  => 'required',
         ]);
 
+        // Decode and save the Certificate of Ownership image
+        // Save the Certificate of Ownership image file
+        $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
+        $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
 
-        $imageData = $request->drawingData;
+        $imageCertTransName = time() . '_' . uniqid() . '.png';
+        $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransName);
+
+        // Decode and save the marked animal image
+        $imageData = base64_decode(substr($request->drawingData, strpos($request->drawingData, ',') + 1));
         $imageName = time() . '_' . uniqid() . '.png';
-
-        // Decode the data URL and save the image
-        $imageData = substr($imageData, strpos($imageData, ',') + 1);
-        $imageData = base64_decode($imageData);
         Storage::put('public/marked-animal/' . $imageName, $imageData);
 
+        // Create a new Animal instance and fill its attributes
         $animal = new Animal();
-
-
         $animal->type = $request->kindOfAnimal;
         $animal->user_id = Auth::user()->id;
         $animal->butcher = $request->butcher;
@@ -168,10 +173,14 @@ class ClientController extends Controller
         $animal->age = $request->age;
         $animal->live_weight = $request->liveWeight;
         $animal->animal_mark = $imageName;
+        $animal->cert_ownership = $imageCertOwnershipName;
+        $animal->cert_transfer = $imageCertTransName;
+        // Save the Animal instance to the database
         $animal->save();
+
+        // Redirect to the specified route
         return redirect()->route('client.animal.list.register');
     }
-
 
 
 

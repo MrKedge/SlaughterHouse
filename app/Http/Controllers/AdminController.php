@@ -145,14 +145,9 @@ class AdminController extends Controller
 
     public function ShowScheduleList()
     {
-        $animal = Animal::wherenotnull('scheduled_at')->where('status', '!=', 'for slaughter')
+        $animal = Animal::wherenotnull('scheduled_at')
             ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));
-    }
-
-    public function ShowMaintenanceForm()
-    {
-        return view('admin.admin-maintenance-form');
     }
 }

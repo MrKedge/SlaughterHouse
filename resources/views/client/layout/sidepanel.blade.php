@@ -6,15 +6,15 @@
 
     {{-- <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1> --}}
 
-    <div class="panel-text pt-6 border-white">
+    <div class="panel-text pt-6 pb-6 border-white flex justify-center items-center">
         <a href="{{ route('client.animal.register') }}">
-            <div class="flex items-center whitespace-nowrap text-white"><box-icon name='file-plus' type='solid'
-                    color='#ffffff' size='64px'></box-icon>
+            <div class="flex items-center whitespace-nowrap text-white bg-gray-700 px-4 rounded-2xl py-2"><box-icon
+                    name='file-plus' type='solid' color='#ffffff' size='64px'></box-icon>
                 Add Animal</div>
         </a>
     </div>
     <div class="flex">
-        <ul class="pt-[20px] grid grid-flow-row w-full px-2">
+        <ul class="pt-[20px] grid grid-flow-row w-full px-2 space-y-5">
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
                 <a href="{{ route('client.overview') }}">

@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    @vite('resources/css/app.css')
-    <title>Form Maintenance</title>
-</head>
+@include('layout.html-head', ['pageTitle' => 'Form Maintenance'])
 
 <body class="bg-[#D5DFE8]">
 
@@ -31,13 +22,37 @@
 
                 {{-- main content --}}
 
-                <div class="ml-[240px] flex justify-between">
+                <div class="ml-[240px] flex">
 
 
                     <section class="flex flex-col h-full pt-8 w-full mx-6">
 
 
                         <div class=" bg-white px-10 rounded-2xl  shadow-2xl py-6">
+                            @if ($errors->any())
+                                <div id="error-alert" class="alert error-alert text-red-700 text-center text-xl">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                                <script>
+                                    setTimeout(function() {
+                                        document.getElementById('error-alert').style.display = 'none';
+                                    }, 3000);
+                                </script>
+                            @endif
+                            @if (session('success'))
+                                <div id="success-alert" class="alert alert-success text-green-800 text-center text-xl">
+                                    {{ session('success') }}
+                                </div>
+                                <script>
+                                    setTimeout(function() {
+                                        document.getElementById('success-alert').style.display = 'none';
+                                    }, 3000); // 3000 milliseconds = 3 seconds
+                                </script>
+                            @endif
                             <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">FORM MAINTENANCE
 
                             </h1>
@@ -59,24 +74,7 @@
                                                             Animal:</label>
                                                         <input name="animalType"
                                                             class=" border-2 border-black rounded-md p-2 w-full">
-
-
                                                     </div>
-                                                    {{-- <div>
-                                                        <label class="block pb-1" for="">Set Age Limit:
-                                                            (Months)</label>
-                                                        <input type="number" name="age" min="0"
-                                                            class="border-2 border-black rounded-md p-2 w-full">
-                                                    </div>
-                                                    <div>
-                                                        <label class="block pb-1" for="">Set Live Weight Limit
-                                                            (Kilogram)</label>
-                                                        <input type="number" name="liveWeight" min="0"
-                                                            class="border-2 border-black rounded-md p-2 w-full">
-
-                                                    </div> --}}
-
-
                                                     <div>
                                                         <label class="block pb-1" for="">Add
                                                             Destination:</label>
@@ -119,19 +117,6 @@
 
 
                                                     </div>
-                                                    {{-- <div>
-                                                        <label class="block pb-1" for="">Set Age Limit:
-                                                            (Months)</label>
-                                                        <input type="number" name="age" min="0"
-                                                            class="border-2 border-black rounded-md p-2 w-full">
-                                                    </div>
-                                                    <div>
-                                                        <label class="block pb-1" for="">Set Live Weight Limit
-                                                            (Kilogram)</label>
-                                                        <input type="number" name="liveWeight" min="0"
-                                                            class="border-2 border-black rounded-md p-2 w-full">
-
-                                                    </div> --}}
                                                     <div>
 
                                                         <label class="block pb-1" for="">Delete on
@@ -165,64 +150,106 @@
 
 
                                         </div>
-
-                                        <div class="space-y-8">
-
-
-                                            {{-- <div class="absolute bottom-0 right-5 pb-[20px]">
-                                                <button type="submit"
-                                                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                                    Update Form
-                                                </button>
-
-                                                <a href="{{ route('admin.dashboard') }}"
-                                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                                    Cancel
-                                                </a>
-                                            </div> --}}
-                                        </div>
-
                                     </div>
-
-
-                                    <div class="flex justify-center">
-
-
-                                    </div>
-
                                 </div>
                             </div>
                         </div>
-                </div>
-                </section>
-
-
-
-                <div>
-
-                    <div
-                        class="mx-4 mt-10 h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
-                        <div class=" text-[#293241]">
-
-                            <div class="text-[#293241] text-center">
-
-
-                            </div>
-
+                    </section>
+                    <section
+                        class="mr-4 ml-0 bg-white rounded-md shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4 mt-10 h-full">
+                        <div class="scrollbar-gutter overflow-y-auto h-[580px]">
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2 rounded-md">
+                                            Animal</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr>
+                                        <td class="py-4">
+                                            @foreach ($animal as $animals)
+                                                @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
+                                                    <p class="font-medium ">
+                                                        {{ $animals->animal_type }}
+                                                    </p>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2 rounded-md">
+                                            Butcher</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr>
+                                        <td class="">
+                                            @foreach ($animal as $butcher)
+                                                @if (!is_null($butcher->animal_butcher) && $butcher->animal_butcher !== '')
+                                                    <p class="font-medium ">
+                                                        {{ $butcher->animal_butcher }}
+                                                    </p>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2 rounded-md">
+                                            Destination
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr>
+                                        <td class="py-4">
+                                            @foreach ($animal as $destination)
+                                                @if (!is_null($destination->animal_destination) && $destination->animal_destination !== '')
+                                                    <p class="font-medium ">
+                                                        {{ $destination->animal_destination }}
+                                                    </p>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="w-full text-center">
+                                <thead>
+                                    <tr>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2 rounded-md">Age
+                                            Classify
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="">
+                                    <tr>
+                                        <td class="py-4">
+                                            @foreach ($animal as $ageClass)
+                                                @if (!is_null($animals->animal_ageclassify) && $ageClass->animal_ageclassify !== '')
+                                                    <p class="font-medium ">
+                                                        {{ $ageClass->animal_ageclassify }}
+                                                    </p>
+                                                @endif
+                                            @endforeach
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                    </div>
-
+                    </section>
                 </div>
-
-
-
             </div>
-
         </div>
-
     </div>
-
-
 </body>
 
 </html>

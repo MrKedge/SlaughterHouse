@@ -7,7 +7,7 @@
     {{-- <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGHTER</span>HOUSE</h1> --}}
 
     <div class="flex">
-        <ul class="pt-[20px] grid grid-flow-row w-full px-2">
+        <ul class="pt-[60px] grid grid-flow-row w-full px-2 space-y-5">
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
                 <a href="{{ route('butcher.overview') }}">
@@ -19,7 +19,8 @@
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
                 <a href="{{ route('butcher.animal') }}">
                     <div class="flex items-center panel-text gap-2"><i class='bx bx-registered'
-                            style='font-size: 24px; color: #ffffff;'></i><span class=" flex items-center">ANIMAL</span>
+                            style='font-size: 24px; color: #ffffff;'></i><span class=" flex items-center">ANIMAL
+                            LIST</span>
                     </div>
                 </a>
             </li>
@@ -28,7 +29,16 @@
                 <a href="">
                     <div class="flex items-center panel-text gap-2"><i class='bx bx-stopwatch'
                             style='font-size: 24px; color: #ffffff;'></i><span
-                            class=" flex items-center whitespace-nowrap">RECENT</span>
+                            class=" flex items-center whitespace-nowrap">RECENT SLAUGHTER</span>
+                    </div>
+                </a>
+            </li>
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <a href="">
+                    <div class="flex items-center panel-text gap-2"><i class='bx bx-scan'
+                            style='font-size: 24px; color: white;'></i><span
+                            class=" flex items-center whitespace-nowrap">SCAN ANIMAL</span>
                     </div>
                 </a>
             </li>

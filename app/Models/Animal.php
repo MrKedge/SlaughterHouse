@@ -18,6 +18,8 @@ class Animal extends Model
         'butcher',
         'age_classify',
         'remarks',
+        'cert_ownership',
+        'cert_transfer',
     ];
 
     public function user()

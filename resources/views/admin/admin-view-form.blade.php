@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    @vite('resources/css/app.css')
-    <title>Receive registration</title>
-</head>
+@include('layout.html-head', ['pageTitle' => 'View Form'])
 
 <body class="bg-[#D5DFE8]">
 
@@ -57,18 +49,28 @@
 
                                 <div>
                                     <label class="block pb-1" for="">Certificate of Ownership:</label>
-                                    <p
-                                        class="bg-white  text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        capitalize
-                                    </p>
+                                    <section class="border-dashed border border-black" data-lightbox="animal-gallery"
+                                        data-title="Animal Image">
+                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                            data-lightbox="animal-gallery">
+                                            <img class=""
+                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                                alt="animal image">
+                                        </a>
+                                    </section>
                                 </div>
 
                                 <div>
                                     <label class="block pb-1" for="">Cert. of Transfer of Large Cattle:</label>
-                                    <p
-                                        class="bg-white  text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        no file
-                                    </p>
+                                    <section class="border-dashed border border-black" data-lightbox="animal-gallery"
+                                        data-title="Animal Image">
+                                        <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                            data-lightbox="animal-gallery">
+                                            <img class=""
+                                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                                alt="animal image">
+                                        </a>
+                                    </section>
                                 </div>
                             </div>
 
@@ -173,7 +175,7 @@
                         <div class="">{{-- buttons --}}
 
                             <div class="flex gap-3 my-10 pr-10 justify-end">
-                                @if ($animal->status != 'approved' && $animal->status != 'rejected' && $animal->status != 'for slaughter')
+                                @if ($animal->status === 'pending')
                                     @csrf
 
                                     <a id="show-approve-nav"
@@ -197,7 +199,7 @@
                                             <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
                                         </button>
                                     </form>
-                                @elseif($animal->qr_code !== null && $animal->status !== 'for slaughter')
+                                @elseif($animal->qr_code !== null && $animal->status !== 'for slaughter' && $animal->status !== 'slaughtered')
                                     <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
                                         method="post">
                                         @csrf

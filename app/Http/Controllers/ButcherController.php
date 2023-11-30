@@ -15,7 +15,12 @@ class ButcherController extends Controller
         $animal = Animal::with('user')
             ->where('status', 'for slaughter')
             ->get();
-        return view('butcher.butcher-overview', compact('animal'));
+        $recent = Animal::where('status', 'slaughtered')
+            ->where('created_at', '>=', Carbon::now()->subHours(12))
+            ->latest('created_at')
+            ->limit(5)
+            ->get();
+        return view('butcher.butcher-overview', compact('animal', 'recent'));
     }
 
     public function ShowButcherAnimal()

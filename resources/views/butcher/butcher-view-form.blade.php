@@ -1,15 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    @vite('resources/css/app.css')
-    <title>Butcher View Form</title>
-</head>
+@include('layout.html-head', ['pageTitle' => 'Butcher View Form'])
 
 <body class="bg-[#D5DFE8]">
 
@@ -192,6 +184,21 @@
 
 
                     <div>
+
+                        <div
+                            class="mx-4 mt-10 h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
+                            <div class=" text-[#293241]">
+
+                                <div class="text-[#293241] text-center">
+
+                                    <div class="">
+                                        <img class="mx-auto" src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
+                                            alt="animal image">
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
 
                         <div
                             class="pl-4 mx-4 w-[250px] mt-10 h-auto bg-white px-1 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">

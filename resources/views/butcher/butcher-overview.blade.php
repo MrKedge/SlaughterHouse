@@ -1,19 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Butcher Overview</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    @vite('resources/css/app.css')
-</head>
+@include('layout.html-head', ['pageTitle' => 'Butcher Overview'])
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
@@ -38,14 +26,14 @@
         <div class="min-h-screen">{{-- wrapperr --}}
 
             {{-- header --}}
-            @include('butcher.layout.butcher-header')
+            <div class="z-50"> @include('butcher.layout.butcher-header')</div>
             {{-- header --}}
 
 
             <div class="flex">
 
 
-                <div class="inline-block "> @include('butcher.layout.butcher-panel')</div>
+                <div class="inline-block z-40"> @include('butcher.layout.butcher-panel')</div>
 
 
                 {{-- main content --}}
@@ -105,7 +93,7 @@
                         {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                         <section
                             class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                            <h1 class="text-2xl font-bold py-3 text-[#293241]">Animal Schedule</h1>
+                            <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">For Slaughter</h1>
                             <div class="scrollbar-gutter overflow-y-auto h-[420px]">
                                 <table class="w-full text-center">
                                     <thead>
@@ -131,8 +119,8 @@
                                         @endphp
                                         @if ($animal->isEmpty())
                                             <tr>
-                                                <td colspan="5" class="py-4 border-b border-black text-center">
-                                                    <h1 class="font-bold italic pb-3">No Schedule</h1>
+                                                <td colspan="6" class="py-4 border-b border-black text-center">
+                                                    <h1 class="font-bold italic pb-3">No For Slaughter Animal</h1>
 
                                                 </td>
                                             </tr>

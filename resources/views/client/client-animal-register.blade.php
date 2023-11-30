@@ -1,18 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Overview</title>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <link rel="stylesheet" href="path/to/boxicons/css/boxicons.min.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    @vite('resources/css/app.css')
-</head>
+@include('layout.html-head', ['pageTitle' => 'Register'])
 
 <body class="bg-[#D5DFE8] overflow-hidden ">
 
@@ -39,7 +28,7 @@
                 <div class=" bg-white px-10 rounded-2xl  shadow-2xl py-6">
                     <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">REGISTRATION
                     </h1>
-                    <form action="{{ route('store.animal') }}" method="POST"
+                    <form action="{{ route('store.animal') }}" method="POST" enctype="multipart/form-data"
                         class="flex w-full justify-center relative">
                         @csrf
                         <div class="w-full">
@@ -78,13 +67,15 @@
                                         <h1 class="font-bold pointer-events-none text-lg italic">Documents</h1>
 
                                         <p class="block pb-1 pt-3">Certificate of Ownership:</p>
-                                        <label for=""
+
+                                        <label for="certOwnershipInput"
                                             class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
                                             <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
-                                                    style='font-size: 2em;'></i> Add
-                                                image</span>
-                                            <input type="file" class="hidden">
+                                                    style='font-size: 2em;'></i> Add image</span>
+                                            <input id="certOwnershipInput" name="certOwnership" accept="image/*"
+                                                type="file" class="hidden" required>
                                         </label>
+
                                     </div>
 
                                     <div>
@@ -92,12 +83,12 @@
                                         </h1>
 
                                         <p class="block pb-1 pt-3">Cert. of Transfer of Large Cattle:</p>
-                                        <label for=""
+                                        <label for="certTransferInput"
                                             class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
                                             <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
-                                                    style='font-size: 2em;'></i> Add
-                                                image</span>
-                                            <input type="file" class="hidden">
+                                                    style='font-size: 2em;'></i> Add image</span>
+                                            <input id="certTransferInput" name="certTransfer" accept="image/*"
+                                                type="file" class="hidden">
                                         </label>
                                     </div>
                                 </div>
