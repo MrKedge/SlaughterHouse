@@ -37,12 +37,13 @@ Route::POST('/approve/status/animal/{id}', [AdminController::class, 'ApproveAnim
 Route::POST('/reject/status/animal/{id}', [AdminController::class, 'RejectAnimalRegistration'])->name('reject.status');
 Route::post('/update/client/animal/form/{id}', [ClientController::class, 'UpdateAnimalForm'])->name('update.form');
 Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
-Route::post('/set/schedule/animal/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
+Route::post('/set/arrival/animal/{id}', [AdminController::class, 'SetArrivalTime'])->name('set.arrival');
 Route::post('/generate/qr/code/{id}', [QrCodeController::class, 'GenerateQRCode'])->name('generate.qr.code');
 Route::post('/form/maintenance/', [FormMaintenanceController::class, 'FormMaintenance'])->name('form.maintenance');
 Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'])->name('delete.on.form');
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
-
+Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
+Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 
 //admin pages
 Route::middleware(['admin'])->group(function () {
@@ -54,6 +55,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/schedule/list', [AdminController::class, 'ShowScheduleList'])->name('admin.schedule.list');
     Route::get('/admin/for/slaughter/list/', [AdminController::class, 'ShowForSlaughterList'])->name('admin.for.slaughter.list');
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
+    Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
+    Route::get('/admin/monitoring/list', [AdminController::class, 'AnteMortem'])->name('admin.monitor.list');
 });
 
 

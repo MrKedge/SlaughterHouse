@@ -43,6 +43,7 @@ class ButcherController extends Controller
 
         $animal = Animal::where('status', 'for slaughter')->find($id);
         $animal->status = 'slaughtered';
+        $animal->slaughtered_at = now();
         $animal->save();
         return redirect()->route('butcher.animal')->with('success', ['id' => $id]);
     }

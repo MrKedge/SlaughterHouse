@@ -25,47 +25,44 @@
             <div class="flex flex-col w-full">
 
 
-                <section class="flex justify-evenly gap-3 pl-6  py-3 overflow-x-auto  w-full h-auto pr-6">
+                <section class="flex justify-evenly gap-3 py-3 overflow-x-auto w-auto h-auto">
                     {{-- wrapper --}}
-
-                    {{-- wrapper --}}
-                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#293241] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
-                                type='solid' color='#ee6c4d' style="width: 32px; height: 32px;"></box-icon>
+                                type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'pending')->count() }}</div>
 
                     </div>
-                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#293241] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='check-double' type='solid' color='#ee6c4d'
+                                name='check-double' type='solid' color='#293241'
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'approved')->count() }}</div>
                     </div>
-                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#293241] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SCHEDULED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#ee6c4d'
+                                name='list-check' type='solid' color='#293241'
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('scheduled_at', '!=', null)->count() }}</div>
                     </div>
-                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md">
+                    <div class="w-[300px] h-28 bg-white rounded-r-md border-l-[16px] border-[#293241] rounded-l-md">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUGHTERED</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#ee6c4d'
+                                name='list-check' type='solid' color='#293241'
                                 style="width: 32px; height: 32px;"></box-icon>
                             {{ $animals->where('status', 'slaughtered')->count() }}</div>
                     </div>
-
                 </section>
 
 
@@ -80,10 +77,6 @@
                                     <input type="text" placeholder="Search..."
                                         class="rounded-2xl m-0 my-2 border-gray-700 border p-1 text-center">
                                     <div class="p-2 pl-1">
-                                        <button>
-                                            <img src="{{ asset('images/search-icon.png') }}" alt="Image"
-                                                class="">
-                                        </button>
                                     </div>
                                 </form>
                             </div>

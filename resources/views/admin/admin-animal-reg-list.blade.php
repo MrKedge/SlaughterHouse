@@ -28,44 +28,44 @@
                 <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">PENDING</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
-                                type='solid' color='#EE6C4D'
+                                type='solid' color='#293241'
                                 style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'pending')->count() }}
                         </div>
 
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl   ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">APPROVE</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='check-double' type='solid' color='#EE6C4D'
-                                style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'approved')->count() }}
+                                name='check-double' type='solid' color='#293241'
+                                style="width: 32px; height: 32px;"></box-icon>
                         </div>
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">SLAUGHTERED</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">OWNER</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#EE6C4D'
-                                style="width: 32px; height: 32px;"></box-icon>{{ $animals->where('status', 'slaughtered')->count() }}
+                                name='list-check' type='solid' color='#293241'
+                                style="width: 32px; height: 32px;"></box-icon>
                         </div>
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#EE6C4D] rounded-l-md relative shadow-2xl  ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
 
-                        <h1 class="pl-2 text-start flex items-center text-[#293241] font-bold text-lg">BUTCHER</h1>
+                        <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
                         <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                name='list-check' type='solid' color='#EE6C4D'
-                                style="width: 32px; height: 32px;"></box-icon>0
+                                name='list-check' type='solid' color='#293241'
+                                style="width: 32px; height: 32px;"></box-icon>
                         </div>
                     </div>
                 </section>
@@ -74,7 +74,7 @@
                 {{-- table section --}}
                 <div class="z-30 px-4"> {{-- table wrapper --}}
                     <section class=" flex justify-center">
-                        <div class=" bg-white h-[500px] w-full rounded-md ">
+                        <div class=" bg-white h-[540px] w-full rounded-md ">
                             <h1 class="text-center font-extrabold text-[#293241] pb-2 pt-4 text-3xl">REGISTRATION LIST
                             </h1>
                             <div class="p-4">
@@ -104,7 +104,8 @@
                                             @php $index = 0 @endphp
                                             @if ($animals->isEmpty())
                                                 <tr>
-                                                    <td colspan="7" class="py-4 border-b border-black text-center">
+                                                    <td colspan="7"
+                                                        class="py-4 border-b border-black text-center h-[400px]">
                                                         <h1 class="font-semibold italic pb-3">No Pending Animal</h1>
                                                     </td>
                                                 </tr>

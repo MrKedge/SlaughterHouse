@@ -64,32 +64,54 @@
 
                                 <div class="grid grid-flow-row md:grid-flow-col md:gap-10">{{-- document info --}}
                                     <div>
+
                                         <h1 class="font-bold pointer-events-none text-lg italic">Documents</h1>
 
                                         <p class="block pb-1 pt-3">Certificate of Ownership:</p>
 
-                                        <label for="certOwnershipInput"
-                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
-                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
-                                                    style='font-size: 2em;'></i> Add image</span>
-                                            <input id="certOwnershipInput" name="certOwnership" accept="image/*"
-                                                type="file" class="hidden" required>
-                                        </label>
+                                        <div class="flex relative">
 
+
+                                            <label for="certOwnershipInput"
+                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                                <span class="mx-auto font-medium flex items-center"><i
+                                                        class='bx bx-plus' style='font-size: 2em;'></i> Add
+                                                    image</span>
+                                                <input id="certOwnershipInput" name="certOwnership" accept="image/*"
+                                                    type="file" class="hidden" required
+                                                    onchange="readURL(this, 'cert-owner');">
+                                            </label>
+
+                                            <img id="cert-owner" src="#" alt="your image"
+                                                class="hidden w-[100px] absolute h-full right-1/4 border border-dashed  border-black  ">
+
+
+                                        </div>
                                     </div>
-
                                     <div>
+
                                         <h1 class="font-bold pointer-events-none text-lg italic opacity-0">Documents
                                         </h1>
 
                                         <p class="block pb-1 pt-3">Cert. of Transfer of Large Cattle:</p>
-                                        <label for="certTransferInput"
-                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
-                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
-                                                    style='font-size: 2em;'></i> Add image</span>
-                                            <input id="certTransferInput" name="certTransfer" accept="image/*"
-                                                type="file" class="hidden">
-                                        </label>
+
+                                        <div class="flex relative">
+
+
+                                            <label for="certTransferInput"
+                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                                <span class="mx-auto font-medium flex items-center"><i
+                                                        class='bx bx-plus' style='font-size: 2em;'></i> Add
+                                                    image</span>
+                                                <input id="certTransferInput" name="certTransfer" accept="image/*"
+                                                    type="file" class="hidden"
+                                                    onchange="readURL(this, 'cert-transfer');">
+                                            </label>
+                                            <img id="cert-transfer" src="#" alt="your image"
+                                                class="hidden w-[100px] absolute h-full right-1/4 border border-dashed  border-black  ">
+
+
+                                        </div>
                                     </div>
                                 </div>
 
@@ -151,7 +173,7 @@
                                             <label class="block pb-1 pt-3" for="">Destination:</label>
                                             <select name="destination" id="" required
                                                 class="border-2 border-black rounded-md w-full p-2">
-                                                <option value="" disabled selected>select</option>
+                                                <option value="" disabled selected>Select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
                                                         <option value="{{ $animals->animal_destination }}">
@@ -213,17 +235,7 @@
 
 
                                 <div class="flex justify-center">
-
-
-                                    <div class="text-center">
-                                        <label class="font-semibold text-[#293241] pt-2 text-2xl">Animal
-                                            Marks</label>
-                                        <div class="pt-3"><canvas class="border-2 border-black"
-                                                id="canvas"></canvas></div>
-                                    </div>
-
-                                    <input type="hidden" name="drawingData" id="drawingData" value="">
-
+                                    @include('client.layout.client-draw-animal')
                                 </div>
 
                             </div>
@@ -235,7 +247,20 @@
         </div>
     </div>
 
-
+    <script>
+        function readURL(input, targetId) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    $('#' + targetId)
+                        .attr('src', e.target.result)
+                        .removeClass('hidden') // Remove the 'hidden' class to display the image
+                        .show(); // Ensure the image is displayed
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
 
     <script>
         var imageUrls = {

@@ -12,9 +12,6 @@
         @include('admin.layout.admin-header')
         {{-- end header --}}
 
-
-
-
         {{-- this is for the table inside --}}
         <div class="flex">
 
@@ -27,10 +24,11 @@
 
 
                     <section class="bg-white h-full w-full ml-4 rounded-2xl my-10 drop-shadow-2xl ">
-                        <h1 class="py-14 text-2xl font-bold text-center text-[#293241]">REGISTRATION DETAILS</h1>
+                        <h1 class="py-14 text-2xl font-bold text-center text-[#293241]">ANIMAL DETAILS</h1>
                         <div class="flex flex-row gap-10 px-10">
 
-                            <div class="space-y-5 w-full px-6">
+                            <div class="space-y-5 w-full">
+
                                 <div>
                                     <label class="block pb-1" for="">Owner Name:</label>
                                     <p
@@ -38,7 +36,6 @@
                                         {{ $user->first_name }} {{ $user->last_name }}
                                     </p>
                                 </div>
-
                                 <div>
                                     <label class="block pb-1" for="">Address:</label>
                                     <p
@@ -46,36 +43,6 @@
                                         {{ $user->address }}
                                     </p>
                                 </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Certificate of Ownership:</label>
-                                    <section class="border-dashed border border-black" data-lightbox="animal-gallery"
-                                        data-title="Animal Image">
-                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                                alt="animal image">
-                                        </a>
-                                    </section>
-                                </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Cert. of Transfer of Large Cattle:</label>
-                                    <section class="border-dashed border border-black" data-lightbox="animal-gallery"
-                                        data-title="Animal Image">
-                                        <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                                alt="animal image">
-                                        </a>
-                                    </section>
-                                </div>
-                            </div>
-
-
-                            <div class="space-y-5 w-full">
                                 <div>
                                     <label class="block pb-1" for="">Animal:</label>
                                     <p
@@ -96,6 +63,12 @@
                                     </p>
                                 </div>
 
+                            </div>
+
+
+                            <div class="space-y-5 w-full">
+
+
                                 <div>
                                     <label class="block pb-1" for="">Destination:</label>
                                     <p
@@ -105,31 +78,6 @@
                                         @endauth
                                     </p>
                                 </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Age Classification (swine only):</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm  border-2 border-black">
-                                        @auth
-                                            {{ $animal->age_classify !== null && $animal->age_classify !== '' ? $animal->age_classify : '(None)' }}
-                                        @endauth
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div class="space-y-5 w-full">
-
-                                <div>
-                                    <label class="block pb-1" for="">Gender:</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->gender }}
-                                        @endauth
-                                    </p>
-                                </div>
-
                                 <div>
                                     <label class="block pb-1" for="">Age:</label>
                                     <p
@@ -149,6 +97,73 @@
                                         @endauth
                                     </p>
                                 </div>
+
+                                <div>
+                                    <label class="block pb-1" for="">Age Classification (swine only):</label>
+                                    <p
+                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm  border-2 border-black">
+                                        @auth
+                                            {{ $animal->age_classify !== null && $animal->age_classify !== '' ? $animal->age_classify : '(None)' }}
+                                        @endauth
+                                    </p>
+                                </div>
+
+
+                            </div>
+
+                            <div class="space-y-5 w-full">
+
+                                <div>
+                                    <label class="block pb-1" for="">Gender:</label>
+                                    <p
+                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
+                                        @auth
+                                            {{ $animal->gender }}
+                                        @endauth
+                                    </p>
+                                </div>
+                                <div>
+                                    <label class="block pb-1" for="">Certificate of Ownership:</label>
+                                    <section class="w-[100px] p-1 border-dashed border border-black"
+                                        data-lightbox="animal-gallery" data-title="Animal Image">
+                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                            data-lightbox="animal-gallery">
+                                            <img class=""
+                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                                alt="animal image">
+                                        </a>
+                                    </section>
+                                </div>
+
+                                <div>
+                                    @if ($animal->cert_transfe !== null)
+                                        <label class="block pb-1" for="">Cert. of Transfer of Large
+                                            Cattle:</label>
+                                        <section class="w-[100px] p-1 border-dashed border border-black"
+                                            data-lightbox="animal-gallery" data-title="Animal Image">
+                                            <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                                data-lightbox="animal-gallery">
+                                                <img class=""
+                                                    src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                                    alt="animal image">
+                                            </a>
+                                        </section>
+                                    @endif
+                                </div>
+
+                                <div>
+                                    <label class="block pb-1" for="">Permit to Slaughter:</label>
+                                    <section class="w-[100px] p-1 border-dashed border border-black"
+                                        data-lightbox="animal-gallery" data-title="Animal Image">
+                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                            data-lightbox="animal-gallery">
+                                            <img class=""
+                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                                alt="animal image">
+                                        </a>
+                                    </section>
+                                </div>
+
                             </div>
 
                             <div class="space-y-32 ">
@@ -162,30 +177,49 @@
                             </div>
 
                         </div>
-
-                        <div class="mt-5 w-full bg-white  rounded-sm px-3 mb-6 ">
-                            {{-- Mark of animal --}}
-                            <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks</h1>
-                            <section class="min-h-[350px] border-dashed border border-black ">
-                                <img class="w-full" src="{{ asset('storage/marked-animal/' . $animal->animal_mark) }}"
-                                    alt="animal image">
-                            </section>
-                        </div>
-
+                        @if ($animal->status === 'approved' || $animal->status === 'pending')
+                            @csrf
+                            <div class="mt-5 w-full bg-white  rounded-sm px-3 mb-6 ">
+                                {{-- Mark of animal --}}
+                                <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks
+                                </h1>
+                                <section class="min-h-[350px] border-dashed border border-black ">
+                                    <img class="w-full"
+                                        src="{{ asset('storage/marked-animal/' . $animal->animal_mark) }}"
+                                        alt="animal image">
+                                </section>
+                            </div>
+                        @endif
                         <div class="">{{-- buttons --}}
 
                             <div class="flex gap-3 my-10 pr-10 justify-end">
+                                @if ($animal->status === 'inspection')
+                                    <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                            <span>For Slaughter</span>
+
+                                        </button>
+                                    </form>
+                                    <form action="{{ route('dispose.animal', ['id' => $animal->id]) }}" method="post">
+                                        @csrf
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                            Dispose
+                                        </button>
+                                    </form>
+                                @endif
+
+
                                 @if ($animal->status === 'pending')
                                     @csrf
-
                                     <a id="show-approve-nav"
                                         class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
                                         <box-icon name='checkbox-checked'
                                             color='#ffffff'></box-icon><span>Approve</span>
                                     </a>
-
-
-
                                     <a id="show-remarks"
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                         REJECT
@@ -203,11 +237,11 @@
                                     <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
                                         method="post">
                                         @csrf
-                                        <button type="submit"
+                                        {{-- <button type="submit"
                                             class="bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
-                                            <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>Send to
-                                                Butcher</span>
-                                        </button>
+                                            <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>For
+                                                Monitoring</span>
+                                        </button> --}}
                                     </form>
                                 @endif
 
@@ -216,88 +250,11 @@
                         </div>
                     </section>
 
-
-
-                    <div>
-
-                        @if ($animal->qr_code !== null)
-                            @csrf
-                            <div
-                                class="mx-4 mt-10 h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
-                                <div class=" text-[#293241]">
-
-                                    <div class="text-[#293241] text-center">
-
-                                        <div class="">
-                                            <img class="mx-auto"
-                                                src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
-                                                alt="animal image">
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                        @endif
-
-
-                        <div
-                            class="pl-4 mx-4 w-[250px] mt-10 h-auto bg-white px-1 py-3 rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border space-y-5">
-                            <div class=" text-[#293241]">
-                                <h1 class="font-semibold text-xl">Status: <span class="uppercase"
-                                        style="
-                            @if ($animal->status == 'pending') color: orange;
-                            @elseif ($animal->status == 'approved') color: green;
-                            @elseif ($animal->status == 'rejected') color: red; @endif
-                        ">{{ $animal->status }}</span>
-                                </h1>
-                            </div>
-                            @if ($animal->scheduled_at !== null && $animal->arrived_at !== null)
-                                @csrf
-                                <div class="text-[#293241]">
-                                    <h1 class="font-semibold text-xl ">Arrival Time:</h1>
-                                    <p>{{ $animal->arrived_at }}</p>
-
-                                </div>
-                                <div class="text-[#293241]">
-                                    <h1 class="font-semibold text-xl ">Slaughter Time:</h1>
-                                    <p>{{ $animal->scheduled_at }}</p>
-
-                                </div>
-                            @else
-                                <div class="text-[#293241]">
-                                    <h1 class="font-semibold text-xl ">Arrival Time:</h1>
-                                    <p class="text-xl">(Not Arrived)</p>
-
-                                </div>
-                                <div class="text-[#293241]">
-                                    <h1 class="font-semibold text-xl ">Slaughter Time:</h1>
-                                    <p class="text-xl">(No Schedule)</p>
-
-                                </div>
-                            @endif
-                            @if ($animal->status === 'rejected')
-                                <div class="text-[#293241] mr-2">
-                                    <h1 class="font-semibold text-xl pb-2">Remarks:</h1>
-
-                                    <p class="uppercase font-semibold border-2  border-black w-full p-2 bg-white">
-                                        {{ $animal->remarks }}
-                                    </p>
-
-                                </div>
-                            @endif
-                        </div>
-
-                    </div>
-
-
+                    @include('admin.layout.admin-form-sideviews')
 
                 </div>
-
             </div>
-
         </div>
-
-
         <nav id="remarks-pop-up"
             class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl">
             <form method="post" action="{{ route('reject.status', ['id' => $animal->id]) }}">
@@ -336,7 +293,6 @@
                 </div>
             </div>
         </nav>
-
         <script src="{{ asset('js/slaughterhouse.js') }}"></script>
         <script>
             rejectRemark();

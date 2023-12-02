@@ -21,7 +21,7 @@
             {{-- main content --}}
 
 
-            <div class="flex flex-col w-full ">
+            <div class="flex flex-col w-full">
 
 
                 <section class="flex justify-start gap-20 pl-6  py-3 overflow-x-auto w-full h-auto pr-6 pb-6">
@@ -58,7 +58,7 @@
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
-                        class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+                        class=" mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
                         <h1 class="text-2xl font-bold py-3 text-[#293241]">Approved Animal Table</h1>
                         <div class="scrollbar-gutter overflow-y-auto h-[420px]">
                             <table class="w-full text-center">

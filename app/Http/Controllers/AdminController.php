@@ -23,20 +23,31 @@ class AdminController extends Controller
         return view('admin.admin-dashboard', compact('recent', 'animal', 'user'));
     }
 
+
+
+
+
     public function ShowForSlaughterList()
     {
         $animal = Animal::where('status', 'for slaughter')->get();
         return view('admin.admin-for-slaughter-list', compact('animal'));
     }
 
+
+
+
+
     public function ShowApproveList()
     {
         $animal = Animal::with('user')
             ->where('status', 'approved')
-            ->whereNull('arrived_at')
             ->get();
         return view('admin.admin-approve-list', compact('animal'));
     }
+
+
+
+
 
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
@@ -47,10 +58,18 @@ class AdminController extends Controller
         return view('admin.admin-animal-reg-list', compact('animals'));
     }
 
+
+
+
+
     public function ShowEditRegistration()
     {
         return view('admin.admin-edit-registration');
     }
+
+
+
+
 
 
     public function ShowRegistrationForm($id)       //for viewing the animal form in reg table//----------------------------
@@ -59,6 +78,10 @@ class AdminController extends Controller
         $user = User::findOrFail($animal->user_id);
         return view('admin.admin-view-form', compact('animal', 'user'));
     }
+
+
+
+
 
 
     public function ApproveAnimalRegistration($id)      //for approving the animal registration form//----------------------
@@ -74,14 +97,9 @@ class AdminController extends Controller
         return redirect()->route('admin.view.animal.reg.list', ['id' => $id]);
     }
 
-    public function ForSlaughterAnimal($id)      //for approving the animal registration form//----------------------
-    {
 
-        $animal = Animal::where('qr_code', '!=', null)->find($id);
-        $animal->status = 'for slaughter';
-        $animal->save();
-        return redirect()->route('admin.schedule.list')->with('success', ['id' => $id]);
-    }
+
+
 
     public function RejectAnimalRegistration(Request $request, $id)
     {
@@ -107,7 +125,55 @@ class AdminController extends Controller
         return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal registration rejected successfully.');
     }
 
-    public function SetSchedule(Request $request, $id)
+
+
+    public function AnteMortem()
+    {
+
+        $animal = Animal::where('status', 'inspection')->get();
+
+
+        return view('admin.admin-monitoring-list', compact('animal'));
+    }
+
+
+
+
+    public function MonitorAnimal($id)
+    {
+        $animal = Animal::where('status', 'approved')->find($id);
+        $animal->status = 'inspection';
+        $animal->save();
+        return redirect()->back()->with('success', 'Animal has been moved to monitoring facility');
+    }
+
+
+
+    public function ForSlaughterAnimal($id)
+    {
+        $animal = Animal::where('status', 'inspection')->find($id);
+        $animal->status = 'for slaughter';
+        $animal->save();
+
+        return redirect()->route('admin.monitor.list')->with('success', 'Animal pass the ante mortem');
+    }
+
+
+
+
+    public function ForDisposeAnimal($id)
+    {
+        $animal = Animal::where('status', 'inspection')->find($id);
+        $animal->status = 'Disposal';
+        $animal->save();
+
+        return redirect()->route('admin.monitor.list')->with('disposed', 'Animal pass the ante mortem');
+    }
+
+
+
+
+    public function SetArrivalTime(Request $request, $id)
     {
         // $arrivalDate = $request->input('dateOfArrival');
         // $arrivalTime = $request->input('timeOfArrival');
@@ -122,8 +188,8 @@ class AdminController extends Controller
         $request->validate([
             'dateOfArrival' => 'nullable',
             'timeOfArrival' => 'nullable',
-            'dateOfSlaughter' => 'nullable',
-            'timeOfSlaughter' => 'nullable',
+            // 'dateOfSlaughter' => 'nullable',
+            // 'timeOfSlaughter' => 'nullable',
         ]);
 
         $animal = Animal::where('status', 'approved')->findorfail($id);
@@ -131,11 +197,10 @@ class AdminController extends Controller
 
         $arrivalDateTime = Carbon::parse($request->input('dateOfArrival') . ' ' . $request->input('timeOfArrival'));
 
-
-        $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
+        // $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
 
         $animal->arrived_at = $arrivalDateTime;
-        $animal->scheduled_at = $slaughterDateTime;
+        // $animal->scheduled_at = $slaughterDateTime;
 
 
         $animal->save();
@@ -143,11 +208,26 @@ class AdminController extends Controller
         return redirect()->route('admin.approve.list')->with('success', 'Animal scheduled successfully.');
     }
 
+
+
+
+
     public function ShowScheduleList()
     {
-        $animal = Animal::wherenotnull('scheduled_at')
+        $animal = Animal::where('status', 'for slaughter')->where('scheduled_at', '=', null)
             ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));
+    }
+
+
+
+
+
+    public function ShowSlaughteredList()
+    {
+        $animal = Animal::where('status', 'slaughtered')->get();
+
+        return view('admin.admin-slaughter-list', compact('animal'));
     }
 }

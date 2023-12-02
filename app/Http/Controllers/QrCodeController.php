@@ -50,6 +50,6 @@ class QrCodeController extends Controller
 
         // Optionally, return a response or redirect as needed
         // For example: return response()->json(['message' => 'QR code generated successfully']);
-        return redirect()->route('admin.schedule.list');
+        return redirect()->back()->with('success', 'Qr Code added successfully');
     }
 }

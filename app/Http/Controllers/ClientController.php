@@ -52,6 +52,7 @@ class ClientController extends Controller
 
 
 
+
     public function ShowRegistrationFormClient($id)
     {
         $animal = Animal::with('user')->find($id);
@@ -146,16 +147,20 @@ class ClientController extends Controller
             'liveWeight' => 'required',
             'drawingData' => 'required',
             'certOwnership' => 'required',
-            'certTransfer'  => 'required',
+            'certTransfer'  => '',
         ]);
 
-        // Decode and save the Certificate of Ownership image
-        // Save the Certificate of Ownership image file
         $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
         $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
 
-        $imageCertTransName = time() . '_' . uniqid() . '.png';
-        $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransName);
+        // Initialize certTransfer variable
+        $imageCertTransferName = null;
+
+        // Handle 'certTransfer' file upload if provided
+        if ($request->has('certTransfer') && $request->file('certTransfer') != null) {
+            $imageCertTransferName = time() . '_' . uniqid() . '.png';
+            $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransferName);
+        }
 
         // Decode and save the marked animal image
         $imageData = base64_decode(substr($request->drawingData, strpos($request->drawingData, ',') + 1));
@@ -174,14 +179,13 @@ class ClientController extends Controller
         $animal->live_weight = $request->liveWeight;
         $animal->animal_mark = $imageName;
         $animal->cert_ownership = $imageCertOwnershipName;
-        $animal->cert_transfer = $imageCertTransName;
+        $animal->cert_transfer = $imageCertTransferName;
         // Save the Animal instance to the database
         $animal->save();
 
         // Redirect to the specified route
         return redirect()->route('client.animal.list.register');
     }
-
 
 
     public function ShowDrafts()
@@ -195,8 +199,9 @@ class ClientController extends Controller
 
     public function ShowEditFormClient($id)
     {
+        $formValue = FormMaintenance::all();
         $animal = Animal::with('user')->find($id);
-        return view('client.client-edit-form', compact('animal'));
+        return view('client.client-edit-form', compact('animal', 'formValue'));
     }
 
 
@@ -204,6 +209,8 @@ class ClientController extends Controller
 
     public function updateAnimalForm(Request $request, $id)
     {
+
+
         $request->validate([
             'kindOfAnimal' => 'required',
             'butcher' => 'required',

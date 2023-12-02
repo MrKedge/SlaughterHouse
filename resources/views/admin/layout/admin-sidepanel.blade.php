@@ -2,8 +2,8 @@
     {{-- side panel --}}
 
 
-    <div class="flex p-3">
-        <ul class="pt-[70px] grid grid-flow-row space-y-2 w-full">
+    <div class="flex p-3 pt-[50px]">
+        <ul class=" grid grid-flow-row space-y-2 w-full">
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
@@ -58,10 +58,14 @@
                         style='color:#ffffff'></i>
                 </button>
 
-                <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0">
-                    <ul class="py-2">
+                <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0 ">
+                    <ul class="">
                         <li><a href="{{ route('admin.approve.list') }}">
                                 <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">APPROVE</h1>
+                            </a>
+                        </li>
+                        <li><a href="{{ route('admin.monitor.list') }}">
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">ANTE MORTEM</h1>
                             </a>
                         </li>
                         <li><a href="{{ route('admin.schedule.list') }}">
@@ -74,6 +78,21 @@
                         </li>
                     </ul>
                 </div>
+
+            </li>
+
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <div>
+                    <div class="flex items-center"><i class='bx bxs-edit' style='font-size: 24px; color: #ffffff;'></i>
+                    </div>
+
+
+                </div>
+
+                <a href="{{ route('admin.slaughter.list') }}">
+                    <h1 class="panel-text flex items-center">SLAUGHTERED</h1>
+                </a>
 
             </li>
 
@@ -103,7 +122,7 @@
                 </div>
 
                 <a href="{{ route('admin.form.maintenance') }}">
-                    <h1 class="panel-text flex items-center">MAINTENANCE</h1>
+                    <h1 class="panel-text flex items-center">MAINTENANANCE</h1>
                 </a>
 
             </li>
@@ -189,7 +208,7 @@
         dropdownTriggers.forEach((trigger, index) => {
             trigger.addEventListener('click', function() {
                 // Toggle the open/closed state
-                const isOpen = dropdownContents[index].classList.toggle('max-h-40');
+                const isOpen = dropdownContents[index].classList.toggle('max-h-44');
 
                 // Toggle additional classes based on the open/closed state
                 dropdownContents[index].classList.toggle('opacity-100', isOpen);

@@ -72,6 +72,8 @@
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Time of
                                             Slaughter
                                         </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Slaughtered Time
+                                        </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
                                         </th>
                                     </tr>
@@ -102,6 +104,9 @@
                                                 </td>
                                                 <td class="py-4 border-b border-black">
                                                     {{ $animals->scheduled_at }}
+                                                </td>
+                                                <td class="py-4 border-b border-black">
+                                                    {{ $animals->slaughtered_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
                                                     <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"

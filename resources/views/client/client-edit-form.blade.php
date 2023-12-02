@@ -61,15 +61,31 @@
                                 <div class="grid grid-flow-row md:grid-flow-col md:gap-10">{{-- document info --}}
                                     <div>
                                         <h1 class="font-bold pointer-events-none text-lg italic">Documents</h1>
-                                        <label class="block pb-1 pt-3" for="">Certificate of Ownership:</label>
-                                        <input type="file" name="certOfOwner" id="fileToUpload" class="">
+
+                                        <p class="block pb-1 pt-3">Certificate of Ownership:</p>
+
+                                        <label for="certOwnershipInput"
+                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                                    style='font-size: 2em;'></i> Add image</span>
+                                            <input id="certOwnershipInput" name="certOwnership" accept="image/*"
+                                                type="file" class="hidden">
+                                        </label>
+
                                     </div>
 
                                     <div>
-                                        <h1 class="font-bold opacity-0 text-lg">Documents</h1>
-                                        <label class="block pb-1 pt-3" for="">Cert. of Transfer of Large
-                                            Cattle:</label>
-                                        <input type="file" name="certOfTransfer" id="fileToUpload" class="">
+                                        <h1 class="font-bold pointer-events-none text-lg italic opacity-0">Documents
+                                        </h1>
+
+                                        <p class="block pb-1 pt-3">Cert. of Transfer of Large Cattle:</p>
+                                        <label for="certTransferInput"
+                                            class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                            <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                                    style='font-size: 2em;'></i> Add image</span>
+                                            <input id="certTransferInput" name="certTransfer" accept="image/*"
+                                                type="file" class="hidden">
+                                        </label>
                                     </div>
                                 </div>
 
@@ -83,22 +99,35 @@
                                             <select name="kindOfAnimal" id="typeOfAnimal" required
                                                 class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->type }}">{{ $animal->type }}</option>
-                                                <option value="cow">Cow</option>
-                                                <option value="goat">Goat</option>
-                                                <option value="horse">Horse</option>
-                                                <option value="swine">Swine</option>
-                                                <option value="carabao">Carabao</option>
+                                                @foreach ($formValue as $animals)
+                                                    @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
+                                                        <option value="{{ $animals->animal_type }}">
+                                                            {{ $animals->animal_type }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
                                         <div class="flex gap-8">
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Gender:</label>
-                                                <select name="gender" id="" required
-                                                    class=" border-2 border-black rounded-md p-2 w-full">
-                                                    <option value="{{ $animal->gender }}">{{ $animal->gender }}</option>
-                                                    <option value="male">Male</option>
-                                                    <option value="female">Female</option>
-                                                </select>
+                                                <div class="">
+                                                    <div>
+                                                        <input type="radio" id="male" name="gender"
+                                                            value="male"
+                                                            class="border-2 border-black rounded-md p-2 inline-block"
+                                                            required {{ $animal->gender == 'male' ? 'checked' : '' }}>
+                                                        <label for="male"
+                                                            {{ $animal->gender == 'female' ? 'checked' : '' }}>Male</label>
+                                                    </div>
+
+                                                    <div>
+                                                        <input type="radio" id="female" name="gender"
+                                                            value="female" class="border-2 border-black rounded-md p-2"
+                                                            required>
+                                                        <label for="female">Female</label>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div>
                                                 <label class="block pb-1 pt-3" for="">Age: (Months)</label>
@@ -122,13 +151,13 @@
                                                 class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->destination }}">{{ $animal->destination }}
                                                 </option>
-                                                <option value="wet market">Wet Market</option>
-                                                <option value="meat shops">Meat Shops</option>
-                                                <option value="meat cutting">Meat Cutting</option>
-                                                <option value="hotel and restaurants">Hotel and Restaurants</option>
-                                                <option value="super market">Super Market</option>
-                                                <option value="meat processing plant">Meat Processing Plant</option>
-                                                <option value="cold storage">Cold Storage</option>
+                                                @foreach ($formValue as $animals)
+                                                    @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
+                                                        <option value="{{ $animals->animal_destination }}">
+                                                            {{ $animals->animal_destination }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
 
@@ -142,10 +171,13 @@
                                                 class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->butcher }}">{{ $animal->butcher }}
                                                 </option>
-                                                <option value="butcher1">butcher1</option>
-                                                <option value="butcher2">butcher2</option>
-                                                <option value="butcher3">butcher3</option>
-                                                <option value="private">PRIVATE</option>
+                                                @foreach ($formValue as $animals)
+                                                    @if (!is_null($animals->animal_butcher) && $animals->animal_butcher !== '')
+                                                        <option value="{{ $animals->animal_butcher }}">
+                                                            {{ $animals->animal_butcher }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
 
                                             </select>
                                         </div>
@@ -156,9 +188,13 @@
                                                 class=" border-2 border-black rounded-md p-2 w-full">
                                                 <option value="{{ $animal->age_classify }}">
                                                     {{ $animal->age_classify }}</option>
-                                                <option value="fattener">Fattener</option>
-                                                <option value="grower">Grower</option>
-                                                <option value="culled sow/boar">Culled sow/boar</option>
+                                                @foreach ($formValue as $animals)
+                                                    @if (!is_null($animals->animal_ageclassify) && $animals->animal_ageclassify !== '')
+                                                        <option value="{{ $animals->animal_type }}">
+                                                            {{ $animals->animal_ageclassify }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
                                             </select>
                                         </div>
 
