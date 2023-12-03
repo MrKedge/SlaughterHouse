@@ -18,7 +18,6 @@ class QrCodeController extends Controller
     {
         $animal = Animal::find($id);
 
-
         if (!$animal) {
             return response()->json(['error' => 'Animal not found'], 404);
         }
@@ -34,26 +33,31 @@ class QrCodeController extends Controller
             'foregroundColor' => '#000000',
         ]);
 
-        // Generate QR code as an image resource
+
         $qrcode = new QRCode($options);
+        $qrCodeImage = $qrcode->render($animal->id);
 
-        $url = route('scan-animal-qr', ['id' => $animal->id]);
-        $qrCodeImage = $qrcode->render($url);
 
-        // Save the QR code image to the public storage
         $qrName = 'animal_QRcode_' . $animal->id . time() . '.png';
         $qrPath = 'public/qr-code/' . $qrName;
 
         Storage::put($qrPath, $qrCodeImage);
 
-        // Store the image name in the database
+
         $animal->qr_code = $qrName;
         $animal->save();
 
-        // Optionally, return a response or redirect as needed
-        // For example: return response()->json(['message' => 'QR code generated successfully']);
+
+
         return redirect()->back()->with('success', 'Qr Code added successfully');
     }
+
+
+    // public function ShowScannedAnimal($id)
+    // {
+    //     $animal = Animal::with('user')->find($id);
+    //     retur
+    // }
 
     // public function DownloadQR($id)
     // {
@@ -71,7 +75,5 @@ class QrCodeController extends Controller
     //     return redirect('/myapplication/show-submit');
     // }
 
-    public function Scanner()
-    {
-    }
+
 }

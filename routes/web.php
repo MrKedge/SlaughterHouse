@@ -26,6 +26,10 @@ Route::get('/', function () {
     return view('auth.log-in');
 });
 
+Route::get('/qr-code-scanner', function () {
+    return view('scan-qr-code');
+})->name('scan.qr');
+
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
 Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign.up');
 Route::get('/log-out', [AuthController::class, 'LogOut'])->name('log-out');
@@ -45,7 +49,7 @@ Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
 Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
-Route::get('/animal-form/{id}', 'AnimalController@showAnimalForm')->name('animal-form');
+
 //admin pages
 
 

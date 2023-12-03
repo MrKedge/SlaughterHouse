@@ -193,8 +193,22 @@
                 </a>
 
             </li>
-        </ul>
 
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <div>
+                    <div class="flex items-center"><i class='bx bx-scan text-[24px] font-medium'></i>
+                    </div>
+
+
+                </div>
+
+                <a href="{{ route('scan.qr') }}">
+                    <h1>SCAN QR</h1>
+                </a>
+
+            </li>
+        </ul>
     </div>
 
 

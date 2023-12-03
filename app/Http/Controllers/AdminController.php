@@ -237,4 +237,11 @@ class AdminController extends Controller
 
         return view('admin.admin-slaughter-list', compact('animal'));
     }
+
+
+
+    public function AdminScanner()
+    {
+        
+    }
 }

@@ -1,137 +1,85 @@
-<body class="bg-custom-admin-bg min-h-screen">
+<!DOCTYPE html>
+<html lang="en">
+
+@include('layout.html-head', ['pageTitle' => 'Scan Animal QR'])
 
 
-    @include('admin.layout.dashboard-nav')
+<style>
+    .scanner-container {
+        position: relative;
+        width: 700px;
+        /* Adjust the width as needed */
+        height: 500px;
+        /* Adjust the height as needed */
+    }
 
-    <section class="main home transition-all duration-300 ease-in">
+    .moving-line {
+        height: 5px;
+        background-color: #4b4b4b;
 
-        @include('admin.layout.dashboard-header-v2', ['title' => 'User Management'])
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        width: calc(100% + 40px);
+        /* Adjust the width as needed */
+        margin-left: -20px;
+        /* Half of the added width to center it */
+        animation: moveLine 3s infinite;
+    }
 
-        <div class="w-9/12 mx-auto text-center my-4 bg-white shadow-md rounded-20">
-            <button onclick="startScan()"
-                class="w-6/12 mx-auto font-poppins text-2xl text-white bg-custom-blue mt-8 py-2 border-none rounded-md">Scan</button>
-            <h1 class="text-2xl my-4 font-poppins font-semibold">QR Code Scanner</h1>
-            <div id="myElement" class="mt-8 opacity-0 text-xl text-green-500 font-medium"></div>
+    @keyframes moveLine {
 
-            <div class="relative ">
-                <video id="scanner-video" class="w-[640px] h-[480px] mx-auto text-center mb-4"
-                    style="object-fit: cover;"></video>
-                <div id="guide" class="opacity-0 absolute inset-0 flex items-center justify-center">
-                    <div class="w-48 h-48 border-4 border-dashed border-white rounded-lg"></div>
-                </div>
+        0%,
+        100% {
+            transform: translateY(-50%) translateY(-200px);
+            /* Half of the vertical movement (400px) */
+        }
+
+        50% {
+            transform: translateY(-50%) translateY(200px);
+            /* Half of the vertical movement (400px) */
+        }
+    }
+</style>
+
+<body class="bg-[#D5DFE8]">
+    <div class="min-h-screen">
+        @include('client.layout.client-header')
+        <div class="flex h-screen justify-center items-center">
+            <div class="scanner-container">
+                <video id="preview" class="w-full h-full"></video>
+                <div class="moving-line"></div>
             </div>
-            <button id="stopbtn" onclick="stopScan()"
-                class="w-6/12 opacity-0 mx-auto font-poppins text-2xl text-white bg-custom-red mt-4 py-2 border-none rounded-md">Stop</button>
-
         </div>
+        <script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
-    </section>
+    </div>
+
+
     <script>
-        const videoElement = document.getElementById('scanner-video');
-        const codeReader = new ZXing.BrowserMultiFormatReader();
-        let isScanning = false; // Track the scanning state
-        const guideElement = document.getElementById('guide'); // Get the guide element
-        const stopBtn = document.getElementById('stopbtn'); // Get the guide element
+        let scanner = new Instascan.Scanner({
+            video: document.getElementById('preview')
+        });
 
-        function startScan() {
-            if (!isScanning) {
+        scanner.addListener('scan', function(content) {
 
-                stopBtn.classList.add('opacity-100');
-                stopBtn.classList.remove('opacity-0');
-                codeReader.listVideoInputDevices()
-                    .then(videoInputDevices => {
-                        let selectedDeviceId;
+            let decodedContent = decodeURIComponent(content);
+            window.location.href = '/admin/view/animal/reg/form/' + decodedContent;
+        });
 
-                        if (videoInputDevices.length > 1) {
-                            // If multiple video input devices are available, prompt the user to select one
-                            selectedDeviceId = prompt('Select video input device:', videoInputDevices[0].deviceId);
-                        } else {
-                            selectedDeviceId = videoInputDevices[0].deviceId;
-                        }
-
-                        // Start the video stream with the selected device
-                        codeReader.decodeFromVideoDevice(selectedDeviceId, videoElement, (result, err) => {
-                            if (result) {
-                                const qrCodeData = result.text;
-                                handleQRCode(qrCodeData);
-                                stopScan(); // Turn off scanning after successful scan
-
-                            }
-                            if (err && !(err instanceof ZXing.NotFoundException)) {
-                                console.error(err);
-                            }
-                        });
-                    })
-                    .catch(err => {
-                        console.error(err);
-                    });
-
-                isScanning = true; // Set scanning state to true
-                guideElement.classList.add('opacity-100');
-                guideElement.classList.remove('opacity-0');
+        Instascan.Camera.getCameras().then(function(cameras) {
+            if (cameras.length > 0) {
+                scanner.start(cameras[0]);
+            } else {
+                console.error('No cameras found.');
             }
-        }
-
-        function stopScan() {
-            codeReader.reset(); // Reset the code reader
-            isScanning = false; // Set scanning state to false
-            guideElement.classList.remove('opacity-100');
-            guideElement.classList.add('opacity-0');
-            stopBtn.classList.remove('opacity-100');
-            stopBtn.classList.add('opacity-0');
-        }
-
-        function handleQRCode(qrCodeData) {
-            // Send the QR code data to the server to update the status
-            fetch('/admin/dashboard/update-status', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    },
-                    body: JSON.stringify({
-                        application_id: qrCodeData
-                    }),
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    } else {
-                        throw new Error('Network response was not OK.');
-                    }
-                })
-                .then(data => {
-                    if (data.status === 'success') {
-                        if (data.isAlreadyUsed) {
-                            document.getElementById('myElement').innerHTML = "Permit already used!";
-                        } else {
-                            document.getElementById('myElement').innerHTML = "Successfully Used a permit!";
-                        }
-                        document.getElementById('myElement').classList.add('opacity-100');
-                        document.getElementById('myElement').classList.remove('opacity-0');
-                    } else {
-                        document.getElementById('myElement').innerHTML = "Failed to update permit status.";
-                        document.getElementById('myElement').classList.add('opacity-100');
-                        document.getElementById('myElement').classList.remove('opacity-0');
-                    }
-                })
-                .catch(error => {
-                    console.error(error);
-                    document.getElementById('myElement').innerHTML = "An error occurred while updating permit status.";
-                    document.getElementById('myElement').classList.add('opacity-100');
-                    document.getElementById('myElement').classList.remove('opacity-0');
-                });
-        }
+        }).catch(function(e) {
+            console.error(e);
+        });
     </script>
 
-
-
-
-
-    @include('admin.layout.admin-script')
-
-
-
-
-
 </body>
+</body>
+
+</html>
