@@ -75,12 +75,12 @@
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
                         class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80 ">For Inspection</h1>
+                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80 ">Post Mortem</h1>
                         <div class="scrollbar-gutter overflow-y-auto h-[440px]">
                             <table class="w-full text-center">
                                 <thead>
                                     <tr>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">No.</th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">ID</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner
                                         </th>
@@ -88,7 +88,7 @@
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butcher
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
                                         </th>
                                     </tr>
                                 </thead>
@@ -123,7 +123,10 @@
                                                     {{ $animals->status }}
                                                 </td>
                                                 <td class="py-4 border-b border-black capitalize">
-                                                    {{ $animals->butcher }}
+                                                    <a href="{{ route('inspector.view.form', ['id' => $animals->id]) }}"
+                                                        class="px-2 bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-1">
+                                                        View
+                                                    </a>
                                                 </td>
                                             </tr>
                                             @php $index++ @endphp

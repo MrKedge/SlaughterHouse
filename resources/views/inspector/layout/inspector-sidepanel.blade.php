@@ -27,10 +27,10 @@
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
-                <a href="">
+                <a href="{{ route('scan.qr') }}">
                     <div class="flex items-center panel-text gap-2"><i class='bx bx-scan'
                             style='font-size: 24px; color: white;'></i><span
-                            class=" flex items-center whitespace-nowrap">SCAN ANIMAL</span>
+                            class=" flex items-center whitespace-nowrap">SCAN QR</span>
                     </div>
                 </a>
             </li>

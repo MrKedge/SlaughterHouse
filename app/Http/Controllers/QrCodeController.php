@@ -22,7 +22,6 @@ class QrCodeController extends Controller
             return response()->json(['error' => 'Animal not found'], 404);
         }
 
-        // Configuration options for QR code generation
         $options = new QROptions([
             'version'         => 5,
             'outputType'      => QRCode::OUTPUT_IMAGE_PNG,
@@ -51,29 +50,4 @@ class QrCodeController extends Controller
 
         return redirect()->back()->with('success', 'Qr Code added successfully');
     }
-
-
-    // public function ShowScannedAnimal($id)
-    // {
-    //     $animal = Animal::with('user')->find($id);
-    //     retur
-    // }
-
-    // public function DownloadQR($id)
-    // {
-    //     $applicationForm = ApplicationForm::findOrFail($id);
-    //     $filePath = $applicationForm->qr_code;
-    //     $absoluteFilePath = storage_path('app/public/' . $filePath);
-
-    //     if (file_exists($absoluteFilePath)) {
-    //         return response()->download($absoluteFilePath, $applicationForm->qr_code_name);
-    //     } else {
-    //         abort(404, 'File not found');
-    //     }
-
-
-    //     return redirect('/myapplication/show-submit');
-    // }
-
-
 }

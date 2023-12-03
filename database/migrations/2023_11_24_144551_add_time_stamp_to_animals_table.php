@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('animals', function (Blueprint $table) {
+            $table->timestamp('inspected_at')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->timestamp('scheduled_at')->nullable();
             $table->timestamp('slaughtered_at')->nullable();
@@ -25,6 +26,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('animals', function (Blueprint $table) {
+            $table->dropColumn('inspected_at');
             $table->dropColumn('approved_at');
             $table->dropColumn('scheduled_at');
             $table->dropColumn('slaughtered_at');

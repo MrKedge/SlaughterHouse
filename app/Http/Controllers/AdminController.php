@@ -7,6 +7,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules\Can;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ApproveMail;
+use App\Mail\RejectMail;
 
 class AdminController extends Controller
 {
@@ -87,14 +90,29 @@ class AdminController extends Controller
     public function ApproveAnimalRegistration($id)      //for approving the animal registration form//----------------------
     {
 
-        $animal = Animal::where('status', 'pending')->find($id);
+
+        $animal = Animal::with('user')->where('status', 'pending')->find($id);
+
+        if (!$animal) {
+            return redirect()->route('admin.view.animal.reg.list')->with('error', 'Animal not found or already approved.');
+        }
 
 
-        // Update the status to 'approved' or perform any other necessary actions
         $animal->status = 'approved';
         $animal->approved_at = now();
         $animal->save();
-        return redirect()->route('admin.view.animal.reg.list', ['id' => $id]);
+
+
+        $userEmail = $animal->user->email;
+
+        if ($userEmail) {
+            Mail::to($userEmail)->send(new ApproveMail($animal->type, $animal->status, $animal->id));
+        } else {
+
+            // 
+        }
+
+        return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal registration approved successfully.');
     }
 
 
@@ -104,23 +122,36 @@ class AdminController extends Controller
     public function RejectAnimalRegistration(Request $request, $id)
     {
         $request->validate([
-            'remarks' => 'nullable|string|max:40', // Adjust validation rules as needed
+            'remarks' => 'nullable|string|max:40',
         ]);
 
-        $animal = Animal::where('status', 'pending')->find($id);
+
+        $animal = Animal::with('user')->where('status', 'pending')->find($id);
+
 
         if (!$animal) {
-            // Handle the case where the animal with the given ID and 'pending' status is not found
             return redirect()->route('admin.view.animal.reg.list')->with('error', 'Animal not found or not pending.');
         }
 
-        // Update the status
+
         $animal->status = 'rejected';
 
-        // Add remarks if provided
+
         $animal->remarks = $request->input('remarks');
 
+
         $animal->save();
+
+
+        $userEmail = $animal->user->email;
+
+        if ($userEmail) {
+            Mail::to($userEmail)->send(new RejectMail($animal->type, $animal->status, $animal->id, $animal->remarks));
+        } else {
+
+            //
+        }
+
 
         return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal registration rejected successfully.');
     }
@@ -242,6 +273,5 @@ class AdminController extends Controller
 
     public function AdminScanner()
     {
-        
     }
 }

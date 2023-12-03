@@ -30,7 +30,36 @@ class InspectorController extends Controller
         $animal = Animal::with('user')
             ->where('status', 'slaughtered')
             ->get();
-
         return view('inspector.inspector-animal-list', compact('animal'));
+    }
+
+
+
+    public function ShowInspectorForm($id)
+    {
+        $animal = Animal::with('user')->where('status', 'slaughtered')->find($id);
+        $user = User::findOrFail($animal->user_id);
+        return view('inspector.inspector-view-form', compact('animal', 'user'));
+    }
+
+
+
+
+    public function PostMortemGood($id)
+    {
+        $animal = Animal::with('user')
+            ->where('status', 'slaughtered')
+            ->find($id);
+        $animal->post_mortem = 'Good';
+        $animal->inspected_at = now();
+        $animal->save();
+
+        return redirect()->route('inspector.animal.list')->with('success', 'Animal has been moved to monitoring facility');
+    }
+
+
+
+    public function PostMortemCondemn()
+    {
     }
 }

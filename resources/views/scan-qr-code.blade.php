@@ -54,31 +54,45 @@
         </div>
         <script src="https://cdn.rawgit.com/schmich/instascan-builds/master/instascan.min.js"></script>
 
-    </div>
+        <script>
+            let scanner = new Instascan.Scanner({
+                video: document.getElementById('preview')
+            });
 
+            let userRole = "{{ auth()->user()->role }}"; // Assuming you have a role attribute in your user model
 
-    <script>
-        let scanner = new Instascan.Scanner({
-            video: document.getElementById('preview')
-        });
-
-        scanner.addListener('scan', function(content) {
-
-            let decodedContent = decodeURIComponent(content);
-            window.location.href = '/admin/view/animal/reg/form/' + decodedContent;
-        });
-
-        Instascan.Camera.getCameras().then(function(cameras) {
-            if (cameras.length > 0) {
-                scanner.start(cameras[0]);
-            } else {
-                console.error('No cameras found.');
+            if (userRole === 'admin') {
+                scanner.addListener('scan', function(content) {
+                    let decodedContent = decodeURIComponent(content);
+                    window.location.href = '/admin/view/animal/reg/form/' + decodedContent;
+                });
+            } else if (userRole === 'butcher') {
+                scanner.addListener('scan', function(content) {
+                    let decodedContent = decodeURIComponent(content);
+                    window.location.href = '/butcher/view/form/' + decodedContent;
+                });
+            } else if (userRole === 'inspector') {
+                scanner.addListener('scan', function(content) {
+                    let decodedContent = decodeURIComponent(content);
+                    window.location.href = '/inspector/view/animal/reg/form/' + decodedContent;
+                });
+            } else if (userRole === 'client') {
+                scanner.addListener('scan', function(content) {
+                    let decodedContent = decodeURIComponent(content);
+                    window.location.href = '/client/view/animal/form/' + decodedContent;
+                });
             }
-        }).catch(function(e) {
-            console.error(e);
-        });
-    </script>
 
+            Instascan.Camera.getCameras().then(function(cameras) {
+                if (cameras.length > 0) {
+                    scanner.start(cameras[0]);
+                } else {
+                    console.error('No cameras found.');
+                }
+            }).catch(function(e) {
+                console.error(e);
+            });
+        </script>
 </body>
 </body>
 

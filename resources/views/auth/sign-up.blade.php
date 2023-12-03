@@ -39,7 +39,6 @@
                             </option>
                             <option class="text-black" value="client">Client</option>
                             <option class="text-black" value="admin">Admin</option>
-                            <option class="text-black" value="abbatoir">Abbatoir</option>
                             <option class="text-black" value="inspector">Inspector</option>
                             <option class="text-black" value="butcher">Butcher</option>
                         </select>

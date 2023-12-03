@@ -81,7 +81,7 @@
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
                         class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">For Slaughter</h1>
+                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">Public Butcher Animals</h1>
                         <div class="scrollbar-gutter overflow-y-auto h-[420px]">
                             <table class="w-full text-center">
                                 <thead>
@@ -107,7 +107,7 @@
                                     @endphp
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="py-4 border-b border-black text-center">
+                                            <td colspan="6" class="py-4 border-b border-black text-center h-[400px]">
                                                 <h1 class="font-bold italic pb-3">No For Slaughter Animal</h1>
 
                                             </td>
@@ -115,7 +115,7 @@
                                     @else
                                         @foreach ($animal as $animals)
                                             <tr
-                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
+                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black ">
                                                 <td class="py-4 border-b border-black">{{ $index }}.</td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
                                                     {{ $animals->type }}

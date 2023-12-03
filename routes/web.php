@@ -10,6 +10,7 @@ use App\Http\Controllers\QrCodeController;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use NunoMaduro\Collision\Adapters\Laravel\Inspector;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +50,7 @@ Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
 Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
-
+Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 //admin pages
 
 
@@ -92,3 +93,4 @@ Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'Slaug
 //inspector
 Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
 Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
+Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
