@@ -72,7 +72,11 @@ class AuthController extends Controller
                 // Redirect client to client overview
                 return redirect()->route('client.overview');
             } elseif ($user->role === 'butcher') {
+
                 return redirect()->route('butcher.overview');
+            } elseif ($user->role === 'inspector') {
+
+                return redirect()->route('inspector.overview');
             }
         }
         return redirect()->route('log.in')->with('error', 'Invalid email or password');

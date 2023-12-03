@@ -1,28 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Butcher Overview'])
+@include('layout.html-head', ['pageTitle' => 'Inspector Overview'])
 
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-@include('layout.html-head', ['pageTitle' => 'Butcher Overview'])
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
     <div class="min-h-screen">{{-- wrapperr --}}
 
         {{-- header --}}
-        <div class="z-50"> @include('butcher.layout.butcher-header')</div>
+        <div class="z-50"> @include('inspector.layout.inspector-header')</div>
         {{-- header --}}
 
 
         <div class="flex">
 
 
-            <div class="inline-block z-40"> @include('butcher.layout.butcher-panel')</div>
+            <div class="inline-block z-40"> @include('inspector.layout.inspector-sidepanel')</div>
 
 
             {{-- main content --}}
@@ -81,8 +75,8 @@
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
                         class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">For Slaughter</h1>
-                        <div class="scrollbar-gutter overflow-y-auto h-[420px]">
+                        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80 ">For Inspection</h1>
+                        <div class="scrollbar-gutter overflow-y-auto h-[440px]">
                             <table class="w-full text-center">
                                 <thead>
                                     <tr>
@@ -90,8 +84,7 @@
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Time of
-                                            Slaughter
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Slaughtered at
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                         </th>
@@ -107,8 +100,8 @@
                                     @endphp
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="py-4 border-b border-black text-center">
-                                                <h1 class="font-bold italic pb-3">No For Slaughter Animal</h1>
+                                            <td colspan="6" class="py-4 border-b border-black text-center h-[405px]">
+                                                <h1 class="font-bold italic pb-3">No For Inspection Animal</h1>
 
                                             </td>
                                         </tr>
@@ -124,7 +117,7 @@
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
-                                                    {{ $animals->scheduled_at }}
+                                                    {{ $animals->slaughtered_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase ">
                                                     {{ $animals->status }}
@@ -145,7 +138,8 @@
         </div>
 
     </div>
-</body>
 
+
+</body>
 
 </html>

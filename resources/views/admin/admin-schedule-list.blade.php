@@ -88,18 +88,18 @@
                                 <thead class="">
                                     <tr>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                            Id
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Owner
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Time of Arrival
+                                            Status
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Time of Slaughter
-                                        </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Permit To Slaughter
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Action
@@ -120,6 +120,9 @@
                                         @foreach ($animal as $animals)
                                             <tr
                                                 class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
+                                                <td class="py-4 border-b border-black uppercase font-semibold">
+                                                    {{ $animals->id }}
+                                                </td>
                                                 <td class="py-4 border-b border-black capitalize font-semibold">
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
@@ -127,13 +130,10 @@
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->arrived_at }}
+                                                    {{ $animals->status }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     {{ $animals->scheduled_at }}
-                                                </td>
-                                                <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    <img src="" alt="permit image">
                                                 </td>
                                                 <td class="border-b border-black font-semibold capitalize">
                                                     <div class="flex justify-center gap-3">

@@ -194,15 +194,11 @@
 
                             <div class="flex gap-3 my-10 pr-10 justify-end">
                                 @if ($animal->status === 'inspection')
-                                    <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
-                                        method="post">
-                                        @csrf
-                                        <button type="submit"
-                                            class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                            <span>For Slaughter</span>
+                                    <button id="toggle-schedule"
+                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                        <span>For Slaughter</span>
+                                    </button>
 
-                                        </button>
-                                    </form>
                                     <form action="{{ route('dispose.animal', ['id' => $animal->id]) }}" method="post">
                                         @csrf
                                         <button type="submit"
@@ -255,6 +251,33 @@
                 </div>
             </div>
         </div>
+
+        <nav id="schedule-nav"
+            class="bg-white fixed h-auto px-6 pb-6 rounded-md hidden text-[#293241] top-1/3  right-1/3  shadow-2xl">
+
+            <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}" method="post"
+                class="space-y-4">
+                @csrf
+                <div class="pb-3">
+                    <label class="font-bold text-xl">Time of Slaughter</label>
+                    <div class="text-center pt-1">
+                        <input name="dateOfSlaughter" required type="date"
+                            class="p-2 border-2 font-semibold border-gray-800 rounded"
+                            value="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                        <input name="timeOfSlaughter" required type="time"
+                            class="p-2 border-2 font-semibold border-gray-800 rounded" value="04:00">
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <button type="submit"
+                        class="py-2 w-full bg-gray-700 hover:bg-gray-800 text-white font-bold rounded text-center">SET</button>
+                    <a id="close-schedule"
+                        class=" py-2 w-full bg-gray-700 hover:bg-gray-800 text-white font-bold rounded text-center">Back</a>
+                </div>
+            </form>
+        </nav>
+
+
         <nav id="remarks-pop-up"
             class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl">
             <form method="post" action="{{ route('reject.status', ['id' => $animal->id]) }}">
@@ -293,6 +316,21 @@
                 </div>
             </div>
         </nav>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const schedNav = document.getElementById('schedule-nav');
+                const forSlaughterBtn = document.getElementById('toggle-schedule');
+                const closeSched = document.getElementById('close-schedule');
+
+                forSlaughterBtn.addEventListener('click', function() {
+                    schedNav.classList.remove('hidden');
+                });
+
+                closeSched.addEventListener('click', function() {
+                    schedNav.classList.add('hidden');
+                });
+            });
+        </script>
         <script src="{{ asset('js/slaughterhouse.js') }}"></script>
         <script>
             rejectRemark();

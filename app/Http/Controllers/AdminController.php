@@ -149,10 +149,18 @@ class AdminController extends Controller
 
 
 
-    public function ForSlaughterAnimal($id)
+    public function ForSlaughterAnimal(Request $request, $id)
     {
+        $request->validate([
+            'dateOfSlaughter' => 'nullable',
+            'timeOfSlaughter' => 'nullable',
+        ]);
+
         $animal = Animal::where('status', 'inspection')->find($id);
+
+        $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
         $animal->status = 'for slaughter';
+        $animal->scheduled_at = $slaughterDateTime;
         $animal->save();
 
         return redirect()->route('admin.monitor.list')->with('success', 'Animal pass the ante mortem');
@@ -188,8 +196,7 @@ class AdminController extends Controller
         $request->validate([
             'dateOfArrival' => 'nullable',
             'timeOfArrival' => 'nullable',
-            // 'dateOfSlaughter' => 'nullable',
-            // 'timeOfSlaughter' => 'nullable',
+
         ]);
 
         $animal = Animal::where('status', 'approved')->findorfail($id);
@@ -197,10 +204,10 @@ class AdminController extends Controller
 
         $arrivalDateTime = Carbon::parse($request->input('dateOfArrival') . ' ' . $request->input('timeOfArrival'));
 
-        // $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
+
 
         $animal->arrived_at = $arrivalDateTime;
-        // $animal->scheduled_at = $slaughterDateTime;
+
 
 
         $animal->save();
@@ -214,7 +221,7 @@ class AdminController extends Controller
 
     public function ShowScheduleList()
     {
-        $animal = Animal::where('status', 'for slaughter')->where('scheduled_at', '=', null)
+        $animal = Animal::where('status', 'for slaughter')->wherenotnull('scheduled_at')
             ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));

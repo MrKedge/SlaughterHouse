@@ -123,7 +123,7 @@
                                             <h1 class="font-bold text-lg italic">Animal Information</h1>
                                             <label class="block pb-1 pt-3" for="">Animal:</label>
                                             <select name="kindOfAnimal" id="typeOfAnimal" required
-                                                class="border-2 border-black rounded-md w-full p-2">
+                                                class="type-animal border-2 border-black rounded-md w-full p-2">
                                                 <option value="" disabled selected>Select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
@@ -206,7 +206,7 @@
                                         <div class="hidden" id="ageClassifyDiv">
                                             <label for="" class="block pb-1 pt-3">Age Classification:</label>
                                             <select name="ageClassify" id="putAgeClassify"
-                                                class="border-2 border-black rounded-md w-full p-2">
+                                                class="age-classify border-2 border-black rounded-md w-full p-2">
                                                 <option value="" disabled selected>select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_ageclassify) && $animals->animal_ageclassify !== '')

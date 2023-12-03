@@ -9,7 +9,7 @@
 <script>
     // Wait for the DOM to be fully loaded before accessing elements
     document.addEventListener("DOMContentLoaded", function() {
-        var kindAnimal = document.getElementsByName('kindOfAnimal')[0];
+        var kindAnimal = document.getElementsByClassName('type-animal')[0];
         var markDiv = document.getElementById("animal-div");
 
         kindAnimal.addEventListener('change', function() {

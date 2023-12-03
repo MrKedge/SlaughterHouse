@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormMaintenanceController;
+use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\QrCodeController;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -44,8 +45,10 @@ Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
 Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
-
+Route::get('/animal-form/{id}', 'AnimalController@showAnimalForm')->name('animal-form');
 //admin pages
+
+
 Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'ShowAdminDashboardOverview'])->name('admin.dashboard');
     Route::get('/admin/view/animal/reg/form/{id}', [AdminController::class, 'ShowRegistrationForm'])->name('admin.view.animal.reg.form');
@@ -81,3 +84,7 @@ Route::get('/butcher/overview/', [ButcherController::class, 'ShowButcherOverview
 Route::get('/butcher/animals/', [ButcherController::class, 'ShowButcherAnimal'])->name('butcher.animal');
 Route::get('/butcher/view/form/{id}', [ButcherController::class, 'ShowButcherForm'])->name('butcher.view.form');
 Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');
+
+//inspector
+Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
+Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');

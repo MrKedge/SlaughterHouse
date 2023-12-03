@@ -13,8 +13,8 @@
                 Add Animal</div>
         </a>
     </div>
-    <div class="flex">
-        <ul class="pt-[20px] grid grid-flow-row w-full px-2 space-y-5">
+    <div class="scrollbar-gutter flex">
+        <ul class="pt-[20px] grid grid-flow-row w-full px-2 space-y-5 ">
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
                 <a href="{{ route('client.overview') }}">

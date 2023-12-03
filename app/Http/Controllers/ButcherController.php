@@ -16,8 +16,8 @@ class ButcherController extends Controller
             ->where('status', 'for slaughter')
             ->get();
         $recent = Animal::where('status', 'slaughtered')
-            ->where('created_at', '>=', Carbon::now()->subHours(12))
-            ->latest('created_at')
+            ->where('slaughtered_at', '>=', Carbon::now()->subHours(12))
+            ->latest('slaughtered_at')
             ->limit(5)
             ->get();
         return view('butcher.butcher-overview', compact('animal', 'recent'));

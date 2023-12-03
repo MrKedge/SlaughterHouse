@@ -64,10 +64,12 @@
                             <table class="w-full text-center">
                                 <thead>
                                     <tr>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">No.</th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Id</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Approved Time
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
                                         </th>
@@ -90,12 +92,15 @@
                                         @foreach ($animal as $animals)
                                             <tr
                                                 class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
-                                                <td class="py-4 border-b border-black">{{ $index }}.</td>
+                                                <td class="py-4 border-b border-black">{{ $animals->id }}</td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
                                                     {{ $animals->approved_at }}
+                                                </td>
+                                                <td class="py-4 border-b border-black capitalize font-medium">
+                                                    {{ $animals->status }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
                                                     <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"

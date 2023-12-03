@@ -146,7 +146,7 @@
                                                                 method="post">
                                                                 @csrf
                                                                 <button type="submit"
-                                                                    class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
+                                                                    class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
                                                                     <i class='bx bx-qr'
                                                                         style='color: #ffffff; font-size: 28px;'></i>
                                                                 </button>
@@ -211,16 +211,6 @@
                                 value="{{ \Carbon\Carbon::now()->format('H:i') }}">
                         </div>
                     </div>
-                    {{-- <div class="pb-3">
-                        <label class="font-bold text-xl">Time of Slaughter</label>
-                        <div class="text-center pt-1">
-                            <input name="dateOfSlaughter" required type="date"
-                                class="p-2 border-2 font-semibold border-gray-800 rounded"
-                                value="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
-                            <input name="timeOfSlaughter" required type="time"
-                                class="p-2 border-2 font-semibold border-gray-800 rounded" value="04:00">
-                        </div>
-                    </div> --}}
                     <div class="flex gap-4">
                         <button type="submit"
                             class="py-2 w-full bg-gray-700 hover:bg-gray-800 text-white font-bold rounded text-center">SET</button>

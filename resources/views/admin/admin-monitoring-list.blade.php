@@ -121,7 +121,7 @@
 
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="py-4 border-b border-black text-center h-[500px]">
+                                            <td colspan="6" class="py-4 border-b border-black text-center h-[400px]">
                                                 <h1 class="font-semibold italic pb-3">No Animal to Monitor
                                                 </h1>
                                             </td>
