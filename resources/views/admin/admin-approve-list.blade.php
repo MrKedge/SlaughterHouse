@@ -140,15 +140,26 @@
                                                 <td class=" border-b border-black font-semibold capitalize">
 
                                                     <div class="flex justify-center gap-3">
-                                                        @if ($animals->qr_code === null)
+                                                        @if ($animals->qr_code !== null)
                                                             <form
                                                                 action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
                                                                 method="post">
                                                                 @csrf
                                                                 <button type="submit"
                                                                     class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
+                                                                    <i class='bx bx-printer text-[28px] '></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
+                                                        @if ($animals->qr_code === null)
+                                                            <form
+                                                                action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
+                                                                method="post">
+                                                                @csrf
+                                                                <button type="submit"
+                                                                    class="btnForSchedNav text-[] font-bold py-2 px-2 rounded flex items-center">
                                                                     <i class='bx bx-qr'
-                                                                        style='color: #ffffff; font-size: 28px;'></i>
+                                                                        style='color: #293241; font-size: 28px;'></i>
                                                                 </button>
                                                             </form>
                                                         @endif

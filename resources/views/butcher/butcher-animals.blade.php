@@ -71,7 +71,7 @@
                 </section>
 
 
-                <div class="mx-auto w-full mt-1">
+                <div class="mx-auto w-full">
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section

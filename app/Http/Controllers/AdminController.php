@@ -10,6 +10,7 @@ use Illuminate\Validation\Rules\Can;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ApproveMail;
 use App\Mail\RejectMail;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -54,7 +55,6 @@ class AdminController extends Controller
 
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
-        //$users = User::with('animals')->get();
         $animals = Animal::with('user')
             ->where('status', 'pending')
             ->get();
@@ -87,29 +87,34 @@ class AdminController extends Controller
 
 
 
-    public function ApproveAnimalRegistration($id)      //for approving the animal registration form//----------------------
+    public function ApproveAnimalRegistration($id)
     {
-
-
         $animal = Animal::with('user')->where('status', 'pending')->find($id);
 
         if (!$animal) {
             return redirect()->route('admin.view.animal.reg.list')->with('error', 'Animal not found or already approved.');
         }
 
-
         $animal->status = 'approved';
         $animal->approved_at = now();
         $animal->save();
 
-
         $userEmail = $animal->user->email;
 
         if ($userEmail) {
-            Mail::to($userEmail)->send(new ApproveMail($animal->type, $animal->status, $animal->id));
-        } else {
+            try {
+                $mailSent = Mail::to($userEmail)->send(new ApproveMail($animal->type, $animal->status, $animal->id));
 
-            // 
+                if (!$mailSent) {
+                    // Log or handle the email sending failure
+                    Log::error('Email sending failed for animal ID ' . $id);
+                }
+            } catch (\Exception $e) {
+                // Log or handle the exception (e.g., report to developers)
+                Log::error('Email sending failed: ' . $e->getMessage());
+            }
+        } else {
+            // Handle the case where user email is not available
         }
 
         return redirect()->route('admin.view.animal.reg.list')->with('success', 'Animal registration approved successfully.');
@@ -161,7 +166,7 @@ class AdminController extends Controller
     public function AnteMortem()
     {
 
-        $animal = Animal::where('status', 'inspection')->get();
+        $animal = Animal::where('status', 'inspection')->wherenull('scheduled_at')->get();
 
 
         return view('admin.admin-monitoring-list', compact('animal'));
@@ -180,7 +185,8 @@ class AdminController extends Controller
 
 
 
-    public function ForSlaughterAnimal(Request $request, $id)
+
+    public function SetSchedule(Request $request, $id)
     {
         $request->validate([
             'dateOfSlaughter' => 'nullable',
@@ -188,13 +194,28 @@ class AdminController extends Controller
         ]);
 
         $animal = Animal::where('status', 'inspection')->find($id);
-
         $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
-        $animal->status = 'for slaughter';
         $animal->scheduled_at = $slaughterDateTime;
+        $animal->ante_mortem = 'for slaughter';
         $animal->save();
 
-        return redirect()->route('admin.monitor.list')->with('success', 'Animal pass the ante mortem');
+        return redirect()->route('admin.monitor.list')->with('success', 'Set Schedule For Animal');
+    }
+
+
+
+
+    public function ForSlaughterAnimal($id)
+    {
+
+
+        $animal = Animal::where('ante_mortem', 'for slaughter')->find($id);
+
+
+        $animal->status = 'for slaughter';
+        $animal->save();
+
+        return redirect()->route('admin.schedule.list')->with('success', 'Animal is now active for slaughtering');
     }
 
 
@@ -252,7 +273,7 @@ class AdminController extends Controller
 
     public function ShowScheduleList()
     {
-        $animal = Animal::where('status', 'for slaughter')->wherenotnull('scheduled_at')
+        $animal = Animal::where('status', 'inspection')->where('ante_mortem', 'for slaughter')->wherenotnull('scheduled_at')
             ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));

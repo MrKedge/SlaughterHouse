@@ -9,7 +9,7 @@
 
 
         {{-- HEADER --}}
-        @include('butcher.layout.butcher-header')
+        @include('inspector.layout.inspector-header')
         {{-- end header --}}
 
 

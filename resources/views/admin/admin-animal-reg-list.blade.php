@@ -92,8 +92,6 @@
                                                     Name</th>
                                                 <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
                                                 </th>
-                                                <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Address
-                                                </th>
                                                 <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                                 </th>
                                                 <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
@@ -121,9 +119,6 @@
                                                         </td>
                                                         <td class="py-4 border-b border-black">
                                                             {{ $animal->created_at }}
-                                                        </td>
-                                                        <td class="py-4 border-b border-black capitalize">
-                                                            {{ $animal->user->address }}
                                                         </td>
                                                         <td class="py-4 border-b border-black font-bold uppercase"
                                                             style="

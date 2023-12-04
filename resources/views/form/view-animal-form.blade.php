@@ -7,7 +7,13 @@
 
         <div class="ml-[240px] flex justify-between">
 
-
+            @if (session('success'))
+                <div class="flex justify-center items-center h-full">
+                    <h1 class="alert alert-success text-green-700">
+                        {{ session('success') }}
+                    </h1>
+                </div>
+            @endif
             <section class="bg-white h-full w-full ml-4 rounded-2xl my-10 drop-shadow-2xl ">
                 <h1 class="py-14 text-2xl font-bold text-center text-[#293241]">REGISTRATION DETAILS</h1>
                 <div class="flex flex-row gap-10 px-10">
@@ -134,7 +140,7 @@
                 </div>
 
                 <div class="mt-5 w-full bg-white  rounded-sm px-3 mb-6 ">
-                    {{-- Mark of animal --}}
+
                     @if ($animal->status !== 'slaughtered' && $animal->status !== 'for slaughter')
                         <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks</h1>
                         <section class="min-h-[350px] border-dashed border border-black ">
@@ -142,34 +148,39 @@
                                 alt="animal image">
                         </section>
                     @endif
-                </div>
 
-                <div class="">{{-- buttons --}}
+                    <div class="">{{-- buttons --}}
 
-                    <div class="flex gap-3 my-10 pr-10 justify-end">
-                        @if ($animal->status !== 'slaughtered' && auth()->user->role === 'inspector' && auth()->user->role === 'client')
-                            <form action="{{ route('butcher.slaughter.animal', ['id' => $animal->id]) }}"
-                                method="post">
-                                @csrf
-                                <button id="" type="submit"
+                        <div class="flex gap-3 my-10 pr-10 justify-end">
+                            @if ($animal->status === 'for slaughter' && auth()->user()->role === 'butcher')
+                                {{-- Slaughtered button --}}
+                                <form action="{{ route('butcher.slaughter.animal', ['id' => $animal->id]) }}"
+                                    method="post">
+                                    @csrf
+                                    <button type="submit"
+                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                        <box-icon name='checkbox-checked' color='#ffffff'></box-icon>
+                                        <span>SLAUGHTERED</span>
+                                    </button>
+                                </form>
+                            @elseif(auth()->user()->role === 'butcher' && $animal->status === 'slaughtered')
+                                <p class="text-red-700">Animal cannot be slaughtered at this time.</p>
+                            @endif
+
+                            @if ($animal->post_mortem === 'null' && $animal->status == 'slaughtered' && auth()->user()->role === 'inspector')
+                                <button id="good-btn"
                                     class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                    <box-icon name='checkbox-checked'
-                                        color='#ffffff'></box-icon><span>SLAUGHTERED</span>
+                                    <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>Good</span>
                                 </button>
-                            </form>
-                        @endif
 
-                        <form action="{{ route('inspector.postmortem.good', ['id' => $animal->id]) }}" method="post">
-                            @csrf
-                            <button id="" type="submit"
-                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>GOOD MEAT</span>
-                            </button>
-                        </form>
+                                <button id="condemn-btn"
+                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                    <i class='bx bxs-error text-white'></i><span>Condemn</span>
+                                </button>
+                            @endif
+                        </div>
 
                     </div>
-
-                </div>
             </section>
 
 
@@ -247,3 +258,67 @@
     </div>
 
 </div>
+
+<div id="good-popup"
+    class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
+    <div class="">
+        <h1 class="block font-semibold text-xl py-5">Do you want to mark the animal as Good?</h1>
+        <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
+            <form method="post" action="{{ route('inspector.postmortem.good', ['id' => $animal->id]) }}">
+                @csrf
+                <button
+                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">YES</button>
+            </form>
+            <a id="hide-good"
+                class="cursor-pointer  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">NO</a>
+        </div>
+    </div>
+</div>
+
+<div id="condemn-popup"
+    class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
+    <div class="">
+        <h1 class="block font-semibold text-xl py-5 px-">Do you want to mark the animal as Condemned?</h1>
+        <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
+            <form method="post" action="{{ route('inspector.condemn.animal', ['id' => $animal->id]) }}">
+                @csrf
+                <button
+                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">YES</button>
+            </form>
+            <a id="close-condemn"
+                class="cursor-pointer  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">NO</a>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var goodBtn = document.getElementById('good-btn');
+        var goodPopup = document.getElementById('good-popup');
+        var hideBtn = document.getElementById('hide-good');
+
+        goodBtn.addEventListener('click', function() {
+            goodPopup.classList.toggle('hidden');
+        });
+
+        hideBtn.addEventListener('click', function() {
+            goodPopup.classList.add('hidden');
+        });
+
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var condemnBtn = document.getElementById('condemn-btn');
+        var goodPopup = document.getElementById('condemn-popup');
+        var hideBtn = document.getElementById('close-condemn');
+
+        condemnBtn.addEventListener('click', function() {
+            goodPopup.classList.toggle('hidden');
+        });
+
+        hideBtn.addEventListener('click', function() {
+            goodPopup.classList.add('hidden');
+        });
+
+    });
+</script>

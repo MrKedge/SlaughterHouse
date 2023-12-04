@@ -84,7 +84,7 @@
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Slaughtered at
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butchering Date
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                         </th>

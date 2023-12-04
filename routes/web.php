@@ -51,6 +51,7 @@ Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughter
 Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
+Route::post('/admin/set/schedule/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
 //admin pages
 
 
@@ -94,3 +95,4 @@ Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'Slaug
 Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
 Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
 Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
+Route::post('/inspector/condemn/animal/{id}', [InspectorController::class, 'PostMortemCondemn'])->name('inspector.condemn.animal');

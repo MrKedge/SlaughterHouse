@@ -74,7 +74,7 @@
             } else if (userRole === 'inspector') {
                 scanner.addListener('scan', function(content) {
                     let decodedContent = decodeURIComponent(content);
-                    window.location.href = '/inspector/view/animal/reg/form/' + decodedContent;
+                    window.location.href = '/inspector/view/form/' + decodedContent;
                 });
             } else if (userRole === 'client') {
                 scanner.addListener('scan', function(content) {

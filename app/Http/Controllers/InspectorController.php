@@ -12,7 +12,7 @@ class InspectorController extends Controller
     public function ShowInspectorOverview()
     {
         $recent = Animal::where('status', 'slaughtered')
-            ->where('Slaughtered_at', '>=', Carbon::now()->subHours(12))
+            ->where('Slaughtered_at', '>=', Carbon::now()->subHours(5))
             ->latest('slaughtered_at')
             ->limit(5)
             ->get();
@@ -37,7 +37,7 @@ class InspectorController extends Controller
 
     public function ShowInspectorForm($id)
     {
-        $animal = Animal::with('user')->where('status', 'slaughtered')->find($id);
+        $animal = Animal::with('user')->find($id);
         $user = User::findOrFail($animal->user_id);
         return view('inspector.inspector-view-form', compact('animal', 'user'));
     }
@@ -50,16 +50,23 @@ class InspectorController extends Controller
         $animal = Animal::with('user')
             ->where('status', 'slaughtered')
             ->find($id);
-        $animal->post_mortem = 'Good';
+        $animal->post_mortem = 'good';
         $animal->inspected_at = now();
         $animal->save();
 
-        return redirect()->route('inspector.animal.list')->with('success', 'Animal has been moved to monitoring facility');
+        return redirect()->back()->with('success', 'Animal is Good for Consumption');
     }
 
 
 
-    public function PostMortemCondemn()
+    public function PostMortemCondemn($id)
     {
+        $animal = Animal::with('user')
+            ->where('status', 'slaughtered')
+            ->find($id);
+        $animal->post_mortem = 'condemn';
+        $animal->inspected_at = now();
+        $animal->save();
+        return redirect()->back()->with('success', 'Set animal as Condemned');
     }
 }

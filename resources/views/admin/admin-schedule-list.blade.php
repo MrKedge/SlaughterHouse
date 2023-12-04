@@ -96,10 +96,13 @@
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Status
+                                            Ante Mortem
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Time of Slaughter
+                                            Possible Schedule
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                            Butcher
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Action
@@ -110,7 +113,7 @@
 
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="py-4 border-b border-black text-center h-[500px]">
+                                            <td colspan="7" class="py-4 border-b border-black text-center h-[500px]">
                                                 <h1 class="font-semibold italic pb-3">No Scheduled Animal
                                                 </h1>
                                             </td>
@@ -130,25 +133,27 @@
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->status }}
+                                                    {{ $animals->ante_mortem }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     {{ $animals->scheduled_at }}
                                                 </td>
+                                                <td class="py-4 border-b border-black font-semibold capitalize">
+                                                    {{ $animals->butcher }}
+                                                </td>
                                                 <td class="border-b border-black font-semibold capitalize">
                                                     <div class="flex justify-center gap-3">
-                                                        @if ($animals->qr_code === null)
-                                                            <form
-                                                                action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
-                                                                    <i class='bx bx-qr'
-                                                                        style='color: #ffffff; font-size: 28px;'></i>
-                                                                </button>
-                                                            </form>
-                                                        @endif
+
+                                                        <form
+                                                            action="{{ route('for.slaughter.animal', ['id' => $animals->id]) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <button type="submit"
+                                                                class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-2 rounded flex items-center">
+                                                                Dispatch
+                                                            </button>
+                                                        </form>
+
                                                         <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                             class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded flex items-center">
                                                             <box-icon name='navigation'

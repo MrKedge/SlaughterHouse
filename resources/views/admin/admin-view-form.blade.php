@@ -220,24 +220,10 @@
                                         class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                                         REJECT
                                     </a>
-                                @elseif($animal->scheduled_at !== null && $animal->arrived_at !== null && $animal->qr_code === null)
-                                    <form action="{{ route('generate.qr.code', ['id' => $animal->id]) }}"
-                                        method="post">
-                                        @csrf
-                                        <button type="submit"
-                                            class="btnForSchedNav bg-[#293241] hover:bg-gray-800 text-white font-bold py-1 px-1 rounded flex items-center">
-                                            <i class='bx bx-qr' style='color: #ffffff; font-size: 28px;'></i>
-                                        </button>
-                                    </form>
-                                @elseif($animal->qr_code !== null && $animal->status !== 'for slaughter' && $animal->status !== 'slaughtered')
+                                @elseif($animal->status === 'inspection')
                                     <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
                                         method="post">
                                         @csrf
-                                        {{-- <button type="submit"
-                                            class="bg-[#293241] hover:bg-gray-800 text-white font-bold py-2 px-2 rounded flex items-center">
-                                            <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>For
-                                                Monitoring</span>
-                                        </button> --}}
                                     </form>
                                 @endif
 
@@ -255,8 +241,7 @@
         <nav id="schedule-nav"
             class="bg-white fixed h-auto px-6 pb-6 rounded-md hidden text-[#293241] top-1/3  right-1/3  shadow-2xl">
 
-            <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}" method="post"
-                class="space-y-4">
+            <form action="{{ route('set.schedule', ['id' => $animal->id]) }}" method="post" class="space-y-4">
                 @csrf
                 <div class="pb-3">
                     <label class="font-bold text-xl">Time of Slaughter</label>
