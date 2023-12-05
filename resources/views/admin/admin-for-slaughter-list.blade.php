@@ -105,7 +105,7 @@
                                     @php $index = 1 @endphp
 
                                     @if ($animal->isEmpty())
-                                        <tr>
+                                        <tr class="h-[440px]">
                                             <td colspan="6" class="py-4 border-b border-black text-center">
                                                 <h1 class="font-semibold italic pb-3">No Scheduled Animal</h1>
                                             </td>

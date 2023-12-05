@@ -52,6 +52,7 @@ Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnima
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
+
 //admin pages
 
 
@@ -66,6 +67,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
     Route::get('/admin/monitoring/list', [AdminController::class, 'AnteMortem'])->name('admin.monitor.list');
+    Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
 });
 
 

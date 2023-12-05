@@ -106,7 +106,7 @@
 
                 </div>
 
-                <a href="">
+                <a href="{{ route('owner.list') }}">
                     <h1 class="panel-text flex items-center whitespace-nowrap">OWNER</h1>
                 </a>
 

@@ -282,17 +282,20 @@ class AdminController extends Controller
 
 
 
+    public function ShowOwnerList()
+    {
+        $owner = User::has('animals')->with('animals')->get();
+
+        return view('admin.admin-owners', compact('owner'));
+    }
+
+
+
 
     public function ShowSlaughteredList()
     {
         $animal = Animal::where('status', 'slaughtered')->get();
 
         return view('admin.admin-slaughter-list', compact('animal'));
-    }
-
-
-
-    public function AdminScanner()
-    {
     }
 }
