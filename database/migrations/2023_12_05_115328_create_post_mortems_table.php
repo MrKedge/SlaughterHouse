@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table_stabs', function (Blueprint $table) {
+        Schema::create('post_mortems', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->timestamp('slaughtered_at')->nullable();
             $table->unsignedBigInteger('animal_id');
+
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('table_stabs');
+        Schema::dropIfExists('post_mortems');
     }
 };

@@ -31,6 +31,8 @@ Route::get('/qr-code-scanner', function () {
     return view('scan-qr-code');
 })->name('scan.qr');
 
+//Auth::routes(['verify' => true]);
+
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
 Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign.up');
 Route::get('/log-out', [AuthController::class, 'LogOut'])->name('log-out');

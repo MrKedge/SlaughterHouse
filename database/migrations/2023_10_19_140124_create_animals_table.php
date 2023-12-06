@@ -26,6 +26,15 @@ return new class extends Migration
             $table->string('butcher')->nullable();
             $table->string('age_classify')->nullable();
             $table->string('status')->default('pending')->nullable();
+            $table->timestamp('approved_at')->nullable();
+            $table->string('cert_transfer')->nullable();
+            $table->string('remarks')->nullable();
+            $table->string('animal_mark')->nullable();
+            $table->string('cert_ownership')->nullable();
+            $table->string('qr_code')->nullable();
+            $table->unsignedBigInteger('stab_id');
+
+            $table->foreign('stab_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
 

@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('animals', function (Blueprint $table) {
-            $table->string('ante_mortem')->nullable();
+        Schema::create('stabs', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('animals', function (Blueprint $table) {
-            $table->dropColumn('ante_mortem');
-        });
+        Schema::dropIfExists('stabs');
     }
 };

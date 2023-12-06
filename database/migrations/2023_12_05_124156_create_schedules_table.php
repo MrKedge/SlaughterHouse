@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('form_maintenances', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('animal_type')->nullable();
-            $table->string('animal_destination')->nullable();
-            $table->string('animal_butcher')->nullable();
-            $table->string('animal_ageclassify')->nullable();
+            $table->timestamp('scheduled_at')->nullable();
+            $table->unsignedBigInteger('animal_id');
+
+            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('form_maintenances');
+        Schema::dropIfExists('schedules');
     }
 };
