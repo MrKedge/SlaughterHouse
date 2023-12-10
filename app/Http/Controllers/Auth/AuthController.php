@@ -89,26 +89,32 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
+        // If the login attempt fails, check if the email exists in the database
+        $user = User::where('email', $credentials['email'])->first();
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-
             $user = Auth::user();
             if ($user->role === 'admin') {
-                // Redirect admin to admin dashboard
                 return redirect()->route('admin.dashboard');
             } elseif ($user->role === 'client') {
-                // Redirect client to client overview
                 return redirect()->route('client.overview');
             } elseif ($user->role === 'butcher') {
-
                 return redirect()->route('butcher.overview');
             } elseif ($user->role === 'inspector') {
-
                 return redirect()->route('inspector.overview');
             }
+        } elseif ($user) {
+            // Email is correct, but password is wrong
+            return redirect()->route('log.in')
+                ->withErrors(['error' => 'Invalid password'])
+                ->withInput($request->except('password'));
         }
-        return redirect()->route('log.in')->withErrors(['error' => 'Invalid email or password'])->withInput();
+
+        $request->session()->forget('email'); // Clear the email from the session
+        return redirect()->route('log.in')
+            ->withErrors(['error' => 'Email does not exist in the database']);
     }
 
 

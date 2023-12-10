@@ -11,6 +11,7 @@
             <span class="px-4"><a href="">Contact</a></span>
         </div>
         <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image">
+        @include('alerts.error')
         <section
             class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
             @if (session('success'))
@@ -25,14 +26,13 @@
                     }, 3000);
                 </script>
             @endif
-
             <h1 class="text-center text-4xl font-bold pb-8 pt-4 ">LOG IN</h1>
             <div class="flex justify-center">
                 <form action="{{ route('login.authenticate') }}" method="POST"
                     class="text-lg font-semibold text-center">
                     @csrf
                     <div class="pb-5 relative">
-                        <pre class="hidden">{{ var_dump(old('email')) }}</pre>
+
                         <input type="email" name="email" placeholder="Email"
                             value="{{ old('email') ?: session('email') }}" required
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">

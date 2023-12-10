@@ -75,30 +75,37 @@ Route::middleware(['admin'])->group(function () {
 });
 
 
-
 //Client pages 
-Route::get('/client/overview', [ClientController::class, 'ShowClientDashboardOverview'])->name('client.overview');
-Route::get('/client/animal/list/register', [ClientController::class, 'ShowAnimalListReg'])->name('client.animal.list.register');
-Route::get('/client/animal/register', [ClientController::class, 'ShowAnimalRegForm'])->name('client.animal.register');
-Route::get('/client/view/animal/form/{id}', [ClientController::class, 'ShowRegistrationFormClient'])->name('client.view.animal.form');
-Route::get('/client/edit/animal/form/{id}', [ClientController::class, 'ShowEditFormClient'])->name('client.edit.animal.form');
-Route::get('/client/archive/list/', [ClientController::class, 'ShowArchiveList'])->name('client.archive.list');
-Route::get('/client/drafts', [ClientController::class, 'ShowDrafts'])->name('client.drafts');
-Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
-Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
-Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
+Route::middleware(['verifiedUser'])->group(function () {
+    Route::get('/client/overview', [ClientController::class, 'ShowClientDashboardOverview'])->name('client.overview');
+    Route::get('/client/animal/list/register', [ClientController::class, 'ShowAnimalListReg'])->name('client.animal.list.register');
+    Route::get('/client/animal/register', [ClientController::class, 'ShowAnimalRegForm'])->name('client.animal.register');
+    Route::get('/client/view/animal/form/{id}', [ClientController::class, 'ShowRegistrationFormClient'])->name('client.view.animal.form');
+    Route::get('/client/edit/animal/form/{id}', [ClientController::class, 'ShowEditFormClient'])->name('client.edit.animal.form');
+    Route::get('/client/archive/list/', [ClientController::class, 'ShowArchiveList'])->name('client.archive.list');
+    Route::get('/client/drafts', [ClientController::class, 'ShowDrafts'])->name('client.drafts');
+    Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
+    Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
+    Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
+});
+
 //post clients
 Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name('archive.form');
 
 
 //butcher
-Route::get('/butcher/overview/', [ButcherController::class, 'ShowButcherOverview'])->name('butcher.overview');
-Route::get('/butcher/animals/', [ButcherController::class, 'ShowButcherAnimal'])->name('butcher.animal');
-Route::get('/butcher/view/form/{id}', [ButcherController::class, 'ShowButcherForm'])->name('butcher.view.form');
 Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');
+Route::middleware(['butcher'])->group(function () {
+    Route::get('/butcher/overview/', [ButcherController::class, 'ShowButcherOverview'])->name('butcher.overview');
+    Route::get('/butcher/animals/', [ButcherController::class, 'ShowButcherAnimal'])->name('butcher.animal');
+    Route::get('/butcher/view/form/{id}', [ButcherController::class, 'ShowButcherForm'])->name('butcher.view.form');
+});
+
 
 //inspector
-Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
-Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
-Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
 Route::post('/inspector/condemn/animal/{id}', [InspectorController::class, 'PostMortemCondemn'])->name('inspector.condemn.animal');
+Route::middleware(['inspector'])->group(function () {
+    Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
+    Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
+    Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
+});
