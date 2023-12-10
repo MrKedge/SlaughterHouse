@@ -27,18 +27,20 @@ Route::get('/', function () {
     return view('auth.log-in');
 });
 
+Route::get('/verify/your/email/', [AuthController::class, 'ShowVerifyEmail'])->name('verify.email.account');
+
 Route::get('/qr-code-scanner', function () {
     return view('scan-qr-code');
 })->name('scan.qr');
-
-//Auth::routes(['verify' => true]);
 
 Route::get('/log-in', [AuthController::class, 'ShowLogin'])->name('log.in');
 Route::get('/sign-up', [AuthController::class, 'ShowSignUp'])->name('sign.up');
 Route::get('/log-out', [AuthController::class, 'LogOut'])->name('log-out');
 
 
-Route::POST('/sign-up/store/account', [AuthController::class, 'StoreAccount'])->name("store.account");
+Route::post('/resend/verification/code/', [AuthController::class, 'ResendCode'])->name('resend.code');
+Route::post('/verify/account/', [AuthController::class, 'Verify'])->name('verify.account');
+Route::POST('/sign-up/store/account/', [AuthController::class, 'StoreAccount'])->name("store.account");
 Route::POST('/log-in/authenticate', [AuthController::class, 'Authenticate'])->name('login.authenticate');
 Route::POST('/store/animal', [ClientController::class, 'Register'])->name('store.animal');
 Route::POST('/approve/status/animal/{id}', [AdminController::class, 'ApproveAnimalRegistration'])->name('approve.status');

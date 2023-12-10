@@ -13,14 +13,28 @@
         <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image">
         <section
             class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-            <h1 class="text-center text-4xl font-bold py-8 ">LOG IN</h1>
+            @if (session('success'))
+                <div id="success-alert" class="alert alert-success text-sm text-green-800 font-medium text-center">
+                    {{ session('success') }}
+                </div>
+
+                <script>
+                    // Automatically hide the success alert after 3 seconds
+                    setTimeout(function() {
+                        document.getElementById('success-alert').style.display = 'none';
+                    }, 3000);
+                </script>
+            @endif
+
+            <h1 class="text-center text-4xl font-bold pb-8 pt-4 ">LOG IN</h1>
             <div class="flex justify-center">
                 <form action="{{ route('login.authenticate') }}" method="POST"
                     class="text-lg font-semibold text-center">
                     @csrf
                     <div class="pb-5 relative">
-
-                        <input type="email" name="email" placeholder="Email" required
+                        <pre class="hidden">{{ var_dump(old('email')) }}</pre>
+                        <input type="email" name="email" placeholder="Email"
+                            value="{{ old('email') ?: session('email') }}" required
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='envelope'
                                 type='solid'></box-icon></span>
@@ -33,8 +47,8 @@
                                 name='lock'></box-icon></span>
                     </div>
 
-                    <div class="block text-center p-2 pb-3"><button class=" bg-[#293241] text-white w-[300px]"
-                            type="submit">LOG IN
+                    <div class="block text-center p-2 pb-3"><button
+                            class="py-1 rounded-md bg-[#293241] text-white w-[300px]" type="submit">LOG IN
                         </button>
                         <div class="py-4">
                             <h1 class="text-center font-semibold">Don't have an account?

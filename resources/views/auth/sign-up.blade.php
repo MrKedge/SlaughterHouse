@@ -72,8 +72,8 @@
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='pencil'
                                 type='solid'></box-icon></span>
                     </div>
-                    <div class="block text-center p-2 pb-3"><button class=" bg-[#293241] text-white w-[300px]"
-                            type="submit">SIGN UP
+                    <div class="block text-center p-2 pb-3"><button
+                            class="py-1 rounded-md bg-[#293241] text-white w-[300px]" type="submit">SIGN UP
                         </button>
                         <div class="">
                             <h1 class="text-center font-semibold pt-4 pb-8">Already have an account? <a

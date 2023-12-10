@@ -167,7 +167,6 @@ class ClientController extends Controller
         $imageName = time() . '_' . uniqid() . '.png';
         Storage::put('public/marked-animal/' . $imageName, $imageData);
 
-        // Create a new Animal instance and fill its attributes
         $animal = new Animal();
         $animal->type = $request->kindOfAnimal;
         $animal->user_id = Auth::user()->id;
@@ -180,10 +179,11 @@ class ClientController extends Controller
         $animal->animal_mark = $imageName;
         $animal->cert_ownership = $imageCertOwnershipName;
         $animal->cert_transfer = $imageCertTransferName;
-        // Save the Animal instance to the database
+
+
         $animal->save();
 
-        // Redirect to the specified route
+
         return redirect()->route('client.animal.list.register');
     }
 
