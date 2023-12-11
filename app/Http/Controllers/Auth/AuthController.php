@@ -47,38 +47,78 @@ class AuthController extends Controller
 
     public function ShowSignUp()
     {
+        //session()->flush();
         return view('auth.sign-up');
     }
 
-    public function StoreAccount(Request $request)
+    public function storeAccount(Request $request)
     {
+        // Check if the email is already present in the database
+        if (User::where('email', $request->email)->exists()) {
+            session()->forget('newEmail');  // Forget the 'email' session
+            return redirect()->route('sign.up')
+                ->withErrors(['email' => 'This email is already registered'])
+                ->withInput($request->except('password'));
+        }
+        if ($request->password !== $request->password_confirmation) {
+            session(['newEmail' => $request->email]);
+            return redirect()->route('sign.up')
+                ->withErrors(['password' => 'Password confirmation does not match'])
+                ->withInput($request->except('password'));
+        }
+
+
+        // Validate the incoming request
         $request->validate([
             'firstName' => 'min:3|required',
             'lastName' => 'min:3|required',
-            'email' => 'required|unique:users,email',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|confirmed|min:6',
+        ], [
+            'firstName.min' => 'First name must be at least :min characters.',
+            'lastName.min' => 'Last name must be at least :min characters.',
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please provide a valid email address.',
+            'email.unique' => 'The provided Email is already registered.',
+            'password.required' => 'Password is required.',
         ]);
 
+        // If password does not match, store the email in the session
+
+
+
+
+        // If email is not present, proceed to create a new user
         $user = new User();
 
         $user->first_name = $request->firstName;
         $user->last_name = $request->lastName;
-        $user->role = $request->role;
+        $user->role = 'client';
         $user->email = $request->email;
         $user->address = $request->address;
         $user->password = Hash::make($request->password);
 
-
-        $verificationCode = strval(mt_rand(100000, 999999));
-
-        $user->verify_code = $verificationCode;
-
+        // Save the user instance
         $user->save();
-        session(['email' => $user->email]);
-        Mail::to($user->email)->send(new VerifyCodeMail($verificationCode, $user->first_name));
 
+        // Additional logic or redirection after successful user creation
+        try {
+            $verificationCode = strval(mt_rand(100000, 999999));
 
-        return redirect()->route('verify.email.account');
+            $user->verify_code = $verificationCode;
+
+            $user->save();
+            session(['email' => $user->email]);
+            session(['lastName' => $user->first_name]);
+
+            Mail::to($user->email)->send(new VerifyCodeMail($verificationCode, $user->first_name));
+
+            return redirect()->route('verify.email.account');
+        } catch (\Exception $e) {
+            // Handle the exception gracefully
+            // For example, log the error, notify the user, or redirect with an error message
+            return redirect()->route('verify.email.account')->withErrors(['error' => 'Failed to send verification email. Please try again later.']);
+        }
     }
 
     //login try
@@ -92,7 +132,7 @@ class AuthController extends Controller
         // If the login attempt fails, check if the email exists in the database
         $user = User::where('email', $credentials['email'])->first();
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
 
             $user = Auth::user();

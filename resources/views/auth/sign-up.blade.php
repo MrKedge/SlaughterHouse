@@ -11,27 +11,32 @@
             <span class="px-4"><a href="">Contact</a></span>
         </div>
         <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image">
+
+        @include('alerts.error')
         <section
             class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
             <h1 class="text-center text-4xl font-bold py-8 ">SIGN UP</h1>
+            {{-- <pre class="hidden">{{ var_dump(session()->all()) }}</pre> --}}
             <div class="flex justify-center">
                 <form action="{{ route('store.account') }}" method="POST" class="text-lg font-semibold text-center">
                     @csrf
                     <div class="pb-5 relative">
-
-                        <input type="text" name="firstName" placeholder="First Name" required
+                        <input minlength="3" value="{{ old('firstName') }}" type="text" name="firstName"
+                            placeholder="First Name" required
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500 ">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
                                 name='user'></box-icon></span>
                     </div>
+
                     <div class="pb-5 relative">
 
-                        <input type="text" name="lastName" placeholder="Last Name" required
+                        <input minlength="3" type="text" name="lastName" placeholder="Last Name" required
+                            value="{{ old('lastName') }}"
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
                                 name='user'></box-icon></span>
                     </div>
-                    <div class="pb-5 relative">
+                    {{-- <div class="pb-5 relative">
 
                         <select name="role" id="role" onchange="toggleAddressField()" required
                             class="bg-transparent outline-none border-black border-b w-[310px] text-red-500 focus:outline-[#293241] focus:ring focus:border-blue-200 focus:border-2">
@@ -43,10 +48,11 @@
                             <option class="text-black" value="butcher">Butcher</option>
                         </select>
 
-                    </div>
-                    <div id="addressDiv" style="display: none;" class="pb-5 relative">
+                    </div> --}}
+                    <div id="addressDiv" class="pb-5 relative">
 
-                        <input id="addressInput" type="text" name="address" placeholder="Address"
+                        <input minlength="3" id="addressInput" type="text" name="address" placeholder="Address"
+                            value="{{ old('address') }}"
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='bank'
                                 type='solid'></box-icon></span>
@@ -54,20 +60,22 @@
                     <div class="pb-5 relative">
 
                         <input type="email" name="email" placeholder="Email" required
+                            value="{{ session('newEmail') }}"
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='envelope'
                                 type='solid'></box-icon></span>
                     </div>
                     <div class="pb-5 relative">
 
-                        <input type="password" name="password" placeholder="Password" required
+                        <input minlength="6" type="password" name="password" placeholder="Password" required
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
                                 name='lock'></box-icon></span>
                     </div>
                     <div class="pb-5 relative">
 
-                        <input type="password" name="password_confirmation" placeholder="Confirm Password" required
+                        <input minlength="6" type="password" name="password_confirmation"
+                            placeholder="Confirm Password" required
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='pencil'
                                 type='solid'></box-icon></span>
@@ -86,7 +94,7 @@
             </div>
         </section>
     </div>
-    <script>
+    {{-- <script>
         function toggleAddressField() {
             var roleSelect = document.getElementById("role");
             var addressField = document.getElementById("addressDiv");
@@ -101,9 +109,9 @@
             }
         }
 
-        // Call the function on page load to initialize the form state
+        // Call function on page load to initialize the form state
         toggleAddressField();
-    </script>
+    </script> --}}
 </body>
 
 </html>
