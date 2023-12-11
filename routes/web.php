@@ -58,7 +58,7 @@ Route::post('/admin/monitor/animal/{id}', [AnteMortemController::class, 'Monitor
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
-
+Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
 //admin pages
 
 
@@ -74,6 +74,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
     Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
+    Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
 });
 
 

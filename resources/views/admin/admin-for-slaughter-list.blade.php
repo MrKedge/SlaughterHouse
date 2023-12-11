@@ -154,8 +154,8 @@
             </div>
             {{-- End wrapper --}}
         </div>
-
-        <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    </div>
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>
 
 </html>

@@ -29,30 +29,9 @@
 
 
                         <div class=" bg-white px-10 rounded-2xl  shadow-2xl py-6">
-                            @if ($errors->any())
-                                <div id="error-alert" class="alert error-alert text-red-700 text-center text-xl">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                                <script>
-                                    setTimeout(function() {
-                                        document.getElementById('error-alert').style.display = 'none';
-                                    }, 3000);
-                                </script>
-                            @endif
-                            @if (session('success'))
-                                <div id="success-alert" class="alert alert-success text-green-800 text-center text-xl">
-                                    {{ session('success') }}
-                                </div>
-                                <script>
-                                    setTimeout(function() {
-                                        document.getElementById('success-alert').style.display = 'none';
-                                    }, 3000); // 3000 milliseconds = 3 seconds
-                                </script>
-                            @endif
+                            <div class="flex justify-center"> @include('alerts.error') @include('alerts.success')
+                            </div>
+
                             <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">FORM MAINTENANCE
 
                             </h1>
@@ -73,25 +52,25 @@
                                                         <label class="block pb-1 pt-3" for="">Add
                                                             Animal:</label>
                                                         <input name="animalType"
-                                                            class=" border-2 border-black rounded-md p-2 w-full">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
                                                     <div>
                                                         <label class="block pb-1" for="">Add
                                                             Destination:</label>
                                                         <input name="animalDestination"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
                                                     <div>
                                                         <label class="block pb-1" for="">Add Butcher:</label>
                                                         <input name="animalButcher"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
 
                                                     <div>
                                                         <label class="block pb-1" for="">Add Age
                                                             Classification:</label>
                                                         <input name="animalAgeClassify"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
 
                                                     <div class="absolute bottom-0 right-[180px] pb-[20px]">
@@ -113,7 +92,7 @@
                                                         <label class="block pb-1 pt-3" for="">Delete on
                                                             Animal:</label>
                                                         <input name="deleteAnimal"
-                                                            class=" border-2 border-black rounded-md p-2 w-full">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
 
                                                     </div>
@@ -122,20 +101,20 @@
                                                         <label class="block pb-1" for="">Delete on
                                                             Destination:</label>
                                                         <input name="deleteDestination"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
                                                     <div>
                                                         <label class="block pb-1" for="">Delete on
                                                             Butcher:</label>
                                                         <input name="deleteButcher"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500"">
                                                     </div>
 
                                                     <div>
                                                         <label class="block pb-1" for="">Delete on Age
                                                             Classification:</label>
                                                         <input name="deleteAgeClassify"
-                                                            class="border-2 border-black rounded-md w-full p-2">
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
 
                                                     <div class="absolute bottom-0 right-5 pb-[20px]">

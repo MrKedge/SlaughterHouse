@@ -188,7 +188,7 @@
 
                 </div>
 
-                <a href="">
+                <a href="{{ route('admin.create.account') }}">
                     <h1 class="panel-text flex items-center">USER ACCOUNTS</h1>
                 </a>
 

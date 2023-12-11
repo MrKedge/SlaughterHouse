@@ -52,7 +52,7 @@
                     <div id="addressDiv" class="pb-5 relative">
 
                         <input minlength="3" id="addressInput" type="text" name="address" placeholder="Address"
-                            value="{{ old('address') }}"
+                            required value="{{ old('address') }}"
                             class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
                         <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='bank'
                                 type='solid'></box-icon></span>

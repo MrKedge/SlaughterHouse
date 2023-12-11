@@ -222,4 +222,57 @@ class AuthController extends Controller
             return redirect()->route('verify.email.account')->with('error', 'User not found.');
         }
     }
+
+
+    //for admin creating accounts
+    public function createAccount(Request $request)
+    {
+
+        if (User::where('email', $request->email)->exists()) {
+            session()->forget('newEmail');  // Forget the 'email' session
+            return redirect()->route('admin.create.account')
+                ->withErrors(['email' => 'This email is already registered'])
+                ->withInput($request->except('password'));
+        }
+
+
+        if ($request->password !== $request->password_confirmation) {
+            session(['newEmail' => $request->email]);
+            return redirect()->route('admin.create.account')
+                ->withErrors(['password' => 'Password confirmation does not match'])
+                ->withInput($request->except('password'));
+        }
+
+
+        $request->validate([
+            'firstName' => 'min:3|required',
+            'lastName' => 'min:3|required',
+            'role' => 'required',
+            'email' => 'required|email:rfc,dns|unique:users,email',
+            'password' => 'required|confirmed|min:6',
+        ], [
+            'firstName.min' => 'First name must be at least :min characters.',
+            'lastName.min' => 'Last name must be at least :min characters.',
+            'email.required' => 'Email is required.',
+            'email.email' => 'Please provide a valid email address.',
+            'email.unique' => 'The provided Email is already registered.',
+            'password.required' => 'Password is required.',
+        ]);
+
+
+        $user = new User();
+
+        $user->first_name = $request->firstName;
+        $user->last_name = $request->lastName;
+        $user->role = $request->role;
+        $user->email = $request->email;
+        $user->address = $request->address;
+        $user->password = Hash::make($request->password);
+        $user->email_verified_at = now();
+
+        $user->save();
+
+
+        return redirect()->route('admin.create.account')->with('success', 'Account created successfully!');
+    }
 }

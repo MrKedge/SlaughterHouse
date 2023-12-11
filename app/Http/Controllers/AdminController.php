@@ -232,4 +232,12 @@ class AdminController extends Controller
 
         return view('admin.admin-slaughter-list', compact('animal'));
     }
+
+
+
+
+    public function ShowCreateAccount()
+    {
+        return view('admin.admin-create-account');
+    }
 }
