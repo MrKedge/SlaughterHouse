@@ -141,7 +141,7 @@
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->arrived_at }}
+                                                    {{ $animals->anteMortem->arrived_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     {{ $animals->status }}

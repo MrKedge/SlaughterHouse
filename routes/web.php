@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnteMortemController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\QrCodeController;
+use App\Models\AnteMortem;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -47,15 +49,15 @@ Route::POST('/approve/status/animal/{id}', [AdminController::class, 'ApproveAnim
 Route::POST('/reject/status/animal/{id}', [AdminController::class, 'RejectAnimalRegistration'])->name('reject.status');
 Route::post('/update/client/animal/form/{id}', [ClientController::class, 'UpdateAnimalForm'])->name('update.form');
 Route::post('/draft/form', [ClientController::class, 'SaveAsDraft'])->name('save.draft');
-Route::post('/set/arrival/animal/{id}', [AdminController::class, 'SetArrivalTime'])->name('set.arrival');
+Route::post('/set/arrival/animal/{id}', [AnteMortemController::class, 'SetArrivalTime'])->name('set.arrival');
 Route::post('/generate/qr/code/{id}', [QrCodeController::class, 'GenerateQRCode'])->name('generate.qr.code');
 Route::post('/form/maintenance/', [FormMaintenanceController::class, 'FormMaintenance'])->name('form.maintenance');
 Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'])->name('delete.on.form');
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
-Route::post('/admin/monitor/animal/{id}', [AdminController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
+Route::post('/admin/monitor/animal/{id}', [AnteMortemController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
-Route::post('/admin/set/schedule/{id}', [AdminController::class, 'SetSchedule'])->name('set.schedule');
+Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 
 //admin pages
 
@@ -70,7 +72,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/for/slaughter/list/', [AdminController::class, 'ShowForSlaughterList'])->name('admin.for.slaughter.list');
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
-    Route::get('/admin/monitoring/list', [AdminController::class, 'AnteMortem'])->name('admin.monitor.list');
+    Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
     Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Animal;
 use App\Models\User;
+use App\Models\AnteMortem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Validation\Rules\Can;
@@ -40,17 +41,14 @@ class AdminController extends Controller
 
 
 
-
     public function ShowApproveList()
     {
-        $animal = Animal::with('user')
+        $animal = Animal::with(['user', 'anteMortem'])
             ->where('status', 'approved')
             ->get();
+
         return view('admin.admin-approve-list', compact('animal'));
     }
-
-
-
 
 
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
@@ -58,6 +56,7 @@ class AdminController extends Controller
         $animals = Animal::with('user')
             ->where('status', 'pending')
             ->get();
+
         return view('admin.admin-animal-reg-list', compact('animals'));
     }
 
@@ -163,60 +162,27 @@ class AdminController extends Controller
 
 
 
-    public function AnteMortem()
-    {
-
-        $animal = Animal::where('status', 'inspection')->wherenull('scheduled_at')->get();
-
-
-        return view('admin.admin-monitoring-list', compact('animal'));
-    }
-
-
-
-
-    public function MonitorAnimal($id)
-    {
-        $animal = Animal::where('status', 'approved')->find($id);
-        $animal->status = 'inspection';
-        $animal->save();
-        return redirect()->back()->with('success', 'Animal has been moved to monitoring facility');
-    }
-
-
-
-
-    public function SetSchedule(Request $request, $id)
-    {
-        $request->validate([
-            'dateOfSlaughter' => 'nullable',
-            'timeOfSlaughter' => 'nullable',
-        ]);
-
-        $animal = Animal::where('status', 'inspection')->find($id);
-        $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
-        $animal->scheduled_at = $slaughterDateTime;
-        $animal->ante_mortem = 'for slaughter';
-        $animal->save();
-
-        return redirect()->route('admin.monitor.list')->with('success', 'Set Schedule For Animal');
-    }
-
 
 
 
     public function ForSlaughterAnimal($id)
     {
+        $animal = Animal::wherehas('anteMortem', function ($query) {
+            $query->where('inspection_status', 'for slaughter');
+        })
+            ->find($id);
 
-
-        $animal = Animal::where('ante_mortem', 'for slaughter')->find($id);
-
+        if (!$animal) {
+            return redirect()->route('admin.schedule.list')->with('error', 'Animal not found or not eligible for slaughter.');
+        }
 
         $animal->status = 'for slaughter';
         $animal->save();
 
         return redirect()->route('admin.schedule.list')->with('success', 'Animal is now active for slaughtering');
     }
+
+
 
 
 
@@ -233,47 +199,15 @@ class AdminController extends Controller
 
 
 
-    public function SetArrivalTime(Request $request, $id)
-    {
-        // $arrivalDate = $request->input('dateOfArrival');
-        // $arrivalTime = $request->input('timeOfArrival');
-
-        // $slaughterDate = $request->input('dateOfSlaughter');
-        // $slaughterTime = $request->input('timeOfSlaughter');
-
-        // $arrivalDateTime = Carbon::parse("$arrivalDate $arrivalTime");
-        // $slaughterDateTime = Carbon::parse("$slaughterDate $slaughterTime");
-
-
-        $request->validate([
-            'dateOfArrival' => 'nullable',
-            'timeOfArrival' => 'nullable',
-
-        ]);
-
-        $animal = Animal::where('status', 'approved')->findorfail($id);
-
-
-        $arrivalDateTime = Carbon::parse($request->input('dateOfArrival') . ' ' . $request->input('timeOfArrival'));
-
-
-
-        $animal->arrived_at = $arrivalDateTime;
-
-
-
-        $animal->save();
-
-        return redirect()->route('admin.approve.list')->with('success', 'Animal scheduled successfully.');
-    }
-
-
-
-
-
     public function ShowScheduleList()
     {
-        $animal = Animal::where('status', 'inspection')->where('ante_mortem', 'for slaughter')->wherenotnull('scheduled_at')
+        $animal = Animal::where('status', 'inspection')
+            ->whereHas('schedule', function ($query) {
+                $query->whereNotNull('scheduled_at');
+            })
+            ->whereHas('anteMortem', function ($query) {
+                $query->where('inspection_status', 'for slaughter');
+            })
             ->get();
 
         return view('admin.admin-schedule-list', compact('animal'));

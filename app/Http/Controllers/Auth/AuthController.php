@@ -37,10 +37,12 @@ class AuthController extends Controller
 
     public function LogOut(Request $request)
     {
-        $email = Auth::user()->email; // Get the user's email before logging out
+        // Get the user's email before logging out
+        $email = Auth::user()->email;
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+
         session(['email' => $email]);
         return redirect('log-in')->with('status', 'Logout Successful');
     }
@@ -72,7 +74,7 @@ class AuthController extends Controller
         $request->validate([
             'firstName' => 'min:3|required',
             'lastName' => 'min:3|required',
-            'email' => 'required|email|unique:users,email',
+            'email' => 'required|email:rfc,dns|unique:users,email',
             'password' => 'required|confirmed|min:6',
         ], [
             'firstName.min' => 'First name must be at least :min characters.',

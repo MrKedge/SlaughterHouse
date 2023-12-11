@@ -92,7 +92,8 @@
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Schedule
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Possible
+                                            Schedule
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butcher
                                         </th>
@@ -121,7 +122,7 @@
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
-                                                    {{ $animals->scheduled_at }}
+                                                    {{ $animals->schedule->scheduled_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
                                                     {{ $animals->butcher }}

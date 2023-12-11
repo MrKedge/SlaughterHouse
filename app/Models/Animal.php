@@ -26,4 +26,14 @@ class Animal extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function anteMortem()
+    {
+        return $this->hasOne(AnteMortem::class);
+    }
+
+    public function schedule()
+    {
+        return $this->hasOne(Schedule::class);
+    }
 }

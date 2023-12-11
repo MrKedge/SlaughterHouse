@@ -32,7 +32,7 @@ return new class extends Migration
             $table->string('animal_mark')->nullable();
             $table->string('cert_ownership')->nullable();
             $table->string('qr_code')->nullable();
-            $table->unsignedBigInteger('stab_id');
+            $table->unsignedBigInteger('stab_id')->nullable();
 
             $table->foreign('stab_id')->references('id')->on('animals')->onDelete('cascade');
         });

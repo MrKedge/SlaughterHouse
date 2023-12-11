@@ -163,14 +163,15 @@
                                                                 </button>
                                                             </form>
                                                         @endif
-                                                        @if ($animals->arrived_at === null)
+                                                        {{-- @if  --}}
+                                                        @if ($animals->status === 'approved' && !($animals->anteMortem && $animals->anteMortem->arrived_at !== null))
                                                             <a data-animal-id="{{ $animals->id }}"
                                                                 class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
                                                                 <i class='bx bx-timer'
                                                                     style='color:#ffffff; font-size: 24px;'></i>
                                                             </a>
                                                         @endif
-                                                        @if ($animals->arrived_at !== null && $animals->qr_code !== null)
+                                                        @if ($animals->anteMortem && $animals->anteMortem->arrived_at !== null && $animals->qr_code !== null)
                                                             <form
                                                                 action="{{ route('admin.monitor.animal', ['id' => $animals->id]) }}"
                                                                 method="post">
