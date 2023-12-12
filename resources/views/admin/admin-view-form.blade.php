@@ -3,9 +3,9 @@
 
 @include('layout.html-head', ['pageTitle' => 'View Form'])
 
-<body class="bg-[#D5DFE8]">
+<body class="bg-[#D5DFE8] ">
 
-    <div class="min-h-screen">{{-- wrapper --}}
+    <div class="min-h-screen w-full">{{-- wrapper --}}
 
 
         {{-- HEADER --}}
@@ -192,20 +192,31 @@
                         @endif
                         <div class="">{{-- buttons --}}
 
-                            <div class="flex gap-3 my-10 pr-10 justify-end">
-                                @if ($animal->status === 'inspection')
-                                    <button id="toggle-schedule"
-                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                        <span>For Slaughter</span>
-                                    </button>
 
-                                    <form action="{{ route('dispose.animal', ['id' => $animal->id]) }}" method="post">
-                                        @csrf
-                                        <button type="submit"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                            Dispose
-                                        </button>
-                                    </form>
+
+                            <div class="flex my-10 pr-10 justify-end gap-3">
+                                @if ($animal->status === 'inspection')
+                                    @csrf
+                                    @if ($animal->anteMortem->inspection_status === null)
+                                        <div class="flex">
+                                            <div class="flex  m-5">
+                                                <button id="toggle-schedule"
+                                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
+                                                    For Slaughter
+                                                </button>
+                                            </div>
+
+
+                                            <div class="flex  m-5">
+                                                <button id="updateProductButton" data-modal-target="updateProductModal"
+                                                    data-modal-toggle="updateProductModal"
+                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                                                    type="button">
+                                                    Dispose Animal
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endif
                                 @endif
 
 
@@ -238,89 +249,11 @@
             </div>
         </div>
 
-        <nav id="schedule-nav"
-            class="bg-white fixed h-auto px-6 pb-6 rounded-md hidden text-[#293241] top-1/3  right-1/3  shadow-2xl">
-
-            <form action="{{ route('set.schedule', ['id' => $animal->id]) }}" method="post" class="space-y-4">
-                @csrf
-                <div class="pb-3">
-                    <label class="font-bold text-xl">Time of Slaughter</label>
-                    <div class="text-center pt-1">
-                        <input name="dateOfSlaughter" required type="date"
-                            class="p-2 border-2 font-semibold border-gray-800 rounded"
-                            value="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
-                        <input name="timeOfSlaughter" required type="time"
-                            class="p-2 border-2 font-semibold border-gray-800 rounded" value="04:00">
-                    </div>
-                </div>
-                <div class="flex gap-4">
-                    <button type="submit"
-                        class="py-2 w-full bg-gray-700 hover:bg-gray-800 text-white font-bold rounded text-center">SET</button>
-                    <a id="close-schedule"
-                        class=" py-2 w-full bg-gray-700 hover:bg-gray-800 text-white font-bold rounded text-center">Back</a>
-                </div>
-            </form>
-        </nav>
 
 
-        <nav id="remarks-pop-up"
-            class="hidden fixed bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl">
-            <form method="post" action="{{ route('reject.status', ['id' => $animal->id]) }}">
-                <div class="p-3">
+    </div>
+    @include('admin.formhandler.form-popup')
 
-                    <textarea name="remarks" placeholder="Write a Remarks..." required
-                        class="w-full h-[100px]  resize-none border-b-4 rounded-t-xl bg-gray-200 border-blue-500 p-2"></textarea>
-                    <h1 class="block font-semibold text-xl py-1">Do you want to <span
-                            class="text-red-600 font-semibold">REJECT</span>
-                        this?
-                    </h1>
-                    <div class="py-3 flex justify-center gap-6 mx-auto">
-
-                        @csrf
-                        <button class="bg-[#293241] w-24 text-white py-2 rounded">YES</button>
-
-                        <a id="close-remarks" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
-
-                    </div>
-                </div>
-            </form>
-        </nav>
-
-        <nav id="approve-pop-up"
-            class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
-            <div class="">
-                <h1 class="block font-semibold text-xl py-5">Do you want to <span
-                        class="text-green-600 ">APPROVE</span>
-                    this?</h1>
-                <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
-                    <form method="post" action="{{ route('approve.status', ['id' => $animal->id]) }}">
-                        @csrf
-                        <button class="bg-[#293241] w-24 text-white py-2 rounded ">YES</button>
-                    </form>
-                    <a id="close-approve" class="bg-[#293241] w-24 text-white py-2 rounded">NO</a>
-                </div>
-            </div>
-        </nav>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                const schedNav = document.getElementById('schedule-nav');
-                const forSlaughterBtn = document.getElementById('toggle-schedule');
-                const closeSched = document.getElementById('close-schedule');
-
-                forSlaughterBtn.addEventListener('click', function() {
-                    schedNav.classList.remove('hidden');
-                });
-
-                closeSched.addEventListener('click', function() {
-                    schedNav.classList.add('hidden');
-                });
-            });
-        </script>
-        <script src="{{ asset('js/slaughterhouse.js') }}"></script>
-        <script>
-            rejectRemark();
-            approvePopUp();
-        </script>
 </body>
 
 </html>

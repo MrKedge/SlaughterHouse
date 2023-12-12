@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->timestamp('scheduled_at')->nullable();
+
             $table->unsignedBigInteger('animal_id');
 
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
+            $table->timestamp('scheduled_at')->nullable();
         });
     }
 

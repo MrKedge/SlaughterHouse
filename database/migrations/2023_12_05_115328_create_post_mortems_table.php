@@ -14,10 +14,13 @@ return new class extends Migration
         Schema::create('post_mortems', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->timestamp('slaughtered_at')->nullable();
+
             $table->unsignedBigInteger('animal_id');
 
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
+            $table->timestamp('slaughtered_at')->nullable();
+            $table->string('carcass_part')->nullable();
+            $table->string('carcass_weight')->nullable();
         });
     }
 

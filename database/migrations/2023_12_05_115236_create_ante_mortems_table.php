@@ -17,8 +17,10 @@ return new class extends Migration
             $table->timestamp('inspected_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
             $table->string('inspection_status')->nullable();
-            $table->unsignedBigInteger('animal_id');
+            $table->string('causes')->nullable();
+            $table->string('ante_remarks')->nullable();
 
+            $table->unsignedBigInteger('animal_id');
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }

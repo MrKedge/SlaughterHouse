@@ -16,33 +16,9 @@ function ageClassify() {
 var typeOfAnimalDropdown = document.getElementById("typeOfAnimal");
 typeOfAnimalDropdown.addEventListener("change", ageClassify);
 
-function rejectRemark(){
-    var remark = document.getElementById("remarks-pop-up");
-    var openRemark = document.getElementById("show-remarks");
-    var closeRemark = document.getElementById("close-remarks");
 
-openRemark.addEventListener("click", ()=> {
-    remark.style.display = "block";
-});
-closeRemark.addEventListener("click", ()=> {
-    remark.style.display = "none";
-});
 
-}
 
-function approvePopUp(){
-    var approveNav = document.getElementById("approve-pop-up");
-    var openRemark = document.getElementById("show-approve-nav");
-    var closeRemark = document.getElementById("close-approve");
-    
-openRemark.addEventListener("click", ()=> {
-    approveNav.style.display = "block";
-});
-closeRemark.addEventListener("click", ()=> {
-    approveNav.style.display = "none";
-});
-
-}
 
 document.addEventListener('DOMContentLoaded', function () {
     const dropdownTriggers = document.querySelectorAll('.group button');

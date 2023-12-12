@@ -62,6 +62,43 @@ class AnteMortemController extends Controller
 
 
 
+    public function ForDisposeAnimal(Request $request, $id)
+    {
+        $request->validate([
+            'causes' => 'nullable',
+            'anteRemarks' => 'nullable',
+        ]);
+
+        // Find the animal
+        $animal = Animal::where('status', 'inspection')->find($id);
+
+        // Handle the case where the animal is not found
+        if (!$animal) {
+            return redirect()->route('admin.monitor.list')->with('error', 'Animal not found.');
+        }
+
+        // Load the anteMortem relationship
+        $animal->load('anteMortem');
+
+        // Handle the case where the anteMortem relationship data is not loaded successfully
+        if (!$animal->anteMortem) {
+            return redirect()->route('admin.monitor.list')->with('error', 'Failed to load anteMortem data.');
+        }
+
+        // Update fields on the anteMortem relationship
+        $animal->anteMortem->inspection_status = 'disposal';
+        $animal->anteMortem->ante_remarks = $request->anteRemarks;
+        $animal->anteMortem->causes = $request->causes;
+        // Save the changes
+        $animal->anteMortem->save();
+
+        // Redirect with success message
+        return redirect()->route('admin.monitor.list')->with('disposed', 'Animal is disposed.');
+    }
+
+
+
+
 
     public function SetSchedule(Request $request, $id)
     {

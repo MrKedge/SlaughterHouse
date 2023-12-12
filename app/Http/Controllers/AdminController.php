@@ -187,17 +187,6 @@ class AdminController extends Controller
 
 
 
-    public function ForDisposeAnimal($id)
-    {
-        $animal = Animal::where('status', 'inspection')->find($id);
-        $animal->status = 'Disposal';
-        $animal->save();
-
-        return redirect()->route('admin.monitor.list')->with('disposed', 'Animal pass the ante mortem');
-    }
-
-
-
 
     public function ShowScheduleList()
     {

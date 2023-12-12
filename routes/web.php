@@ -55,7 +55,7 @@ Route::post('/form/maintenance/', [FormMaintenanceController::class, 'FormMainte
 Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'])->name('delete.on.form');
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
 Route::post('/admin/monitor/animal/{id}', [AnteMortemController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
-Route::post('/admin/dispose/animal/{id}', [AdminController::class, 'ForDisposeAnimal'])->name('dispose.animal');
+Route::post('/admin/dispose/animal/{id}', [AnteMortemController::class, 'ForDisposeAnimal'])->name('dispose.animal');
 Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
