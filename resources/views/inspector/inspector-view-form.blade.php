@@ -17,6 +17,7 @@
 
 
     </div>
+
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>
 

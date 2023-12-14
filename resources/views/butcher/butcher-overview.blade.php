@@ -124,7 +124,7 @@
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
-                                                    {{ $animals->scheduled_at }}
+                                                    {{ $animals->schedule->scheduled_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase ">
                                                     {{ $animals->status }}

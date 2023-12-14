@@ -229,4 +229,16 @@ class AdminController extends Controller
     {
         return view('admin.admin-create-account');
     }
+
+
+
+
+    public function ShowDisposedList()
+    {
+        $animal = Animal::with('anteMortem')
+            ->where('status', 'not available')
+            ->get();
+
+        return view('admin.admin-disposal-list', compact('animal'));
+    }
 }

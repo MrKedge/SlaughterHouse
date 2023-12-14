@@ -145,9 +145,10 @@ class ClientController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'liveWeight' => 'required',
-            'drawingData' => 'required',
+            'drawingData' => 'required_if:kindOfAnimal,cow,horse,carabao',
             'certOwnership' => 'required',
-            'certTransfer'  => '',
+            'certTransfer' => '',
+            'ageClassify' => '',
         ]);
 
         $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
@@ -162,10 +163,18 @@ class ClientController extends Controller
             $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransferName);
         }
 
-        // Decode and save the marked animal image
-        $imageData = base64_decode(substr($request->drawingData, strpos($request->drawingData, ',') + 1));
-        $imageName = time() . '_' . uniqid() . '.png';
-        Storage::put('public/marked-animal/' . $imageName, $imageData);
+        // Check if 'kindOfAnimal' is in the allowed values before saving 'drawingData'
+        if (in_array($request->input('kindOfAnimal'), ['cow', 'horse', 'carabao'])) {
+            // Decode and save the marked animal image
+            $imageData = base64_decode(substr($request->drawingData, strpos($request->drawingData, ',') + 1));
+            $imageName = time() . '_' . uniqid() . '.png';
+            Storage::put('public/marked-animal/' . $imageName, $imageData);
+        }
+
+        // Check if 'kindOfAnimal' is not 'swine' and unset 'ageClassify'
+        if ($request->input('kindOfAnimal') !== 'swine') {
+            $request->merge(['ageClassify' => null]);
+        }
 
         $animal = new Animal();
         $animal->type = $request->kindOfAnimal;
@@ -176,16 +185,15 @@ class ClientController extends Controller
         $animal->gender = $request->gender;
         $animal->age = $request->age;
         $animal->live_weight = $request->liveWeight;
-        $animal->animal_mark = $imageName;
+        $animal->animal_mark = isset($imageName) ? $imageName : null; // Set to null if not in allowed values
         $animal->cert_ownership = $imageCertOwnershipName;
         $animal->cert_transfer = $imageCertTransferName;
 
-
         $animal->save();
-
 
         return redirect()->route('client.animal.list.register');
     }
+
 
 
     public function ShowDrafts()

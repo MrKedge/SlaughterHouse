@@ -23,7 +23,7 @@
             <div class="flex flex-col w-full ml-[240px]">
 
 
-                <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
+                <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
                         class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
@@ -83,25 +83,28 @@
                                 {{-- <input type="checkbox"> --}}
                             </div>
                         </div>
-                        <div class="scrollbar-gutter overflow-y-auto h-[440px]">
+                        <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                             <table class="w-full text-center">
                                 <thead class="">
                                     <tr>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Id
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Owner
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                            Approved Date
+                                        </th>
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Approved Time
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Status
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Action
                                         </th>
                                     </tr>
@@ -121,21 +124,46 @@
                                         @php $index = 1 @endphp
                                         @foreach ($animal as $animals)
                                             <tr
-                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
+                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
                                                 <td class="py-4 border-b border-black capitalize font-semibold">
                                                     {{ $animals->id }}
                                                 </td>
                                                 <td class="py-4 border-b border-black capitalize font-semibold">
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
-                                                <td class="py-4 border-b border-black uppercase font-semibold">
-                                                    {{ $animals->type }}
+                                                <td class="py-4 border-b border-black uppercase font-semibold relative">
+
+                                                    <p data-popover-target="popover-{{ $loop->index }}"
+                                                        class=" font-bold rounded-lg text-sm px-5 py-2.5 text-center   ">
+                                                        {{ $animals->type }}
+                                                    </p>
+
+                                                    <!-- Popover -->
+                                                    <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 dark:text-gray-400 dark:border-gray-600 dark:bg-gray-800">
+                                                        <div
+                                                            class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                                                            <h3 class="font-semibold text-gray-900 dark:text-white">
+                                                                {{ $animals->type }}</h3>
+                                                        </div>
+                                                        <div class="z-40 px-3 py-2">
+                                                            <p>{{ $animals->gender }}</p>
+                                                            <p>{{ $animals->live_weight }} Kg.</p>
+                                                            <p>{{ $animals->age }} Mos.</p>
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
                                                 </td>
-                                                <td class="py-4 font-semibold border-b border-black uppercase">
-                                                    {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y h:i:s A') }}
+                                                <td class="py-4 font-medium  border-b border-black capitalize ">
+                                                    {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y') }}
+                                                </td>
+                                                <td class="py-4 font-medium  border-b border-black capitalize ">
+                                                    {{ \Carbon\Carbon::parse($animals->approved_at)->format('h:i:s A') }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->status }}
+                                                    <span
+                                                        class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-green-900 dark:text-green-300 uppercase">{{ $animals->status }}</span>
+
                                                 </td>
                                                 <td class=" border-b border-black font-semibold capitalize">
 
@@ -273,6 +301,7 @@
         </script>
 
         <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+
 </body>
 
 </html>

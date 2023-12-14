@@ -12,12 +12,13 @@ class ButcherController extends Controller
 {
     public function ShowButcherOverview()
     {
-        $animal = Animal::with('user')
+        $animal = Animal::with('anteMortem')
             ->where('status', 'for slaughter')
             ->get();
-        $recent = Animal::where('status', 'slaughtered')
-            ->where('slaughtered_at', '>=', Carbon::now()->subHours(5))
-            ->latest('slaughtered_at')
+        $recent = Animal::join('post_mortems', 'animals.id', '=', 'post_mortems.animal_id')
+            ->where('animals.status', 'slaughtered')
+            ->where('post_mortems.slaughtered_at', '>=', Carbon::now()->subHours(5))
+            ->latest('post_mortems.slaughtered_at')
             ->limit(5)
             ->get();
         return view('butcher.butcher-overview', compact('animal', 'recent'));
@@ -36,15 +37,5 @@ class ButcherController extends Controller
         $animal = Animal::with('user')->find($id);
         $user = User::findOrFail($animal->user_id);
         return view('butcher.butcher-view-form', compact('animal', 'user'));
-    }
-
-    public function SlaughteredAnimal($id)      //for slaughtered the animal registration form//----------------------
-    {
-
-        $animal = Animal::where('status', 'for slaughter')->find($id);
-        $animal->status = 'slaughtered';
-        $animal->slaughtered_at = now();
-        $animal->save();
-        return redirect()->route('butcher.animal')->with('success', ['id' => $id]);
     }
 }

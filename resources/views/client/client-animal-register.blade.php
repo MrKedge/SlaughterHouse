@@ -22,27 +22,32 @@
             <div class=""> @include('client.layout.sidepanel')</div>
 
 
-            <section class="flex flex-col h-full pt-8 w-full mx-6">
+            <section class="flex flex-col h-full w-full mx-6">
 
 
-                <div class=" bg-white px-10 rounded-2xl  shadow-2xl py-6">
-                    <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">REGISTRATION
+                <div class=" bg-white px-10 rounded-md  shadow-2xl py-6">
+                    <h1
+                        class="text-center bg-gray-200 rounded-2xl font-extrabold mb-3 text-[#293241] py-8 text-2xl border-b-2 border-gray-400">
+                        REGISTRATION
                     </h1>
                     <form action="{{ route('store.animal') }}" method="POST" enctype="multipart/form-data"
                         class="flex w-full justify-center relative">
                         @csrf
                         <div class="w-full">
-                            <div class="scrollbar-gutter pr-5 pb-20 overflow-y-auto h-[500px] space-y-10">
+                            <div
+                                class="scrollbar-gutter pr-5 pb-20 overflow-y-auto h-[500px] space-y-10 border-b border-gray-400">
 
                                 <div class="grid grid-flow-row  md:grid-flow-col gap-10 w-full">
                                     {{-- owner info --}}
                                     <div class="">
                                         <h1 class="font-bold pointer-events-none text-lg italic">Owner Information</h1>
 
-                                        <label class="block pb-1 pt-3" for="ownerName">Owner Name:</label>
+                                        <label
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Owner
+                                            Name:</label>
 
                                         <p id="ownerName"
-                                            class="text-center capitalize border-2 border-black rounded-md w-full p-2">
+                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             @auth
                                                 {{ auth()->user()->first_name }} {{ auth()->user()->last_name }}
                                             @endauth
@@ -51,9 +56,10 @@
 
                                     <div>
                                         <h1 class="font-bold opacity-0 text-lg">Owner Information</h1>
-                                        <label class="block pb-1 pt-3" for="address">Address:</label>
+                                        <label
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Address:</label>
                                         <p id="address"
-                                            class="text-center capitalize border-2 border-black rounded-md w-full p-2">
+                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             @auth
                                                 {{ auth()->user()->address }}
                                             @endauth
@@ -67,13 +73,14 @@
 
                                         <h1 class="font-bold pointer-events-none text-lg italic">Documents</h1>
 
-                                        <p class="block pb-1 pt-3">Certificate of Ownership:</p>
+                                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">
+                                            Certificate of Ownership:</p>
 
                                         <div class="flex relative">
 
 
                                             <label for="certOwnershipInput"
-                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
                                                 <span class="mx-auto font-medium flex items-center"><i
                                                         class='bx bx-plus' style='font-size: 2em;'></i> Add
                                                     image</span>
@@ -93,13 +100,15 @@
                                         <h1 class="font-bold pointer-events-none text-lg italic opacity-0">Documents
                                         </h1>
 
-                                        <p class="block pb-1 pt-3">Cert. of Transfer of Large Cattle:</p>
+                                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">
+                                            Cert.
+                                            of Transfer of Large Cattle:</p>
 
                                         <div class="flex relative">
 
 
                                             <label for="certTransferInput"
-                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center">
+                                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
                                                 <span class="mx-auto font-medium flex items-center"><i
                                                         class='bx bx-plus' style='font-size: 2em;'></i> Add
                                                     image</span>
@@ -117,14 +126,14 @@
 
 
                                 <div class="grid grid-cols-1 md:grid-cols-2 md:gap-10">{{-- animal info --}}
-
                                     <div class="space-y-8">
                                         <div>
                                             <h1 class="font-bold text-lg italic">Animal Information</h1>
-                                            <label class="block pb-1 pt-3" for="">Animal:</label>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Animal:</label>
                                             <select name="kindOfAnimal" id="typeOfAnimal" required
-                                                class="type-animal border-2 border-black rounded-md w-full p-2">
-                                                <option value="" disabled selected>Select</option>
+                                                class="type-animal font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option pla value="" disabled selected>Select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
                                                         <option value="{{ $animals->animal_type }}">
@@ -136,43 +145,64 @@
                                         </div>
                                         <div class="flex justify-start gap-7">
                                             <div>
-                                                <label class="block pb-1 pt-3" for="">Gender:</label>
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+                                                    for="">Gender:</label>
                                                 <div class="">
-                                                    <div>
-                                                        <input type="radio" id="male" name="gender"
-                                                            value="male"
-                                                            class="border-2 border-black rounded-md p-2 inline-block"
-                                                            required>
-                                                        <label for="male">Male</label>
-                                                    </div>
-
-                                                    <div>
-                                                        <input type="radio" id="female" name="gender"
-                                                            value="female" class="border-2 border-black rounded-md p-2"
-                                                            required>
-                                                        <label for="female">Female</label>
-                                                    </div>
+                                                    <ul
+                                                        class="w-28    text-sm font-medium text-gray-900 border border-gray-200 rounded-lg bg-gray-50 dark:border-gray-600 dark:text-white">
+                                                        <li
+                                                            class="w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600">
+                                                            <div class="flex items-center ps-3">
+                                                                <input id="list-radio-male" type="radio"
+                                                                    value="male" name="gender"
+                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:border-gray-500">
+                                                                <label for="list-radio-male"
+                                                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">Male
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                        <li
+                                                            class="w-full border-gray-200 rounded-t-lg dark:border-gray-600">
+                                                            <div class="flex items-center ps-3">
+                                                                <input id="list-radio-female" type="radio"
+                                                                    value="female" name="gender"
+                                                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:border-gray-500">
+                                                                <label for="list-radio-female"
+                                                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">female
+                                                                </label>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
                                             <div>
-                                                <label class="block pb-1 pt-3" for="">Age: (Months)</label>
-                                                <input type="number" name="age" required min="0"
-                                                    max="2000" step="0.01"
-                                                    class="border-2 border-black rounded-md p-2">
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+                                                    for="">Age: (Months)</label>
+                                                <input type="number" name="age" required min="1"
+                                                    max="2000" placeholder="Age" oninput="limitInputValue(this)"
+                                                    class="font-medium  bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                             </div>
                                             <div>
-                                                <label class="block pb-1 pt-3" for="">Live Wt.
+                                                <label
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+                                                    for="">Live Wt.
                                                     (Kilogram)</label>
                                                 <input type="number" max="2000" name="liveWeight" required
-                                                    min="0" class="border-2 border-black rounded-md p-2">
+                                                    min="1" placeholder="Weight" step="0.01"
+                                                    oninput="limitInputValue(this)"
+                                                    class="font-medium bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
                                             </div>
                                         </div>
 
                                         <div>
-                                            <label class="block pb-1 pt-3" for="">Destination:</label>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
+                                                for="">Destination:</label>
                                             <select name="destination" id="" required
-                                                class="border-2 border-black rounded-md w-full p-2">
+                                                class="font-medium bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 <option value="" disabled selected>Select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
@@ -189,9 +219,11 @@
                                     <div class="space-y-8">
                                         <div>
                                             <h1 class="font-bold opacity-0 text-lg">Animal Information</h1>
-                                            <label class="block pb-1 pt-3" for="">Butcher:</label>
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3"
+                                                for="">Butcher:</label>
                                             <select name="butcher" id="" required
-                                                class="border-2 border-black rounded-md w-full p-2">
+                                                class="font-medium  bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                 <option value="" disabled selected>Select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_butcher) && $animals->animal_butcher !== '')
@@ -204,13 +236,19 @@
                                         </div>
 
                                         <div class="hidden" id="ageClassifyDiv">
-                                            <label for="" class="block pb-1 pt-3">Age Classification:</label>
+                                            <label for=""
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Age
+                                                Classification:</label>
                                             <select name="ageClassify" id="putAgeClassify"
-                                                class="age-classify border-2 border-black rounded-md w-full p-2">
+                                                class="capitalize  font-medium  age-classify bg-gray-50 border border-gray-300
+                                                text-gray-900 text-sm rounded-lg focus:ring-blue-500
+                                                focus:border-blue-500 block w-full p-2.5 dark:border-gray-600
+                                                dark:placeholder-gray-400  dark:focus:ring-blue-500
+                                                dark:focus:border-blue-500">
                                                 <option value="" disabled selected>select</option>
                                                 @foreach ($animal as $animals)
                                                     @if (!is_null($animals->animal_ageclassify) && $animals->animal_ageclassify !== '')
-                                                        <option value="{{ $animals->animal_type }}">
+                                                        <option value="{{ $animals->animal_ageclassify }}">
                                                             {{ $animals->animal_ageclassify }}
                                                         </option>
                                                     @endif
@@ -220,12 +258,12 @@
 
                                         <div class="absolute bottom-0 right-5 pb-[20px]">
                                             <button type="submit"
-                                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                                class="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
                                                 Register
                                             </button>
 
                                             <a href="{{ route('client.overview') }}"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                class="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded">
                                                 Cancel
                                             </a>
                                         </div>
@@ -261,6 +299,7 @@
             }
         }
     </script>
+
 
     <script>
         var imageUrls = {

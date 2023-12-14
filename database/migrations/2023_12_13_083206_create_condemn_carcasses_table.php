@@ -11,18 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_mortems', function (Blueprint $table) {
+        Schema::create('condemn_carcasses', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('category')->nullable();
+            $table->integer('carcass_weight')->nullable();
+            $table->string('part')->nullable();
+            $table->string('cause')->nullable();
 
             $table->unsignedBigInteger('animal_id');
-
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-            $table->timestamp('slaughtered_at')->nullable();
-            $table->string('postmortem_status')->nullable();
-            $table->string('checked_at')->nullable();
-            $table->integer('post_weight')->nullable();
-            $table->string('inspected_by')->nullable();
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_mortems');
+        Schema::dropIfExists('condemn_carcasses');
     }
 };

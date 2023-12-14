@@ -69,28 +69,31 @@ class AnteMortemController extends Controller
             'anteRemarks' => 'nullable',
         ]);
 
-        // Find the animal
-        $animal = Animal::where('status', 'inspection')->find($id);
+        // Find the animal with the anteMortem relationship loaded
+        $animal = Animal::with('anteMortem')->where('status', 'inspection')->find($id);
 
         // Handle the case where the animal is not found
         if (!$animal) {
             return redirect()->route('admin.monitor.list')->with('error', 'Animal not found.');
         }
 
-        // Load the anteMortem relationship
-        $animal->load('anteMortem');
+        // Check if the anteMortem relationship exists
+        if ($animal->anteMortem) {
+            // Update fields on the anteMortem relationship
+            $animal->anteMortem->inspection_status = 'disposal';
+            $animal->anteMortem->ante_remarks = $request->anteRemarks;
+            $animal->anteMortem->causes = $request->causes;
+            $animal->anteMortem->inspected_at = now();
 
-        // Handle the case where the anteMortem relationship data is not loaded successfully
-        if (!$animal->anteMortem) {
-            return redirect()->route('admin.monitor.list')->with('error', 'Failed to load anteMortem data.');
+            // Save the changes to the anteMortem record
+            $animal->anteMortem->save();
+        } else {
+            return redirect()->route('admin.monitor.list')->with('error', 'AnteMortem data not found for the specified animal.');
         }
 
-        // Update fields on the anteMortem relationship
-        $animal->anteMortem->inspection_status = 'disposal';
-        $animal->anteMortem->ante_remarks = $request->anteRemarks;
-        $animal->anteMortem->causes = $request->causes;
-        // Save the changes
-        $animal->anteMortem->save();
+        // Update the status directly on the animal model
+        $animal->status = 'not available';
+        $animal->save();
 
         // Redirect with success message
         return redirect()->route('admin.monitor.list')->with('disposed', 'Animal is disposed.');

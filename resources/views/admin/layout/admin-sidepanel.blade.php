@@ -42,7 +42,7 @@
                 </div>
 
                 <a href="{{ route('admin.view.animal.reg.list') }}">
-                    <h1 class="panel-text flex items-center">FOR APPROVAL</h1>
+                    <h1 class="panel-text flex items-center">For Approval</h1>
                 </a>
 
             </li>
@@ -52,7 +52,7 @@
                 <button
                     class="flex justify-between items-center w-full panel-text hover:bg-gray-700 p-2 rounded-md group">
                     <div class="flex items-center justify-start gap-4">
-                        <i class='bx bx-registered' style='color: #ffffff; font-size: 24px;'></i>ON PROCESS
+                        <i class='bx bx-registered' style='color: #ffffff; font-size: 24px;'></i>On Process
                     </div>
                     <i class='arrow bx bxs-chevron-right transform transition-transform duration-300'
                         style='color:#ffffff'></i>
@@ -61,19 +61,19 @@
                 <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0 ">
                     <ul class="">
                         <li><a href="{{ route('admin.approve.list') }}">
-                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">APPROVE</h1>
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Approve</h1>
                             </a>
                         </li>
                         <li><a href="{{ route('admin.monitor.list') }}">
-                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">ANTE MORTEM</h1>
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Ante Mortem</h1>
                             </a>
                         </li>
                         <li><a href="{{ route('admin.schedule.list') }}">
-                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">SCHEDULE</h1>
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Schedule</h1>
                             </a>
                         </li>
                         <li><a href="{{ route('admin.for.slaughter.list') }}">
-                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">FOR SLAUGHTER</h1>
+                                <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">For Slaughter</h1>
                             </a>
                         </li>
                     </ul>
@@ -91,7 +91,22 @@
                 </div>
 
                 <a href="{{ route('admin.slaughter.list') }}">
-                    <h1 class="panel-text flex items-center">SLAUGHTERED</h1>
+                    <h1 class="panel-text flex items-center">Slaughtered</h1>
+                </a>
+
+            </li>
+
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                <div>
+                    <div class="flex items-center"><i class='bx bxs-trash' style='color: #ffffff; font-size: 24px;'></i>
+                    </div>
+
+
+                </div>
+
+                <a href="{{ route('admin.dispose.list') }}">
+                    <h1 class="panel-text flex items-center">Disposal</h1>
                 </a>
 
             </li>
@@ -107,7 +122,7 @@
                 </div>
 
                 <a href="{{ route('owner.list') }}">
-                    <h1 class="panel-text flex items-center whitespace-nowrap">OWNER</h1>
+                    <h1 class="panel-text flex items-center whitespace-nowrap">Owner</h1>
                 </a>
 
             </li>
@@ -122,7 +137,7 @@
                 </div>
 
                 <a href="{{ route('admin.form.maintenance') }}">
-                    <h1 class="panel-text flex items-center">MAINTENANANCE</h1>
+                    <h1 class="panel-text flex items-center">Maintenance</h1>
                 </a>
 
             </li>
@@ -189,7 +204,7 @@
                 </div>
 
                 <a href="{{ route('admin.create.account') }}">
-                    <h1 class="panel-text flex items-center">REGISTER ACCOUNT</h1>
+                    <h1 class="panel-text flex items-center">Register Account</h1>
                 </a>
 
             </li>
@@ -204,7 +219,7 @@
                 </div>
 
                 <a href="{{ route('scan.qr') }}">
-                    <h1>SCAN QR</h1>
+                    <h1>Scan QR</h1>
                 </a>
 
             </li>

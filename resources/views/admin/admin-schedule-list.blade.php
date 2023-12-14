@@ -133,7 +133,8 @@
                                                     {{ $animals->type }}
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->anteMortem->inspection_status }}
+                                                    <span
+                                                        class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-pink-900 dark:text-pink-300">{{ $animals->anteMortem->inspection_status }}</span>
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     {{ $animals->schedule->scheduled_at }}

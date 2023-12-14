@@ -1,6 +1,12 @@
 <div class="flex">
 
-    <div class="fixed">@include('butcher.layout.butcher-panel')</div>
+    <div class="fixed">
+        @if (auth()->user()->role === 'butcher')
+            @include('butcher.layout.butcher-panel')
+        @else
+            @include('inspector.layout.inspector-sidepanel')
+        @endif
+    </div>
     <div class="mx-auto w-full">
 
         {{-- main content --}}
@@ -167,17 +173,26 @@
                                 <p class="text-red-700">Animal cannot be slaughtered at this time.</p>
                             @endif
 
-                            @if ($animal->post_mortem === 'null' && $animal->status == 'slaughtered' && auth()->user()->role === 'inspector')
-                                <button id="good-btn"
-                                    class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                    <box-icon name='checkbox-checked' color='#ffffff'></box-icon><span>Good</span>
-                                </button>
 
-                                <button id="condemn-btn"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                    <i class='bx bxs-error text-white'></i><span>Condemn</span>
+                            <div class="flex justify-center m-5">
+                                <button id="defaultModalButton" data-modal-target="defaultModal"
+                                    data-modal-toggle="defaultModal"
+                                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                    type="button">
+                                    For Consumption
                                 </button>
-                            @endif
+                            </div>
+
+
+                            <div class="flex justify-center m-5">
+                                <button id="condemnModalButton" data-modal-target="condemnModal"
+                                    data-modal-toggle="condemnModal"
+                                    class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
+                                    type="button">
+                                    Condemn
+                                </button>
+                            </div>
+
                         </div>
 
                     </div>
@@ -259,54 +274,9 @@
 
 </div>
 
-<div id="good-popup"
-    class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
-    <div class="">
-        <h1 class="block font-semibold text-xl py-5">Do you want to mark the animal as Good?</h1>
-        <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
-            <form method="post" action="{{ route('inspector.postmortem.good', ['id' => $animal->id]) }}">
-                @csrf
-                <button
-                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">YES</button>
-            </form>
-            <a id="hide-good"
-                class="cursor-pointer  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">NO</a>
-        </div>
-    </div>
-</div>
-
-<div id="condemn-popup"
-    class="fixed hidden bg-white w-[400px] h-auto text-center rounded-md border left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2  shadow-2xl backdrop-filter ">
-    <div class="">
-        <h1 class="block font-semibold text-xl py-5 px-">Do you want to mark the animal as Condemned?</h1>
-        <div class="py-3 flex justify-center gap-6 mx-auto mb-4">
-            <form method="post" action="{{ route('inspector.condemn.animal', ['id' => $animal->id]) }}">
-                @csrf
-                <button
-                    class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">YES</button>
-            </form>
-            <a id="close-condemn"
-                class="cursor-pointer  text-white bg-red-700 hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900">NO</a>
-        </div>
-    </div>
-</div>
-
+@include('form.pop-up'){{-- POP UP FORM FOR BUTCHER AND INSPECTOR --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        var goodBtn = document.getElementById('good-btn');
-        var goodPopup = document.getElementById('good-popup');
-        var hideBtn = document.getElementById('hide-good');
-
-        goodBtn.addEventListener('click', function() {
-            goodPopup.classList.toggle('hidden');
-        });
-
-        hideBtn.addEventListener('click', function() {
-            goodPopup.classList.add('hidden');
-        });
-
-    });
-
     document.addEventListener('DOMContentLoaded', function() {
         var condemnBtn = document.getElementById('condemn-btn');
         var goodPopup = document.getElementById('condemn-popup');

@@ -36,4 +36,14 @@ class Animal extends Model
     {
         return $this->hasOne(Schedule::class);
     }
+
+    public function postMortem()
+    {
+        return $this->hasOne(PostMortem::class);
+    }
+
+    public function condemnCarcasses()
+    {
+        return $this->hasMany(CondemnCarcass::class);
+    }
 }

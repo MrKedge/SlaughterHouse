@@ -33,6 +33,7 @@ class AnimalFactory extends Factory
             'cert_ownership' => $this->faker->word,
             'animal_mark' => $this->faker->word,
             'cert_transfer' => $this->faker->word,
+            'status' => $this->faker->randomElement(['pending', 'approved']),
             'user_id' => User::factory(),
         ];
     }

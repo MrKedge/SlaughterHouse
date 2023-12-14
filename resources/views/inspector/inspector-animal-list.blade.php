@@ -84,7 +84,7 @@
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butchering Date
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Slaughter Date
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
                                         </th>
@@ -117,7 +117,7 @@
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
                                                 <td class="py-4 border-b border-black">
-                                                    {{ $animals->slaughtered_at }}
+                                                    {{ optional($animals->postMortem)->slaughtered_at }}
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase ">
                                                     {{ $animals->status }}

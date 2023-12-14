@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
+use App\Rules\EmailDomains;
 
 class AuthController extends Controller
 {
@@ -74,7 +75,7 @@ class AuthController extends Controller
         $request->validate([
             'firstName' => 'min:3|required',
             'lastName' => 'min:3|required',
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => ['required', 'email', new EmailDomains, 'unique:users,email'],
             'password' => 'required|confirmed|min:6',
         ], [
             'firstName.min' => 'First name must be at least :min characters.',
@@ -248,7 +249,7 @@ class AuthController extends Controller
             'firstName' => 'min:3|required',
             'lastName' => 'min:3|required',
             'role' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users,email',
+            'email' => ['required', 'email', new EmailDomains, 'unique:users,email'],
             'password' => 'required|confirmed|min:6',
         ], [
             'firstName.min' => 'First name must be at least :min characters.',

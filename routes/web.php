@@ -7,6 +7,7 @@ use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\InspectorController;
+use App\Http\Controllers\PostMortemController;
 use App\Http\Controllers\QrCodeController;
 use App\Models\AnteMortem;
 use GuzzleHttp\Client;
@@ -56,9 +57,10 @@ Route::post('/delete/on/form', [FormMaintenanceController::class, 'DeleteOnForm'
 Route::post('/for/slaughter/animal/{id}', [AdminController::class, 'ForSlaughterAnimal'])->name('for.slaughter.animal');
 Route::post('/admin/monitor/animal/{id}', [AnteMortemController::class, 'MonitorAnimal'])->name('admin.monitor.animal');
 Route::post('/admin/dispose/animal/{id}', [AnteMortemController::class, 'ForDisposeAnimal'])->name('dispose.animal');
-Route::post('/inspector/postmortem/good/{id}', [InspectorController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
+Route::post('/inspector/postmortem/good/{id}', [PostMortemController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
+
 //admin pages
 
 
@@ -75,6 +77,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
     Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
+    Route::get('/admin/dispose/list', [AdminController::class, 'ShowDisposedList'])->name('admin.dispose.list');
 });
 
 
@@ -97,7 +100,7 @@ Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name
 
 
 //butcher
-Route::post('/buthcer/slaughtered/animal{id}', [ButcherController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');
+Route::post('/buthcer/slaughtered/animal{id}', [PostMortemController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');
 Route::middleware(['butcher'])->group(function () {
     Route::get('/butcher/overview/', [ButcherController::class, 'ShowButcherOverview'])->name('butcher.overview');
     Route::get('/butcher/animals/', [ButcherController::class, 'ShowButcherAnimal'])->name('butcher.animal');
@@ -106,7 +109,7 @@ Route::middleware(['butcher'])->group(function () {
 
 
 //inspector
-Route::post('/inspector/condemn/animal/{id}', [InspectorController::class, 'PostMortemCondemn'])->name('inspector.condemn.animal');
+Route::post('/inspector/condemn/animal/{id}', [PostMortemController::class, 'CondemnCarcass'])->name('inspector.condemn.animal');
 Route::middleware(['inspector'])->group(function () {
     Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
     Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
