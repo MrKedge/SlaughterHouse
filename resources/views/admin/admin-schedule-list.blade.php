@@ -24,7 +24,7 @@
             <div class="flex flex-col w-full ml-[240px]">
 
 
-                <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
+                <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
                         class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
@@ -75,15 +75,12 @@
                     <section
                         class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
-                        <div class="flex">
-                            <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Scheduled
-                            </h1>
-                            <div class="">
-                                <label for=""></label>
-                                {{-- <input type="checkbox"> --}}
-                            </div>
+                        <div class="flex gap-8">
+
+
+                            @include('admin.tabs.tabs')
                         </div>
-                        <div class="scrollbar-gutter overflow-y-auto h-[440px]">
+                        <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                             <table class="w-full text-center">
                                 <thead class="">
                                     <tr>

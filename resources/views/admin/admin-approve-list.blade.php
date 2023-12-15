@@ -75,13 +75,9 @@
                         class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                         <div class="flex">
-                            <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">
-                                Approved Animals
-                            </h1>
-                            <div class="">
-                                <label for=""></label>
-                                {{-- <input type="checkbox"> --}}
-                            </div>
+
+                            @include('admin.tabs.tabs')
+
                         </div>
                         <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                             <table class="w-full text-center">
@@ -162,7 +158,7 @@
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     <span
-                                                        class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-green-900 dark:text-green-300 uppercase">{{ $animals->status }}</span>
+                                                        class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-green-600 dark:text-green-300 uppercase">{{ $animals->status }}</span>
 
                                                 </td>
                                                 <td class=" border-b border-black font-semibold capitalize">

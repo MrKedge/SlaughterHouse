@@ -76,8 +76,9 @@
                         class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                         <div class="flex">
-                            <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Ante Mortem
-                            </h1>
+
+
+                            @include('admin.tabs.tabs')
 
                             @if (session('success'))
                                 <div class="">
