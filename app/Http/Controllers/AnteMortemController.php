@@ -123,13 +123,17 @@ class AnteMortemController extends Controller
 
         // Update the inspection status in the AnteMortem record
         $anteMortem->inspection_status = 'for slaughter';
+        if ($anteMortem->inspected_at === null) {
+            $anteMortem->inspected_at = now();
+        }
+
         $anteMortem->save();
 
         // Set the schedule in the Schedule model
         $slaughterDateTime = Carbon::parse($request->input('dateOfSlaughter') . ' ' . $request->input('timeOfSlaughter'));
         Schedule::updateOrCreate(
             ['animal_id' => $animal->id],
-            ['scheduled_at' => $slaughterDateTime]
+            ['scheduled_at' => $slaughterDateTime],
         );
 
         // Redirect with success message

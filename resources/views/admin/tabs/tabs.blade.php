@@ -47,6 +47,8 @@
 
     </ul>
 </div>
+
+
 {{-- <ul class="flex space-x-2">
     <li class="me-2">
         <a href="{{ route('admin.schedule.list') }}"

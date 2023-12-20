@@ -98,6 +98,9 @@
                                             Status
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                            Cause
+                                        </th>
+                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Date of Disposal
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
@@ -133,6 +136,44 @@
                                                 </td>
                                                 <td class="py-4 border-b border-black uppercase font-semibold">
                                                     {{ optional($animals->anteMortem)->inspection_status }}
+                                                </td>
+                                                <td class="py-4 border-b border-black capitalize font-semibold">
+
+                                                    <p data-popover-target="popover-{{ $loop->index }}"
+                                                        class="font-bold rounded-lg text-sm px-5 py-2.5 text-center">
+                                                        {{ Str::limit(optional($animals->anteMortem)->causes, 10, '...') }}
+                                                    </p>
+                                                    <!-- Popover -->
+                                                    <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 ">
+                                                        <div
+                                                            class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg  ">
+                                                            <h3 class="font-semibold text-gray-900 ">
+                                                                {{ $animals->type }}</h3>
+                                                        </div>
+                                                        <div class="z-40 px-3 py-2">
+
+                                                            <div>
+                                                                <label
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Cause:</label>
+                                                                <p id="address"
+                                                                    class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                                                    {{ optional($animals->anteMortem)->causes }}
+
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Remarks:</label>
+                                                                <textarea readonly
+                                                                    class="cursor-not-allowed  font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                    rows="3" {{-- You can adjust the number of rows based on your design --}} name="ante_remarks">{{ optional($animals->anteMortem)->ante_remarks }}</textarea>
+                                                            </div>
+
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
                                                 </td>
                                                 <td class="py-4 border-b border-black font-semibold capitalize">
                                                     {{ optional($animals->anteMortem)->inspected_at }}

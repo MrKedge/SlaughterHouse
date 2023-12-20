@@ -97,23 +97,23 @@
                         </div>
                         <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                             <table class="w-full text-center">
-                                <thead class="">
-                                    <tr>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                <thead>
+                                    <tr class="">
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Id
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Owner
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Time of Arrival
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Status
                                         </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Action
                                         </th>
                                     </tr>
@@ -131,26 +131,45 @@
                                         @php $index = 1 @endphp
                                         @foreach ($animal as $animals)
                                             <tr
-                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
-                                                <td class="py-4 border-b border-black capitalize font-semibold">
+                                                class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200">
+                                                <td class=" border-b border-black capitalize font-semibold">
                                                     {{ $animals->id }}
                                                 </td>
-                                                <td class="py-4 border-b border-black capitalize font-semibold">
+                                                <td class=" border-b border-black capitalize font-semibold">
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
-                                                <td class="py-4 border-b border-black uppercase font-semibold">
-                                                    {{ $animals->type }}
-                                                </td>
-                                                <td class="py-4 border-b border-black font-semibold capitalize">
-                                                    {{ $animals->anteMortem->arrived_at }}
-                                                </td>
-                                                <td class="py-4 border-b border-black font-semibold capitalize">
+                                                <td class=" border-b border-black uppercase font-semibold relative">
+                                                    <p data-popover-target="popover-{{ $loop->index }}"
+                                                        class="font-bold rounded-lg text-sm py-2.5 text-center">
+                                                        {{ $animals->type }}
+                                                    </p>
 
-                                                    <span
-                                                        class="cursor-default     bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-1 rounded dark:bg-gray-700 dark:text-gray-300 uppercase">
-                                                        {{ $animals->status }}</span>
+                                                    <!-- Popover -->
+                                                    <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                                                        <div
+                                                            class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                                                            <h3 class="font-semibold text-gray-900">{{ $animals->type }}
+                                                            </h3>
+                                                        </div>
+                                                        <div class="z-40 px-3 py-2">
+                                                            <p>{{ $animals->gender }}</p>
+                                                            <p>{{ $animals->live_weight }} Kg.</p>
+                                                            <p>{{ $animals->age }} Mos.</p>
+                                                        </div>
+                                                        <div data-popper-arrow></div>
+                                                    </div>
                                                 </td>
                                                 <td class="border-b border-black font-semibold capitalize">
+                                                    {{ $animals->anteMortem->arrived_at }}
+                                                </td>
+                                                <td class="border-b border-black font-semibold capitalize">
+                                                    <span
+                                                        class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                        {{ $animals->status }}
+                                                    </span>
+                                                </td>
+                                                <td class="py-4 border-b border-black font-semibold capitalize">
                                                     <div class="flex justify-center gap-3">
                                                         @if ($animals->qr_code === null)
                                                             <form
@@ -165,9 +184,14 @@
                                                             </form>
                                                         @endif
                                                         <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-1 rounded flex items-center">
-                                                            <box-icon name='navigation'
-                                                                color='#ffffff'></box-icon><span>View</span>
+                                                            class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                fill="currentColor" data-slot="icon" class="w-6 h-6">
+                                                                <path
+                                                                    d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
+                                                            </svg>
+
+                                                            <span>View</span>
                                                         </a>
                                                     </div>
                                                 </td>
