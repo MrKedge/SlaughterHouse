@@ -34,15 +34,17 @@ class AnteMortemController extends Controller
 
 
 
-
     public function AnteMortemList()
     {
-
         $animal = Animal::where('status', 'inspection')->doesntHave('schedule')
             ->get();
 
-
-        return view('admin.admin-monitoring-list', compact('animal'));
+        // Check user role
+        if (auth()->user()->role === 'admin') {
+            return view('admin.admin-monitoring-list', compact('animal'));
+        } elseif (auth()->user()->role === 'inspector') {
+            return view('inspector.inspector-antemortem', compact('animal'));
+        }
     }
 
 
@@ -137,6 +139,6 @@ class AnteMortemController extends Controller
         );
 
         // Redirect with success message
-        return redirect()->route('admin.monitor.list')->with('success', 'Set Schedule For Animal');
+        return redirect()->back()->with('success', 'Set Schedule For Animal');
     }
 }

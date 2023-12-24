@@ -27,12 +27,20 @@ class InspectorController extends Controller
 
 
 
-    public function ShowInspectAnimal()
+    public function ShowPostMortemAnimal()
     {
         $animal = Animal::with('user')
             ->where('status', 'slaughtered')
             ->get();
-        return view('inspector.inspector-animal-list', compact('animal'));
+        return view('inspector.inspector-postmortem', compact('animal'));
+    }
+
+
+
+    public function ShowAnteMortemAnimal()
+    {
+
+        return view('inspector.inspector-antemortem');
     }
 
 

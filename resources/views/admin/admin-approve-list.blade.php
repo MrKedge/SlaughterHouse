@@ -120,10 +120,10 @@
                                         @foreach ($animal as $animals)
                                             <tr
                                                 class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
-                                                <td class=" border-b border-black capitalize font-semibold">
+                                                <td class=" border-b border-black capitalize font-medium">
                                                     {{ $animals->id }}
                                                 </td>
-                                                <td class="border-b border-black capitalize font-semibold">
+                                                <td class="border-b border-black capitalize font-normal">
                                                     {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                                 </td>
                                                 <td class=" border-b border-black uppercase font-semibold relative">
@@ -148,10 +148,10 @@
                                                         <div data-popper-arrow></div>
                                                     </div>
                                                 </td>
-                                                <td class=" font-medium  border-b border-black capitalize ">
+                                                <td class=" border-b border-black capitalize font-normal">
                                                     {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y') }}
                                                 </td>
-                                                <td class=" font-medium  border-b border-black capitalize ">
+                                                <td class=" font-normal  border-b border-black capitalize ">
                                                     {{ \Carbon\Carbon::parse($animals->approved_at)->format('h:i:s A') }}
                                                 </td>
                                                 <td class=" border-b border-black font-semibold capitalize">

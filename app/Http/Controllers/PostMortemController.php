@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\PostMortem;
 use App\Models\CondemnCarcass;
+use Illuminate\Support\Str;
 
 class PostMortemController extends Controller
 {
@@ -97,5 +98,31 @@ class PostMortemController extends Controller
         $animal->condemnCarcasses()->save($condemnCarcass);
 
         return redirect()->back()->with('success', 'Condemn record saved successfully.');
+    }
+
+
+    public function EditCondemn(Request $request, $id)
+    {
+        $request->validate([
+            'category' => 'nullable',
+            'condemnWeights' => 'nullable',
+            'part' => 'nullable',
+            'inspectorName' => 'nullable',
+            'cause' => 'nullable',
+        ]);
+
+        $condemn = CondemnCarcass::updateOrCreate(
+            ['id' => $id], // Condition to find the record based on its primary key
+            [
+                'category' => Str::lower($request->category),
+                'carcass_weight' => $request->condemnWeights,
+                'part' => Str::lower($request->part),
+                'cause' => Str::lower($request->cause),
+                // Add other fields as needed
+            ]
+        );
+        // You can pass $condemn to your edit view or perform any other logic here
+
+        return redirect()->back()->with('success', 'Condemn updated');
     }
 }

@@ -23,9 +23,9 @@
                 <div class="ml-[240px] flex">
 
 
-                    <section class="bg-white h-full w-full rounded-md mx-3 mt-2 drop-shadow-2xl">
+                    <section class=" h-full w-full rounded-md mx-3 mt-2 drop-shadow-2xl bg-gray-50">
 
-                        <div class=" border-b border-gray-300">
+                        <div class=" border-b border-gray-300 bg-white">
                             <h1 class="mt-3  text-2xl font-bold text-left pl-6 pb-6 text-[#293241] ">
                                 ANIMAL
                                 DETAILS</h1>
@@ -191,10 +191,10 @@
 
 
                                 </div>
-                                <h1 class="font-bold pointer-events-none text-lg italic pl-12">Documents:
+                                <h1 class="font-bold pointer-events-none text-lg italic pl-12 ">Documents:
                                 </h1>
                                 <!-- Modal body -->
-                                <div class="grid gap-4 mb-4 sm:grid-cols-5 px-12">
+                                <div class="grid gap-4 mb-4 sm:grid-cols-5 px-12 bg-gray-50">
 
                                     <div>
                                         <label class="block pb-1" for="">Certificate of Ownership:</label>
@@ -420,19 +420,20 @@
                                         </h2>
                                         <div id="accordion-color-body-3" class="hidden"
                                             aria-labelledby="accordion-color-heading-3">
-                                            <div class="p-5 border border-t-0 border-gray-200 dark:border-gray-700">
+                                            <div
+                                                class="p-1 border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg ">
                                                 {{-- start table --}}
 
-                                                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                                                <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg">
                                                     <table
                                                         class="w-full text-sm text-left rtl:text-right text-gray-500">
-                                                        <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+                                                        <thead class="text-xs text-gray-700 uppercase bg-gray-300">
                                                             <tr>
                                                                 <th scope="col" class="px-6 py-3">
                                                                     Organ
                                                                 </th>
                                                                 <th scope="col" class="px-6 py-3">
-                                                                    Status
+                                                                    Category
                                                                 </th>
                                                                 <th scope="col" class="px-6 py-3">
                                                                     Weight
@@ -446,28 +447,66 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody>
-                                                            <tr class="odd:bg-white even:bg-gray-50 border-b">
-                                                                <th scope="row"
-                                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                                    Apple MacBook Pro 17"
-                                                                </th>
-                                                                <td class="px-6 py-4">
-                                                                    Silver
-                                                                </td>
-                                                                <td class="px-6 py-4">
-                                                                    Laptop
-                                                                </td>
-                                                                <td class="px-6 py-4">
-                                                                    $2999
-                                                                </td>
-                                                                <td class="px-6 py-4">
-                                                                    <a href="#"
-                                                                        class="font-medium text-blue-600 hover:underline">Edit</a>
-                                                                </td>
-                                                            </tr>
+                                                            @foreach ($animal->condemnCarcasses as $condemn)
+                                                                <tr
+                                                                    class="{{ $loop->odd ? 'odd:bg-white' : 'even:bg-gray-200' }} capitalize border-b">
+                                                                    <form
+                                                                        action="{{ route('edit.condemn.parts', ['id' => $condemn->id]) }}"
+                                                                        method="post">
+                                                                        @csrf
+                                                                        <th scope="row"
+                                                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                                            <span
+                                                                                id="part_{{ $condemn->id }}">{{ optional($condemn)->part }}</span>
+                                                                            <input type="text" name="part"
+                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                id="part_input_{{ $condemn->id }}"
+                                                                                value="{{ optional($condemn)->part }}">
+                                                                        </th>
+                                                                        <td class="px-6 py-4">
+                                                                            <span
+                                                                                id="category_{{ $condemn->id }}">{{ optional($condemn)->category }}</span>
+                                                                            <input type="text" name="category"
+                                                                                id="category_input_{{ $condemn->id }}"
+                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                value="{{ optional($condemn)->category }}">
+                                                                        </td>
+                                                                        <td class="px-6 py-4">
+                                                                            <span
+                                                                                id="carcass_weight_{{ $condemn->id }}">{{ optional($condemn)->carcass_weight }}</span>
+                                                                            <input type="number"
+                                                                                name="condemnWeights"
+                                                                                id="carcass_weight_input_{{ $condemn->id }}"
+                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                value="{{ optional($condemn)->carcass_weight }}">
+                                                                        </td>
+                                                                        <td class="px-6 py-4">
+                                                                            <span
+                                                                                id="cause_{{ $condemn->id }}">{{ optional($condemn)->cause }}</span>
+                                                                            <input type="text" name="cause"
+                                                                                id="cause_input_{{ $condemn->id }}"
+                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                value="{{ optional($condemn)->cause }}">
+                                                                        </td>
+                                                                        <td class="px-6 py-4 space-x-1">
+                                                                            <a onclick="editRow({{ $condemn->id }})"
+                                                                                class="cursor-pointer  font-medium text-blue-600 hover:underline">
+                                                                                <span
+                                                                                    id="editSpan_{{ $condemn->id }}">Edit</span>
+                                                                                <span
+                                                                                    id="cancelSpan_{{ $condemn->id }}"
+                                                                                    class="hidden">Cancel</span>
+                                                                            </a>
 
-
-                                                            <!-- Repeat similar changes for other rows -->
+                                                                            <button id="button_{{ $condemn->id }}"
+                                                                                type="submit"
+                                                                                class="cursor-pointer hidden  font-medium text-green-600 hover:underline">
+                                                                                Save
+                                                                            </button>
+                                                                        </td>
+                                                                    </form>
+                                                                </tr>
+                                                            @endforeach
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -503,9 +542,8 @@
                                                 </div>
 
                                                 <div class="flex  m-5">
-                                                    <button id="updateProductButton"
-                                                        data-modal-target="updateProductModal"
-                                                        data-modal-toggle="updateProductModal"
+                                                    <button id="adminDisposeBtn" data-modal-target="admin-dispose"
+                                                        data-modal-toggle="admin-dispose"
                                                         class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
                                                         type="button">
                                                         Dispose Animal
@@ -529,10 +567,15 @@
 
                                             Approve
                                         </button>
-                                        <a id="show-remarks"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                            REJECT
-                                        </a>
+                                        <button data-modal-target="reject-modal" data-modal-toggle="reject-modal"
+                                            class=" flex items-center gap-1 text-white bg-red-500 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                            type="button"><svg xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                                                <path
+                                                    d="M15.73 5.5h1.035A7.465 7.465 0 0 1 18 9.625a7.465 7.465 0 0 1-1.235 4.125h-.148c-.806 0-1.534.446-2.031 1.08a9.04 9.04 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.499 4.499 0 0 0-.322 1.672v.633A.75.75 0 0 1 9 22a2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.622c-1.026 0-1.945-.694-2.054-1.715A12.137 12.137 0 0 1 1.5 12.25c0-2.848.992-5.464 2.649-7.521C4.537 4.247 5.136 4 5.754 4H9.77a4.5 4.5 0 0 1 1.423.23l3.114 1.04a4.5 4.5 0 0 0 1.423.23ZM21.669 14.023c.536-1.362.831-2.845.831-4.398 0-1.22-.182-2.398-.52-3.507-.26-.85-1.084-1.368-1.973-1.368H19.1c-.445 0-.72.498-.523.898.591 1.2.924 2.55.924 3.977a8.958 8.958 0 0 1-1.302 4.666c-.245.403.028.959.5.959h1.053c.832 0 1.612-.453 1.918-1.227Z" />
+                                            </svg>
+                                            Reject
+                                        </button>
                                     @elseif($animal->status === 'inspection')
                                         <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
                                             method="post">
@@ -540,22 +583,24 @@
                                         </form>
                                     @endif
                                     @if (optional($animal->anteMortem)->inspection_status === 'for slaughter')
-                                        <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                            type="button">
-                                            Reschedule
-                                        </button>
+                                        @if ($animal->status !== 'slaughtered')
+                                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
+                                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                                type="button">
+                                                Reschedule
+                                            </button>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
                         </div>
 
 
-                        <!-- Main modal -->
+                    </section> <!-- Main modal -->
                 </div>
 
 
-                </section>
+
 
 
 
@@ -564,8 +609,62 @@
     </div>
 
 
+    <script>
+        let activeRowId = null;
 
-    </div>
+        function editRow(id) {
+            if (activeRowId !== null && activeRowId !== id) {
+                // If another row is active, cancel editing for that row
+                cancelEditing(activeRowId);
+            }
+
+            // Toggle visibility of text and input elements
+            toggleEditing(id);
+
+            // Update the active row ID
+            activeRowId = (activeRowId === id) ? null : id;
+        }
+
+        function cancelEditing(id) {
+            // Close the currently active row
+            toggleEditing(id);
+        }
+
+        function toggleEditing(id) {
+            // Toggle visibility of text and input elements
+            document.getElementById(`part_${id}`).classList.toggle('hidden');
+            document.getElementById(`part_input_${id}`).classList.toggle('hidden');
+
+            document.getElementById(`category_${id}`).classList.toggle('hidden');
+            document.getElementById(`category_input_${id}`).classList.toggle('hidden');
+
+            document.getElementById(`carcass_weight_${id}`).classList.toggle('hidden');
+            document.getElementById(`carcass_weight_input_${id}`).classList.toggle('hidden');
+
+            document.getElementById(`cause_${id}`).classList.toggle('hidden');
+            document.getElementById(`cause_input_${id}`).classList.toggle('hidden');
+
+            document.getElementById(`button_${id}`).classList.toggle('hidden');
+
+            const editSpan = document.getElementById(`editSpan_${id}`);
+            const cancelSpan = document.getElementById(`cancelSpan_${id}`);
+
+            if (editSpan && cancelSpan) {
+                if (editSpan.classList.contains('hidden')) {
+                    // "Cancel" is currently displayed, switch to "Edit"
+                    editSpan.classList.remove('hidden');
+                    cancelSpan.classList.add('hidden');
+                } else {
+                    // "Edit" is currently displayed, switch to "Cancel"
+                    editSpan.classList.add('hidden');
+                    cancelSpan.classList.remove('hidden');
+                }
+            }
+        }
+    </script>
+
+
+
     @include('admin.formhandler.form-popup')
     {{-- @include('admin.layout.admin-form-sideviews') --}}
 </body>

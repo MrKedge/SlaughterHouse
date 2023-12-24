@@ -109,9 +109,11 @@ Route::middleware(['butcher'])->group(function () {
 
 
 //inspector
+Route::post('/edit/condemn/parts/{id}', [PostMortemController::class, 'EditCondemn'])->name('edit.condemn.parts');
 Route::post('/inspector/condemn/animal/{id}', [PostMortemController::class, 'CondemnCarcass'])->name('inspector.condemn.animal');
 Route::middleware(['inspector'])->group(function () {
     Route::get('/inspector/overview', [InspectorController::class, 'ShowInspectorOverview'])->name('inspector.overview');
-    Route::get('/inspector/animal/list', [InspectorController::class, 'ShowInspectAnimal'])->name('inspector.animal.list');
+    Route::get('/inspector/antemortem/animal', [AnteMortemController::class, 'AnteMortemList'])->name('inspector.antemortem.list');
+    Route::get('/inspector/animal/list', [InspectorController::class, 'ShowPostMortemAnimal'])->name('inspector.postmortem.list');
     Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
 });
