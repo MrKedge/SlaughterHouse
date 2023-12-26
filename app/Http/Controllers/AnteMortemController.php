@@ -69,6 +69,7 @@ class AnteMortemController extends Controller
         $request->validate([
             'causes' => 'nullable',
             'anteRemarks' => 'nullable',
+            'examinedBy' => 'nullable',
         ]);
 
         // Find the animal with the anteMortem relationship loaded
@@ -85,6 +86,7 @@ class AnteMortemController extends Controller
             $animal->anteMortem->inspection_status = 'disposal';
             $animal->anteMortem->ante_remarks = $request->anteRemarks;
             $animal->anteMortem->causes = $request->causes;
+            $animal->anteMortem->examined_by = $request->examinedBy;
             $animal->anteMortem->inspected_at = now();
 
             // Save the changes to the anteMortem record
@@ -110,6 +112,7 @@ class AnteMortemController extends Controller
         $request->validate([
             'dateOfSlaughter' => 'nullable',
             'timeOfSlaughter' => 'nullable',
+            'examinedBy' => 'nullable',
         ]);
 
         $animal = Animal::where('status', 'inspection')->find($id);
@@ -127,6 +130,7 @@ class AnteMortemController extends Controller
         $anteMortem->inspection_status = 'for slaughter';
         if ($anteMortem->inspected_at === null) {
             $anteMortem->inspected_at = now();
+            $animal->anteMortem->examined_by = $request->examinedBy;
         }
 
         $anteMortem->save();
@@ -140,5 +144,18 @@ class AnteMortemController extends Controller
 
         // Redirect with success message
         return redirect()->back()->with('success', 'Set Schedule For Animal');
+    }
+
+    public function ShowDisposedList()
+    {
+        $animal = Animal::with('anteMortem')
+            ->where('status', 'not available')
+            ->get();
+
+        if (auth()->user()->role === 'admin') {
+            return view('admin.admin-disposal-list', compact('animal'));
+        } elseif (auth()->user()->role === 'inspector') {
+            return view('inspector.inspector-disposal', compact('animal'));
+        }
     }
 }

@@ -79,27 +79,34 @@
                             @include('admin.tabs.search-bar')
                         </div>
                         <div class="scrollbar-gutter overflow-y-auto h-[430px]">
-                            <table class="w-full text-center">
+                            <table id="example" class="w-full text-center">
                                 <thead class="">
                                     <tr>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="1"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Id
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="2"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Owner
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                        <th data-priority="3"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="4"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Approved Date
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="5"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Approved Time
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="6"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Status
                                         </th>
-                                        <th class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        <th data-priority="7"
+                                            class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Action
                                         </th>
                                     </tr>
@@ -128,7 +135,7 @@
                                                 </td>
                                                 <td class=" border-b border-black uppercase font-semibold relative">
                                                     <p data-popover-target="popover-{{ $loop->index }}"
-                                                        class="font-bold rounded-lg text-sm py-2.5 text-center">
+                                                        class="font-medium rounded-lg text-sm py-2.5 text-center">
                                                         {{ $animals->type }}
                                                     </p>
 
@@ -199,7 +206,8 @@
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="w-6 h-6">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                                 </svg>
                                                             </button>

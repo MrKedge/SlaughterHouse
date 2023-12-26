@@ -77,7 +77,7 @@
 
                         <div class="flex">
                             <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Disposed
-                                Carcass
+                                Animal
                             </h1>
                             <div class="">
                                 <label for=""></label>
@@ -119,12 +119,12 @@
                                     @if ($animal->isEmpty())
                                         <tr>
                                             <td colspan="7" class="py-4 border-b border-black text-center h-[500px]">
-                                                <h1 class="font-semibold italic pb-3">No Scheduled Animal
+                                                <h1 class="font-semibold italic pb-3">No Disposed Animal
                                                 </h1>
                                             </td>
                                         </tr>
                                     @else
-                                        @php $index = 0 @endphp
+                                        @php $index = 1 @endphp
                                         @foreach ($animal as $animals)
                                             <tr
                                                 class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
@@ -199,9 +199,8 @@
 
                                                         <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                             class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                viewBox="0 0 24 24" fill="currentColor"
-                                                                data-slot="icon" class="w-6 h-6">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                fill="currentColor" data-slot="icon" class="w-6 h-6">
                                                                 <path
                                                                     d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                                                             </svg>

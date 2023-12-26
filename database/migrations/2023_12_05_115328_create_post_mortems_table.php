@@ -19,6 +19,7 @@ return new class extends Migration
 
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
             $table->timestamp('slaughtered_at')->nullable();
+            $table->string('slaughtered_by')->nullable();
             $table->string('postmortem_status')->nullable();
             $table->string('checked_at')->nullable();
             $table->integer('post_weight')->nullable();

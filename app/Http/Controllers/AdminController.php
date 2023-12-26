@@ -233,12 +233,5 @@ class AdminController extends Controller
 
 
 
-    public function ShowDisposedList()
-    {
-        $animal = Animal::with('anteMortem')
-            ->where('status', 'not available')
-            ->get();
-
-        return view('admin.admin-disposal-list', compact('animal'));
-    }
+    
 }

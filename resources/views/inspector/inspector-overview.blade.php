@@ -100,8 +100,8 @@
                                     @endphp
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="6" class="py-4 border-b border-black text-center">
-                                                <h1 class="font-bold italic pb-3">No For Slaughter Animal</h1>
+                                            <td colspan="6" class="py-4 border-b border-black text-center h-[400px]">
+                                                <h1 class="font-bold italic pb-3">No Slaughtered Animal</h1>
 
                                             </td>
                                         </tr>

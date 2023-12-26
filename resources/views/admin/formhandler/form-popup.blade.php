@@ -7,8 +7,12 @@
         <div class="relative bg-white rounded-lg shadow ">
 
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
-                <h3 class="text-xl font-semibold text-gray-900 ">
-                    Schedule of slaughter
+                <h3 class="text-xl font-semibold text-gray-900">
+                    @if (optional($animal->schedule)->scheduled_at === null)
+                        Schedule of slaughter
+                    @else
+                        Reschedule Animal
+                    @endif
                 </h3>
                 <button type="button"
                     class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
@@ -31,17 +35,25 @@
 
                         <div class="w-full flex gap-4">
                             <input name="dateOfSlaughter" required type="date"
-                                class="w-full p-2 border font-semibold border-gray-800 rounded focus:ring-4 focus:ring-blue-900"
-                                value="{{ \Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
-                            <input name="timeOfSlaughter" required type="time" value="{{ now()->format('H:i') }}"
+                                class="w-full p-2 border font-semibold border-gray-800 rounded focus:ring-4 focus:ring-blue-900">
+                            <input name="timeOfSlaughter" required type="time"
                                 class="w-full p-2 border font-semibold border-gray-800 rounded focus:ring-4 focus:ring-blue-900">
                         </div>
                     </div>
+                    <div>
+                        <label for="cause" class="block mb-2 text-sm font-medium text-gray-900 ">Inspected
+                            By:</label>
+                        <input required name="examinedBy" readonly
+                            value="{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}"
+                            class="cursor-not-allowed  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+                            placeholder="{{ auth()->user()->firts_name }} {{ auth()->user()->last_name }}">
+
+                    </div>
 
 
-                    <h3 class="mb-8 text-lg font-normal text-gray-500 mt-4   ">Are you sure you want to schedule
-                        this Animal?
-                    </h3>
+                    <h3 class="mb-8 text-lg font-normal text-gray-500 mt-4">Are you sure you want to perform this
+                        action?</h3>
+
                     <button data-modal-hide="schedule-modal" type="submit"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Yes, I'm sure
@@ -102,12 +114,21 @@
                         {{ $animal->live_weight }} Kg.</p>
                 </div>
                 <div>
+                    <label for="cause" class="block mb-2 text-sm font-medium text-gray-900 ">Inspected By:</label>
+                    <input id="examinedBy" required name="examinedBy" readonly
+                        value="{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}"
+                        class="cursor-not-allowed  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+                        placeholder="{{ auth()->user()->firts_name }} {{ auth()->user()->last_name }}">
+
+                </div>
+                <div>
                     <label for="cause" class="block mb-2 text-sm font-medium text-gray-900 ">Cause</label>
                     <input id="category" required name="causes" maxlength="20"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
                         placeholder="Enter Cause">
 
                 </div>
+
                 <div class="sm:col-span-2">
                     <label for="Remarks" class="block mb-2 text-sm font-medium text-gray-900 ">Remarks</label>
                     <textarea id="description" rows="5" required name="anteRemarks" maxlength="40"
@@ -246,7 +267,7 @@
 
 
 
-<div id="popup-modal" tabindex="-1"
+{{-- <div id="popup-modal" tabindex="-"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 
     <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -289,7 +310,7 @@
                     <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you want to reschedule this
                         Animal?
                     </h3>
-                    <button data-modal-hide="popup-modal" type="submit"
+                    <button type="submit"
                         class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                         Yes, I'm sure
                     </button>
@@ -300,7 +321,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 
 <script>

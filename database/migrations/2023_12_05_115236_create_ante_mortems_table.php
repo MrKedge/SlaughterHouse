@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->timestamp('inspected_at')->nullable();
             $table->timestamp('arrived_at')->nullable();
+            $table->string('examined_by')->nullable();
             $table->string('inspection_status')->nullable();
             $table->string('causes')->nullable();
             $table->string('ante_remarks')->nullable();

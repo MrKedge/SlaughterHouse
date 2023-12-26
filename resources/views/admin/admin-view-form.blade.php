@@ -31,10 +31,34 @@
                                 DETAILS</h1>
                             <h1 class="pl-6 text-2xl font-medium text-[#293241]">
                                 ID:<span> {{ $animal->id }}</span></h1>
-                            <h1 class="pl-6 pb-3 text-2xl font-medium text-[#293241]">
-                                Status: @include('admin.formhandler.form-status')
-                            </h1>
+                            <div class="flex justify-between items-center">
+                                <h1 class="pl-6 pb-3 text-2xl font-medium text-[#293241]">
+                                    Status: @include('admin.formhandler.form-status')
+                                </h1>
 
+                                <div class="">
+                                    @if ($animal->qr_code !== null)
+                                        <button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar"
+                                            class="z-20 pr-2 flex text-sm bg-transparent rounded-full md:me-0"
+                                            type="button">
+                                            <span class="sr-only">Open user menu</span>
+                                            <i
+                                                class='bx bx-qr-scan text-[24px] text-gray-900 transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 '></i>
+                                        </button>
+                                    @endif
+                                    <div id="dropdownAvatar"
+                                        class=" hidden z-10 text-end bg-white divide-y divide-gray-100 rounded-lg shadow w-44 absolute">
+                                        <img class="mx-auto" src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
+                                            alt="animal image">
+                                        <div class="py-2">
+                                            <a href="#"
+                                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Print
+                                                qr
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="flex flex-row gap-10 mx-auto">
                             <!-- Modal toggle -->
@@ -239,286 +263,341 @@
 
                                 </div>
 
-                                <h1 class="font-bold pointer-events-none text-lg italic pl-12">Inspection:
-                                </h1>
-                                <!-- Modal body -->
-                                <div class="grid gap-4 mb-4 sm:grid-cols-1 px-12">
+                                @if ($animal->status !== 'pending')
+                                    <h1 class="font-bold pointer-events-none text-lg italic pl-12">Inspection:
+                                    </h1>
+                                    <!-- Modal body -->
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-1 px-12">
 
 
 
-                                    {{-- Ante Mortem --}}
-                                    <div id="inspection-color" data-accordion="collapse"
-                                        data-active-classes="bg-gray-300 text-gray-900 dark:text-gray-900">
-                                        <h2 id="accordion-color-heading-1">
-                                            <button type="button"
-                                                class="flex mt-4 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 rounded-t-xl focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
-                                                data-accordion-target="#inspection-color-body-1" aria-expanded="false"
-                                                aria-controls="inspection-color-body-1">
-                                                <span>Ante Mortem</span>
-                                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 10 6">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
-                                                </svg>
-                                            </button>
-                                        </h2>
-                                        <div id="inspection-color-body-1" class="hidden"
-                                            aria-labelledby="accordion-color-heading-1">
-                                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 ">
+                                        {{-- Ante Mortem --}}
+                                        <div id="inspection-color" data-accordion="collapse"
+                                            data-active-classes="bg-gray-300 text-gray-900 dark:text-gray-900">
+                                            <h2 id="accordion-color-heading-1">
+                                                <button type="button"
+                                                    class="flex mt-4 items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 rounded-t-xl focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
+                                                    data-accordion-target="#inspection-color-body-1"
+                                                    aria-expanded="false" aria-controls="inspection-color-body-1">
+                                                    <span>Ante Mortem</span>
+                                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M9 5 5 1 1 5" />
+                                                    </svg>
+                                                </button>
+                                            </h2>
+                                            <div id="inspection-color-body-1" class="hidden"
+                                                aria-labelledby="accordion-color-heading-1">
+                                                <div
+                                                    class="p-5 border border-b-0 border-gray-200 dark:border-gray-700 ">
 
 
-                                                <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12">
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Time
-                                                            of Arrival
-                                                        </label>
-
-                                                        <p id="ownerName"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->anteMortem->arrived_at ?? 'N/A' }}
-
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Inspected
-                                                            Time:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->anteMortem->inspected_at ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Result:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->anteMortem->inspection_status ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Schedule
-                                                            of Slaughter:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->schedule->scheduled_at ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
-
-                                                    @if (optional($animal->anteMortem)->inspection_status === 'disposal')
+                                                    <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12">
                                                         <div>
                                                             <label
-                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Causes:</label>
-                                                            <p id="address"
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Time
+                                                                of Arrival
+                                                            </label>
+
+                                                            <p id="ownerName"
                                                                 class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                                {{ $animal->anteMortem->causes ?? 'N/A' }}
+                                                                {{ $animal->anteMortem->arrived_at ?? 'N/A' }}
+
                                                             </p>
                                                         </div>
                                                         <div>
                                                             <label
-                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Remarks:</label>
-                                                            <textarea id="address"
-                                                                class="font-medium min-h-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                                rows="3" name="ante_remarks">{{ $animal->anteMortem->ante_remarks ?? 'N/A' }}</textarea>
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Inspected
+                                                                Time:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->anteMortem->inspected_at ?? 'N/A' }}
+                                                            </p>
                                                         </div>
-                                                    @endif
-                                                </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">
+                                                                Inspected by:</label>
+                                                            <p
+                                                                class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->anteMortem->examined_by ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Result:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->anteMortem->inspection_status ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Schedule
+                                                                of Slaughter:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->schedule->scheduled_at ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
 
-
-                                            </div>
-                                        </div>
-
-                                        <h2 id="accordion-color-heading-2">
-                                            <button type="button"
-                                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
-                                                data-accordion-target="#accordion-color-body-2" aria-expanded="false"
-                                                aria-controls="accordion-color-body-2">
-                                                <span>Post Mortem</span>
-                                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 10 6">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
-                                                </svg>
-                                            </button>
-                                        </h2>
-                                        <div id="accordion-color-body-2" class="hidden"
-                                            aria-labelledby="accordion-color-heading-2">
-                                            <div class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
-
-                                                <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12">
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Butchered
-                                                            Time:
-
-                                                        </label>
-
-                                                        <p id="ownerName"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->anteMortem->slaughtered_at ?? 'N/A' }}
-
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Inspected
-                                                            Time:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->postMortem->checked_at ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Result:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->postMortem->postmortem_status ?? 'N/A' }}
-                                                        </p>
+                                                        @if (optional($animal->anteMortem)->inspection_status === 'disposal')
+                                                            <div>
+                                                                <label
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Causes:</label>
+                                                                <p id="address"
+                                                                    class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                    {{ $animal->anteMortem->causes ?? 'N/A' }}
+                                                                </p>
+                                                            </div>
+                                                            <div>
+                                                                <label
+                                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Remarks:</label>
+                                                                <p id="address"
+                                                                    class="font-medium min-h-[40px] bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                                                    rows="3" name="ante_remarks">
+                                                                    {{ $animal->anteMortem->ante_remarks ?? 'N/A' }}
+                                                                </p>
+                                                            </div>
+                                                        @endif
                                                     </div>
 
-
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Weight:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->postMortem->post_weight ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
-                                                    <div>
-                                                        <label
-                                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Result:</label>
-                                                        <p id="address"
-                                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                                            {{ $animal->postMortem->postmortem_status ?? 'N/A' }}
-                                                        </p>
-                                                    </div>
 
                                                 </div>
-
                                             </div>
-                                        </div>
 
-                                        <h2 id="accordion-color-heading-3">
-                                            <button type="button"
-                                                class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
-                                                data-accordion-target="#accordion-color-body-3" aria-expanded="false"
-                                                aria-controls="accordion-color-body-3">
-                                                <span>Condemn Carcass</span>
-                                                <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
-                                                    aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none" viewBox="0 0 10 6">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5" />
-                                                </svg>
-                                            </button>
-                                        </h2>
-                                        <div id="accordion-color-body-3" class="hidden"
-                                            aria-labelledby="accordion-color-heading-3">
-                                            <div
-                                                class="p-1 border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg ">
-                                                {{-- start table --}}
+                                            <h2 id="accordion-color-heading-2">
+                                                <button type="button"
+                                                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
+                                                    data-accordion-target="#accordion-color-body-2"
+                                                    aria-expanded="false" aria-controls="accordion-color-body-2">
+                                                    <span>Post Mortem</span>
+                                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M9 5 5 1 1 5" />
+                                                    </svg>
+                                                </button>
+                                            </h2>
+                                            <div id="accordion-color-body-2" class="hidden"
+                                                aria-labelledby="accordion-color-heading-2">
+                                                <div
+                                                    class="p-5 border border-b-0 border-gray-200 dark:border-gray-700">
 
-                                                <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg">
-                                                    <table
-                                                        class="w-full text-sm text-left rtl:text-right text-gray-500">
-                                                        <thead class="text-xs text-gray-700 uppercase bg-gray-300">
-                                                            <tr>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Organ
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Category
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Weight
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Cause
-                                                                </th>
-                                                                <th scope="col" class="px-6 py-3">
-                                                                    Action
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            @foreach ($animal->condemnCarcasses as $condemn)
-                                                                <tr
-                                                                    class="{{ $loop->odd ? 'odd:bg-white' : 'even:bg-gray-200' }} capitalize border-b">
-                                                                    <form
-                                                                        action="{{ route('edit.condemn.parts', ['id' => $condemn->id]) }}"
-                                                                        method="post">
-                                                                        @csrf
-                                                                        <th scope="row"
-                                                                            class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                                                                            <span
-                                                                                id="part_{{ $condemn->id }}">{{ optional($condemn)->part }}</span>
-                                                                            <input type="text" name="part"
-                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
-                                                                                id="part_input_{{ $condemn->id }}"
-                                                                                value="{{ optional($condemn)->part }}">
-                                                                        </th>
-                                                                        <td class="px-6 py-4">
-                                                                            <span
-                                                                                id="category_{{ $condemn->id }}">{{ optional($condemn)->category }}</span>
-                                                                            <input type="text" name="category"
-                                                                                id="category_input_{{ $condemn->id }}"
-                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
-                                                                                value="{{ optional($condemn)->category }}">
-                                                                        </td>
-                                                                        <td class="px-6 py-4">
-                                                                            <span
-                                                                                id="carcass_weight_{{ $condemn->id }}">{{ optional($condemn)->carcass_weight }}</span>
-                                                                            <input type="number"
-                                                                                name="condemnWeights"
-                                                                                id="carcass_weight_input_{{ $condemn->id }}"
-                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
-                                                                                value="{{ optional($condemn)->carcass_weight }}">
-                                                                        </td>
-                                                                        <td class="px-6 py-4">
-                                                                            <span
-                                                                                id="cause_{{ $condemn->id }}">{{ optional($condemn)->cause }}</span>
-                                                                            <input type="text" name="cause"
-                                                                                id="cause_input_{{ $condemn->id }}"
-                                                                                class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
-                                                                                value="{{ optional($condemn)->cause }}">
-                                                                        </td>
-                                                                        <td class="px-6 py-4 space-x-1">
-                                                                            <a onclick="editRow({{ $condemn->id }})"
-                                                                                class="cursor-pointer  font-medium text-blue-600 hover:underline">
-                                                                                <span
-                                                                                    id="editSpan_{{ $condemn->id }}">Edit</span>
-                                                                                <span
-                                                                                    id="cancelSpan_{{ $condemn->id }}"
-                                                                                    class="hidden">Cancel</span>
-                                                                            </a>
+                                                    <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12">
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Butchered
+                                                                Time:
 
-                                                                            <button id="button_{{ $condemn->id }}"
-                                                                                type="submit"
-                                                                                class="cursor-pointer hidden  font-medium text-green-600 hover:underline">
-                                                                                Save
-                                                                            </button>
-                                                                        </td>
-                                                                    </form>
+                                                            </label>
+
+                                                            <p id="butcheredTime"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->slaughtered_at ?? 'N/A' }}
+
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Butchered
+                                                                by:
+
+                                                            </label>
+
+                                                            <p id="butcheredTime"
+                                                                class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->slaughtered_by ?? 'N/A' }}
+
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Inspected
+                                                                Time:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->checked_at ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Result:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->postmortem_status ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+
+
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Weight:</label>
+                                                            <p id="address"
+                                                                class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->post_weight ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Inspected
+                                                                by:</label>
+                                                            <p id="address"
+                                                                class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem->inspected_by ?? 'N/A' }}
+                                                            </p>
+                                                        </div>
+                                                        <div>
+                                                            <label
+                                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">
+                                                                Contain condemn carcass:
+                                                            </label>
+                                                            <p id="address"
+                                                                class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                                {{ $animal->postMortem ? $animal->condemnCarcasses->count() : 0 }}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <h2 id="accordion-color-heading-3">
+                                                <button type="button"
+                                                    class="flex items-center justify-between w-full p-5 font-medium rtl:text-right text-gray-900 border border-gray-700 focus:ring-1 focus:ring-gray-900 hover:bg-gray-200 gap-3"
+                                                    data-accordion-target="#accordion-color-body-3"
+                                                    aria-expanded="false" aria-controls="accordion-color-body-3">
+                                                    <span>Condemn Carcass</span>
+                                                    <svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 10 6">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M9 5 5 1 1 5" />
+                                                    </svg>
+                                                </button>
+                                            </h2>
+                                            <div id="accordion-color-body-3" class="hidden"
+                                                aria-labelledby="accordion-color-heading-3">
+                                                <div
+                                                    class="p-1 border border-t-0 border-gray-200 dark:border-gray-700 rounded-b-lg ">
+                                                    {{-- start table --}}
+
+                                                    <div class="relative overflow-x-auto shadow-md sm:rounded-b-lg">
+                                                        <table
+                                                            class="w-full text-sm text-left rtl:text-right text-gray-500">
+                                                            <thead class="text-xs text-gray-700 uppercase bg-gray-300">
+                                                                <tr>
+                                                                    <th scope="col" class="px-6 py-3">
+                                                                        Organ
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-3">
+                                                                        Category
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-3">
+                                                                        Weight
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-3">
+                                                                        Cause
+                                                                    </th>
+                                                                    <th scope="col" class="px-6 py-3">
+                                                                        Action
+                                                                    </th>
                                                                 </tr>
-                                                            @endforeach
-                                                        </tbody>
-                                                    </table>
+                                                            </thead>
+                                                            <tbody>
+                                                                @if ($animal->condemnCarcasses->isEmpty())
+                                                                    <tr>
+                                                                        <td rowspan="1" colspan="6"
+                                                                            class="py-4  text-center">
+                                                                            <h1 class="font-semibold italic pb-3">No
+                                                                                Condemn Carcass</h1>
+                                                                        </td>
+                                                                    </tr>
+                                                                @else
+                                                                    @foreach ($animal->condemnCarcasses as $condemn)
+                                                                        <tr
+                                                                            class="{{ $loop->odd ? 'odd:bg-white' : 'even:bg-gray-200' }} capitalize border-b">
+                                                                            <form
+                                                                                action="{{ route('edit.condemn.parts', ['id' => $condemn->id]) }}"
+                                                                                method="post">
+                                                                                @csrf
+                                                                                <th scope="row"
+                                                                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                                                                    <span
+                                                                                        id="part_{{ $condemn->id }}">{{ optional($condemn)->part }}</span>
+                                                                                    <input type="text"
+                                                                                        name="part"
+                                                                                        class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                        id="part_input_{{ $condemn->id }}"
+                                                                                        value="{{ optional($condemn)->part }}">
+                                                                                </th>
+                                                                                <td class="px-6 py-4">
+                                                                                    <span
+                                                                                        id="category_{{ $condemn->id }}">{{ optional($condemn)->category }}</span>
+                                                                                    <input type="text"
+                                                                                        name="category"
+                                                                                        id="category_input_{{ $condemn->id }}"
+                                                                                        class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                        value="{{ optional($condemn)->category }}">
+                                                                                </td>
+                                                                                <td class="px-6 py-4">
+                                                                                    <span
+                                                                                        id="carcass_weight_{{ $condemn->id }}">{{ optional($condemn)->carcass_weight }}</span>
+                                                                                    <input type="number"
+                                                                                        name="condemnWeights"
+                                                                                        id="carcass_weight_input_{{ $condemn->id }}"
+                                                                                        class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                        value="{{ optional($condemn)->carcass_weight }}">
+                                                                                </td>
+                                                                                <td class="px-6 py-4">
+                                                                                    <span
+                                                                                        id="cause_{{ $condemn->id }}">{{ optional($condemn)->cause }}</span>
+                                                                                    <input type="text"
+                                                                                        name="cause"
+                                                                                        id="cause_input_{{ $condemn->id }}"
+                                                                                        class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
+                                                                                        value="{{ optional($condemn)->cause }}">
+                                                                                </td>
+                                                                                <td class="px-6 py-4 space-x-1">
+                                                                                    <a onclick="editRow({{ $condemn->id }})"
+                                                                                        class="cursor-pointer  font-medium text-blue-600 hover:underline">
+                                                                                        <span
+                                                                                            id="editSpan_{{ $condemn->id }}">Edit</span>
+                                                                                        <span
+                                                                                            id="cancelSpan_{{ $condemn->id }}"
+                                                                                            class="hidden">Cancel</span>
+                                                                                    </a>
+
+                                                                                    <button
+                                                                                        id="button_{{ $condemn->id }}"
+                                                                                        type="submit"
+                                                                                        class="cursor-pointer hidden  font-medium text-green-600 hover:underline">
+                                                                                        Save
+                                                                                    </button>
+                                                                                </td>
+                                                                            </form>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    {{-- end table --}}
+
                                                 </div>
-
-                                                {{-- end table --}}
-
                                             </div>
+
                                         </div>
 
                                     </div>
-
-                                </div>
+                                @endif
                                 <!-- Modal footer -->
                                 <div class="flex items-center p-6 space-x-4 rounded-b dark:border-gray-600">
                                     {{-- <button type="submit"
@@ -584,9 +663,9 @@
                                     @endif
                                     @if (optional($animal->anteMortem)->inspection_status === 'for slaughter')
                                         @if ($animal->status !== 'slaughtered')
-                                            <button data-modal-target="popup-modal" data-modal-toggle="popup-modal"
-                                                class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                                                type="button">
+                                            <button data-modal-target="schedule-modal"
+                                                data-modal-toggle="schedule-modal"
+                                                class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                                 Reschedule
                                             </button>
                                         @endif
@@ -666,7 +745,7 @@
 
 
     @include('admin.formhandler.form-popup')
-    {{-- @include('admin.layout.admin-form-sideviews') --}}
+
 </body>
 
 </html>

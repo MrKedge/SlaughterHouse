@@ -1,258 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="antialiased">
 
-@include('layout.html-head', ['pageTitle' => 'View Form'])
-
-<body class="bg-[#D5DFE8] ">
-
-    <div class="min-h-screen w-full">{{-- wrapper --}}
-
-
-        {{-- HEADER --}}
-        @include('admin.layout.admin-header')
-        {{-- end header --}}
-
-        {{-- this is for the table inside --}}
-        <div class="flex">
-
-            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
-            <div class="mx-auto w-full">
-
-                {{-- main content --}}
-
-                <div class="ml-[240px] flex justify-between">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DataTables </title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <link href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" rel=" stylesheet">
+    <!--Replace with your tailwind.css once created-->
 
 
-                    <section class="bg-white h-full w-full ml-4 rounded-2xl my-10 drop-shadow-2xl ">
-                        <h1 class="py-14 text-2xl font-bold text-center text-[#293241]">ANIMAL DETAILS</h1>
-                        <div class="flex flex-row gap-10 px-10">
+    <!--Regular Datatables CSS-->
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet">
+    <!--Responsive Extension Datatables CSS-->
+    <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet">
 
-                            <div class="space-y-5 w-full">
+    <style>
+        /*Overrides for Tailwind CSS */
 
-                                <div>
-                                    <label class="block pb-1" for="">Owner Name:</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm border-2  border-black">
-                                        {{ $user->first_name }} {{ $user->last_name }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="block pb-1" for="">Address:</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        {{ $user->address }}
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="block pb-1" for="">Animal:</label>
-                                    <p
-                                        class="bg-white  text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->type }}
-                                        @endauth
-                                    </p>
-                                </div>
+        /*Form fields*/
+        .dataTables_wrapper select,
+        .dataTables_wrapper .dataTables_filter input {
+            color: #4a5568;
+            /*text-gray-700*/
+            padding-left: 1rem;
+            /*pl-4*/
+            padding-right: 1rem;
+            /*pl-4*/
+            padding-top: .5rem;
+            /*pl-2*/
+            padding-bottom: .5rem;
+            /*pl-2*/
+            line-height: 1.25;
+            /*leading-tight*/
+            border-width: 2px;
+            /*border-2*/
+            border-radius: .25rem;
+            border-color: #edf2f7;
+            /*border-gray-200*/
+            background-color: #edf2f7;
+            /*bg-gray-200*/
+        }
 
-                                <div>
-                                    <label class="block pb-1" for="">Butcher:</label>
-                                    <p
-                                        class="bg-white  text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->butcher }}
-                                        @endauth
-                                    </p>
-                                </div>
+        /*Row Hover*/
+        table.dataTable.hover tbody tr:hover,
+        table.dataTable.display tbody tr:hover {
+            background-color: #ebf4ff;
+            /*bg-indigo-100*/
+        }
 
-                            </div>
+        /*Pagination Buttons*/
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
 
+        /*Pagination Buttons - Current selected */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+            color: #fff !important;
+            /*text-white*/
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            /*shadow*/
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            background: #667eea !important;
+            /*bg-indigo-500*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
 
-                            <div class="space-y-5 w-full">
+        /*Pagination Buttons - Hover */
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            color: #fff !important;
+            /*text-white*/
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1), 0 1px 2px 0 rgba(0, 0, 0, .06);
+            /*shadow*/
+            font-weight: 700;
+            /*font-bold*/
+            border-radius: .25rem;
+            /*rounded*/
+            background: #667eea !important;
+            /*bg-indigo-500*/
+            border: 1px solid transparent;
+            /*border border-transparent*/
+        }
 
+        /*Add padding to bottom border */
+        table.dataTable.no-footer {
+            border-bottom: 1px solid #e2e8f0;
+            /*border-b-1 border-gray-300*/
+            margin-top: 0.75em;
+            margin-bottom: 0.75em;
+        }
 
-                                <div>
-                                    <label class="block pb-1" for="">Destination:</label>
-                                    <p
-                                        class="bg-white  text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->destination }}
-                                        @endauth
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="block pb-1" for="">Age:</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold   p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->age }} mos.
-                                        @endauth
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Live wt.</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold   p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->live_weight }} kg.
-                                        @endauth
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Age Classification (swine only):</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm  border-2 border-black">
-                                        @auth
-                                            {{ $animal->age_classify !== null && $animal->age_classify !== '' ? $animal->age_classify : '(None)' }}
-                                        @endauth
-                                    </p>
-                                </div>
-
-
-                            </div>
-
-                            <div class="space-y-5 w-full">
-
-                                <div>
-                                    <label class="block pb-1" for="">Gender:</label>
-                                    <p
-                                        class="bg-white text-[#484848] font-semibold capitalize p-1 rounded-sm border-2 border-black">
-                                        @auth
-                                            {{ $animal->gender }}
-                                        @endauth
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="block pb-1" for="">Certificate of Ownership:</label>
-                                    <section class="w-[100px] p-1 border-dashed border border-black"
-                                        data-lightbox="animal-gallery" data-title="Animal Image">
-                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                                alt="animal image">
-                                        </a>
-                                    </section>
-                                </div>
-
-                                <div>
-                                    @if ($animal->cert_transfe !== null)
-                                        <label class="block pb-1" for="">Cert. of Transfer of Large
-                                            Cattle:</label>
-                                        <section class="w-[100px] p-1 border-dashed border border-black"
-                                            data-lightbox="animal-gallery" data-title="Animal Image">
-                                            <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                                data-lightbox="animal-gallery">
-                                                <img class=""
-                                                    src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                                    alt="animal image">
-                                            </a>
-                                        </section>
-                                    @endif
-                                </div>
-
-                                <div>
-                                    <label class="block pb-1" for="">Permit to Slaughter:</label>
-                                    <section class="w-[100px] p-1 border-dashed border border-black"
-                                        data-lightbox="animal-gallery" data-title="Animal Image">
-                                        <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                                alt="animal image">
-                                        </a>
-                                    </section>
-                                </div>
-
-                            </div>
-
-                            <div class="space-y-32 ">
-
-                                <div class="flex justify-end gap-3 pb-1">
-
-                                    {{-- --}}
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                        @if ($animal->status === 'approved' || $animal->status === 'pending')
-                            @csrf
-                            <div class="mt-5 w-full bg-white  rounded-sm px-3 mb-6 ">
-                                {{-- Mark of animal --}}
-                                <h1 class="text-center font-semibold text-[#293241] pb-8 pt-2 text-2xl">Animal Marks
-                                </h1>
-                                <section class="min-h-[350px] border-dashed border border-black ">
-                                    <img class="w-full"
-                                        src="{{ asset('storage/marked-animal/' . $animal->animal_mark) }}"
-                                        alt="animal image">
-                                </section>
-                            </div>
-                        @endif
-                        <div class="">{{-- buttons --}}
+        /*Change colour of responsive icon*/
+        table.dataTable.dtr-inline.collapsed>tbody>tr>td:first-child:before,
+        table.dataTable.dtr-inline.collapsed>tbody>tr>th:first-child:before {
+            background-color: #667eea !important;
+            /*bg-indigo-500*/
+        }
+    </style>
 
 
 
-                            <div class="flex my-10 pr-10 justify-end gap-3">
-                                @if ($animal->status === 'inspection')
-                                    @csrf
-                                    @if ($animal->anteMortem->inspection_status === null)
-                                        <div class="flex">
-                                            <div class="flex  m-5">
-                                                <button id="toggle-schedule"
-                                                    class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
-                                                    For Slaughter
-                                                </button>
-                                            </div>
+</head>
+
+<body class="bg-gray-100 text-gray-900 tracking-wider leading-normal">
 
 
-                                            <div class="flex  m-5">
-                                                <button id="updateProductButton" data-modal-target="updateProductModal"
-                                                    data-modal-toggle="updateProductModal"
-                                                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
-                                                    type="button">
-                                                    Dispose Animal
-                                                </button>
-                                            </div>
-                                        </div>
-                                    @endif
-                                @endif
+    <!--Container-->
+    <div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+        <!--Title-->
+        <h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
+            Responsive <a class="underline mx-2" href="https://datatables.net/">DataTables.net</a> Table
+        </h1>
 
 
-                                @if ($animal->status === 'pending')
-                                    @csrf
-                                    <a id="show-approve-nav"
-                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                        <box-icon name='checkbox-checked'
-                                            color='#ffffff'></box-icon><span>Approve</span>
-                                    </a>
-                                    <a id="show-remarks"
-                                        class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                        REJECT
-                                    </a>
-                                @elseif($animal->status === 'inspection')
-                                    <form action="{{ route('for.slaughter.animal', ['id' => $animal->id]) }}"
-                                        method="post">
-                                        @csrf
-                                    </form>
-                                @endif
+        <!--Card-->
+        <div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
 
-                            </div>
 
-                        </div>
-                    </section>
+            <table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+                <thead>
+                    <tr>
+                        <th data-priority="1">Name</th>
+                        <th data-priority="2">Position</th>
+                        <th data-priority="3">Office</th>
+                        <th data-priority="4">Age</th>
+                        <th data-priority="5">Start date</th>
+                        <th data-priority="6">Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Tiger Nixon</td>
+                        <td>System Architect</td>
+                        <td>Edinburgh</td>
+                        <td>61</td>
+                        <td>2011/04/25</td>
+                        <td>$320,800</td>
+                    </tr>
 
-                    @include('admin.layout.admin-form-sideviews')
+                    <!-- Rest of your data (refer to https://datatables.net/examples/server_side/ for server side processing)-->
 
-                </div>
-            </div>
+                    <tr>
+                        <td>Donna Snider</td>
+                        <td>Customer Support</td>
+                        <td>New York</td>
+                        <td>27</td>
+                        <td>2011/01/25</td>
+                        <td>$112,000</td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+
         </div>
-
+        <!--/Card-->
 
 
     </div>
-    @include('admin.formhandler.form-popup')
+    <!--/container-->
+
+
+
+
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <!--Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            var table = $('#example').DataTable({
+                    responsive: true
+                })
+                .columns.adjust()
+                .responsive.recalc();
+        });
+    </script>
 
 </body>
 

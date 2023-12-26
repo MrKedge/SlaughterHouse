@@ -50,7 +50,7 @@
 
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
-                <a href="{{ route('scan.qr') }}">
+                <a href="{{ route('inspector.dispose.list') }}">
                     <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                             <path stroke-linecap="round" stroke-linejoin="round"

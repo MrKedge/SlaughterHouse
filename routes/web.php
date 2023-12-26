@@ -77,7 +77,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
     Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
-    Route::get('/admin/dispose/list', [AdminController::class, 'ShowDisposedList'])->name('admin.dispose.list');
+    Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
 });
 
 
@@ -116,4 +116,5 @@ Route::middleware(['inspector'])->group(function () {
     Route::get('/inspector/antemortem/animal', [AnteMortemController::class, 'AnteMortemList'])->name('inspector.antemortem.list');
     Route::get('/inspector/animal/list', [InspectorController::class, 'ShowPostMortemAnimal'])->name('inspector.postmortem.list');
     Route::get('/inspector/view/form/{id}', [InspectorController::class, 'ShowInspectorForm'])->name('inspector.view.form');
+    Route::get('/inspector/disposed/list', [AnteMortemController::class, 'ShowDisposedList'])->name('inspector.dispose.list');
 });

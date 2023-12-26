@@ -10,8 +10,11 @@ use Illuminate\Support\Str;
 
 class PostMortemController extends Controller
 {
-    public function SlaughteredAnimal($id)
+    public function SlaughteredAnimal(Request $request, $id)
     {
+        $request->validate([
+            'butcheredBy' => 'nullable',
+        ]);
         // Find the animal with the 'for slaughter' status
         $animal = Animal::where('status', 'for slaughter')->find($id);
 
@@ -31,7 +34,7 @@ class PostMortemController extends Controller
             // If it doesn't exist, create a new PostMortem record
             $postMortem = new PostMortem([
                 'slaughtered_at' => now(),
-                // Other PostMortem fields
+                'slaughtered_by' => $request->butcheredBy,
             ]);
 
             // Save the new PostMortem record and associate it with the animal
@@ -39,6 +42,7 @@ class PostMortemController extends Controller
         } else {
             // If it exists, update the existing PostMortem record
             $animal->postMortem->slaughtered_at = now();
+            $animal->postMortem->slaughtered_by = $request->butcheredBy;
             $animal->postMortem->save();
         }
 
@@ -96,6 +100,12 @@ class PostMortemController extends Controller
 
         // Associate the condemn_carcass record with the corresponding animal_id
         $animal->condemnCarcasses()->save($condemnCarcass);
+
+        $animal->load('postMortem');
+
+        // Update the inspected_by field
+        $animal->postMortem->inspected_by = $request->inspectorName;
+        $animal->postMortem->save();
 
         return redirect()->back()->with('success', 'Condemn record saved successfully.');
     }

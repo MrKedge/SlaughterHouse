@@ -9,7 +9,7 @@ class PostMortem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['animal_id', 'slaughtered_at', 'checked_at', 'postmortem_status', 'post_weight', 'inspected_by',];
+    protected $fillable = ['animal_id', 'slaughtered_at', 'slaughtered_by', 'checked_at', 'postmortem_status', 'post_weight', 'inspected_by',];
 
     // Define the relationship to the Animal model
     public function animal()
