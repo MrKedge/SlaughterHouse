@@ -161,7 +161,7 @@
 
                 </div>
 
-                <a href="">
+                <a href="{{ route('lrme.reports') }}">
                     <h1 class="panel-text flex items-center">LRME</h1>
                 </a>
 

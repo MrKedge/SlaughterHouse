@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\FormMaintenance;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Illuminate\Support\Facades\DB;
 
 class FormMaintenanceController extends Controller
 {
@@ -51,7 +52,7 @@ class FormMaintenanceController extends Controller
     }
 
 
-    public function DeleteOnForm(Request $request)
+    public function deleteOnForm(Request $request)
     {
         $request->validate([
             'deleteAnimal' => '',
@@ -65,12 +66,12 @@ class FormMaintenanceController extends Controller
         $animalButcher = $request->input('deleteButcher');
         $animalAgeClassify = $request->input('deleteAgeClassify');
 
-        // Find and delete the animal from the database
-        FormMaintenance::where('animal_type', $animalType)->delete();
-        FormMaintenance::where('animal_destination', $animalDestination)->delete();
-        FormMaintenance::where('animal_butcher', $animalButcher)->delete();
-        FormMaintenance::where('animal_ageclassify', $animalAgeClassify)->delete();
+        // Find and update the specific fields to null
+        FormMaintenance::where('animal_type', $animalType)->update(['animal_type' => null]);
+        FormMaintenance::where('animal_destination', $animalDestination)->update(['animal_destination' => null]);
+        FormMaintenance::where('animal_butcher', $animalButcher)->update(['animal_butcher' => null]);
+        FormMaintenance::where('animal_ageclassify', $animalAgeClassify)->update(['animal_ageclassify' => null]);
 
-        return redirect()->back()->with('success', 'Record deleted successfully');
+        return redirect()->back()->with('success', 'Data deleted successfully');
     }
 }

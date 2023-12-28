@@ -9,6 +9,7 @@ use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PostMortemController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\ReportsController;
 use App\Models\AnteMortem;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -60,7 +61,7 @@ Route::post('/admin/dispose/animal/{id}', [AnteMortemController::class, 'ForDisp
 Route::post('/inspector/postmortem/good/{id}', [PostMortemController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
-
+Route::post('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
 //admin pages
 
 
@@ -78,6 +79,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
     Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
+    Route::get('/admin/lrme/report', [ReportsController::class, 'ShowReportLRME'])->name('lrme.reports');
 });
 
 

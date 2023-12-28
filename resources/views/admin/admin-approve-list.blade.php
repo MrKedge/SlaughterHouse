@@ -71,7 +71,8 @@
                 <div class="mx-auto w-full px-4">
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                    <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border p-4">
+                    <section
+                        class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                         <div class="flex justify-between ">
 
@@ -260,8 +261,8 @@
             </div>
             {{-- End wrapper --}}
         </div>
-
-        {{-- @foreach ($animal as $animals)
+    </div>
+    {{-- @foreach ($animal as $animals)
             <nav id="schedule-nav{{ $animals->id }}"
                 class="bg-white absolute h-auto px-6 pb-6 rounded-md hidden text-[#293241] top-1/3  right-1/3 ">
 
@@ -308,7 +309,7 @@
             });
         </script> --}}
 
-        <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 
 </body>
 
