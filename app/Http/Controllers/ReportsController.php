@@ -12,14 +12,14 @@ use Illuminate\Support\Facades\Log;
 
 class ReportsController extends Controller
 {
-    public function ShowReportLRME(Request $request)
+    public function ShowReportLRME()
     {
         // Get distinct animal types from form_maintenances table
         $animalTypes = DB::table('form_maintenances')->distinct()->pluck('animal_type');
 
         // Retrieve user input for start and end dates
-        $startDate = $request->input('start_date', Carbon::now()->toDateString());
-        $endDate = $request->input('end_date', Carbon::now()->toDateString());
+        $startDate = request('start_date', Carbon::now()->toDateString());
+        $endDate = request('end_date', Carbon::now()->toDateString());
 
         // Initialize an array to store data for each date
         $animalData = [];
@@ -48,8 +48,8 @@ class ReportsController extends Controller
             $currentDate->addDay();
         }
 
-        // Create an instance of the ExportLRME class with start and end dates
-        $export = new ExportLRME($startDate, $endDate);
+        // Store start_date and end_date in the session
+        session(['start_date' => $startDate, 'end_date' => $endDate]);
 
         // Return the view with the retrieved data
         return view('admin.reports.lrme', compact('animalData', 'animalTypes', 'startDate', 'endDate'));
@@ -57,18 +57,11 @@ class ReportsController extends Controller
 
     public function DownloadLRME(Request $request)
     {
-        // Log request data
-        Log::info('Request data:', $request->all());
+        // Retrieve start_date and end_date from the session
+        $startDate = session('start_date');
+        $endDate = session('end_date');
 
-        // Retrieve user input for start and end dates
-        $startDate = $request->input('start_date', Carbon::now()->toDateString());
-        $endDate = $request->input('end_date', Carbon::now()->toDateString());
-        // dd($startDate, $endDate);
-
-        // Create an instance of the ExportLRME class with start and end dates
-        $export = new ExportLRME($startDate, $endDate);
-
-        // Store the export file and return the download link
-        return Excel::download($export, 'lrme-export.xlsx');
+        // Download Excel using ExportLRME
+        return Excel::download(new ExportLRME(), 'lrme-export.xlsx');
     }
 }
