@@ -7,25 +7,32 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 
 
 class ExportLRME implements FromView
 {
+    private $startDate;
+    private $endDate;
+
+    public function __construct($startDate, $endDate)
+    {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
     public function view(): View
     {
+        // Get distinct animal types from form_maintenances table
         $animalTypes = DB::table('form_maintenances')->distinct()->pluck('animal_type');
-
-        // Define the date range (starting and ending dates)
-        $startDate = '2023-12-24';
-        $endDate = '2023-12-28';
 
         // Initialize an array to store data for each date
         $animalData = [];
 
         // Loop through each date in the range
-        $currentDate = Carbon::parse($startDate);
-        while ($currentDate <= Carbon::parse($endDate)) {
+        $currentDate = Carbon::parse($this->startDate);
+        while ($currentDate <= Carbon::parse($this->endDate)) {
             $currentDateFormatted = $currentDate->toDateString();
 
             // Retrieve animals with related postMortem for the current date
@@ -47,6 +54,6 @@ class ExportLRME implements FromView
             $currentDate->addDay();
         }
 
-        return view('admin.reports.exports.lrme-export', compact('animalData', 'animalTypes', 'startDate', 'endDate'));
+        return view('admin.reports.exports.lrme-export', compact('animalData', 'animalTypes', 'currentDateFormatted'));
     }
 }

@@ -56,7 +56,7 @@
                         </div>
                     </div>
                     <div
-                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                        class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl">
 
                         <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
@@ -71,8 +71,7 @@
                 <div class="mx-auto w-full px-4">
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                    <section
-                        class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+                    <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border p-4">
 
                         <div class="flex justify-between ">
 

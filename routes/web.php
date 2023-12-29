@@ -61,7 +61,7 @@ Route::post('/admin/dispose/animal/{id}', [AnteMortemController::class, 'ForDisp
 Route::post('/inspector/postmortem/good/{id}', [PostMortemController::class, 'PostMortemGood'])->name('inspector.postmortem.good');
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
-Route::post('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
+Route::get('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
 //admin pages
 
 

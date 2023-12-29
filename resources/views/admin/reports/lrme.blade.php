@@ -25,43 +25,7 @@
 
                 {{-- <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
                  
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
-                    </div>
-
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='check-double'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
-                    </div>
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">OWNER</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='list-check'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
-                    </div>
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='list-check'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
-                    </div>
-                </div>
+               
                 </section> --}}
 
 
@@ -81,18 +45,17 @@
                     <div class="flex text-start items-center mt-4 gap-4">
                         <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
                             LRME</h1>
-                        <form action="{{ route('download.lrme') }}" method="post">
-                            @csrf
-                            <button type="submit"
-                                class="focus:outline-none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2"><svg
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                </svg>
 
-                            </button>
-                        </form>
+                        <a href="{{ route('download.lrme') }}"
+                            class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+
+                        </a>
+
                     </div>
 
                 </div>
@@ -110,19 +73,33 @@
 
                     <table class=" text-sm text-left text-gray-500">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
-
-                            <div class="flex items-center gap-3">
-                                Date:
-                                <div>
-                                    <input name="dateOfArrival" required type="date"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ">
+                            {{-- <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
+                                LRME</h1> --}}
+                            <form action="{{ route('lrme.reports') }}" method="get">
+                                @csrf
+                                <div class="flex items-center gap-3">
+                                    <label for="start_date">Date:</label>
+                                    <div>
+                                        <input id="start_date" name="start_date" required type="date"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                            value="{{ $startDate }}">
+                                    </div>
+                                    <label for="end_date">to</label>
+                                    <div>
+                                        <input id="end_date" name="end_date" required type="date"
+                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                                            value="{{ $endDate }}">
+                                    </div>
+                                    <button type="submit"
+                                        class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-gray-600 rounded-lg hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
+                                        </svg>
+                                    </button>
                                 </div>
-                                to
-                                <div>
-                                    <input name="dateOfArrival" required type="date"
-                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ">
-                                </div>
-                            </div>
+                            </form>
                             {{-- <p class="mt-1 text-sm font-normal text-gray-500">This is the registered Animal for the
                                 month of December.</p> --}}
                         </caption>
@@ -164,7 +141,7 @@
                             <!-- Loop through each date and display data -->
                             @foreach ($animalData as $day)
                                 <tr class="even:bg-gray-100 odd:bg-white border-b">
-                                    <td class="px-6 py-4">{{ $day['date'] }}</td>
+                                    <td class="px-6 py-4">{{ \Carbon\Carbon::parse($day['date'])->format('d') }}</td>
                                     <!-- Loop through animal types and generate data columns -->
                                     @foreach ($animalTypes as $animalType)
                                         @php
@@ -209,11 +186,40 @@
                         <tfoot>
                             <tr class="border-t">
                                 <th class="px-6 py-3 border">Total</th>
-                                <!-- Loop through animal types and calculate totals -->
+
+                                <!-- Initialize totals for each column -->
                                 @foreach ($animalTypes as $animalType)
-                                    <!-- Calculate and display totals (replace with actual calculations) -->
-                                    <td class="px-6 py-3 border"></td>
-                                    <td class="px-6 py-3 border"></td>
+                                    @php
+                                        $totalAnimalCount = 0;
+                                        $totalPostWeight = 0;
+                                    @endphp
+
+                                    <!-- Loop through each day and accumulate totals for the current column -->
+                                    @foreach ($animalData as $day)
+                                        @php
+                                            // Check if $day['animals'] is an array or object
+                                            if (is_array($day['animals']) || is_object($day['animals'])) {
+                                                // Loop through animals of the current type
+                                                foreach ($day['animals'] as $animal) {
+                                                    // Check if the animal is of the current type
+                                                    if (isset($animal->type) && $animal->type === $animalType) {
+                                                        // Check if postMortem data is available for the current animal
+                                                        if (isset($animal->postMortem)) {
+                                                            // Increment the total animal count for the current type
+                                                            $totalAnimalCount++;
+
+                                                            // Accumulate post_weight for the current animal
+                                                            $totalPostWeight += $animal->postMortem->post_weight;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                    @endforeach
+
+                                    <!-- Display totals for the current column -->
+                                    <td class="px-6 py-3 border">{{ $totalAnimalCount }}</td>
+                                    <td class="px-6 py-3 border">{{ $totalPostWeight }}</td>
                                     <td class="px-6 py-3 border"></td>
                                     <td class="px-6 py-3 border"></td>
                                 @endforeach
