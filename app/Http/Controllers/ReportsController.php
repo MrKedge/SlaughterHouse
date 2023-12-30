@@ -72,4 +72,20 @@ class ReportsController extends Controller
         // Download Excel using ExportLRME
         return Excel::download(new ExportLRME($startDate, $endDate), 'lrme-export.xlsx');
     }
+
+
+    public function ShowSSHPDP()
+    {
+        $animalType =  FormMaintenance::pluck('animal_type')->toArray();
+
+        return view('admin.reports.sshpdp', compact('animalType'));
+    }
+
+
+    public function ShowAnimalSSHPDP(Request $request)
+    {
+        $animalType = $request->query('animalType');
+
+        return view('admin.reports.per-animal-sshpdp', compact('animalType'));
+    }
 }

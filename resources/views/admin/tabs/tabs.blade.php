@@ -1,8 +1,8 @@
 <div class="">
-    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400">
+    <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-600 ">
         <li class="me-2">
             <a href="{{ route('admin.approve.list') }}"
-                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-600  dark:hover:text-gray-600 group">
+                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -13,7 +13,7 @@
         </li>
         <li class="me-2">
             <a href="{{ route('admin.monitor.list') }}"
-                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-600  dark:hover:text-gray-600 group">
+                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900   group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -24,7 +24,7 @@
         </li>
         <li class="me-2">
             <a href="{{ route('admin.schedule.list') }}"
-                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-600 dark:hover:text-gray-600 group">
+                class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -35,7 +35,7 @@
         </li>
         <li class="me-2">
             <a href="{{ route('admin.for.slaughter.list') }}"
-                class="gap-1 tab-link inline-flex items-center justify-center p-4   hover:text-gray-600 dark:hover:text-gray-600 group">
+                class="gap-1 tab-link inline-flex items-center justify-center p-4   hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round"

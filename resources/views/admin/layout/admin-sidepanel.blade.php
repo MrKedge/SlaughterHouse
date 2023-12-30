@@ -177,7 +177,7 @@
 
                 </div>
 
-                <a href="">
+                <a href="{{ route('sshpdp.reports') }}">
                     <h1 class="panel-text flex items-center">SSHPDP</h1>
                 </a>
 

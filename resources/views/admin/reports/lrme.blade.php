@@ -32,12 +32,13 @@
                 <div class="mx-auto w-full px-4">
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                    <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border p-4">
+                    <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border border-white p-4">
 
                         <div class="flex justify-between ">
 
-                            @include('admin.tabs.tabs')
+                            <div class="text-gray-600"> @include('admin.tabs.tabs')</div>
                             @include('admin.tabs.search-bar')
+
                         </div>
 
                     </section>
@@ -69,7 +70,8 @@
             <div class=" shadow-md sm:rounded-lg flex justify-center ml-[240px]">
 
 
-                <div class="overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl">
+                <div
+                    class="overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border border-white">
 
                     <table class=" text-sm text-left text-gray-500">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
@@ -241,39 +243,41 @@
 
                                 <!-- Initialize totals for each column -->
                                 @foreach ($animalTypes as $animalType)
-                                    @php
-                                        $totalAnimalCount = 0;
-                                        $totalPostWeight = 0;
-                                    @endphp
-
-                                    <!-- Loop through each day and accumulate totals for the current column -->
-                                    @foreach ($animalData as $day)
+                                    @if ($animalType !== null && $animalType !== '')
                                         @php
-                                            // Check if $day['animals'] is an array or object
-                                            if (is_array($day['animals']) || is_object($day['animals'])) {
-                                                // Loop through animals of the current type
-                                                foreach ($day['animals'] as $animal) {
-                                                    // Check if the animal is of the current type
-                                                    if (isset($animal->type) && $animal->type === $animalType) {
-                                                        // Check if postMortem data is available for the current animal
-                                                        if (isset($animal->postMortem)) {
-                                                            // Increment the total animal count for the current type
-                                                            $totalAnimalCount++;
+                                            $totalAnimalCount = 0;
+                                            $totalPostWeight = 0;
+                                        @endphp
 
-                                                            // Accumulate post_weight for the current animal
-                                                            $totalPostWeight += $animal->postMortem->post_weight;
+                                        <!-- Loop through each day and accumulate totals for the current column -->
+                                        @foreach ($animalData as $day)
+                                            @php
+                                                // Check if $day['animals'] is an array or object
+                                                if (is_array($day['animals']) || is_object($day['animals'])) {
+                                                    // Loop through animals of the current type
+                                                    foreach ($day['animals'] as $animal) {
+                                                        // Check if the animal is of the current type
+                                                        if (isset($animal->type) && $animal->type === $animalType) {
+                                                            // Check if postMortem data is available for the current animal
+                                                            if (isset($animal->postMortem)) {
+                                                                // Increment the total animal count for the current type
+                                                                $totalAnimalCount++;
+
+                                                                // Accumulate post_weight for the current animal
+                                                                $totalPostWeight += $animal->postMortem->post_weight;
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                        @endphp
-                                    @endforeach
+                                            @endphp
+                                        @endforeach
 
-                                    <!-- Display totals for the current column -->
-                                    <td class="px-6 py-3 border">{{ $totalAnimalCount }}</td>
-                                    <td class="px-6 py-3 border">{{ $totalPostWeight }}</td>
-                                    <td class="px-6 py-3 border"></td>
-                                    <td class="px-6 py-3 border"></td>
+                                        <!-- Display totals for the current column -->
+                                        <td class="px-6 py-3 border font-semibold">{{ $totalAnimalCount }}</td>
+                                        <td class="px-6 py-3 border font-semibold">{{ $totalPostWeight }}</td>
+                                        <td class="px-6 py-3 border"></td>
+                                        <td class="px-6 py-3 border"></td>
+                                    @endif
                                 @endforeach
                             </tr>
                         </tfoot>
