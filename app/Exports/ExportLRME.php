@@ -8,41 +8,45 @@ use Maatwebsite\Excel\Concerns\FromView;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Models\FormMaintenance;
 
 
 class ExportLRME implements FromView
 {
+    protected $startDate;
+    protected $endDate;
+
+    public function __construct($startDate, $endDate)
+    {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
+    }
+
+
     public function view(): View
     {
-        // Retrieve start_date and end_date from the session
-        $startDate = session('start_date');
-        $endDate = session('end_date');
+        // Retrieve all form data
+        $allFormData = FormMaintenance::all();
 
         // Get distinct animal types from form_maintenances table
-        $animalTypes = DB::table('form_maintenances')->distinct()->pluck('animal_type');
+        $animalTypes = $allFormData->pluck('animal_type')->unique();
 
         // Initialize an array to store data for each date
         $animalData = [];
 
-        // Ensure $startDate and $endDate are Carbon instances
-        $startDate = $startDate ? Carbon::parse($startDate) : null;
-        $endDate = $endDate ? Carbon::parse($endDate) : null;
+        // Ensure $this->startDate and $this->endDate are Carbon instances
+        $startDate = $this->getStartDate();
+        $endDate = $this->getEndDate();
 
+        // Iterate through the date range
         if ($startDate && $endDate) {
-            $currentDate = $startDate->copy();
+            $currentDate = $startDate->copy(); // Use copy to avoid modifying the original date
 
             while ($currentDate <= $endDate) {
                 $currentDateFormatted = $currentDate->toDateString();
 
                 // Retrieve animals with related postMortem for the current date
-                $animalsForDate = Animal::with(['postMortem' => function ($query) use ($currentDateFormatted) {
-                    $query->whereDate('slaughtered_at', $currentDateFormatted)->where('postmortem_status', 'good');
-                }])
-                    ->whereHas('postMortem', function ($query) use ($currentDateFormatted) {
-                        $query->whereDate('slaughtered_at', $currentDateFormatted)->where('postmortem_status', 'good');
-                    })
-                    ->get();
+                $animalsForDate = $this->getAnimalsForDate($currentDateFormatted);
 
                 // Add the results to the array
                 $animalData[] = [
@@ -56,6 +60,43 @@ class ExportLRME implements FromView
         }
 
         // Pass the dates, animalData, and animalTypes to the view
-        return view('admin.reports.exports.lrme-export', compact('animalData', 'animalTypes', 'startDate', 'endDate'));
+        return view('admin.reports.exports.lrme-export', compact('animalData', 'animalTypes', 'startDate', 'endDate', 'allFormData'));
+    }
+
+    /**
+     * Get the start date for the report.
+     *
+     * @return \Illuminate\Support\Carbon|null
+     */
+    private function getStartDate()
+    {
+        return $this->startDate instanceof Carbon ? $this->startDate : Carbon::parse($this->startDate);
+    }
+
+    /**
+     * Get the end date for the report.
+     *
+     * @return \Illuminate\Support\Carbon|null
+     */
+    private function getEndDate()
+    {
+        return $this->endDate instanceof Carbon ? $this->endDate : Carbon::parse($this->endDate);
+    }
+
+    /**
+     * Get animals with related post-mortem data for the specified date.
+     *
+     * @param string $dateFormatted
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    private function getAnimalsForDate(string $dateFormatted)
+    {
+        return Animal::with(['postMortem' => function ($query) use ($dateFormatted) {
+            $query->whereDate('slaughtered_at', $dateFormatted)->where('postmortem_status', 'good');
+        }])
+            ->whereHas('postMortem', function ($query) use ($dateFormatted) {
+                $query->whereDate('slaughtered_at', $dateFormatted)->where('postmortem_status', 'good');
+            })
+            ->get();
     }
 }

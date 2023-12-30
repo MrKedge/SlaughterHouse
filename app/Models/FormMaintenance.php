@@ -13,5 +13,6 @@ class FormMaintenance extends Model
         'animalDestination',
         'animalButcher',
         'animalAgeClassify',
+        'animalSource',
     ];
 }

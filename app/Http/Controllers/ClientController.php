@@ -149,6 +149,7 @@ class ClientController extends Controller
             'certOwnership' => 'required',
             'certTransfer' => '',
             'ageClassify' => '',
+            'source' => 'required',
         ]);
 
         $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
@@ -188,6 +189,7 @@ class ClientController extends Controller
         $animal->animal_mark = isset($imageName) ? $imageName : null; // Set to null if not in allowed values
         $animal->cert_ownership = $imageCertOwnershipName;
         $animal->cert_transfer = $imageCertTransferName;
+        $animal->source = $request->source;
 
         $animal->save();
 

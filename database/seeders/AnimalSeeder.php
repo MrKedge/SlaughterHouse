@@ -14,8 +14,8 @@ class AnimalSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\User::factory(10)->create()->each(function ($user) {
-            Animal::factory(10)->create(['user_id' => $user->id]);
+        \App\Models\User::factory(5)->create()->each(function ($user) {
+            Animal::factory(5)->create(['user_id' => $user->id]);
         });
     }
 }

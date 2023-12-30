@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('animal_destination')->nullable();
             $table->string('animal_butcher')->nullable();
             $table->string('animal_ageclassify')->nullable();
+            $table->string('animal_source')->nullable();
         });
     }
 

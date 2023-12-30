@@ -14,48 +14,59 @@ class FormMaintenanceSeeder extends Seeder
     public function run()
     {
         FormMaintenance::create([
-            'animal_type' => 'Cow',
-            'animal_destination' => 'Market',
-            'animal_butcher' => 'John Doe',
-            'animal_ageclassify' => 'Adult',
+            'animal_type' => 'cow',
+            'animal_destination' => 'wet market',
+            'animal_butcher' => 'public',
+            'animal_ageclassify' => 'culled sow/boar',
+            'animal_source' => 'within the province',
         ]);
 
         FormMaintenance::create([
-            'animal_type' => 'Pig',
-            'animal_destination' => 'Slaughterhouse',
-            'animal_butcher' => 'Jane Smith',
-            'animal_ageclassify' => 'Young',
+            'animal_type' => 'carabao',
+            'animal_destination' => 'meat shops',
+            'animal_butcher' => 'private',
+            'animal_ageclassify' => 'fattener',
+            'animal_source' => 'outside the province',
         ]);
 
         FormMaintenance::create([
-            'animal_type' => 'Chicken',
-            'animal_destination' => 'Farm',
-            'animal_butcher' => 'Alice Johnson',
-            'animal_ageclassify' => 'Young',
+            'animal_type' => 'horse',
+            'animal_destination' => 'meat cutting',
+            'animal_butcher' => null,
+            'animal_ageclassify' => 'grower',
+            'animal_source' => null,
         ]);
 
         FormMaintenance::create([
-            'animal_type' => 'Sheep',
-            'animal_destination' => 'Slaughterhouse',
-            'animal_butcher' => 'Bob Williams',
-            'animal_ageclassify' => 'Adult',
+            'animal_type' => 'swine',
+            'animal_destination' => 'hotel & restaurants',
+            'animal_butcher' => null,
+            'animal_ageclassify' => null,
+            'animal_source' => null,
         ]);
 
         FormMaintenance::create([
-            'animal_type' => 'Goat',
-            'animal_destination' => 'Market',
-            'animal_butcher' => 'Charlie Davis',
-            'animal_ageclassify' => 'Young',
+            'animal_type' => null,
+            'animal_destination' => 'supermarket',
+            'animal_butcher' => null,
+            'animal_ageclassify' => null,
+            'animal_source' => null,
         ]);
 
-        // Add Dinosaur record
         FormMaintenance::create([
-            'animal_type' => 'Dinosaur',
-            'animal_destination' => 'Jurassic Park',
-            'animal_butcher' => 'Paleontologist',
-            'animal_ageclassify' => 'Ancient',
+            'animal_type' => null,
+            'animal_destination' => 'meat processing plant',
+            'animal_butcher' => null,
+            'animal_ageclassify' => null,
+            'animal_source' => null,
         ]);
 
-        // Add more seed data as needed
+        FormMaintenance::create([
+            'animal_type' => null,
+            'animal_destination' => 'cold storage',
+            'animal_butcher' => null,
+            'animal_ageclassify' => null,
+            'animal_source' => null,
+        ]);
     }
 }

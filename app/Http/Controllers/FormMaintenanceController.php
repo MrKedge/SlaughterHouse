@@ -28,6 +28,7 @@ class FormMaintenanceController extends Controller
                 'animalDestination' => 'nullable|unique:form_maintenances,animal_destination',
                 'animalButcher' => 'nullable|unique:form_maintenances,animal_butcher',
                 'animalAgeClassify' => 'nullable|unique:form_maintenances,animal_ageclassify',
+                'animalSource' => 'nullable|unique:form_maintenances,animal_source',
             ]);
 
             $newFill = new FormMaintenance();
@@ -36,6 +37,7 @@ class FormMaintenanceController extends Controller
             $newFill->animal_destination = strtolower($request->animalDestination);
             $newFill->animal_butcher = strtolower($request->animalButcher);
             $newFill->animal_ageclassify = strtolower($request->animalAgeClassify);
+            $newFill->animal_source = strtolower($request->animalSource);
             $newFill->save();
 
             return redirect()->back()->with('success', 'Record added successfully');

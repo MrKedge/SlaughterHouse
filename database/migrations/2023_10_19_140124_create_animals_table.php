@@ -23,6 +23,7 @@ return new class extends Migration
             $table->integer('age')->nullable();
             $table->integer('live_weight')->nullable();
             $table->string('destination')->nullable();
+            $table->string('source')->nullable();
             $table->string('butcher')->nullable();
             $table->string('age_classify')->nullable();
             $table->string('status')->default('pending')->nullable();

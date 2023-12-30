@@ -20,6 +20,7 @@ class Animal extends Model
         'remarks',
         'cert_ownership',
         'cert_transfer',
+        'source',
     ];
 
     public function user()

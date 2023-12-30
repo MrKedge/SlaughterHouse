@@ -61,6 +61,12 @@
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
                                                     <div>
+                                                        <label class="block pb-1" for="">Add
+                                                            Source:</label>
+                                                        <input name="animalSource"
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    </div>
+                                                    <div>
                                                         <label class="block pb-1" for="">Add Butcher:</label>
                                                         <input name="animalButcher"
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -101,6 +107,12 @@
                                                         <label class="block pb-1" for="">Delete on
                                                             Destination:</label>
                                                         <input name="deleteDestination"
+                                                            class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                    </div>
+                                                    <div>
+                                                        <label class="block pb-1" for="">Delete on
+                                                            Source:</label>
+                                                        <input name="deleteSource"
                                                             class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                                     </div>
                                                     <div>

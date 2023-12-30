@@ -41,6 +41,7 @@ class AnimalFactory extends Factory
             'animal_mark' => $this->faker->word,
             'cert_transfer' => $this->faker->word,
             'status' => $this->faker->randomElement(['pending', 'approved']),
+            'source' => $this->faker->randomElement(['within the province', 'outside the province']),
             'user_id' => User::factory(),
         ];
     }

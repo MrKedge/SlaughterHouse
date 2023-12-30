@@ -7,19 +7,30 @@ use Illuminate\Http\Request;
 use App\Exports\ExportLRME;
 use Maatwebsite\Excel\Facades\Excel; // Import the Excel facade
 use App\Models\Animal;
+use App\Models\FormMaintenance;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class ReportsController extends Controller
 {
-    public function ShowReportLRME()
+    private $startDate;
+    private $endDate;
+
+    public function ShowReportLRME(Request $request)
     {
-        // Get distinct animal types from form_maintenances table
-        $animalTypes = DB::table('form_maintenances')->distinct()->pluck('animal_type');
+        // Get all data from FormMaintenance model
+        $allFormData = FormMaintenance::all();
+
+        // Get distinct animal types from all data
+        $animalTypes = $allFormData->pluck('animal_type')->unique();
 
         // Retrieve user input for start and end dates
-        $startDate = request('start_date', Carbon::now()->toDateString());
-        $endDate = request('end_date', Carbon::now()->toDateString());
+        $startDate = $request->input('start_date', Carbon::now()->toDateString());
+        $endDate = $request->input('end_date', Carbon::now()->toDateString());
+
+        // Store start_date and end_date in the session
+        $request->session()->put('start_date', $startDate);
+        $request->session()->put('end_date', $endDate);
 
         // Initialize an array to store data for each date
         $animalData = [];
@@ -48,20 +59,17 @@ class ReportsController extends Controller
             $currentDate->addDay();
         }
 
-        // Store start_date and end_date in the session
-        session(['start_date' => $startDate, 'end_date' => $endDate]);
-
         // Return the view with the retrieved data
-        return view('admin.reports.lrme', compact('animalData', 'animalTypes', 'startDate', 'endDate'));
+        return view('admin.reports.lrme', compact('animalData', 'animalTypes', 'startDate', 'endDate', 'allFormData'));
     }
 
     public function DownloadLRME(Request $request)
     {
         // Retrieve start_date and end_date from the session
-        $startDate = session('start_date');
-        $endDate = session('end_date');
+        $startDate = $request->session()->get('start_date');
+        $endDate = $request->session()->get('end_date');
 
         // Download Excel using ExportLRME
-        return Excel::download(new ExportLRME(), 'lrme-export.xlsx');
+        return Excel::download(new ExportLRME($startDate, $endDate), 'lrme-export.xlsx');
     }
 }

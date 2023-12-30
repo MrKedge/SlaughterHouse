@@ -179,10 +179,12 @@
                                             <div>
                                                 <label
                                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
-                                                    for="">Age: (Months)</label>
-                                                <input type="number" name="age" required min="1"
-                                                    max="2000" placeholder="Age" oninput="limitInputValue(this)"
+                                                    for="">Age:(months)</label>
+                                                <input type="number" name="age" required
+                                                    oninput="formatAge(this); limitInputValue(this, 2000)"
+                                                    min="1" max="2000" placeholder="Age"
                                                     class="font-medium  bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <div id="displayAge" class="text-gray-500 text-sm mt-2"></div>
                                             </div>
                                             <div>
                                                 <label
@@ -216,11 +218,30 @@
 
                                     </div>
 
+
+
                                     <div class="space-y-8">
+
                                         <div>
                                             <h1 class="font-bold opacity-0 text-lg">Animal Information</h1>
                                             <label
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Source:</label>
+                                            <select name="source" id="" required
+                                                class="font-medium  bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                                <option value="" disabled selected>Select</option>
+                                                @foreach ($animal as $animals)
+                                                    @if (!is_null($animals->animal_source) && $animals->animal_source !== '')
+                                                        <option value="{{ $animals->animal_source }}">
+                                                            {{ $animals->animal_source }}
+                                                        </option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div>
+                                            {{-- <h1 class="font-bold opacity-0 text-lg">Animal Information</h1> --}}
+                                            <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
                                                 for="">Butcher:</label>
                                             <select name="butcher" id="" required
                                                 class="font-medium  bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -235,7 +256,7 @@
                                             </select>
                                         </div>
 
-                                        <div class="hidden" id="ageClassifyDiv">
+                                        <div class="hidden " id="ageClassifyDiv">
                                             <label for=""
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900">Age
                                                 Classification:</label>
@@ -254,16 +275,20 @@
                                                     @endif
                                                 @endforeach
                                             </select>
+                                            {{-- <div class="text-gray-500 text-sm mt-2">fattener - 49kg</div>
+                                            <div class="text-gray-500 text-sm mt-2">grower - 50kg above</div>
+                                            <div class="text-gray-500 text-sm mt-2">culled sow/boar - 100kg</div> --}}
                                         </div>
+
 
                                         <div class="absolute bottom-0 right-5 pb-[20px]">
                                             <button type="submit"
-                                                class="bg-blue-500 hover:bg-blue-700 font-bold py-2 px-4 rounded">
+                                                class="bg-green-500 text-white hover:bg-green-700 font-bold py-2 px-4 rounded">
                                                 Register
                                             </button>
 
                                             <a href="{{ route('client.overview') }}"
-                                                class="bg-red-500 hover:bg-red-700 font-bold py-2 px-4 rounded">
+                                                class="bg-red-500 text-white hover:bg-red-700 font-bold py-2 px-4 rounded">
                                                 Cancel
                                             </a>
                                         </div>
@@ -284,6 +309,8 @@
 
         </div>
     </div>
+
+
 
     <script>
         function readURL(input, targetId) {
@@ -311,6 +338,41 @@
 
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+
+    <script>
+        function limitInputValue(input) {
+            if (input.value > 2000) {
+                input.value = 2000;
+            }
+        }
+
+        function formatAge(input) {
+            // Limit the input value to a maximum of 2000
+            const maxValue = 2000;
+            const inputValue = Math.min(parseInt(input.value) || 0, maxValue);
+
+            // Convert months to years and months for display
+            const years = Math.floor(inputValue / 12);
+            const months = inputValue % 12;
+
+            // Construct the formatted age string
+            let ageString = '';
+            if (years > 0) {
+                ageString += years === 1 ? '1 year' : `${years} years`;
+            }
+            if (months > 0) {
+                ageString += years > 0 ? ' ' : ''; // Add space if both years and months are present
+                ageString += months === 1 ? '1 month' : `${months} months`;
+            }
+
+            // Display the formatted age string
+            const displayElement = document.getElementById('displayAge');
+            if (displayElement) {
+                displayElement.textContent = ageString;
+            }
+        }
+    </script>
+
 </body>
 
 </html>

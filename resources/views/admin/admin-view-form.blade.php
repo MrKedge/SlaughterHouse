@@ -120,6 +120,17 @@
 
                                         <div>
                                             <label
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Source:</label>
+                                            <p id="address"
+                                                class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+
+                                                {{ $animal->source }}
+
+                                            </p>
+                                        </div>
+
+                                        <div>
+                                            <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Butcher:</label>
                                             <p id="address"
                                                 class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -162,12 +173,12 @@
                                         @if ($animal->type === 'swine')
                                             <div>
                                                 <label
-                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Live
-                                                    Wt. (Kilogram):</label>
+                                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Age
+                                                    Classification:</label>
                                                 <p id="address"
                                                     class="font-medium capitalize bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                                    {{ $animal->live_weight }}
+                                                    {{ $animal->age_classify }}
 
                                                 </p>
                                             </div>
