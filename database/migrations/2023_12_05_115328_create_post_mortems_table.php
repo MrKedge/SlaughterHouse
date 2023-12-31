@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('slaughtered_by')->nullable();
             $table->string('postmortem_status')->nullable();
             $table->string('checked_at')->nullable();
-            $table->integer('post_weight')->nullable();
+            $table->decimal('post_weight', 8, 3)->nullable();
             $table->string('inspected_by')->nullable();
         });
     }

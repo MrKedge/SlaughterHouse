@@ -129,6 +129,14 @@
 
                 </div>
 
+                <div>
+                    <label for="disposeWeight" class="block mb-2 text-sm font-medium text-gray-900 ">Dispose wt.</label>
+                    <input type="number" max="2000" name="disposeWeight" required min="1"
+                        placeholder="Weight" step="0.01" oninput="limitInputValue(this)"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 ">
+
+                </div>
+
                 <div class="sm:col-span-2">
                     <label for="Remarks" class="block mb-2 text-sm font-medium text-gray-900 ">Remarks</label>
                     <textarea id="description" rows="5" required name="anteRemarks" maxlength="40"
@@ -368,4 +376,10 @@
             approveNav.classList.add("hidden");
         });
     });
+
+    function limitInputValue(input) {
+        if (input.value > 2000) {
+            input.value = 2000;
+        }
+    }
 </script>

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('category')->nullable();
-            $table->integer('carcass_weight')->nullable();
+            $table->decimal('carcass_weight', 8, 3)->nullable();
             $table->string('part')->nullable();
             $table->string('cause')->nullable();
 

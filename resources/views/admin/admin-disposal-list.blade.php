@@ -118,7 +118,7 @@
 
                                     @if ($animal->isEmpty())
                                         <tr>
-                                            <td colspan="7" class="py-4 border-b border-black text-center h-[500px]">
+                                            <td colspan="8" class="py-4 border-b border-black text-center h-[500px]">
                                                 <h1 class="font-semibold italic pb-3">No Disposed Animal
                                                 </h1>
                                             </td>

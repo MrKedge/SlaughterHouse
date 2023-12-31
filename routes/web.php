@@ -81,7 +81,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
     Route::get('/admin/lrme/report', [ReportsController::class, 'ShowReportLRME'])->name('lrme.reports');
     Route::get('/admin/sshpdp/report', [ReportsController::class, 'ShowSSHPDP'])->name('sshpdp.reports');
-    Route::get('/admin/animal/sshpdp/', [ReportsController::class, 'ShowAnimalSSHPDP'])->name('animal.sshpdp');
+    Route::get('/admin/animal/sshpdp/{animalType}', [ReportsController::class, 'ShowAnimalSSHPDP'])->name('animal.sshpdp');
 });
 
 

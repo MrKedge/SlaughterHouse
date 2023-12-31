@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('type')->nullable();
             $table->string('gender')->nullable();
             $table->integer('age')->nullable();
-            $table->integer('live_weight')->nullable();
+            $table->decimal('live_weight', 8, 3)->nullable();
             $table->string('destination')->nullable();
             $table->string('source')->nullable();
             $table->string('butcher')->nullable();

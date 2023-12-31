@@ -82,10 +82,59 @@ class ReportsController extends Controller
     }
 
 
-    public function ShowAnimalSSHPDP(Request $request)
+    public function ShowAnimalSSHPDP(Request $request, $animalType)
     {
-        $animalType = $request->query('animalType');
+        $allFormData = FormMaintenance::all();
 
-        return view('admin.reports.per-animal-sshpdp', compact('animalType'));
+        $startDate = $request->input('start_date', Carbon::now()->toDateString());
+        $endDate = $request->input('end_date', Carbon::now()->toDateString());
+
+
+
+        $currentDate = Carbon::parse($startDate);
+        $animalData = [];
+
+        while ($currentDate <= Carbon::parse($endDate)) {
+            $currentDateFormatted = $currentDate->toDateString();
+
+            // Retrieve animals with related postMortem or anteMortem for the current date
+            $animalsForDate = Animal::with([
+                'postMortem' => function ($query) use ($currentDateFormatted) {
+                    $query->whereDate('slaughtered_at', $currentDateFormatted)->where('postmortem_status', 'good');
+                },
+                'anteMortem' => function ($query) use ($currentDateFormatted) {
+                    $query->whereDate('inspected_at', $currentDateFormatted)->where('inspection_status', 'disposal');
+                },
+            ])
+                ->where(function ($query) use ($currentDateFormatted) {
+                    // Include animals with postMortem or anteMortem for the current date
+                    $query->whereHas('postMortem', function ($subQuery) use ($currentDateFormatted) {
+                        $subQuery->whereDate('slaughtered_at', $currentDateFormatted)->where('postmortem_status', 'good');
+                    })
+                        ->orWhereHas('anteMortem', function ($subQuery) use ($currentDateFormatted) {
+                            $subQuery->whereDate('inspected_at', $currentDateFormatted)->where('inspection_status', 'disposal');
+                        });
+                })
+                ->where('type', $animalType)
+                ->get();
+
+            // Extract the source data for the first animal of the current date
+            $sourceData = null;
+            if ($animalsForDate->isNotEmpty()) {
+                $sourceData = $allFormData->where('animal_source', $animalsForDate->first()->source)->first();
+            }
+
+            // Add the results to the array
+            $animalData[] = [
+                'date' => $currentDateFormatted,
+                'animals' => $animalsForDate,
+                'sourceData' => $sourceData,
+            ];
+
+            // Move to the next date
+            $currentDate->addDay();
+        }
+
+        return view('admin.reports.per-animal-sshpdp', compact('animalData', 'startDate', 'endDate', 'animalType', 'allFormData'));
     }
 }

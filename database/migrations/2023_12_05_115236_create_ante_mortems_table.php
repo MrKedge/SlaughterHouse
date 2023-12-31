@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('inspection_status')->nullable();
             $table->string('causes')->nullable();
             $table->string('ante_remarks')->nullable();
+            $table->decimal('dispose_weight', 8, 3)->nullable();
+
 
             $table->unsignedBigInteger('animal_id');
             $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');

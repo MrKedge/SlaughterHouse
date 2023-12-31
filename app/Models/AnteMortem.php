@@ -9,7 +9,7 @@ class AnteMortem extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['animal_id', 'arrived_at', 'inspected_at', 'examined_by', 'inspection_status', 'causes',];
+    protected $fillable = ['animal_id', 'arrived_at', 'inspected_at', 'examined_by', 'inspection_status', 'causes', 'dispose_weight',];
 
     // Define the relationship to the Animal model
     public function animal()

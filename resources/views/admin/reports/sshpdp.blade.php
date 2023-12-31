@@ -84,7 +84,7 @@
 
                                         <h5
                                             class="mb-2 text-2xl font-semibold tracking-tight text-gray-700 capitalize ">
-                                            {{ $type }}</h5>
+                                            {{ e($type) }}</h5>
 
                                         <p class="mb-3 font-normal text-gray-500 ">Survey of Slaughterhouses and poultry
                                             dressing plants of {{ $type }}
