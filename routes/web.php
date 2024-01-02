@@ -10,6 +10,7 @@ use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PostMortemController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\ReportsController;
+use App\Http\Controllers\StabController;
 use App\Models\AnteMortem;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -76,12 +77,14 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
-    Route::get('/admin/owner/list/', [AdminController::class, 'ShowOwnerList'])->name('owner.list');
+    Route::get('/admin/issuing/stab/', [AdminController::class, 'ShowOwnerList'])->name('issuing.stab');
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
     Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
     Route::get('/admin/lrme/report', [ReportsController::class, 'ShowReportLRME'])->name('lrme.reports');
     Route::get('/admin/sshpdp/report', [ReportsController::class, 'ShowSSHPDP'])->name('sshpdp.reports');
     Route::get('/admin/animal/sshpdp/{animalType}', [ReportsController::class, 'ShowAnimalSSHPDP'])->name('animal.sshpdp');
+    Route::get('/admin/animal/stab/{ownerId}', [StabController::class, 'ShowForStabAnimal'])->name('admin.for.stab.animals');
+    Route::get('/admin/issue/stab/', [StabController::class, 'GenerateStab'])->name('issue.stab');
 });
 
 

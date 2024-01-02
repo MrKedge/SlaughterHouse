@@ -14,6 +14,7 @@
     {{-- <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet"> --}}
     <!--Responsive Extension Datatables CSS-->
     {{-- <link href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css" rel="stylesheet"> --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>{{-- pdf --}}
     @vite('resources/css/app.css')
     <title>{{ $pageTitle ?? 'Default Title' }}</title>
 </head>

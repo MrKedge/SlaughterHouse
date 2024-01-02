@@ -76,10 +76,10 @@
                         class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                         <div class="flex items-center gap-6">
-                            <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Owners
+                            <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Issuing of stab
                             </h1>
 
-                            <form action="" method="get">
+                            {{-- <form action="" method="get">
                                 <label for=""
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
                                 <select id="countries"
@@ -88,7 +88,7 @@
                                     <option value="approved">Approved</option>
                                     <option value="slaughter">For Slaughter</option>
                                 </select>
-                            </form>
+                            </form> --}}
                             <div class="">
                                 <label for=""></label>
                                 {{-- <input type="checkbox"> --}}
@@ -143,7 +143,16 @@
                                                 </td>
                                                 <td class="border-b border-black font-semibold capitalize">
                                                     <div class="flex justify-center gap-3">
-                                                        {{-- Your buttons or actions here --}}
+                                                        <a href="{{ route('admin.for.stab.animals', ['ownerId' => $owners->id]) }}"
+                                                            class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                                fill="currentColor" data-slot="icon" class="w-6 h-6">
+                                                                <path
+                                                                    d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
+                                                            </svg>
+
+                                                            <span>View</span>
+                                                        </a>
                                                     </div>
                                                 </td>
                                             </tr>

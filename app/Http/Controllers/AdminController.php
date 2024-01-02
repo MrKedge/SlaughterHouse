@@ -207,11 +207,23 @@ class AdminController extends Controller
 
     public function ShowOwnerList()
     {
-        $owner = User::has('animals')->with('animals')->get();
+        $owner = User::has('animals')
+            ->with(['animals' => function ($query) {
+                $query->where('status', 'approved')
+                    ->whereHas('anteMortem', function ($anteMortemQuery) {
+                        $anteMortemQuery->whereNotNull('arrived_at');
+                    });
+            }])
+            ->whereHas('animals', function ($query) {
+                $query->where('status', 'approved')
+                    ->whereHas('anteMortem', function ($anteMortemQuery) {
+                        $anteMortemQuery->whereNotNull('arrived_at');
+                    });
+            })
+            ->get();
 
         return view('admin.admin-owners', compact('owner'));
     }
-
 
 
 
@@ -229,9 +241,4 @@ class AdminController extends Controller
     {
         return view('admin.admin-create-account');
     }
-
-
-
-
-    
 }

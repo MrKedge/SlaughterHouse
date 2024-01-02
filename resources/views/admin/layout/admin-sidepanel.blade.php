@@ -121,8 +121,8 @@
 
                 </div>
 
-                <a href="{{ route('owner.list') }}">
-                    <h1 class="panel-text flex items-center whitespace-nowrap">Owner</h1>
+                <a href="{{ route('issuing.stab') }}">
+                    <h1 class="panel-text flex items-center whitespace-nowrap">Stab</h1>
                 </a>
 
             </li>
