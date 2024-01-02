@@ -71,7 +71,7 @@
 
 
                 <div
-                    class="overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border border-white">
+                    class="scrollbar-gutter overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border border-white">
 
                     <table class=" text-sm text-left text-gray-500">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">

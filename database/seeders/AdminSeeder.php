@@ -19,7 +19,7 @@ class AdminSeeder extends Seeder
         User::create([
             'first_name' => 'Abbatoir',
             'last_name' => 'Worker',
-            'email' => 'admin@test.com',
+            'email' => 'admin.slaughtech@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('adminako123'),
             'role' => 'admin',

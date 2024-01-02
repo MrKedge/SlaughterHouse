@@ -73,7 +73,7 @@
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section
-                        class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+                        class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border-white border-2 p-4">
 
                         <div class="flex">
 
@@ -125,13 +125,13 @@
                                                 </td>
                                                 <td class="border-b border-black uppercase font-semibold relative">
                                                     <p data-popover-target="popover-{{ $loop->index }}"
-                                                        class="font-bold rounded-lg text-sm py-2.5 text-center">
+                                                        class="font-medium rounded-lg text-sm py-2.5 text-center">
                                                         {{ $animals->type }}
                                                     </p>
 
                                                     <!-- Popover -->
                                                     <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                                        class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0">
+                                                        class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
                                                         <div
                                                             class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
                                                             <h3 class="font-semibold text-gray-900">{{ $animals->type }}
@@ -166,7 +166,7 @@
                                                                     d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                                                             </svg>
 
-                                                            <span>View</span>
+                                                            <span></span>
                                                         </a>
                                                     </div>
                                                 </td>
