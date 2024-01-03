@@ -23,7 +23,8 @@
                     </div>
                 </a>
             </li>
-            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+            <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md transition-opacity duration-500">
+                {{-- this for icon --}}
                 <a href="{{ route('client.drafts') }}">
                     <div class="flex items-center panel-text gap-2"><box-icon name='pencil' type='solid'
                             color='#ffffff'></box-icon><span class=" flex items-center">REGISTER ANIMAL</span>

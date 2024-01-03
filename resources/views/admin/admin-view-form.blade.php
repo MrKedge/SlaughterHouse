@@ -96,7 +96,7 @@
                                     <h1 class="font-bold pointer-events-none text-lg italic pl-12">Animal Information
                                     </h1>
                                     <!-- Modal body -->
-                                    <div class="grid gap-4 mb-4 sm:grid-cols-3 px-12">
+                                    <div class="grid gap-4 mb-4 sm:grid-cols-2 max-w-2xl px-12">
                                         <div>
                                             <label
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Animal

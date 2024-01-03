@@ -192,8 +192,19 @@ class ClientController extends Controller
         $animal->source = $request->source;
 
         $animal->save();
+        if (auth()->check()) {
+            if (auth()->user()->role === 'client') {
+                return redirect()->route('client.animal.list.register');
+            } elseif (auth()->user()->role === 'admin') {
+                return redirect()->route('admin.view.animal.reg.list');
+            } else {
 
-        return redirect()->route('client.animal.list.register');
+                return redirect()->route('log-in');
+            }
+        } else {
+
+            return redirect()->route('log-in');
+        }
     }
 
 

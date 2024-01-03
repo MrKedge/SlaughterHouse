@@ -47,4 +47,14 @@ class Animal extends Model
     {
         return $this->hasMany(CondemnCarcass::class);
     }
+
+    public function receipt()
+    {
+        return $this->belongsTo(Receipt::class);
+    }
+
+    public function stab()
+    {
+        return $this->belongsTo(Stabs::class, 'stab_id');
+    }
 }

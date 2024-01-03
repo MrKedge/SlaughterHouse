@@ -11,11 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stabs', function (Blueprint $table) {
+        Schema::create('receipts', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
 
-            $table->timestamp('issued_at')->nullable();
+
+
+            $table->string('receipt_name')->nullable();
+            $table->string('receipt_no')->nullable();
+            $table->string('payment')->nullable();
+
+            $table->unsignedBigInteger('animal_id');
+            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
 
@@ -24,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stabs');
+        Schema::dropIfExists('receipts');
     }
 };

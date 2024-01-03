@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\ApproveMail;
 use App\Mail\RejectMail;
 use Illuminate\Support\Facades\Log;
+use App\Models\FormMaintenance;
 
 class AdminController extends Controller
 {
@@ -204,29 +205,6 @@ class AdminController extends Controller
 
 
 
-
-    public function ShowOwnerList()
-    {
-        $owner = User::has('animals')
-            ->with(['animals' => function ($query) {
-                $query->where('status', 'approved')
-                    ->whereHas('anteMortem', function ($anteMortemQuery) {
-                        $anteMortemQuery->whereNotNull('arrived_at');
-                    });
-            }])
-            ->whereHas('animals', function ($query) {
-                $query->where('status', 'approved')
-                    ->whereHas('anteMortem', function ($anteMortemQuery) {
-                        $anteMortemQuery->whereNotNull('arrived_at');
-                    });
-            })
-            ->get();
-
-        return view('admin.admin-owners', compact('owner'));
-    }
-
-
-
     public function ShowSlaughteredList()
     {
         $animal = Animal::where('status', 'slaughtered')->get();
@@ -240,5 +218,12 @@ class AdminController extends Controller
     public function ShowCreateAccount()
     {
         return view('admin.admin-create-account');
+    }
+
+
+    public function ShowAdminRegister()
+    {
+        $animal = FormMaintenance::all();
+        return view('admin.admin-register-animal', compact('animal'));
     }
 }

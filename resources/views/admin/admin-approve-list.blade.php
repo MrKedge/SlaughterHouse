@@ -171,16 +171,14 @@
                                                 <td class="border-b border-black font-semibold capitalize py-4">
                                                     <div class="flex justify-center gap-3">
                                                         @if ($animals->qr_code !== null)
-                                                            <form
-                                                                action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
-                                                                method="post">
-                                                                @csrf
-                                                                <button type="submit"
-                                                                    class="  text-white font-medium py-1 px-3 rounded-lg flex items-center text-sm">
-                                                                    <i
-                                                                        class='bx bx-printer text-[24px] text-gray-900 transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 '></i>
-                                                                </button>
-                                                            </form>
+                                                            <button
+                                                                data-modal-target="print-qr-modal{{ $animals->id }}"
+                                                                data-modal-toggle="print-qr-modal{{ $animals->id }}"
+                                                                type="button"
+                                                                class="  text-white font-medium py-1 px-3 rounded-lg flex items-center text-sm">
+                                                                <i
+                                                                    class='bx bx-printer text-[24px] text-gray-900 transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 '></i>
+                                                            </button>
                                                         @endif
                                                         @if ($animals->qr_code === null)
                                                             <form
@@ -261,55 +259,36 @@
             {{-- End wrapper --}}
         </div>
     </div>
-    {{-- @foreach ($animal as $animals)
-            <nav id="schedule-nav{{ $animals->id }}"
-                class="bg-white absolute h-auto px-6 pb-6 rounded-md hidden text-[#293241] top-1/3  right-1/3 ">
-
-
-            </nav>
-        @endforeach
-
-        <script>
-            document.addEventListener("DOMContentLoaded", function() {
-                var showNavBtns = document.querySelectorAll(".btnForSchedNav");
-                var scheduleNavs = document.querySelectorAll("[id^='schedule-nav']");
-                var hideNavBtns = document.querySelectorAll(".hideSchedNav");
-                var blurringDiv = document.getElementById("blurring");
-
-                hideNavBtns.forEach(function(hideBtn) {
-                    hideBtn.addEventListener("click", function() {
-                        // Hide all schedule navigations
-                        scheduleNavs.forEach(function(nav) {
-                            nav.classList.add("hidden");
-                        });
-
-                        // Hide the blurring div
-                        blurringDiv.classList.add("hidden");
-                    });
-                });
-
-                showNavBtns.forEach(function(btn) {
-                    btn.addEventListener("click", function() {
-                        var animalId = btn.getAttribute("data-animal-id");
-
-                        // Hide all schedule navigations
-                        scheduleNavs.forEach(function(nav) {
-                            nav.classList.add("hidden");
-                        });
-
-                        // Show the clicked schedule navigation
-                        var scheduleNav = document.getElementById("schedule-nav" + animalId);
-                        scheduleNav.classList.remove("hidden");
-
-                        // Show the blurring div
-                        blurringDiv.classList.remove("hidden");
-                    });
-                });
-            });
-        </script> --}}
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    <script>
+        function printPage() {
+            // Add opacity-0 class to hide other buttons
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.add('opacity-0');
+            });
 
+            // Toggle opacity and apply backdrop styles to the elements with class 'hide-on-print' before printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.add('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Trigger the print function
+            window.print();
+
+            // Remove the applied styles and show other buttons after printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.remove('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Remove opacity-0 class to show other buttons after printing
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.remove('opacity-0');
+            });
+        }
+    </script>
 </body>
 
 </html>

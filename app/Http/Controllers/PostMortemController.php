@@ -135,4 +135,17 @@ class PostMortemController extends Controller
 
         return redirect()->back()->with('success', 'Condemn updated');
     }
+
+
+    public function ShowAdminPostMortem()
+    {
+        $animal = Animal::where('status', 'slaughtered')
+            ->wherehas('postMortem', function ($query) {
+                $query->where('postmortem_status', 'good');
+            })
+            ->get();
+
+
+        return view('admin.admin-post-mortem', compact('animal'));
+    }
 }

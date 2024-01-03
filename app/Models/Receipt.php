@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stabs extends Model
+class Receipt extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['issued_at'];
+    protected $fillable = ['receipt_no', 'animal_id', 'payment', 'receipt_name', ''];
 
 
     public function animals()
     {
-        return $this->hasMany(Animal::class, 'stab_id');
+        return $this->hasMany(Animal::class);
     }
 }

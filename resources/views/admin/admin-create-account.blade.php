@@ -23,7 +23,7 @@
             <div class="flex flex-col w-full ml-[240px]">
 
 
-                <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
+                <section class="flex justify-evenly gap-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
                         class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
@@ -68,8 +68,9 @@
                 </section>
 
 
-                <div class="mx-auto bg-white rounded-md w-[1200px] mt-10 mb-10 pb-10 px-20">
-                    <div class="flex justify-center"> @include('alerts.error') @include('alerts.success')
+                <div class="max-w-2xl ml-4 bg-white rounded-md backdrop-blur-0 mt-3 mb-10 pb-10 px-20">
+                    <div class="flex justify-center">
+                        @include('alerts.error') @include('alerts.success')
                     </div>
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <form action="{{ route('admin.seed.account') }}" method="post">
@@ -77,7 +78,7 @@
                         <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">Create Account
 
                         </h1>
-                        <div class="grid gap-6 mb-6 md:grid-cols-2">
+                        <div class="grid gap-6 mb-6 max-w-12 md:grid-cols-2 ">
 
                             <div>
                                 <label for="first_name"
@@ -100,7 +101,7 @@
                                 <label for="role" class="block mb-2 text-sm font-medium text-gray-900">Select a Role
                                 </label>
                                 <select id="role" name="role" required
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    class="bg-gray-50 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-transparent dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                     <option value="" disabled selected>Choose a Role</option>
                                     <option value="admin">Admin</option>
                                     <option value="inspector">Inspector</option>
@@ -146,7 +147,7 @@
                                     class="w-4 h-4 border-2 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-transparent dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800"
                                     required>
                             </div>
-                            <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I
+                            <label for="remember" class="ms-2 text-sm font-medium text-gray-900 ">I
                                 agree
                                 with the <a href="#"
                                     class="text-blue-600 hover:underline dark:text-blue-500">terms and

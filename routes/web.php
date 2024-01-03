@@ -9,6 +9,7 @@ use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PostMortemController;
 use App\Http\Controllers\QrCodeController;
+use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\StabController;
 use App\Models\AnteMortem;
@@ -77,7 +78,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
-    Route::get('/admin/issuing/stab/', [AdminController::class, 'ShowOwnerList'])->name('issuing.stab');
+    Route::get('/admin/issuing/stab/', [StabController::class, 'ShowOwnerStabList'])->name('issuing.stab'); //stab first page
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
     Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
     Route::get('/admin/lrme/report', [ReportsController::class, 'ShowReportLRME'])->name('lrme.reports');
@@ -85,6 +86,8 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/animal/sshpdp/{animalType}', [ReportsController::class, 'ShowAnimalSSHPDP'])->name('animal.sshpdp');
     Route::get('/admin/animal/stab/{ownerId}', [StabController::class, 'ShowForStabAnimal'])->name('admin.for.stab.animals');
     Route::get('/admin/issue/stab/', [StabController::class, 'GenerateStab'])->name('issue.stab');
+    Route::get('/admin/register/animal', [AdminController::class, 'ShowAdminRegister'])->name('admin.register.animal');
+    Route::get('/admin/postmortem/list', [PostMortemController::class, 'ShowAdminPostMortem'])->name('admin.postmortem.list');
 });
 
 
@@ -100,6 +103,8 @@ Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
     Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
     Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
+    Route::get('/client/stab', [ReceiptController::class, 'ShowClientStab'])->name('client.stab');
+    Route::get('/client/table/receipt/{id}', [ReceiptController::class, 'ShowReceiptTable'])->name('receipt.table');
 });
 
 //post clients

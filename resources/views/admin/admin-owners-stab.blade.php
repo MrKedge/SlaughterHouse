@@ -24,7 +24,7 @@
             <div class="flex flex-col w-full ml-[240px]">
 
 
-                <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
+                <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
                     {{-- wrapper --}}
                     <div
                         class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
@@ -94,7 +94,7 @@
                                 {{-- <input type="checkbox"> --}}
                             </div>
                         </div>
-                        <div class="scrollbar-gutter overflow-y-auto h-[440px]">
+                        <div class="scrollbar-gutter overflow-y-auto h-[420px]">
                             <table class="w-full text-center">
                                 <thead class="">
                                     <tr>
@@ -151,7 +151,7 @@
                                                                     d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
                                                             </svg>
 
-                                                            <span>View</span>
+                                                            <span></span>
                                                         </a>
                                                     </div>
                                                 </td>
