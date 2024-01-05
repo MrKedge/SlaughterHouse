@@ -20,9 +20,6 @@ return new class extends Migration
             $table->string('receipt_name')->nullable();
             $table->string('receipt_no')->nullable();
             $table->string('payment')->nullable();
-
-            $table->unsignedBigInteger('animal_id');
-            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
 

@@ -9,7 +9,7 @@ class Receipt extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['receipt_no', 'animal_id', 'payment', 'receipt_name', ''];
+    protected $fillable = ['receipt_no', 'payment', 'receipt_name', ''];
 
 
     public function animals()

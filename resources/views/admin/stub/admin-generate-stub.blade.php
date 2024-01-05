@@ -70,7 +70,7 @@
 
 
                 <div class="mx-auto w-full px-4">
-                    <form action="{{ route('issue.stab') }}" method="get" id="animalForm">
+                    <form action="{{ route('issue.stub') }}" method="get" id="animalForm">
                         @csrf {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                         <section
                             class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
@@ -151,9 +151,11 @@
                                     <thead class="">
                                         <tr>
                                             <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                <input id="checkbox-all" type="checkbox"
-                                                    class="animal-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                                                <label for="checkbox-all" class="sr-only">checkbox</label>
+                                                @if (count($animal) > 0)
+                                                    <input id="checkbox-all" type="checkbox"
+                                                        class="animal-checkbox w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                                                    <label for="checkbox-all" class="sr-only">checkbox</label>
+                                                @endif
                                             </th>
                                             <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                                 Id
@@ -228,7 +230,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="7"
+                                                <td colspan="8"
                                                     class="py-4 border-b border-black text-center h-[500px]">
                                                     <h1 class="font-semibold italic pb-3">No Animals Found</h1>
                                                 </td>

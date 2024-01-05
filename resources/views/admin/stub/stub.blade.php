@@ -44,7 +44,7 @@
                                         <h3 class="text-lg font-semibold  text-white">
                                             Stab
                                         </h3>
-                                        <a href="{{ route('issuing.stab') }}" class="text-lg font-semibold  text-white">
+                                        <a href="{{ route('issuing.stub') }}" class="text-lg font-semibold  text-white">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                 fill="currentColor" class="w-6 h-6">
                                                 <path fill-rule="evenodd"

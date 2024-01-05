@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('verify_code')->nullable();
+        Schema::create('stubs', function (Blueprint $table) {
+            $table->id();
+            $table->timestamps();
+
+            $table->timestamp('issued_at')->nullable();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            Schema::dropIfExists('verify_code');
-        });
+        Schema::dropIfExists('stubs');
     }
 };

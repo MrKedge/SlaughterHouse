@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+
             $table->string('type')->nullable();
             $table->string('gender')->nullable();
             $table->integer('age')->nullable();
@@ -33,9 +34,6 @@ return new class extends Migration
             $table->string('animal_mark')->nullable();
             $table->string('cert_ownership')->nullable();
             $table->string('qr_code')->nullable();
-            $table->unsignedBigInteger('stab_id')->nullable();
-
-            $table->foreign('stab_id')->references('id')->on('animals')->onDelete('cascade');
         });
     }
 

@@ -21,6 +21,7 @@ class Animal extends Model
         'cert_ownership',
         'cert_transfer',
         'source',
+        'brgy_clearance',
     ];
 
     public function user()
@@ -53,8 +54,8 @@ class Animal extends Model
         return $this->belongsTo(Receipt::class);
     }
 
-    public function stab()
+    public function stub()
     {
-        return $this->belongsTo(Stabs::class, 'stab_id');
+        return $this->belongsTo(Stubs::class, 'stub_id');
     }
 }

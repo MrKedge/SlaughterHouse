@@ -55,11 +55,11 @@
 
                             <label for="certOwnershipInput"
                                 class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
-                                <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                <span class="text-left font-medium flex items-center"><i class='bx bx-plus'
                                         style='font-size: 2em;'></i> Add
                                     image</span>
                                 <input id="certOwnershipInput" name="certOwnership" accept="image/*" type="file"
-                                    class="hidden" required onchange="readURL(this, 'cert-owner');">
+                                    class="hidden" onchange="readURL(this, 'cert-owner');">
                             </label>
 
                             <img id="cert-owner" src="#" alt="your image"
@@ -82,13 +82,40 @@
 
                             <label for="certTransferInput"
                                 class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
-                                <span class="mx-auto font-medium flex items-center"><i class='bx bx-plus'
+                                <span class="text-left font-medium flex items-center"><i class='bx bx-plus'
                                         style='font-size: 2em;'></i> Add
                                     image</span>
                                 <input id="certTransferInput" name="certTransfer" accept="image/*" type="file"
                                     class="hidden" onchange="readURL(this, 'cert-transfer');">
                             </label>
                             <img id="cert-transfer" src="#" alt="your image"
+                                class="hidden w-[100px] absolute h-full right-1/4 border border-dashed  border-black  ">
+
+
+                        </div>
+                    </div>
+
+                    <div>
+
+                        <h1 class="font-bold pointer-events-none text-lg italic opacity-0">Documents
+                        </h1>
+
+                        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">
+                            Brgy. Clearance
+                        </p>
+
+                        <div class="flex relative">
+
+
+                            <label for="brgy-clearance"
+                                class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
+                                <span class=" text-left font-medium flex items-center"><i class='bx bx-plus'
+                                        style='font-size: 2em;'></i> Add
+                                    image</span>
+                                <input id="brgy-clearance" name="brgyClearance" accept="image/*" type="file"
+                                    class="hidden" onchange="readURL(this, 'clearance-brgy');">
+                            </label>
+                            <img id="clearance-brgy" src="#" alt="your image"
                                 class="hidden w-[100px] absolute h-full right-1/4 border border-dashed  border-black  ">
 
 
@@ -148,8 +175,8 @@
                                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900"
                                     for="">Age:(months)</label>
                                 <input type="number" name="age" required
-                                    oninput="formatAge(this); limitInputValue(this, 2000)" min="1" max="2000"
-                                    placeholder="Age"
+                                    oninput="formatAge(this); limitInputValue(this, 2000)" min="1"
+                                    max="2000" placeholder="Age"
                                     class="font-medium  bg-gray-50 border border-gray-300  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
                                 <div id="displayAge" class="text-gray-500 text-sm mt-2"></div>
                             </div>

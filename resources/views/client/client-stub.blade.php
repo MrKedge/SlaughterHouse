@@ -20,7 +20,7 @@
 
             <section
                 class=" z-10 mx-5 w-auto  bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                <h1 class="text-2xl font-bold py-3 text-[#293241]">With Stab</h1>
+                <h1 class="text-2xl font-bold py-3 text-[#293241]">Stub</h1>
 
                 <div class="scrollbar-gutter overflow-y-auto h-[480px]">
                     <table class="w-full">
@@ -33,16 +33,16 @@
                             </tr>
                         </thead>
                         <tbody class="space-y-4">
-                            @forelse ($stabs as $stab)
+                            @forelse ($stubs as $stub)
                                 <tr class="bg-transparent border border-black text-center">
-                                    <td class="p-2">{{ $stab->id }}</td>
-                                    <td class="p-2">{{ $stab->issued_at }}</td>
-                                    <td class="p-2">{{ $stab->animals()->count() }}</td>
+                                    <td class="p-2">{{ $stub->id }}</td>
+                                    <td class="p-2">{{ $stub->issued_at }}</td>
+                                    <td class="p-2">{{ $stub->animals->count() }}</td>
                                     <td class="p-2 flex justify-center gap-3">
                                         <!-- Add your links for viewing and editing animals here -->
 
 
-                                        <a href="{{ route('receipt.table', ['id' => $stab->id]) }}"
+                                        <a href="{{ route('receipt.table', ['id' => $stub->id]) }}"
                                             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded gap-1 flex items-center">
                                             <box-icon name='send' color='#ffffff'></box-icon><span>View</span>
                                         </a>

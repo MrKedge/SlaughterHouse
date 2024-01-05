@@ -118,7 +118,7 @@
 
                 </div>
 
-                <a href="{{ route('issuing.stab') }}">
+                <a href="{{ route('issuing.stub') }}">
                     <h1 class="panel-text flex items-center whitespace-nowrap">Stab</h1>
                 </a>
 
@@ -140,7 +140,7 @@
 
                 </div>
 
-                <a href="{{ route('issuing.stab') }}">
+                <a href="{{ route('issuing.stub') }}">
                     <h1 class="panel-text flex items-center whitespace-nowrap">Mic</h1>
                 </a>
 
@@ -161,7 +161,7 @@
 
                 </div>
 
-                <a href="{{ route('issuing.stab') }}">
+                <a href="{{ route('issuing.stub') }}">
                     <h1 class="panel-text flex items-center whitespace-nowrap">Completed</h1>
                 </a>
 

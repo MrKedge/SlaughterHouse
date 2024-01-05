@@ -84,6 +84,7 @@ class AuthController extends Controller
             'email.email' => 'Please provide a valid email address.',
             'email.unique' => 'The provided Email is already registered.',
             'password.required' => 'Password is required.',
+
         ]);
 
         // If password does not match, store the email in the session

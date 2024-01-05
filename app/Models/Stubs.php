@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Stabs extends Model
+class Stubs extends Model
 {
     use HasFactory;
 
@@ -14,6 +14,6 @@ class Stabs extends Model
 
     public function animals()
     {
-        return $this->hasMany(Animal::class, 'stab_id');
+        return $this->hasMany(Animal::class, 'stub_id');
     }
 }

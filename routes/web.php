@@ -11,7 +11,7 @@ use App\Http\Controllers\PostMortemController;
 use App\Http\Controllers\QrCodeController;
 use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReportsController;
-use App\Http\Controllers\StabController;
+use App\Http\Controllers\StubController;
 use App\Models\AnteMortem;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
@@ -78,14 +78,14 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/form/maintenance/', [FormMaintenanceController::class, 'ShowMaintenanceForm'])->name('admin.form.maintenance');
     Route::get('/admin/slaughter/list', [AdminController::class, 'ShowSlaughteredList'])->name('admin.slaughter.list');
     Route::get('/admin/monitoring/list', [AnteMortemController::class, 'AnteMortemList'])->name('admin.monitor.list');
-    Route::get('/admin/issuing/stab/', [StabController::class, 'ShowOwnerStabList'])->name('issuing.stab'); //stab first page
+    Route::get('/admin/issuing/stub/', [StubController::class, 'ShowOwnerStubList'])->name('issuing.stub'); //stub first page
     Route::get('/admin/create/account/', [AdminController::class, 'ShowCreateAccount'])->name('admin.create.account');
     Route::get('/admin/dispose/list', [AnteMortemController::class, 'ShowDisposedList'])->name('admin.dispose.list');
     Route::get('/admin/lrme/report', [ReportsController::class, 'ShowReportLRME'])->name('lrme.reports');
     Route::get('/admin/sshpdp/report', [ReportsController::class, 'ShowSSHPDP'])->name('sshpdp.reports');
     Route::get('/admin/animal/sshpdp/{animalType}', [ReportsController::class, 'ShowAnimalSSHPDP'])->name('animal.sshpdp');
-    Route::get('/admin/animal/stab/{ownerId}', [StabController::class, 'ShowForStabAnimal'])->name('admin.for.stab.animals');
-    Route::get('/admin/issue/stab/', [StabController::class, 'GenerateStab'])->name('issue.stab');
+    Route::get('/admin/animal/stub/{ownerId}', [StubController::class, 'ShowForStubAnimal'])->name('admin.for.stub.animals');
+    Route::get('/admin/issue/stub/', [StubController::class, 'GenerateStub'])->name('issue.stub');
     Route::get('/admin/register/animal', [AdminController::class, 'ShowAdminRegister'])->name('admin.register.animal');
     Route::get('/admin/postmortem/list', [PostMortemController::class, 'ShowAdminPostMortem'])->name('admin.postmortem.list');
 });
@@ -103,13 +103,13 @@ Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
     Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
     Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
-    Route::get('/client/stab', [ReceiptController::class, 'ShowClientStab'])->name('client.stab');
+    Route::get('/client/stub', [ReceiptController::class, 'ShowClientStub'])->name('client.stub');
     Route::get('/client/table/receipt/{id}', [ReceiptController::class, 'ShowReceiptTable'])->name('receipt.table');
 });
 
 //post clients
 Route::post('archive/form/{id}', [ClientController::class, 'ArchiveForm'])->name('archive.form');
-
+Route::post('/upload/receipt/{id}', [ReceiptController::class, 'UploadReceipt'])->name('upload.receipt');
 
 //butcher
 Route::post('/buthcer/slaughtered/animal{id}', [PostMortemController::class, 'SlaughteredAnimal'])->name('butcher.slaughter.animal');

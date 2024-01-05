@@ -143,7 +143,7 @@
                                                 </td>
                                                 <td class="border-b border-black font-semibold capitalize">
                                                     <div class="flex justify-center gap-3">
-                                                        <a href="{{ route('admin.for.stab.animals', ['ownerId' => $owners->id]) }}"
+                                                        <a href="{{ route('admin.for.stub.animals', ['ownerId' => $owners->id]) }}"
                                                             class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
                                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                                 fill="currentColor" data-slot="icon" class="w-6 h-6">

@@ -229,7 +229,7 @@
                                 <h1 class="font-bold pointer-events-none text-lg italic pl-12 ">Documents:
                                 </h1>
                                 <!-- Modal body -->
-                                <div class="grid gap-4 mb-4 sm:grid-cols-5 px-12 bg-gray-50">
+                                <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12 bg-gray-50">
 
                                     <div>
                                         <label class="block pb-1" for="">Certificate of Ownership:</label>
@@ -244,7 +244,7 @@
                                         </section>
                                     </div>
                                     <div>
-                                        @if ($animal->cert_transfe !== null)
+                                        @if ($animal->cert_transfer !== null)
                                             <label class="block pb-1" for="">Cert. of Transfer of Large
                                                 Cattle:</label>
                                             <section class="w-[100px] p-1 border-dashed border border-black"
@@ -253,21 +253,47 @@
                                                     data-lightbox="animal-gallery">
                                                     <img class=""
                                                         src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                                        alt="animal image">
+                                                        alt="Cert. of Transfer Image">
                                                 </a>
                                             </section>
                                         @endif
                                     </div>
+
                                     <div>
                                         <label class="block pb-1" for="">Brgy. Clearance:</label>
                                         <section class="w-[100px] p-1 border-dashed border border-black"
-                                            data-lightbox="animal-gallery" data-title="Animal Image">
-                                            <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                                data-lightbox="animal-gallery">
-                                                <img class=""
-                                                    src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                                    alt="animal image">
-                                            </a>
+                                            data-lightbox="animal-gallery" data-title="Brgy. Clearance Image">
+
+                                            @if ($animal->cert_ownership)
+                                                <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
+                                                    data-lightbox="animal-gallery">
+                                                    <img class=""
+                                                        src="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
+                                                        alt="Brgy. Clearance Image">
+                                                </a>
+                                            @else
+                                                <p>No Brgy. Clearance available</p>
+                                            @endif
+
+                                        </section>
+                                    </div>
+
+                                    <div>
+                                        <label class="block pb-1" for="">Receipt:</label>
+                                        <section class="w-[100px] p-1 border-dashed border border-black"
+                                            data-lightbox="animal-gallery" data-title="Receipt Image">
+
+                                            @if ($animal->receipt)
+                                                <a href="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
+                                                    data-lightbox="animal-gallery">
+                                                    <img class=""
+                                                        src="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
+                                                        alt="Receipt Image">
+                                                </a>
+                                            @else
+                                                <p>No receipt available</p>
+                                            @endif
+
                                         </section>
                                     </div>
 

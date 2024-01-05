@@ -94,10 +94,7 @@
                                                     class="px-2 bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-1">
                                                     View
                                                 </a>
-                                                {{-- <a href="{{ route('client.edit.animal.form', ['id' => $animals->id]) }}"
-                                            class="px-4 bg-green-500 hover:bg-green-700 text-white font-bold  rounded mx-1 py-1">
-                                            Edit
-                                        </a> --}}
+
                                             </td>
                                         </tr>
                                         @php $index++ @endphp

@@ -34,8 +34,8 @@ class ClientController extends Controller
     {
         $user = User::with('animals')->find(Auth::id());
 
-        // Retrieve only non-archived animals
-        $animals = $user->animals->where('status', '=', 'pending');
+        // Retrieve all animals for the user
+        $animals = $user->animals;
 
         return view('client.client-animal-list-registration', compact('user', 'animals'));
     }
@@ -150,7 +150,12 @@ class ClientController extends Controller
             'certTransfer' => '',
             'ageClassify' => '',
             'source' => 'required',
+            'brgyClearance' => '',
         ]);
+
+        $brgyClearanceName = time() . '_' . uniqid() . '.png';
+        $request->file('brgyClearance')->storeAs('public/brgy-clearance', $brgyClearanceName);
+
 
         $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
         $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
@@ -190,6 +195,7 @@ class ClientController extends Controller
         $animal->cert_ownership = $imageCertOwnershipName;
         $animal->cert_transfer = $imageCertTransferName;
         $animal->source = $request->source;
+        $animal->brgy_clearance = $brgyClearanceName;
 
         $animal->save();
         if (auth()->check()) {

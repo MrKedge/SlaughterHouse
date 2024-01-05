@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stabs', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-
-            $table->timestamp('issued_at')->nullable();
+        Schema::table('animals', function (Blueprint $table) {
+            $table->string('brgy_clearance')->nullable();
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stabs');
+        Schema::table('animals', function (Blueprint $table) {
+            $table->dropColumn('brgy_clearance');
+        });
     }
 };
