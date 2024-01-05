@@ -30,7 +30,7 @@ use NunoMaduro\Collision\Adapters\Laravel\Inspector;
 */
 
 Route::get('/', function () {
-    return view('auth.log-in');
+    return view('index');
 });
 
 Route::get('/verify/your/email/', [AuthController::class, 'ShowVerifyEmail'])->name('verify.email.account');
