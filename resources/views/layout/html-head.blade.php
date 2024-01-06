@@ -2,7 +2,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Equali | Login </title>
+    <title>{{ $pageTitle ?? 'Default Title' }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -21,7 +21,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>{{-- pdf --}}
 
-    <title>{{ $pageTitle ?? 'Default Title' }}</title>
+
 
     <script>
         tailwind.config = {
@@ -36,7 +36,8 @@
         }
     </script>
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+
+    @vite('resources/css/app.css')
     {{-- <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script> --}}
 </head>
