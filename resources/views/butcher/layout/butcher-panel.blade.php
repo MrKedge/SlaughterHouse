@@ -17,7 +17,7 @@
                 </a>
             </li>
             <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
-                <a href="{{ route('butcher.animal') }}">
+                <a href="{{ route('') }}">
                     <div class="flex items-center panel-text gap-2"><i class='bx bx-registered'
                             style='font-size: 24px; color: #ffffff;'></i><span class=" flex items-center">ANIMAL
                             LIST</span>

@@ -54,11 +54,11 @@ class AdminController extends Controller
 
     public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
     {
-        $animals = Animal::with('user')
+        $animal = Animal::with('user')
             ->where('status', 'pending')
             ->get();
 
-        return view('admin.admin-animal-reg-list', compact('animals'));
+        return view('admin.admin-animal-reg-list', compact('animal'));
     }
 
 

@@ -10,9 +10,9 @@
         class="bg-center bg-cover w-screen h-screen bg-no-repeat bg-[url('/public/images/background.png')] bg-gray-700 bg-blend-multiply">
         <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56">
 
-            <header class="absolute  inset-x-0 top-0 z-50">
-                <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
-                    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            <header class="absolute  inset-x-0 top-0 z-50 ">
+                <nav class="flex items-center justify-end w-full p-6 lg:px-8" aria-label="Global">
+                    <div class=" lg:flex lg:flex-1 justify-end">
                         <a href="{{ route('log.in') }}" class="text-sm font-semibold leading-6 text-white">Log in <span
                                 aria-hidden="true">&rarr;</span></a>
                     </div>
@@ -25,7 +25,7 @@
             <div class="">
                 <div class="hidden sm:mb-8 sm:flex sm:justify-center">
                     <div
-                        class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-300 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                        class="relative rounded-full px-3 py-1 text-sm leading-6 text-gray-300 ring-1 ring-gray-800/10 hover:ring-gray-400/20">
                         Announcing our new system Slaughtech <a href="#" class="font-semibold text-blue-600"><span
                                 class="absolute inset-0" aria-hidden="true"></span>About us <span
                                 aria-hidden="true">&rarr;</span></a>

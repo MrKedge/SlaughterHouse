@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'SSHPDP report'])
+@include('layout.html-head', ['pageTitle' => 'SSHPDP'])
 
-<body class="bg-[#D5DFE8] ">
+<body class="bg-[#D5DFE8]">
 
-    <div class="min-h-screen">{{-- wrapper --}}
+    @extends('admin.layout.admin-masterlayout')
+
+    @section('admincontent')
+        {{-- wrapper --}}
 
 
 
         {{-- HEADER --}}
-        @include('admin.layout.admin-header')
+
         {{-- end header --}}
 
 
         <div class="flex">{{-- middle content wrapper --}}
 
-            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
 
 
             {{-- table wrapper --}}
-            <div class="flex flex-col w-full ml-[240px]">
+            <div class="flex flex-col w-full">
 
 
                 {{-- <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
@@ -29,7 +31,7 @@
                 </section> --}}
 
 
-                <div class="mx-auto w-full px-4">
+                <div class="mx-auto mt-6 w-full px-4">
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border border-white p-4">
@@ -59,7 +61,7 @@
 
 
         <div class="px-4 pt-4">
-            <div class=" shadow-md sm:rounded-lg flex justify-center ml-[240px]">
+            <div class=" shadow-md sm:rounded-lg flex justify-center">
 
 
                 <div
@@ -82,8 +84,7 @@
                                         </svg>
 
 
-                                        <h5
-                                            class="mb-2 text-2xl font-semibold tracking-tight text-gray-700 capitalize ">
+                                        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-700 capitalize ">
                                             {{ e($type) }}</h5>
 
                                         <p class="mb-3 font-normal text-gray-500 ">Survey of Slaughterhouses and poultry
@@ -93,8 +94,8 @@
 
                                             <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true"
                                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
-                                                <path stroke="currentColor" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="2"
+                                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                    stroke-width="2"
                                                     d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778" />
                                             </svg>
                                         </div>
@@ -108,9 +109,10 @@
                 </div>
             </div>
 
-
         </div>
-        <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    @endsection
+
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>
 
 </html>

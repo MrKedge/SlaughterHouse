@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layout.html-head', ['pageTitle' => 'Form Maintenance'])
 
-<body class="bg-[#D5DFE8]">
+@include('layout.html-head', ['pageTitle' => 'Approved List'])
 
-    <div class="min-h-screen">{{-- wrapper --}}
+<body class="bg-[#D5DFE8] overflow-hidden">
 
+    @extends('admin.layout.admin-masterlayout')
 
-        {{-- HEADER --}}
-        @include('admin.layout.admin-header')
-        {{-- end header --}}
-
-
-
-
-        {{-- this is for the table inside --}}
+    @section('admincontent')
         <div class="flex">
 
-            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
             <div class="mx-auto w-full">
 
                 {{-- main content --}}
 
-                <div class="ml-[240px] flex">
+                <div class=" flex">
 
 
                     <section class="flex flex-col h-full pt-8 w-full mx-6">
@@ -240,7 +232,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    @endsection
 </body>
 
 </html>

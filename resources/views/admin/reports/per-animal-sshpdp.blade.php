@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => $animalType . ' SSHPDP'])
+@include('layout.html-head', ['pageTitle' => 'Animal SSHPDP'])
 
-<body class="bg-[#D5DFE8] ">
+<body class="bg-[#D5DFE8] overflow-hidden">
+
+    @extends('admin.layout.admin-masterlayout')
 
     <div class="min-h-screen">{{-- wrapper --}}
 
 
         {{-- HEADER --}}
-        @include('admin.layout.admin-header')
+
         {{-- end header --}}
 
 
         <div class="flex">{{-- middle content wrapper --}}
 
-            <div class="fixed">@include('admin.layout.admin-sidepanel')</div>
+
 
             <div class="flex flex-col w-full ml-[240px]">
 
@@ -24,17 +26,17 @@
 
                     {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     {{-- <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border border-white p-4">
-
+    
                         <div class="flex justify-between ">
-
+    
                             <div class="text-gray-600"> @include('admin.tabs.tabs')</div>
                             @include('admin.tabs.search-bar')
-
+    
                         </div>
-
+    
                     </section> --}}
 
-                    <div class="flex text-start items-center gap-4">
+                    <div class="flex text-start mt-16 items-center gap-4">
                         <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
                             SSHPDP</h1>
 
@@ -385,6 +387,9 @@
 
 
     </div>
+    @section('admincontent')
+    @endsection
+
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>
 
