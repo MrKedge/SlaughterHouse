@@ -23,6 +23,9 @@
 
 
 
+
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -35,9 +38,5 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-
-    @vite('resources/css/app.css')
     {{-- <script src="https://unpkg.com/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script> --}}
 </head>

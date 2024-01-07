@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Generate Stub'])
+@include('layout.html-head', ['pageTitle' => 'MIC'])
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
@@ -12,20 +12,20 @@
 
 
 
-
             <div class="mx-auto w-full px-4 mt-20">
-                <form action="{{ route('issue.stub') }}" method="get" id="animalForm">
+
+                <form action="{{ route('generate.mic') }}" method="get" id="animalForm">
                     @csrf {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
                     <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
 
                         <div class="flex items-center gap-6">
                             <h1 class="text-left font-bold text-[#293241] py-4 text-3xl opacity-80 whitespace-nowrap">
-                                Stub generation
+                                Meat Inspection Certificate
                             </h1>
 
 
                             <div class="text-end w-full pr-3">
-                                <div id="generate-modal" tabindex="-1"
+                                <div id="mic-modal" tabindex="-1"
                                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                     <div
                                         class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity">
@@ -34,7 +34,7 @@
                                         <div class="relative bg-white rounded-lg shadow ">
                                             <button type="button"
                                                 class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                                                data-modal-hide="generate-modal">
+                                                data-modal-hide="mic-modal">
                                                 <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                                     fill="none" viewBox="0 0 14 14">
                                                     <path stroke="currentColor" stroke-linecap="round"
@@ -54,12 +54,12 @@
 
                                                 <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you
                                                     want to
-                                                    generate stub for this Animals?</h3>
-                                                <button id="generateBtn" data-modal-hide="generate-modal"
+                                                    generate MIC for this Animals?</h3>
+                                                <button id="generateBtn" data-modal-hide="mic-modal"
                                                     class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                                     Yes, I'm sure
                                                 </button>
-                                                <button data-modal-hide="generate-modal" type="button"
+                                                <button data-modal-hide="mic-modal" type="button"
                                                     class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">No,
                                                     cancel</button>
                                             </div>
@@ -69,7 +69,7 @@
 
                                 <input type="hidden" name="selected_animals" id="selectedAnimalsInput">
                                 {{-- selected animal input --}}
-                                <button data-modal-target="generate-modal" data-modal-toggle="generate-modal" type="button"
+                                <button data-modal-target="mic-modal" data-modal-toggle="mic-modal" type="button"
                                     class="generateBtn px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                         class="w-6 h-6">
@@ -85,7 +85,7 @@
                             </div>
 
                         </div>
-                        <div class="scrollbar-gutter overflow-y-auto h-[420px]">
+                        <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                             <table class="w-full text-center">
                                 <thead class="">
                                     <tr>
@@ -100,16 +100,13 @@
                                             Id
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Arrival Date
+                                            Type
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Arrival Date
+                                            Completed Date
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Arrival Time
-                                        </th>
-                                        <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                            Animals
+                                            Completed Time
                                         </th>
                                         <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                             Status
@@ -132,23 +129,16 @@
                                                 {{ $animals->id }}
                                             </td>
                                             <td class="py-4 border-b border-black capitalize  font-semibold">
-                                                {{ $animals->user->last_name }} {{ $animals->user->first_name }}
-                                            </td>
-                                            <td class="py-4 border-b border-black capitalize font-semibold">
-                                                {{ optional($animals->anteMortem)->arrived_at }}
-                                            </td>
-                                            <td class="py-4 border-b border-black capitalize font-semibold">
-                                                {{ optional($animals->anteMortem)->arrived_at }}
-                                            </td>
-                                            <td class="py-4 border-b border-black font-semibold capitalize">
-
                                                 {{ $animals->type }}
-
+                                            </td>
+                                            <td class="py-4 border-b border-black capitalize font-normal">
+                                                {{ \Carbon\Carbon::parse($animals->completed->created_at)->format('M d Y') }}
+                                            </td>
+                                            <td class=" font-normal  border-b border-black capitalize ">
+                                                {{ \Carbon\Carbon::parse($animals->completed->created_at)->format('h:i:s A') }}
                                             </td>
                                             <td class="py-4 border-b border-black font-semibold capitalize">
-
-                                                {{ $animals->status }}
-
+                                                {{ $animals->completed->complete_status }}
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize">
                                                 <div class="flex justify-center gap-3">
@@ -176,11 +166,13 @@
                                 </tbody>
                             </table>
                         </div>
+
                     </section>
                 </form>
             </div>
         </div>
     @endsection
+
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
     <script>
         $(document).ready(function() {

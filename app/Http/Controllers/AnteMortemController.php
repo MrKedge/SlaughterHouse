@@ -29,7 +29,7 @@ class AnteMortemController extends Controller
             ['arrived_at' => $arrivalDateTime]
         );
 
-        return redirect()->route('admin.approve.list')->with('success', 'Animal scheduled successfully.');
+        return redirect()->route('admin.approve.list')->with('success', 'Arrival date set successfully.');
     }
 
 

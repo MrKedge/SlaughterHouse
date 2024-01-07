@@ -24,6 +24,7 @@
                     <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
                 </div>
             </div>
+
             <div class="flex items-center lg:order-2">
                 <button type="button" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
                     class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300">
@@ -47,6 +48,9 @@
                         </path>
                     </svg>
                 </button>
+
+
+
                 <!-- Dropdown menu -->
                 <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg"
                     id="notification-dropdown">
@@ -418,30 +422,14 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                             </svg>
-                            <h1 class="panel-text flex items-center whitespace-nowrap">Stab</h1>
+                            <h1 class="panel-text flex items-center whitespace-nowrap">Stub</h1>
                         </div>
                     </a>
                 </li>
 
                 <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 
-                    <a href="{{ route('issuing.stub') }}">
-                        <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round"
-                                    d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9Z" />
-                            </svg>
-
-                            <h1 class="panel-text flex items-center whitespace-nowrap">Mic</h1>
-
-                        </div>
-                    </a>
-
-                </li>
-
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
-
-                    <a href="{{ route('issuing.stub') }}">
+                    <a href="{{ route('complete.animals') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -500,14 +488,21 @@
         </div>
 
     </aside>
-
+    <div>
+        @include('alerts.error')
+        @include('alerts.success')
+    </div>
     <main class="md:ml-60 h-auto pt-10 overflow-auto ">
+
         @yield('admincontent')
+
     </main>
 </div>
 
+
 <div id="log-out-modal" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+
     <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow">

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Approved List'])
+@include('layout.html-head', ['pageTitle' => 'Post mortem List'])
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
@@ -157,6 +157,21 @@
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize py-4">
                                                 <div class="flex justify-center gap-3">
+                                                    <form action="{{ route('complete.process', ['id' => $animals->id]) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        <button type="submit"
+                                                            class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                                class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                            </svg>
+
+                                                            <span></span>
+                                                        </button>
+                                                    </form>
                                                     <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                         class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

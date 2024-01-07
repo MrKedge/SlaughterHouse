@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('completeds', function (Blueprint $table) {
+        Schema::create('mics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-
-            $table->unsignedBigInteger('animal_id');
-
-            $table->foreign('animal_id')->references('id')->on('animals')->onDelete('cascade');
-
-            $table->string('complete_status')->nullable();
         });
     }
 
@@ -28,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('completeds');
+        Schema::dropIfExists('mics');
     }
 };

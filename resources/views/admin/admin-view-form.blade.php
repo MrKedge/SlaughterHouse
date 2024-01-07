@@ -67,16 +67,18 @@
                                         {{ $animal->user->first_name }} {{ $animal->user->last_name }}
                                     </p>
                                 </div>
-                                <div>
-                                    <label
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Address:</label>
-                                    <p id="address"
-                                        class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                @if (auth()->user()->role === 'client')
+                                    <div>
+                                        <label
+                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Address:</label>
+                                        <p id="address"
+                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                        {{ $animal->user->address }}
+                                            {{ $animal->user->address }}
 
-                                    </p>
-                                </div>
+                                        </p>
+                                    </div>
+                                @endif
 
                             </div>
                             <h1 class="font-bold pointer-events-none text-lg italic pl-12">Animal Information

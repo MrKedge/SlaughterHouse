@@ -11,7 +11,6 @@
 
         <div class="max-w-2xl ml-2 bg-white rounded-md backdrop-blur-0 mt-3 mb-10 pb-10 px-20">
             <div class="flex justify-center">
-                @include('alerts.error') @include('alerts.success')
             </div>
             {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
             <form action="{{ route('admin.seed.account') }}" method="post">

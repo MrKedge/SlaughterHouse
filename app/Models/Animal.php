@@ -58,4 +58,9 @@ class Animal extends Model
     {
         return $this->belongsTo(Stubs::class, 'stub_id');
     }
+
+    public function completed()
+    {
+        return $this->hasOne(Completed::class);
+    }
 }

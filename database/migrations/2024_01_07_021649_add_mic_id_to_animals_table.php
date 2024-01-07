@@ -12,9 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('animals', function (Blueprint $table) {
-
-            $table->unsignedBigInteger('receipt_id')->nullable();
-            $table->foreign('receipt_id')->references('id')->on('receipts')->onDelete('cascade');
+            $table->unsignedBigInteger('mic_id')->nullable();
+            $table->foreign('mic_id')->references('id')->on('mics')->onDelete('cascade');
         });
     }
 
@@ -24,8 +23,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('animals', function (Blueprint $table) {
-            $table->dropForeign(['receipt_id']); // Use an array here
-            $table->dropColumn('receipt_id');
+            $table->dropForeign(['mic_id']); // Use an array here
+            $table->dropColumn('mic_id');
         });
     }
 };

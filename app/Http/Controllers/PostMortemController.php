@@ -140,11 +140,11 @@ class PostMortemController extends Controller
     public function ShowAdminPostMortem()
     {
         $animal = Animal::where('status', 'slaughtered')
-            ->wherehas('postMortem', function ($query) {
+            ->whereHas('postMortem', function ($query) {
                 $query->where('postmortem_status', 'good');
             })
+            ->whereDoesntHave('completed') // Ensure there is no related completed record
             ->get();
-
 
         return view('admin.admin-post-mortem', compact('animal'));
     }

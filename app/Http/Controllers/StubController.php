@@ -38,13 +38,13 @@ class StubController extends Controller
         }
 
         // Create a new stub with issued_at set to the current time
-        $newStab = Stubs::create([
+        $newStub = Stubs::create([
             // Add any other relevant fields for the new stub
             'issued_at' => Carbon::now(),
         ]);
 
         // Update the stub_id for each selected animal with the same stub_id
-        Animal::whereIn('id', $selectedAnimals)->update(['stub_id' => $newStab->id]);
+        Animal::whereIn('id', $selectedAnimals)->update(['stub_id' => $newStub->id]);
 
         // Retrieve the updated animals based on the selected IDs
         $animals = Animal::with('user')->whereIn('id', $selectedAnimals)->get();
@@ -53,7 +53,7 @@ class StubController extends Controller
         $weightTotal = $animals->sum('live_weight');
         $owner = User::find($animals->first()->user_id);
 
-        return view('admin.stub.stub', compact('animals', 'totalAnimal', 'weightTotal', 'owner'));
+        return view('admin.stub.stub', compact('animals', 'totalAnimal', 'weightTotal', 'owner', 'newStub'));
     }
 
 

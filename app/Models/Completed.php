@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Completed extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['animal_id', 'complete_status'];
+
+
+
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class);
+    }
 }

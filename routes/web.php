@@ -5,6 +5,7 @@ use App\Http\Controllers\AnteMortemController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CompletedController;
 use App\Http\Controllers\FormMaintenanceController;
 use App\Http\Controllers\InspectorController;
 use App\Http\Controllers\PostMortemController;
@@ -64,6 +65,7 @@ Route::post('/inspector/postmortem/good/{id}', [PostMortemController::class, 'Po
 Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedule'])->name('set.schedule');
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
 Route::get('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
+Route::post('/comple/process/{id}', [CompletedController::class, 'CompleteRecord'])->name('complete.process');
 //admin pages
 
 
@@ -88,6 +90,9 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/issue/stub/', [StubController::class, 'GenerateStub'])->name('issue.stub');
     Route::get('/admin/register/animal', [AdminController::class, 'ShowAdminRegister'])->name('admin.register.animal');
     Route::get('/admin/postmortem/list', [PostMortemController::class, 'ShowAdminPostMortem'])->name('admin.postmortem.list');
+    Route::get('/admin/completed/animals', [CompletedController::class, 'ShowCompleted'])->name('complete.animals');
+    Route::get('/admin/user/complete/list/{ownerId}', [CompletedController::class, 'ShowUserMic'])->name('owner.mic.list');
+    Route::get('/admin/generate/mic/', [CompletedController::class, 'GenerateMic'])->name('generate.mic');
 });
 
 

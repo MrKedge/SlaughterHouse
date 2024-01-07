@@ -1,19 +1,26 @@
 @if (session('success'))
     <div id="success-alert"
-        class="absolute top-4 rounded-md flex items-center p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
+        class="fixed transition-opacity duration-300 ease-in-out  inset-x-px max-w-lg mt-10 mx-auto top-0 flex justify-center z-50 p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 "
         role="alert">
-        <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 20">
+        <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
             <path
                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
         </svg>
-        <div class="ms-3 text-sm font-medium">
-            {{ session('success') }}
+        <span class="sr-only">Info</span>
+        <div>
+            <span class="font-medium">Success alert!</span> {{ session('success') }}.
         </div>
     </div>
+
+
     <script>
         setTimeout(function() {
-            document.getElementById('success-alert').style.display = 'none';
-        }, 3000); // 3000 milliseconds = 3 seconds
+            var successAlert = document.getElementById('success-alert');
+            successAlert.style.opacity = 0;
+            setTimeout(function() {
+                successAlert.style.display = 'none';
+            }, 300);
+        }, 4000);
     </script>
 @endif

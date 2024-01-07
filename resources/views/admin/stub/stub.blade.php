@@ -42,7 +42,7 @@
                                     <div
                                         class="flex items-center justify-between p-2 pl-4 border-b rounded-t border-gray-600 ">
                                         <h3 class="text-lg font-semibold  text-white">
-                                            Stab
+                                            Stub
                                         </h3>
                                         <a href="{{ route('issuing.stub') }}" class="text-lg font-semibold  text-white">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -59,8 +59,8 @@
 
                                         <div class="mx-auto max-w-sm bg-white p-4  rounded-sm mb-2">
                                             <div class="flex justify-between">
-                                                <h1 class="inline-block">Contact No.</h1>
-                                                <h1>Id:</h1>
+                                                <h1 class="inline-block"></h1>
+                                                <h1>Id: {{ $newStub->id }}</h1>
                                             </div>
 
 

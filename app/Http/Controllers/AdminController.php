@@ -207,7 +207,11 @@ class AdminController extends Controller
 
     public function ShowSlaughteredList()
     {
-        $animal = Animal::where('status', 'slaughtered')->get();
+        $animal = Animal::where('status', 'slaughtered')
+            ->whereHas('postMortem', function ($query) {
+                $query->whereNull('postmortem_status');
+            })
+            ->get();
 
         return view('admin.admin-slaughter-list', compact('animal'));
     }

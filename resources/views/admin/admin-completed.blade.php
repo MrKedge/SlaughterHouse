@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Stub List'])
+@include('layout.html-head', ['pageTitle' => 'Completed List'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#D5DFE8] ">
 
     @extends('admin.layout.admin-masterlayout')
 
     @section('admincontent')
-
 
         <div class="flex flex-col w-full">
 
@@ -44,7 +43,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
@@ -58,45 +57,30 @@
             <div class="mx-auto w-full px-4">
 
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section
-                    class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+                <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
 
-                    <div class="flex items-center gap-6">
-                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Issuing of stab
+                    <div class="flex justify-between ">
+
+                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">Completed
                         </h1>
-
-                        {{-- <form action="" method="get">
-                        <label for=""
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"></label>
-                        <select id="countries"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm font-semibold rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-900 dark:focus:ring-gray-500 dark:focus:border-gray-900">
-                            <option value="pending">Pending</option>
-                            <option value="approved">Approved</option>
-                            <option value="slaughter">For Slaughter</option>
-                        </select>
-                    </form> --}}
-                        <div class="">
-                            <label for=""></label>
-                            {{-- <input type="checkbox"> --}}
-                        </div>
                     </div>
-                    <div class="scrollbar-gutter overflow-y-auto h-[420px]">
-                        <table class="w-full text-center">
+                    <div class="scrollbar-gutter overflow-y-auto h-[430px]">
+                        <table id="example" class="w-full text-center">
                             <thead class="">
                                 <tr>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th data-priority="1" class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Id
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th data-priority="2" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th data-priority="3" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Address
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Animals
+                                    <th data-priority="5" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Animal
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th data-priority="7" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Action
                                     </th>
                                 </tr>
@@ -105,8 +89,10 @@
 
                                 @if ($owner->isEmpty())
                                     <tr>
-                                        <td colspan="7" class="py-4 border-b border-black text-center h-[500px]">
+                                        <td rowspan="6" colspan="6"
+                                            class="h-[500px] py-4 border-b border-black text-center">
                                             <h1 class="font-semibold italic pb-3">Empty Table
+
                                             </h1>
                                         </td>
                                     </tr>
@@ -129,7 +115,7 @@
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize">
                                                 <div class="flex justify-center gap-3">
-                                                    <a href="{{ route('admin.for.stub.animals', ['ownerId' => $owners->id]) }}"
+                                                    <a href="{{ route('owner.mic.list', ['ownerId' => $owners->id]) }}"
                                                         class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                             fill="currentColor" data-slot="icon" class="w-6 h-6">
@@ -151,7 +137,38 @@
             </div>
         </div>
 
+
     @endsection
+
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    <script>
+        function printPage() {
+            // Add opacity-0 class to hide other buttons
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.add('opacity-0');
+            });
+
+            // Toggle opacity and apply backdrop styles to the elements with class 'hide-on-print' before printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.add('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Trigger the print function
+            window.print();
+
+            // Remove the applied styles and show other buttons after printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.remove('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Remove opacity-0 class to show other buttons after printing
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.remove('opacity-0');
+            });
+        }
+    </script>
 </body>
 
 </html>
