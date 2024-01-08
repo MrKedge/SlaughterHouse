@@ -230,16 +230,16 @@
                         </div>
                     </a>
                 </li>
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                {{-- <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">
 
-                    <a href="{{ route('client.approve.list') }}">
-                        <div class="flex items-center panel-text gap-2"><i class='bx bxs-check-circle'
-                                style='font-size: 24px;'></i>
-                            <span class=" flex items-center">Approved</span>
-                        </div>
-                    </a>
-                </li>
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <a href="{{ route('client.approve.list') }}">
+                    <div class="flex items-center panel-text gap-2"><i class='bx bxs-check-circle'
+                            style='font-size: 24px;'></i>
+                        <span class=" flex items-center">Approved</span>
+                    </div>
+                </a>
+                </li> --}}
+                {{-- <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">
 
                     <a href="{{ route('client.schedule.list') }}">
                         <div class="flex items-center panel-text gap-2"><i class='bx bx-calendar'
@@ -247,9 +247,9 @@
                             <span class=" flex items-center">Schedule</span>
                         </div>
                     </a>
-                </li>
-
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                </li> --}}
+                {{-- 
+                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">
 
                     <a href="{{ route('client.slaughter.list') }}">
                         <div class="flex items-center panel-text gap-2"><i class='bx bx-cart-download'
@@ -257,7 +257,7 @@
                             <span class=" flex items-center">Slaughtered</span>
                         </div>
                     </a>
-                </li>
+                </li> --}}
 
                 <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
 

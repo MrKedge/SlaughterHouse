@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnteMortemController;
+use App\Http\Controllers\ArchiveController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ButcherController;
 use App\Http\Controllers\ClientController;
@@ -66,6 +67,8 @@ Route::post('/admin/set/schedule/{id}', [AnteMortemController::class, 'SetSchedu
 Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->name('admin.seed.account');
 Route::get('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
 Route::post('/comple/process/{id}', [CompletedController::class, 'CompleteRecord'])->name('complete.process');
+Route::post('/admin/slaughter/private/{id}', [PostMortemController::class, 'PrivateButcher'])->name('private.butcher');
+
 //admin pages
 
 
@@ -93,6 +96,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/completed/animals', [CompletedController::class, 'ShowCompleted'])->name('complete.animals');
     Route::get('/admin/user/complete/list/{ownerId}', [CompletedController::class, 'ShowUserMic'])->name('owner.mic.list');
     Route::get('/admin/generate/mic/', [CompletedController::class, 'GenerateMic'])->name('generate.mic');
+    Route::get('/admin/archive/list', [ArchiveController::class, 'ShowArchive'])->name('archive.list');
 });
 
 

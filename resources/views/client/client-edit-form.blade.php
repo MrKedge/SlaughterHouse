@@ -230,7 +230,7 @@
                                             for="">Butcher:</label>
                                         <select name="butcher" id="" required
                                             class="font-medium  bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 text-gray-800 dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                            <option value="{{ $animal->butcher }}" disabled selected>Select</option>
+                                            <option value="{{ $animal->butcher }}">Select</option>
                                             @foreach ($formValue as $animals)
                                                 @if (!is_null($animals->animal_butcher) && $animals->animal_butcher !== '')
                                                     <option value="{{ $animals->animal_butcher }}">

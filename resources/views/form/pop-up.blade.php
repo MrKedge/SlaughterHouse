@@ -1,7 +1,7 @@
 <div id="inspector-schedule-modal" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
 
-    <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow ">
 
@@ -69,7 +69,7 @@
 
 <div id="defaultModal" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-    <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -156,7 +156,7 @@
 {{-- CONDEMN POP UP --}}
 <div id="condemnModal" tabindex="-1" aria-hidden="true"
     class="hidden overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-    <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
     <div class="relative p-4 w-full max-w-2xl h-full md:h-auto">
         <!-- Modal content -->
         <div class="relative p-4 bg-white rounded-lg shadow dark:bg-gray-800 sm:p-5">
@@ -188,7 +188,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             {{ $animal->type }}</p>
                     </div>
-                    <div>
+                    {{-- <div>
                         <label for="category"
                             class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                         <select id="category" name="category"
@@ -198,7 +198,7 @@
                             <option value="part">Part</option>
 
                         </select>
-                    </div>
+                    </div> --}}
 
                     <div>
                         <label for="condemn weight"
@@ -235,10 +235,10 @@
                     </div>
                     <div class="sm:col-span-2">
                         <label for="description"
-                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Remarks</label>
                         <textarea id="description" rows="4"
                             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            placeholder="Write product description here"></textarea>
+                            placeholder="Write remarks..."></textarea>
                     </div>
                 </div>
                 @if ($animal->condemnCarcasses->isEmpty())
@@ -258,6 +258,14 @@
                     </button>
                 @endif
             </form>
+            <div class="flex  m-5">
+                {{-- <button id="updateProductButton" data-modal-target="inspector-dispose"
+                    data-modal-toggle="inspector-dispose"
+                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900"
+                    type="button">
+                    Dispose Animal
+                </button> --}}
+            </div>
         </div>
     </div>
 </div>
@@ -266,7 +274,7 @@
 {{-- disposal --}}
 <div id="inspector-dispose" tabindex="-1" aria-hidden="true"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-modal md:h-full">
-    <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
     <!-- Modal content -->
     <div class="relative p-4 bg-white rounded-lg shadow  sm:p-5">
         <!-- Modal header -->
@@ -320,7 +328,7 @@
                     <label for="Remarks" class="block mb-2 text-sm font-medium text-gray-900 ">Remarks</label>
                     <textarea id="description" rows="5" required name="anteRemarks" maxlength="40"
                         class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-500 focus:border-primary-500"
-                        placeholder="Write a description..."></textarea>
+                        placeholder="Write a remarks..."></textarea>
                 </div>
             </div>
             <div class="flex items-center space-x-4">
@@ -344,7 +352,7 @@
 
 <div id="slaughter-modal" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+    {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow ">
             <button type="button"
@@ -374,9 +382,7 @@
                             placeholder="{{ auth()->user()->firts_name }} {{ auth()->user()->last_name }}">
 
                     </div>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you want to
-                        slaughter
-                        this Animal?</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you slaughtered this animal?</h3>
                     <button data-modal-hide="slaughter-modal" type="submit"
                         class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                         Yes, I'm sure

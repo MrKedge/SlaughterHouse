@@ -148,4 +148,48 @@ class PostMortemController extends Controller
 
         return view('admin.admin-post-mortem', compact('animal'));
     }
+
+
+
+    public function PrivateButcher(Request $request, $id)
+    {
+        $request->validate([
+            'privateButcher' => 'nullable',
+        ]);
+        // Find the animal with the 'for slaughter' status
+        $animal = Animal::where('status', 'for slaughter')->find($id);
+
+        // Check if the animal is found
+        if (!$animal) {
+            return redirect()->route('butcher.animal')->with('error', 'Animal not found.');
+        }
+
+        // Load the postMortem relationship
+        $animal->load('postMortem');
+
+        // Update the status and set the slaughtered_at timestamp
+        $animal->status = 'slaughtered';
+
+        // Check if the postMortem relationship exists
+        if (!$animal->postMortem) {
+            // If it doesn't exist, create a new PostMortem record
+            $postMortem = new PostMortem([
+                'slaughtered_at' => now(),
+                'slaughtered_by' => $request->privateButcher,
+            ]);
+
+            // Save the new PostMortem record and associate it with the animal
+            $animal->postMortem()->save($postMortem);
+        } else {
+            // If it exists, update the existing PostMortem record
+            $animal->postMortem->slaughtered_at = now();
+            $animal->postMortem->slaughtered_by = $request->privateButcher;
+            $animal->postMortem->save();
+        }
+
+        // Save the changes to the animal
+        $animal->save();
+
+        return redirect()->route('admin.for.slaughter.list')->with('success', 'Animal successfully slaughtered');
+    }
 }

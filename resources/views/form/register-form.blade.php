@@ -105,20 +105,16 @@
                         </p>
 
                         <div class="flex relative">
-
-
                             <label for="brgy-clearance"
                                 class="cursor-pointer border-2 border-gray-500 rounded-md p-2 w-[300px] flex items-center pt-3">
-                                <span class=" text-left font-medium flex items-center"><i class='bx bx-plus'
-                                        style='font-size: 2em;'></i> Add
-                                    image</span>
+                                <span class="text-left font-medium flex items-center">
+                                    <i class='bx bx-plus' style='font-size: 2em;'></i> Add Image
+                                </span>
                                 <input id="brgy-clearance" name="brgyClearance" accept="image/*" type="file"
                                     class="hidden" onchange="readURL(this, 'clearance-brgy');">
                             </label>
-                            <img id="clearance-brgy" src="#" alt="your image"
-                                class="hidden w-[100px] absolute h-full right-1/4 border border-dashed  border-black  ">
-
-
+                            <img id="clearance-brgy" src="#" alt="Brgy Clearance Image"
+                                class="hidden w-[100px] absolute h-full right-1/4 border border-dashed border-black">
                         </div>
                     </div>
                 </div>

@@ -15,42 +15,69 @@
 
 
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
-                {{-- wrapper --}}
                 <div
                     class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
+                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='time'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
+                    <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
+                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+
+                        <span class="font-bold text-4xl">{{ $animal->where('type', 'cow')->count() }}</span>
                     </div>
 
                 </div>
                 <div
                     class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
+                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
 
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='check-double'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
+                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
+                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+
+
+                        <span class="text-4xl font-bold">{{ $animal->where('type', 'horse')->count() }}</span>
                     </div>
                 </div>
                 <div
                     class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">OWNER</h1>
+                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
 
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='list-check'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
+                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
+                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+
+
+                        <span class="text-4xl font-bold">{{ $animal->where('type', 'carabao')->count() }}</span>
                     </div>
                 </div>
                 <div
                     class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
 
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon name='list-check'
-                            type='solid' color='#293241' style="width: 32px; height: 32px;"></box-icon>
+                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
+                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M18.364 18.364A9 9 0 0 0 5.636 5.636m12.728 12.728A9 9 0 0 1 5.636 5.636m12.728 12.728L5.636 5.636" />
+                        </svg>
+
+
+
+                        <span class="text-4xl font-bold">{{ $animal->where('type', 'swine')->count() }}</span>
                     </div>
                 </div>
             </section>
@@ -67,19 +94,7 @@
 
                         @include('admin.tabs.tabs')
 
-                        @if (session('success'))
-                            <div class="">
-                                <div id="success-alert"
-                                    class="alert alert-success text-green-800 absolute top-0 right-3/4 text-xl">
-                                    {{ session('success') }}
-                                </div>
-                                <script>
-                                    setTimeout(function() {
-                                        document.getElementById('success-alert').style.display = 'none';
-                                    }, 3000); // 3000 milliseconds = 3 seconds
-                                </script>
-                            </div>
-                        @endif
+
 
                     </div>
                     <div class="scrollbar-gutter overflow-y-auto h-[430px]">

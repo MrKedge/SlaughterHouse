@@ -23,16 +23,16 @@
                             <h1 class="text-[#EE6C4D]">SLAUGHTECH</h1>
                         </div>
                     </div>
-                    <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                        data-modal-hide="extralarge-modal">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    <a href="{{ route('complete.animals') }}"
+                        class="hide-on-print-button text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center ">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
                         </svg>
+
                         <span class="sr-only">Close modal</span>
-                    </button>
+                    </a>
                 </div>
                 <!-- Modal body -->
                 <div class="p-4 md:p-5 space-y-4">
@@ -177,18 +177,107 @@
                 </div>
                 <!-- Modal footer -->
                 <div
-                    class="flex items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b ">
-                    <button data-modal-hide="extralarge-modal" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">I
-                        accept</button>
-                    <button data-modal-hide="extralarge-modal" type="button"
-                        class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">Decline</button>
+                    class="flex justify-end items-center p-4 md:p-5 space-x-3 rtl:space-x-reverse border-t border-gray-200 rounded-b ">
+                    <div data-dial-init class=" flex justify-end  top-6 group hide-on-print-button">
+                        <div id="speed-dial-menu-horizontal" class="hidden ">
+
+                            <div class="flex items-center me-4 space-x-2 rtl:space-x-reverse">
+                                <button onclick="printPage()" type="button" data-tooltip-target="tooltip-print"
+                                    data-tooltip-placement="top"
+                                    class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 :border-gray-600 shadow-sm :hover:text-white :text-gray-400 hover:bg-gray-50 :bg-gray-700 :hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none :focus:ring-gray-400">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path d="M5 20h10a1 1 0 0 0 1-1v-5H4v5a1 1 0 0 0 1 1Z" />
+                                        <path
+                                            d="M18 7H2a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2v-3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2Zm-1-2V2a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v3h14Z" />
+                                    </svg>
+                                    <span class="sr-only">Print</span>
+                                </button>
+                                {{-- <div id="tooltip-print" role="tooltip"
+                                    class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip :bg-gray-700">
+                                    Print
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div> --}}
+                                <button onclick="saveAsPDF()" data-tooltip-target="tooltip-download"
+                                    data-tooltip-placement="top"
+                                    class="flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 :border-gray-600 shadow-sm :hover:text-white :text-gray-400 hover:bg-gray-50 :bg-gray-700 :hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none :focus:ring-gray-400">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M14.707 7.793a1 1 0 0 0-1.414 0L11 10.086V1.5a1 1 0 0 0-2 0v8.586L6.707 7.793a1 1 0 1 0-1.414 1.414l4 4a1 1 0 0 0 1.416 0l4-4a1 1 0 0 0-.002-1.414Z" />
+                                        <path
+                                            d="M18 12h-2.55l-2.975 2.975a3.5 3.5 0 0 1-4.95 0L4.55 12H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-4a2 2 0 0 0-2-2Zm-3 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z" />
+                                    </svg>
+                                    <span class="sr-only">Download Pdf</span>
+                                </button>
+                                {{-- <div id="tooltip-download" role="tooltip"
+                                    class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip :bg-gray-700">
+                                    Download
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div> --}}
+                                <button type="button" data-tooltip-target="tooltip-copy"
+                                    data-tooltip-placement="top"
+                                    class="hide-on-print-button flex justify-center items-center w-[52px] h-[52px] text-gray-500 hover:text-gray-900 bg-white rounded-full border border-gray-200 :border-gray-600 :hover:text-white shadow-sm :text-gray-400 hover:bg-gray-50 :bg-gray-700 :hover:bg-gray-600 focus:ring-4 focus:ring-gray-300 focus:outline-none :focus:ring-gray-400">
+                                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 18 20">
+                                        <path
+                                            d="M5 9V4.13a2.96 2.96 0 0 0-1.293.749L.879 7.707A2.96 2.96 0 0 0 .13 9H5Zm11.066-9H9.829a2.98 2.98 0 0 0-2.122.879L7 1.584A.987.987 0 0 0 6.766 2h4.3A3.972 3.972 0 0 1 15 6v10h1.066A1.97 1.97 0 0 0 18 14V2a1.97 1.97 0 0 0-1.934-2Z" />
+                                        <path
+                                            d="M11.066 4H7v5a2 2 0 0 1-2 2H0v7a1.969 1.969 0 0 0 1.933 2h9.133A1.97 1.97 0 0 0 13 18V6a1.97 1.97 0 0 0-1.934-2Z" />
+                                    </svg>
+                                    <span class="sr-only">Copy</span>
+                                </button>
+                                {{-- <div id="tooltip-copy" role="tooltip"
+                                    class="absolute z-10 invisible inline-block w-auto px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip :bg-gray-700">
+                                    Copy
+                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                </div> --}}
+                            </div>
+                        </div>
+                        <button type="button" data-dial-toggle="speed-dial-menu-horizontal"
+                            aria-controls="speed-dial-menu-horizontal" aria-expanded="false"
+                            class="flex items-center justify-center text-white bg-blue-700 rounded-full w-14 h-14 hover:bg-blue-800 :bg-blue-600 :hover:bg-blue-700 focus:ring-4 focus:ring-blue-300 focus:outline-none :focus:ring-blue-800">
+                            <svg class="w-5 h-5 transition-transform group-hover:rotate-45" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M9 1v16M1 9h16" />
+                            </svg>
+                            <span class="sr-only">Open actions menu</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+        function printPage() {
+            // Add opacity-0 class to hide other buttons
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.add('opacity-0');
+            });
 
+            // Toggle opacity and apply backdrop styles to the elements with class 'hide-on-print' before printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.add('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Trigger the print function
+            window.print();
+
+            // Remove the applied styles and show other buttons after printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.remove('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Remove opacity-0 class to show other buttons after printing
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.remove('opacity-0');
+            });
+        }
+    </script>
 </body>
 
 </html>

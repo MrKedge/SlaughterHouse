@@ -101,8 +101,18 @@ class AnteMortemController extends Controller
         $animal->status = 'not available';
         $animal->save();
 
-        // Redirect with success message
-        return redirect()->route('admin.monitor.list')->with('disposed', 'Animal is disposed.');
+        $userRole = auth()->user()->role;
+
+        switch ($userRole) {
+            case 'admin':
+                return redirect()->route('admin.monitor.list')->with('success', 'Animal is disposed.');
+            case 'inspector':
+                return redirect()->route('inspector.antemortem.list')->with('success', 'Animal is disposed.');
+
+            default:
+                // Handle any other roles or scenarios
+                break;
+        }
     }
 
 

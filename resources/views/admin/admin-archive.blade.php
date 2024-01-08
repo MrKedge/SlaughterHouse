@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Pending List'])
+@include('layout.html-head', ['pageTitle' => 'Archived List'])
 
 <body class="bg-[#D5DFE8] overflow-hidden">
 
@@ -9,90 +9,42 @@
 
     @section('admincontent')
 
-        <div class="flex flex-col w-full">
+        <div class="flex flex-col w-full mt-20">
 
-            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
-                {{-- wrapper --}}
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
-                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg><span class="font-bold text-4xl">{{ $animal->where('type', 'cow')->count() }}</span>
-                    </div>
 
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
-                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg>
-                        <span class="text-4xl font-bold">{{ $animal->where('type', 'horse')->count() }}</span>
-                    </div>
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
-                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg>
-                        <span class="text-4xl font-bold">{{ $animal->where('type', 'carabao')->count() }}</span>
-                    </div>
-                </div>
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
-
-                    <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
-                        <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 0 0-3.7-3.7 48.678 48.678 0 0 0-7.324 0 4.006 4.006 0 0 0-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 0 0 3.7 3.7 48.656 48.656 0 0 0 7.324 0 4.006 4.006 0 0 0 3.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3-3 3" />
-                        </svg>
-
-                        <span class="text-4xl font-bold">{{ $animal->where('type', 'swine')->count() }}</span>
-                    </div>
-                </div>
-            </section>
 
             <div class="mx-auto w-full px-4">
 
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section class="bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
+                <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
 
-                    <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">Pending Animal</h1>
+                    <div class="flex justify-between ">
+
+                        <h1 class="text-left pl-6 font-bold text-[#293241] py-4 text-3xl opacity-80">
+                            Archived
+                        </h1>
+                        @include('admin.tabs.search-bar')
+                    </div>
                     <div class="scrollbar-gutter overflow-y-auto h-[430px]">
                         <table id="example" class="w-full text-center">
                             <thead class="">
                                 <tr>
                                     <th data-priority="1" class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        No.
+                                        Id
                                     </th>
                                     <th data-priority="2" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Animal
-                                    </th>
-                                    <th data-priority="3" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
                                     </th>
+                                    <th data-priority="3" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Animal
+                                    </th>
                                     <th data-priority="4" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Date
+                                        Archive Date
+                                    </th>
+                                    <th data-priority="5" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Archived Time
                                     </th>
                                     <th data-priority="6" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Status
@@ -106,10 +58,10 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td rowspan="6" colspan="6"
+                                        <td rowspan="7" colspan="7"
                                             class="h-[500px] py-4 border-b border-black text-center">
-                                            <h1 class="font-semibold italic pb-3">No Approve
-                                                Animal
+                                            <h1 class="font-semibold italic pb-3">
+                                                No archive Animal
                                             </h1>
                                         </td>
                                     </tr>
@@ -147,13 +99,15 @@
                                                 </div>
                                             </td>
                                             <td class=" border-b border-black capitalize font-normal">
-                                                {{ \Carbon\Carbon::parse($animals->created_at)->format('M d Y H:I a') }}
+                                                {{ \Carbon\Carbon::parse($animals->archive->created_at)->format('M d Y') }}
                                             </td>
-
+                                            <td class=" font-normal  border-b border-black capitalize ">
+                                                {{ \Carbon\Carbon::parse($animals->archive->created_at)->format('h:i A') }}
+                                            </td>
                                             <td class=" border-b border-black font-semibold capitalize">
                                                 <span
-                                                    class="bg-yellow-50 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                    {{ $animals->status }}
+                                                    class="bg-orange-100 text-orange-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                    {{ $animals->archive->archive_status }}
                                                 </span>
 
                                             </td>
@@ -186,6 +140,9 @@
 
 
     @endsection
+
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+
 </body>
 
 </html>

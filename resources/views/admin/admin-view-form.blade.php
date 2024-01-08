@@ -38,9 +38,12 @@
                                 <img class="mx-auto" src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
                                     alt="animal image">
                                 <div class="py-2">
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Print
-                                        qr
-                                    </a>
+                                    <button data-modal-target="print-view-modal" data-modal-toggle="print-view-modal"
+                                        type="button"
+                                        class="  text-white font-medium py-1 px-3 rounded-lg flex items-center text-sm">
+                                        <i
+                                            class='bx bx-printer text-[24px] text-gray-900 transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 '></i>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -67,18 +70,18 @@
                                         {{ $animal->user->first_name }} {{ $animal->user->last_name }}
                                     </p>
                                 </div>
-                                @if (auth()->user()->role === 'client')
-                                    <div>
-                                        <label
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Address:</label>
-                                        <p id="address"
-                                            class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                            {{ $animal->user->address }}
+                                <div>
+                                    <label
+                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Address:</label>
+                                    <p id="address"
+                                        class="font-medium  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500">
 
-                                        </p>
-                                    </div>
-                                @endif
+                                        {{ $animal->user->address }}
+
+                                    </p>
+                                </div>
+
 
                             </div>
                             <h1 class="font-bold pointer-events-none text-lg italic pl-12">Animal Information
@@ -170,6 +173,13 @@
                                         </p>
                                     </div>
                                 @endif
+                                <div class="relative">
+                                    <button data-modal-target="image-modal" data-modal-toggle="image-modal"
+                                        class="block absolute bottom-0 max-h-12 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        type="button">
+                                        View Documents
+                                    </button>
+                                </div>
 
                             </div>
                             <!-- Modal body -->
@@ -215,73 +225,10 @@
                         <h1 class="font-bold pointer-events-none text-lg italic pl-12 ">Documents:
                         </h1>
                         <!-- Modal body -->
+
                         <div class="grid gap-4 mb-4 sm:grid-cols-4 px-12 bg-gray-50">
 
-                            <div>
-                                <label class="block pb-1" for="">Certificate of Ownership:</label>
-                                <section class="w-[100px] p-1 border-dashed border border-black"
-                                    data-lightbox="animal-gallery" data-title="Animal Image">
-                                    <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                        data-lightbox="animal-gallery">
-                                        <img class=""
-                                            src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                            alt="animal image">
-                                    </a>
-                                </section>
-                            </div>
-                            <div>
-                                @if ($animal->cert_transfer !== null)
-                                    <label class="block pb-1" for="">Cert. of Transfer of Large
-                                        Cattle:</label>
-                                    <section class="w-[100px] p-1 border-dashed border border-black"
-                                        data-lightbox="animal-gallery" data-title="Animal Image">
-                                        <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                                alt="Cert. of Transfer Image">
-                                        </a>
-                                    </section>
-                                @endif
-                            </div>
-
-                            <div>
-                                <label class="block pb-1" for="">Brgy. Clearance:</label>
-                                <section class="w-[100px] p-1 border-dashed border border-black"
-                                    data-lightbox="animal-gallery" data-title="Brgy. Clearance Image">
-
-                                    @if ($animal->cert_ownership)
-                                        <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
-                                                alt="Brgy. Clearance Image">
-                                        </a>
-                                    @else
-                                        <p>No Brgy. Clearance available</p>
-                                    @endif
-
-                                </section>
-                            </div>
-
-                            <div>
-                                <label class="block pb-1" for="">Receipt:</label>
-                                <section class="w-[100px] p-1 border-dashed border border-black"
-                                    data-lightbox="animal-gallery" data-title="Receipt Image">
-
-                                    @if ($animal->receipt)
-                                        <a href="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
-                                            data-lightbox="animal-gallery">
-                                            <img class=""
-                                                src="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
-                                                alt="Receipt Image">
-                                        </a>
-                                    @else
-                                        <p>No receipt available</p>
-                                    @endif
-
-                                </section>
-                            </div>
+                            {{-- image place --}}
 
 
                         </div>
@@ -513,9 +460,7 @@
                                                             <th scope="col" class="px-6 py-3">
                                                                 Organ
                                                             </th>
-                                                            <th scope="col" class="px-6 py-3">
-                                                                Category
-                                                            </th>
+
                                                             <th scope="col" class="px-6 py-3">
                                                                 Weight
                                                             </th>
@@ -553,14 +498,14 @@
                                                                                 id="part_input_{{ $condemn->id }}"
                                                                                 value="{{ optional($condemn)->part }}">
                                                                         </th>
-                                                                        <td class="px-6 py-4">
+                                                                        {{-- <td class="px-6 py-4">
                                                                             <span
                                                                                 id="category_{{ $condemn->id }}">{{ optional($condemn)->category }}</span>
                                                                             <input type="text" name="category"
                                                                                 id="category_input_{{ $condemn->id }}"
                                                                                 class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
                                                                                 value="{{ optional($condemn)->category }}">
-                                                                        </td>
+                                                                        </td> --}}
                                                                         <td class="px-6 py-4">
                                                                             <span
                                                                                 id="carcass_weight_{{ $condemn->id }}">{{ optional($condemn)->carcass_weight }}</span>
@@ -641,7 +586,16 @@
                                     </div>
                                 @endif
                             @endif
-
+                            @if ($animal->butcher === 'private' && $animal->status === 'for slaughter')
+                                <div class="flex justify-center m-5">
+                                    <button data-modal-target="privateButcher-modal"
+                                        data-modal-toggle="privateButcher-modal"
+                                        class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                        type="button">
+                                        Slaughter
+                                    </button>
+                                </div>
+                            @endif
 
                             @if ($animal->status === 'pending')
                                 @csrf
@@ -670,7 +624,7 @@
                                 </form>
                             @endif
                             @if (optional($animal->anteMortem)->inspection_status === 'for slaughter')
-                                @if ($animal->status !== 'slaughtered')
+                                @if ($animal->status !== 'slaughtered' && $animal->status !== 'completed')
                                     <button data-modal-target="schedule-modal" data-modal-toggle="schedule-modal"
                                         class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5  dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">
                                         Reschedule
@@ -684,10 +638,194 @@
 
             </section> <!-- Main modal -->
             @include('admin.formhandler.form-popup')
+
+        </div>
+        <div id="print-view-modal" tabindex="-1"
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
+            <div class="relative w-full max-w-md max-h-full  ">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow ">
+                    <!-- Modal header -->
+
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t  ">
+                        <h3 class="hide-on-print-button text-xl font-medium text-gray-900 ">
+                            Qr code
+                        </h3>
+                        <button type="button"
+                            class="hide-on-print-button text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
+                            data-modal-hide="print-view-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="hide-on-print"></div>
+                    <img class="mx-auto z-50 relative" src="{{ asset('storage/qr-code/' . $animal->qr_code) }}"
+                        alt="animal image">
+
+                    <!-- Modal footer -->
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
+                        <button onclick="printPage()" data-modal-hide="print-view-modal" type="button"
+                            class="hide-on-print-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center  ">
+                            Print</button>
+                        <button data-modal-hide="print-view-modal" type="button"
+                            class="hide-on-print-button ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">Cancel</button>
+                    </div>
+                </div>
+            </div>
         </div>
     @endsection
 
+    <div id="image-modal" tabindex="-1" aria-hidden="true"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <!-- Modal header -->
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
 
+                    </h3>
+                    <button type="button"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-toggle="image-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+                    <p class="text-gray-500 dark:text-gray-400 mb-4"></p>
+                    <ul class="space-y-4 mb-4">
+                        <li>
+                            <label class="block pb-1" for="">Certificate of Ownership:</label>
+                            <section class="w-[100px] p-1 border-dashed border border-black"
+                                data-lightbox="animal-gallery" data-title="Animal Image">
+                                <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                    data-lightbox="animal-gallery">
+                                    <img class=""
+                                        src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                        alt="animal image">
+                                </a>
+                            </section>
+                        </li>
+                        <li>
+                            <label class="block pb-1" for="">Cert. of Transfer of Large
+                                Cattle:</label>
+                            <section class="w-[100px] p-1 border-dashed border border-black"
+                                data-lightbox="animal-gallery" data-title="Animal Image">
+                                @if ($animal->cert_transfer !== null)
+                                    <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                        data-lightbox="animal-gallery">
+                                        <img class=""
+                                            src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                            alt="Cert. of Transfer Image">
+                                    </a>
+                                @else
+                                    <p>No Cert. of Transfer of Large</p>
+                                @endif
+                            </section>
+                        </li>
+                        <li>
+                            <label class="block pb-1" for="">Brgy. Clearance:</label>
+                            <section class="w-[100px] p-1 border-dashed border border-black"
+                                data-lightbox="animal-gallery" data-title="Brgy. Clearance Image">
+
+                                @if ($animal->cert_ownership)
+                                    <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
+                                        data-lightbox="animal-gallery">
+                                        <img class=""
+                                            src="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
+                                            alt="Brgy. Clearance Image">
+                                    </a>
+                                @else
+                                    <p>No Brgy. Clearance </p>
+                                @endif
+
+                            </section>
+                        </li>
+                        <li>
+                            <label class="block pb-1" for="">Receipt:</label>
+                            <section class="w-[100px] p-1 border-dashed border border-black"
+                                data-lightbox="animal-gallery" data-title="Receipt Image">
+
+                                @if ($animal->receipt)
+                                    <a href="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
+                                        data-lightbox="animal-gallery">
+                                        <img class=""
+                                            src="{{ asset('storage/owner-receipt/' . $animal->receipt->receipt_name) }}"
+                                            alt="Receipt Image">
+                                    </a>
+                                @else
+                                    <p>No receipt </p>
+                                @endif
+
+                            </section>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="privateButcher-modal" tabindex="-1"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        {{-- <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div> --}}
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow ">
+                <button type="button"
+                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                    data-modal-hide="privateButcher-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+                <div class="p-4 md:p-5 text-center">
+                    <form action="{{ route('private.butcher', ['id' => $animal->id]) }}" method="post">
+                        @csrf
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <div class="py-3">
+                            <label for="cause" class="block mb-2 text-sm font-medium text-gray-900 ">Slaughtered
+                                by:</label>
+                            <input required name="privateButcher" readonly
+                                value="{{ auth()->user()->first_name }} {{ auth()->user()->last_name }}"
+                                class="cursor-not-allowed capitalize  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 "
+                                placeholder="{{ auth()->user()->firts_name }} {{ auth()->user()->last_name }}">
+
+                        </div>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you slaughtered this animal?
+                        </h3>
+                        <button data-modal-hide="privateButcher-modal" type="submit"
+                            class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                            Yes, I'm sure
+                        </button>
+
+                        <button data-modal-hide="privateButcher-modal" type="button"
+                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10">No,
+                            cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script>
         let activeRowId = null;
 
@@ -741,7 +879,35 @@
             }
         }
     </script>
+    <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    <script>
+        function printPage() {
+            // Add opacity-0 class to hide other buttons
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.add('opacity-0');
+            });
 
+            // Toggle opacity and apply backdrop styles to the elements with class 'hide-on-print' before printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.add('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Trigger the print function
+            window.print();
+
+            // Remove the applied styles and show other buttons after printing
+            document.querySelectorAll('.hide-on-print').forEach(function(element) {
+                element.classList.remove('fixed', 'inset-0', 'backdrop-blur-sm', 'bg-gray-500', 'bg-opacity-75',
+                    'transition-opacity');
+            });
+
+            // Remove opacity-0 class to show other buttons after printing
+            document.querySelectorAll('.hide-on-print-button').forEach(function(button) {
+                button.classList.remove('opacity-0');
+            });
+        }
+    </script>
 </body>
 
 </html>

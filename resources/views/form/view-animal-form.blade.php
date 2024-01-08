@@ -54,7 +54,7 @@
                         <h1 class="font-bold pointer-events-none text-lg italic pl-12">Animal Information
                         </h1>
                         <!-- Modal body -->
-                        <div class="grid gap-4 mb-4 sm:grid-cols-3 px-12">
+                        <div class="grid gap-4 mb-4 sm:grid-cols-2 max-w-2xl px-12">
                             <div>
                                 <label
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-900 pt-3">Animal
@@ -171,7 +171,7 @@
 
 
                     </div>
-                    @if (auth()->user()->role === 'admin')
+                    @if (auth()->user()->role === 'client')
                         <h1 class="font-bold pointer-events-none text-lg italic pl-12 ">Documents:
                         </h1>
                         <!-- Modal body -->
@@ -208,11 +208,11 @@
                                 <label class="block pb-1" for="">Brgy. Clearance:</label>
                                 <section class="w-[100px] p-1 border-dashed border border-black"
                                     data-lightbox="animal-gallery" data-title="Animal Image">
-                                    <a href="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
+                                    <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
                                         data-lightbox="animal-gallery">
                                         <img class=""
-                                            src="{{ asset('storage/cert-ownership/' . $animal->cert_ownership) }}"
-                                            alt="animal image">
+                                            src="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
+                                            alt="Brgy. Clearance">
                                     </a>
                                 </section>
                             </div>
@@ -602,7 +602,6 @@
                                 </button>
                             </div>
                         @endif
-
 
                     </div>
                 </div>

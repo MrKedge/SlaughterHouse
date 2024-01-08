@@ -60,7 +60,7 @@
                     <div>
 
 
-                        <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 ">
+                        {{-- <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 ">
                             <div class="flex-shrink-0">
                                 <img class="w-11 h-11 rounded-full"
                                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/joseph-mcfall.png"
@@ -86,9 +86,9 @@
                                     44 minutes ago
                                 </div>
                             </div>
-                        </a>
+                        </a> --}}
 
-                        <a href="#" class="flex py-3 px-4 hover:bg-gray-100 ">
+                        {{-- <a href="#" class="flex py-3 px-4 hover:bg-gray-100 ">
                             <div class="flex-shrink-0">
                                 <img class="w-11 h-11 rounded-full"
                                     src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/robert-brown.png"
@@ -113,7 +113,7 @@
                                     3 hours ago
                                 </div>
                             </div>
-                        </a>
+                        </a> --}}
                     </div>
                     <a href="#"
                         class="block py-2 text-md font-medium text-center text-gray-900 bg-gray-50 hover:bg-gray-100 ">
@@ -204,7 +204,8 @@
                                 Settings
                             </div>
                         </a>
-                        <a href="#" class="block p-4 text-center rounded-lg hover:bg-gray-100 group">
+                        <a href="{{ route('archive.list') }}"
+                            class="block p-4 text-center rounded-lg hover:bg-gray-100 group">
                             <svg aria-hidden="true"
                                 class="mx-auto mb-1 w-7 h-7 text-gray-400 group-hover:text-gray-500 "
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Animal;
 use App\Models\Completed;
 use App\Models\Mic;
+use App\Models\Archive;
 
 class CompletedController extends Controller
 {
@@ -30,17 +31,22 @@ class CompletedController extends Controller
         $owner = User::whereHas('animals', function ($query) {
             $query->whereHas('completed', function ($subQuery) {
                 $subQuery->where('complete_status', 'completed');
+            })->whereDoesntHave('archive', function ($subQuery) {
+                $subQuery->where('archive_status', 'archived');
             });
         })
             ->with(['animals' => function ($query) {
                 $query->whereHas('completed', function ($subQuery) {
                     $subQuery->where('complete_status', 'completed');
+                })->whereDoesntHave('archive', function ($subQuery) {
+                    $subQuery->where('archive_status', 'archived');
                 });
             }])
             ->get();
 
         return view('admin.admin-completed', compact('owner'));
     }
+
 
 
 
@@ -67,7 +73,6 @@ class CompletedController extends Controller
     }
 
 
-
     public function GenerateMic(Request $request)
     {
         // Decode the selected animals from JSON
@@ -81,6 +86,17 @@ class CompletedController extends Controller
 
         // Update the mic_id for each selected animal with the newMic's id
         Animal::whereIn('id', $selectedAnimals)->update(['mic_id' => $newMic->id]);
+
+        // Update or create archives for the selected animals
+        foreach ($selectedAnimals as $animalId) {
+            // Ensure $animalId is a numeric value
+            if (is_numeric($animalId)) {
+                Archive::updateOrCreate(
+                    ['animal_id' => $animalId],
+                    ['archive_status' => 'archived']
+                );
+            }
+        }
 
         // Retrieve the updated animals based on the selected IDs with eager loading of the 'user' relationship
         $animals = Animal::with('user')->whereIn('id', $selectedAnimals)->get();

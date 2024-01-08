@@ -146,25 +146,34 @@ class ClientController extends Controller
             'age' => 'required',
             'liveWeight' => 'required',
             'drawingData' => 'required_if:kindOfAnimal,cow,horse,carabao',
-            'certOwnership' => 'required',
+            'certOwnership' => '',
             'certTransfer' => '',
             'ageClassify' => '',
             'source' => 'required',
             'brgyClearance' => '',
         ]);
+        $brgyClearanceName = null;
 
-        $brgyClearanceName = time() . '_' . uniqid() . '.png';
-        $request->file('brgyClearance')->storeAs('public/brgy-clearance', $brgyClearanceName);
+        // Handle 'brgyClearance' file upload if provided
+        if ($request->hasFile('brgyClearance') && $request->file('brgyClearance')->isValid()) {
+            $brgyClearanceName = time() . '_' . uniqid() . '.png';
+            $request->file('brgyClearance')->storeAs('public/brgy-clearance', $brgyClearanceName);
+        }
 
+        // Initialize imageCertOwnershipName variable
+        $imageCertOwnershipName = null;
 
-        $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
-        $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
+        // Handle 'certOwnership' file upload if provided
+        if ($request->hasFile('certOwnership') && $request->file('certOwnership')->isValid()) {
+            $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
+            $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
+        }
 
-        // Initialize certTransfer variable
+        // Initialize imageCertTransfer variable
         $imageCertTransferName = null;
 
         // Handle 'certTransfer' file upload if provided
-        if ($request->has('certTransfer') && $request->file('certTransfer') != null) {
+        if ($request->hasFile('certTransfer') && $request->file('certTransfer')->isValid()) {
             $imageCertTransferName = time() . '_' . uniqid() . '.png';
             $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransferName);
         }
@@ -237,7 +246,6 @@ class ClientController extends Controller
     public function updateAnimalForm(Request $request, $id)
     {
 
-
         $request->validate([
             'kindOfAnimal' => 'required',
             'butcher' => 'required',
@@ -245,20 +253,81 @@ class ClientController extends Controller
             'gender' => 'required',
             'age' => 'required',
             'liveWeight' => 'required',
-
+            'drawingData' => 'required_if:kindOfAnimal,cow,horse,carabao',
+            'certOwnership' => '',
+            'certTransfer' => '',
+            'ageClassify' => '',
+            'source' => 'required',
+            'brgyClearance' => '',
         ]);
+        $brgyClearanceName = null;
 
-        $animal = Animal::findOrFail($id);
+        // Handle 'brgyClearance' file upload if provided
+        if ($request->hasFile('brgyClearance') && $request->file('brgyClearance')->isValid()) {
+            $brgyClearanceName = time() . '_' . uniqid() . '.png';
+            $request->file('brgyClearance')->storeAs('public/brgy-clearance', $brgyClearanceName);
+        }
 
+        // Initialize imageCertOwnershipName variable
+        $imageCertOwnershipName = null;
+
+        // Handle 'certOwnership' file upload if provided
+        if ($request->hasFile('certOwnership') && $request->file('certOwnership')->isValid()) {
+            $imageCertOwnershipName = time() . '_' . uniqid() . '.png';
+            $request->file('certOwnership')->storeAs('public/cert-ownership', $imageCertOwnershipName);
+        }
+
+        // Initialize imageCertTransfer variable
+        $imageCertTransferName = null;
+
+        // Handle 'certTransfer' file upload if provided
+        if ($request->hasFile('certTransfer') && $request->file('certTransfer')->isValid()) {
+            $imageCertTransferName = time() . '_' . uniqid() . '.png';
+            $request->file('certTransfer')->storeAs('public/cert-transfer', $imageCertTransferName);
+        }
+
+        // Check if 'kindOfAnimal' is in the allowed values before saving 'drawingData'
+        if (in_array($request->input('kindOfAnimal'), ['cow', 'horse', 'carabao'])) {
+            // Decode and save the marked animal image
+            $imageData = base64_decode(substr($request->drawingData, strpos($request->drawingData, ',') + 1));
+            $imageName = time() . '_' . uniqid() . '.png';
+            Storage::put('public/marked-animal/' . $imageName, $imageData);
+        }
+
+        // Check if 'kindOfAnimal' is not 'swine' and unset 'ageClassify'
+        if ($request->input('kindOfAnimal') !== 'swine') {
+            $request->merge(['ageClassify' => null]);
+        }
+
+        $animal = new Animal();
         $animal->type = $request->kindOfAnimal;
+        $animal->user_id = Auth::user()->id;
+        $animal->butcher = $request->butcher;
+        $animal->age_classify = $request->ageClassify;
+        $animal->destination = $request->destination;
         $animal->gender = $request->gender;
         $animal->age = $request->age;
         $animal->live_weight = $request->liveWeight;
-        $animal->butcher = $request->butcher;
-        $animal->age_classify = $request->age_classify;
+        $animal->animal_mark = isset($imageName) ? $imageName : null; // Set to null if not in allowed values
+        $animal->cert_ownership = $imageCertOwnershipName;
+        $animal->cert_transfer = $imageCertTransferName;
+        $animal->source = $request->source;
+        $animal->brgy_clearance = $brgyClearanceName;
         $animal->status = 'pending';
-        $animal->save();
 
-        return redirect()->route('client.animal.list.register');
+        $animal->save();
+        if (auth()->check()) {
+            if (auth()->user()->role === 'client') {
+                return redirect()->route('client.animal.list.register');
+            } elseif (auth()->user()->role === 'admin') {
+                return redirect()->route('admin.view.animal.reg.list');
+            } else {
+
+                return redirect()->route('log-in');
+            }
+        } else {
+
+            return redirect()->route('log-in');
+        }
     }
 }

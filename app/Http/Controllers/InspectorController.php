@@ -31,6 +31,8 @@ class InspectorController extends Controller
     {
         $animal = Animal::with('user')
             ->where('status', 'slaughtered')
+            ->whereDoesntHave('archive')
+            ->whereDoesntHave('completed')
             ->get();
         return view('inspector.inspector-postmortem', compact('animal'));
     }

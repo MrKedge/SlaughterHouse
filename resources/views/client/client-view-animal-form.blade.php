@@ -3,13 +3,13 @@
 
 @include('layout.html-head', ['pageTitle' => 'view form'])
 
-<body class="bg-[#D5DFE8] overflow-hidden ">
+<body class="bg-[#D5DFE8] ">
 
 
     @extends('client.layout.masterlayout')
 
     @section('content')
-        @include('')
+        @include('form.view-animal-form')
     @endsection
 
 

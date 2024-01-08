@@ -97,6 +97,11 @@
                                                 class="filter-btn inline-flex w-full px-4 py-2 hover:bg-gray-100"
                                                 data-status="rejected">Rejected</button>
                                         </li>
+                                        <li>
+                                            <button type="button"
+                                                class="filter-btn inline-flex w-full px-4 py-2 hover:bg-gray-100"
+                                                data-status="slaughtered">Slaughtered</button>
+                                        </li>
                                         <!-- Add more li elements for other categories -->
 
                                     </ul>
@@ -104,7 +109,7 @@
                                 <div class="relative w-full">
                                     <input type="search" id="search-dropdown"
                                         class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 "
-                                        placeholder="Search Mockups, Logos, Design Templates..." required>
+                                        placeholder="Search..." required>
                                     <button type="submit"
                                         class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
@@ -176,7 +181,7 @@
                                                         class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                         {{ $animal->status }}
                                                     </span>
-                                                @elseif($animal->status === 'not available')
+                                                @elseif($animal->status === 'rejected')
                                                     <span
                                                         class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                         {{ $animal->status }}
@@ -195,6 +200,17 @@
                                             </td>
                                             <td class="py-4 border-b border-black">
                                                 <div class="flex justify-center whitespace-nowrap">
+                                                    @if ($animal->status === 'rejected' || $animal->status === 'pending')
+                                                        <a
+                                                            href="{{ route('client.edit.animal.form', ['id' => $animal->id]) }}">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                                viewBox="0 0 24 24" stroke-width="1.5"
+                                                                stroke="currentColor" class="w-6 h-6">
+                                                                <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                            </svg>
+                                                        </a>
+                                                    @endif
                                                     <a href="{{ route('client.view.animal.form', ['id' => $animal->id]) }}"
                                                         class="  text-gray-900 font-semibold px-3 rounded-lg flex items-center text-sm">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"

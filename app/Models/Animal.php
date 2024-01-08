@@ -63,4 +63,14 @@ class Animal extends Model
     {
         return $this->hasOne(Completed::class);
     }
+
+    public function mic()
+    {
+        return $this->belongsTo(Mic::class);
+    }
+
+    public function archive()
+    {
+        return $this->hasOne(archive::class);
+    }
 }

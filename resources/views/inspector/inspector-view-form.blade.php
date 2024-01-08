@@ -11,6 +11,8 @@
         <div class="flex flex-col w-full ">
             @include('form.view-animal-form')
         </div>
+        @include('alerts.success')
+        @include('alerts.error')
     @endsection
 </body>
 

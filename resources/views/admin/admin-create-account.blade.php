@@ -18,7 +18,7 @@
                 <h1 class="text-center font-extrabold text-[#293241] pb-8 pt-4 text-2xl">Create Account
 
                 </h1>
-                <div class="grid gap-6 mb-6 max-w-12 md:grid-cols-2 ">
+                <div class="grid gap-6 mb-6 w-full md:grid-cols-2 ">
 
                     <div>
                         <label for="first_name"
