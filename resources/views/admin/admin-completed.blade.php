@@ -101,7 +101,7 @@
                             <thead class="">
                                 <tr>
                                     <th data-priority="1" class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th data-priority="2" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
@@ -134,7 +134,7 @@
                                         <tr
                                             class="{{ $loop->even ? 'bg-gray-300' : 'bg-white bg-opacity-20' }} border border-black">
                                             <td class="py-4 border-b border-black uppercase font-semibold">
-                                                {{ $owners->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class="py-4 border-b border-black capitalize font-semibold">
                                                 {{ $owners->last_name }}, {{ $owners->first_name }}

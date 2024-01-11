@@ -102,12 +102,15 @@
                             <thead>
                                 <tr class="">
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                    </th>
+                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Date of Arrival
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Time of Arrival
@@ -135,7 +138,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200">
                                             <td class=" border-b border-black capitalize font-semibold">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class=" border-b border-black capitalize font-semibold">
                                                 {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -163,7 +166,12 @@
                                                 </div>
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize">
-                                                {{ $animals->anteMortem->arrived_at }}
+
+                                                {{ optional($animals->anteMortem)->arrived_at ? \Carbon\Carbon::parse($animals->anteMortem->arrived_at)->format('M d Y') : 'N/A' }}
+                                            </td>
+                                            <td class="border-b border-black font-semibold capitalize">
+
+                                                {{ optional($animals->anteMortem)->arrived_at ? \Carbon\Carbon::parse($animals->anteMortem->arrived_at)->format('h:i a') : 'N/A' }}
                                             </td>
                                             <td class="border-b border-black font-semibold capitalize">
                                                 <span

@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Register'])
 
-<body class="bg-[#D5DFE8] overflow-hidden ">
+<body class="">
 
 
     @extends('client.layout.masterlayout')

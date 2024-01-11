@@ -103,15 +103,18 @@
                             <thead class="">
                                 <tr>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
                                     </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Possible
-                                        Schedule
+                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Scheduled date
+                                    </th>
+                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Scheduled time
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butcher
                                     </th>
@@ -126,7 +129,7 @@
                                 @if ($animal->isEmpty())
                                     <tr class="h-[440px]">
                                         <td colspan="6" class="py-4 border-b border-black text-center">
-                                            <h1 class="font-semibold italic pb-3">No Scheduled Animal</h1>
+                                            <h1 class="font-semibold italic pb-3">No for slaughter Animal</h1>
                                         </td>
                                     </tr>
                                 @else
@@ -134,7 +137,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200">
                                             <td class="border-b border-black capitalize font-semibold">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class=" border-b border-black capitalize font-semibold">
                                                 {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -161,8 +164,13 @@
                                                     <div data-popper-arrow></div>
                                                 </div>
                                             </td>
-                                            <td class=" border-b border-black uppercase font-semibold">
-                                                {{ $animals->schedule->scheduled_at }}
+                                            <td class=" border-b border-black font-semibold capitalize">
+
+                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
+                                            </td>
+                                            <td class=" border-b border-black font-semibold capitalize">
+
+                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i a') : 'N/A' }}
                                             </td>
                                             <td class=" border-b border-black uppercase font-semibold">
                                                 {{ $animals->butcher }}

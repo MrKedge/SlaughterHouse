@@ -263,7 +263,10 @@
         </div>
 
     </aside>
-
+    <div>
+        @include('alerts.error')
+        @include('alerts.success')
+    </div>
     <main class="md:ml-60 h-auto pt-10 ">
 
 

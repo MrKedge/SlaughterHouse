@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class ClientController extends Controller
 {
@@ -246,7 +247,7 @@ class ClientController extends Controller
     public function updateAnimalForm(Request $request, $id)
     {
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'kindOfAnimal' => 'required',
             'butcher' => 'required',
             'destination' => 'required',
@@ -260,6 +261,10 @@ class ClientController extends Controller
             'source' => 'required',
             'brgyClearance' => '',
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
         $brgyClearanceName = null;
 
         // Handle 'brgyClearance' file upload if provided

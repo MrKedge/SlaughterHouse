@@ -104,7 +104,7 @@
                             <thead class="">
                                 <tr>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Animal
@@ -144,7 +144,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
                                             <td class=" border-b border-black uppercase font-semibold">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class=" border-b border-black capitalize font-semibold">
                                                 {{ $animals->type }}

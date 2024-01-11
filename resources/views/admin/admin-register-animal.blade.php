@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Approved List'])
+@include('layout.html-head', ['pageTitle' => 'Register Form'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-white">
 
     @extends('admin.layout.admin-masterlayout')
 

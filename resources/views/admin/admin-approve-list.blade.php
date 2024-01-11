@@ -93,7 +93,7 @@
                             <thead class="">
                                 <tr>
                                     <th data-priority="1" class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th data-priority="2" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
@@ -119,7 +119,7 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td rowspan="6" colspan="6"
+                                        <td rowspan="6" colspan="7"
                                             class="h-[500px] py-4 border-b border-black text-center">
                                             <h1 class="font-semibold italic pb-3">No Approve
                                                 Animal
@@ -132,7 +132,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
                                             <td class=" border-b border-black capitalize font-medium">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class="border-b border-black capitalize font-normal">
                                                 {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -163,7 +163,7 @@
                                                 {{ \Carbon\Carbon::parse($animals->approved_at)->format('M d Y') }}
                                             </td>
                                             <td class=" font-normal  border-b border-black capitalize ">
-                                                {{ \Carbon\Carbon::parse($animals->approved_at)->format('h:i:s A') }}
+                                                {{ \Carbon\Carbon::parse($animals->approved_at)->format('h:i A') }}
                                             </td>
                                             <td class=" border-b border-black font-semibold capitalize">
                                                 <span
@@ -219,7 +219,8 @@
                                                         <button data-modal-target="monitor-modal{{ $animals->id }}"
                                                             data-modal-toggle="monitor-modal{{ $animals->id }}"
                                                             type="button"
-                                                            class=" text-gray-900 font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 ">
+                                                            class="{{ optional($animals->stub)->issued_at === null ? 'cursor-not-allowed' : '' }} text-gray-900 font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110"
+                                                            @if (optional($animals->stub)->issued_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
                                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                 viewBox="0 0 24 24" stroke-width="1.5"
                                                                 stroke="currentColor" data-slot="icon" class="w-6 h-6">
@@ -227,17 +228,24 @@
                                                                     d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
                                                             </svg>
 
-
-
                                                         </button>
+                                                        @include('admin.layout.tooltip', [
+                                                            'tooltipId' => 'tooltip-light-' . $animals->id,
+                                                            'tooltipContent' => 'Issue Stub First',
+                                                            'tooltipStyle' => 'light',
+                                                        ])
                                                     @endif
                                                     <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                        class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            fill="currentColor" data-slot="icon" class="w-6 h-6">
-                                                            <path
-                                                                d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
+                                                        class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                            class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                         </svg>
+
 
                                                         <span></span>
                                                     </a>

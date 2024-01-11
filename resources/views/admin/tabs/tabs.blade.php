@@ -106,7 +106,7 @@
             // Check if the href attribute matches the current page URL
             if (link.getAttribute('href') === currentPageUrl) {
                 // Add Tailwind CSS classes for the active state to the link
-                link.classList.add('border-blue-600', 'text-blue-600', 'dark:text-blue-600',
+                link.classList.add('border-blue-600', 'text-[#EE6C4D]', 'dark:text-blue-600',
                     'dark:border-blue-600');
 
                 // Apply color to all SVG icons within the link

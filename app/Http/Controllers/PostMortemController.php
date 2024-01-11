@@ -190,6 +190,6 @@ class PostMortemController extends Controller
         // Save the changes to the animal
         $animal->save();
 
-        return redirect()->route('admin.for.slaughter.list')->with('success', 'Animal successfully slaughtered');
+        return redirect()->back()->with('success', 'Animal successfully slaughtered');
     }
 }

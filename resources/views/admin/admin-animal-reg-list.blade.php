@@ -94,6 +94,9 @@
                                     <th data-priority="4" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Date
                                     </th>
+                                    <th data-priority="4" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Time
+                                    </th>
                                     <th data-priority="6" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Status
                                     </th>
@@ -106,24 +109,21 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td rowspan="6" colspan="6"
+                                        <td rowspan="1" colspan="7"
                                             class="h-[500px] py-4 border-b border-black text-center">
-                                            <h1 class="font-semibold italic pb-3">No Approve
+                                            <h1 class="font-semibold italic pb-3">No Pending
                                                 Animal
                                             </h1>
                                         </td>
                                     </tr>
                                 @else
-                                    @php $index = 1 @endphp
                                     @foreach ($animal as $animals)
                                         <tr
-                                            class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
+                                            class="{{ $loop->iteration % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
                                             <td class=" border-b border-black capitalize font-medium">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
-                                            <td class="border-b border-black capitalize font-normal">
-                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                            </td>
+
                                             <td class=" border-b border-black uppercase font-semibold relative">
                                                 <p data-popover-target="popover-{{ $loop->index }}"
                                                     class="font-medium rounded-lg text-sm py-2.5 text-center">
@@ -146,10 +146,15 @@
                                                     <div data-popper-arrow></div>
                                                 </div>
                                             </td>
-                                            <td class=" border-b border-black capitalize font-normal">
-                                                {{ \Carbon\Carbon::parse($animals->created_at)->format('M d Y H:I a') }}
+                                            <td class="border-b border-black capitalize font-normal">
+                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
                                             </td>
-
+                                            <td class=" border-b border-black capitalize font-normal">
+                                                {{ \Carbon\Carbon::parse($animals->created_at)->format('M d Y') }}
+                                            </td>
+                                            <td class=" border-b border-black capitalize font-normal">
+                                                {{ \Carbon\Carbon::parse($animals->created_at)->format('h:i a') }}
+                                            </td>
                                             <td class=" border-b border-black font-semibold capitalize">
                                                 <span
                                                     class="bg-yellow-50 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
@@ -174,7 +179,6 @@
                                             </td>
 
                                         </tr>
-                                        @php $index++ @endphp
                                     @endforeach
                                 @endif
                             </tbody>

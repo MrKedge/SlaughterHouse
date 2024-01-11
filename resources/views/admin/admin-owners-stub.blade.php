@@ -62,7 +62,7 @@
                     class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
 
                     <div class="flex items-center gap-6">
-                        <h1 class="text-left font-bold text-[#293241] py-4 text-3xl opacity-80">Issuing of stab
+                        <h1 class="text-left font-bold text-[#293241] py-4 text-3xl opacity-80">Issuing of stub
                         </h1>
 
                         {{-- <form action="" method="get">
@@ -85,7 +85,7 @@
                             <thead class="">
                                 <tr>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
@@ -116,7 +116,7 @@
                                         <tr
                                             class="{{ $loop->even ? 'bg-gray-300' : 'bg-white bg-opacity-20' }} border border-black">
                                             <td class="py-4 border-b border-black uppercase font-semibold">
-                                                {{ $owners->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class="py-4 border-b border-black capitalize font-semibold">
                                                 {{ $owners->last_name }}, {{ $owners->first_name }}

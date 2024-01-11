@@ -96,7 +96,7 @@
                             <thead class="">
                                 <tr>
                                     <th data-priority="1" class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th data-priority="2" class="z-30  sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
@@ -128,8 +128,8 @@
                                     <tr>
                                         <td rowspan="7" colspan="8"
                                             class="h-[500px] py-4 border-b border-black text-center">
-                                            <h1 class="font-semibold italic pb-3">No Approve
-                                                Animal
+                                            <h1 class="font-semibold italic pb-3">Empty table
+
                                             </h1>
                                         </td>
                                     </tr>
@@ -139,7 +139,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200  ">
                                             <td class=" border-b border-black capitalize font-medium">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class="border-b border-black capitalize font-normal">
                                                 {{ $animals->user->first_name }} {{ $animals->user->last_name }}

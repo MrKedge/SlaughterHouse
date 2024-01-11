@@ -1,6 +1,6 @@
 @if ($errors->has('error'))
     <div id="error-alert"
-        class="absolute top-4 flex items-center p-4 mb-4 text-sm text-white rounded-lg bg-red-900 dark:bg-red-500 dark:text-white"
+        class="fixed transition-opacity duration-300 ease-in-out  inset-x-px max-w-lg mt-10 mx-auto top-0 flex justify-center z-50 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
         role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -15,15 +15,18 @@
         </div>
     </div>
     <script>
-        // Automatically hide the error alert after 3 seconds
         setTimeout(function() {
-            document.getElementById('error-alert').style.display = 'none';
-        }, 3000);
+            var successAlert = document.getElementById('error-alert');
+            successAlert.style.opacity = 0;
+            setTimeout(function() {
+                successAlert.style.display = 'none';
+            }, 300);
+        }, 4000);
     </script>
 @elseif ($errors->any())
     <!-- Display validation errors -->
     <div id="validation-errors"
-        class="absolute top-4 flex items-center p-4 mb-4 text-sm text-white rounded-lg bg-red-900 dark:bg-red-500 dark:text-white"
+        class="fixed transition-opacity duration-300 ease-in-out  inset-x-px max-w-lg mt-10 mx-auto top-0 flex justify-center z-50 p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
         role="alert">
         <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" fill="none" viewBox="0 0 24 24"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -40,9 +43,12 @@
         </div>
     </div>
     <script>
-        // Automatically hide the validation error alert after 3 seconds
         setTimeout(function() {
-            document.getElementById('validation-errors').style.display = 'none';
-        }, 3000);
+            var successAlert = document.getElementById('validation-errors');
+            successAlert.style.opacity = 0;
+            setTimeout(function() {
+                successAlert.style.display = 'none';
+            }, 300);
+        }, 4000);
     </script>
 @endif

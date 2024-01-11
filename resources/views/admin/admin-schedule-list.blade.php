@@ -8,14 +8,12 @@
     @extends('admin.layout.admin-masterlayout')
 
     @section('admincontent')
-
         <div class="flex flex-col w-full">
-
 
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
+                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
@@ -101,7 +99,7 @@
                             <thead class="">
                                 <tr>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Id
+                                        No.
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Owner
@@ -112,7 +110,10 @@
                                         Ante Mortem
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Possible Schedule
+                                        Scheduled date
+                                    </th>
+                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                        Scheduled time
                                     </th>
                                     <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
                                         Butcher
@@ -126,7 +127,7 @@
 
                                 @if ($animal->isEmpty())
                                     <tr>
-                                        <td colspan="7" class="py-4 border-b border-black text-center h-[500px]">
+                                        <td colspan="8" class="py-4 border-b border-black text-center h-[500px]">
                                             <h1 class="font-semibold italic pb-3">No Scheduled Animal
                                             </h1>
                                         </td>
@@ -137,7 +138,7 @@
                                         <tr
                                             class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200">
                                             <td class="border-b border-black uppercase font-semibold">
-                                                {{ $animals->id }}
+                                                {{ $loop->iteration }}
                                             </td>
                                             <td class=" border-b border-black capitalize font-semibold">
                                                 {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -169,7 +170,12 @@
                                                     class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->anteMortem->inspection_status }}</span>
                                             </td>
                                             <td class=" border-b border-black font-semibold capitalize">
-                                                {{ $animals->schedule->scheduled_at }}
+
+                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
+                                            </td>
+                                            <td class=" border-b border-black font-semibold capitalize">
+
+                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i a') : 'N/A' }}
                                             </td>
                                             <td class=" border-b border-black font-semibold capitalize">
                                                 {{ $animals->butcher }}
@@ -181,16 +187,20 @@
                                                     ])
                                                     <button data-modal-target="popup-modal{{ $animals->id }}"
                                                         data-modal-toggle="popup-modal{{ $animals->id }}"
-                                                        class=" focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1 "
-                                                        type="button">
+                                                        class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
+                                                        type="button"
+                                                        @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="w-6 h-6">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                                                         </svg>
-
-
+                                                        @include('admin.layout.tooltip', [
+                                                            'tooltipId' => 'tooltip-light-' . $animals->id,
+                                                            'tooltipContent' => 'This animal has no receipt.',
+                                                            'tooltipStyle' => 'light',
+                                                        ])
                                                     </button>
                                                     <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                         class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
@@ -216,7 +226,6 @@
                 </section>
             </div>
         </div>
-
     @endsection
 
 

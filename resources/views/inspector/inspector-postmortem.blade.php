@@ -179,8 +179,7 @@
                 </section>
             </div>
         </div>
-        @include('alerts.success')
-        @include('alerts.error')
+
 
     @endsection
 </body>
