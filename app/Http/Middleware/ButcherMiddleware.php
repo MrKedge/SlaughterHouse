@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
+use App\Events\UserAuthenticated;
 
 class ButcherMiddleware
 {
@@ -21,7 +22,7 @@ class ButcherMiddleware
 
             return redirect('/log-in')->withErrors(['error' => 'Access Denied']);
         }
-
+        event(new UserAuthenticated(Auth::user()));
         return $next($request);
     }
 }

@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use App\Events\UserAuthenticated;
 
 class AdminMiddleware
 {
@@ -22,6 +23,7 @@ class AdminMiddleware
 
             return redirect('/log-in')->withErrors(['error' => 'Access Denied']);
         }
+        event(new UserAuthenticated(Auth::user()));
 
         return $next($request);
     }

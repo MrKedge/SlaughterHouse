@@ -10,6 +10,9 @@
     @section('admincontent')
         <div class="flex flex-col w-full">
 
+
+
+
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
@@ -87,143 +90,157 @@
             <div class="mx-auto w-full px-4">
 
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
 
-                    <div class="flex gap-8">
+                <div class="text-2xl font-bold py-3"> @include('admin.tabs.tabs')</div>
+                <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
+                    <table class="w-full text-center text-base capitalize font-medium text-gray-500 ">
+                        <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                            Scheduled Animal
+                            <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                                {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                        </caption>
+                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No.
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Animal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Owner
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Scheduled Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Scheduled Time
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
 
 
-                        @include('admin.tabs.tabs')
-                    </div>
-                    <div class="scrollbar-gutter overflow-y-auto h-[430px]">
-                        <table class="w-full text-center">
-                            <thead class="">
-                                <tr>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        No.
+                        @forelse ($animal as $animals)
+                            <tbody>
+                                <tr
+                                    class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap ">
+                                        {{ $loop->iteration }}
                                     </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Owner
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Ante Mortem
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Scheduled date
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Scheduled time
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Butcher
-                                    </th>
-                                    <th class="z-30 sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Action
-                                    </th>
+                                    <td class="px-6 py-4">
+                                        <p data-popover-target="popover-{{ $loop->index }}"
+                                            class="font-medium rounded-lg py-2.5 text-center">
+                                            {{ $animals->type }}
+                                        </p>
+
+                                        <!-- Popover -->
+                                        <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
+                                            class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
+                                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                                                <h3 class="font-semibold text-gray-900">{{ $animals->type }}
+                                                </h3>
+                                            </div>
+                                            <div class="z-40 px-3 py-2">
+                                                <p>{{ $animals->gender }}</p>
+                                                <p>{{ $animals->live_weight }} Kg.</p>
+                                                <p>{{ $animals->age }} Mos.</p>
+                                            </div>
+                                            <div data-popper-arrow></div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i A') : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->anteMortem->inspection_status }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-gray-600">
+                                        <div class="flex justify-center gap-3">
+                                            @include('admin.layout.pop-up', [
+                                                'animalId' => $animals->id,
+                                            ])
+                                            <button data-modal-target="popup-modal{{ $animals->id }}"
+                                                data-modal-toggle="popup-modal{{ $animals->id }}"
+                                                class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
+                                                type="button"
+                                                @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                                                </svg>
+                                                @include('admin.layout.tooltip', [
+                                                    'tooltipId' => 'tooltip-light-' . $animals->id,
+                                                    'tooltipContent' => 'no receipt.',
+                                                    'tooltipStyle' => 'light',
+                                                ])
+                                            </button>
+                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                                class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm hover:-translate-y-1 transition ease-in-out delay-150 duration-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                    class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+
+                                                <span></span>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="">
 
-                                @if ($animal->isEmpty())
-                                    <tr>
-                                        <td colspan="8" class="py-4 border-b border-black text-center h-[500px]">
-                                            <h1 class="font-semibold italic pb-3">No Scheduled Animal
-                                            </h1>
-                                        </td>
-                                    </tr>
-                                @else
-                                    @php $index = 1 @endphp
-                                    @foreach ($animal as $animals)
-                                        <tr
-                                            class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black hover:bg-blue-200">
-                                            <td class="border-b border-black uppercase font-semibold">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td class=" border-b border-black capitalize font-semibold">
-                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                            </td>
-                                            <td class=" border-b border-black uppercase font-semibold relative">
-                                                <p data-popover-target="popover-{{ $loop->index }}"
-                                                    class="font-medium rounded-lg text-sm py-2.5 text-center">
-                                                    {{ $animals->type }}
-                                                </p>
-
-                                                <!-- Popover -->
-                                                <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                                    class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                                    <div
-                                                        class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                        <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                        </h3>
-                                                    </div>
-                                                    <div class="z-40 px-3 py-2">
-                                                        <p>{{ $animals->gender }}</p>
-                                                        <p>{{ $animals->live_weight }} Kg.</p>
-                                                        <p>{{ $animals->age }} Mos.</p>
-                                                    </div>
-                                                    <div data-popper-arrow></div>
-                                                </div>
-                                            </td>
-                                            <td class=" border-b border-black font-semibold capitalize">
-                                                <span
-                                                    class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->anteMortem->inspection_status }}</span>
-                                            </td>
-                                            <td class=" border-b border-black font-semibold capitalize">
-
-                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
-                                            </td>
-                                            <td class=" border-b border-black font-semibold capitalize">
-
-                                                {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i a') : 'N/A' }}
-                                            </td>
-                                            <td class=" border-b border-black font-semibold capitalize">
-                                                {{ $animals->butcher }}
-                                            </td>
-                                            <td class="border-b border-black font-semibold capitalize py-4">
-                                                <div class="flex justify-center gap-3">
-                                                    @include('admin.layout.pop-up', [
-                                                        'animalId' => $animals->id,
-                                                    ])
-                                                    <button data-modal-target="popup-modal{{ $animals->id }}"
-                                                        data-modal-toggle="popup-modal{{ $animals->id }}"
-                                                        class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
-                                                        type="button"
-                                                        @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                            viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                            class="w-6 h-6">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
-                                                        </svg>
-                                                        @include('admin.layout.tooltip', [
-                                                            'tooltipId' => 'tooltip-light-' . $animals->id,
-                                                            'tooltipContent' => 'This animal has no receipt.',
-                                                            'tooltipStyle' => 'light',
-                                                        ])
-                                                    </button>
-                                                    <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                        class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            fill="currentColor" data-slot="icon" class="w-6 h-6">
-                                                            <path
-                                                                d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
-                                                        </svg>
-
-                                                        <span></span>
-                                                    </a>
-                                                </div>
-                                            </td>
-
-                                        </tr>
-                                        @php $index++ @endphp
-                                    @endforeach
-                                @endif
                             </tbody>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="py-4 bg-white text-center">
+                                    <h1 class="font-semibold italic pb-3">No Animal</h1>
+                                </td>
+                            </tr>
+                        @endforelse
 
-                        </table>
+                    </table>
+                    <div class="flex p-4">
+                        <!-- Previous Button -->
+                        <a href="{{ $animal->previousPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+                            </svg>
+                            Previous
+                        </a>
+                        <a href="{{ $animal->nextPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            Next
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
                     </div>
-                </section>
+                </div>
+
+
             </div>
         </div>
     @endsection

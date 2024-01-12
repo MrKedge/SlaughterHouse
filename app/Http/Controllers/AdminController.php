@@ -18,6 +18,9 @@ class AdminController extends Controller
 {
     public function ShowAdminDashboardOverview()
     {
+        $userChart = User::All();
+        $animalChart = Animal::doesntHave('archive')->get();
+
         $animal = Animal::with('user')->get();
         $user = User::with('animals')->get();
         $recent = Animal::whereIn('status', ['pending', 'approved',])
@@ -26,7 +29,7 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.admin-dashboard', compact('recent', 'animal', 'user'));
+        return view('admin.dashboard-data.admin-dashboard', compact('recent', 'animal', 'user', 'animalChart', 'userChart'));
     }
 
 
@@ -46,7 +49,7 @@ class AdminController extends Controller
     {
         $animal = Animal::with(['user', 'anteMortem'])
             ->where('status', 'approved')
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-approve-list', compact('animal'));
     }
@@ -56,8 +59,7 @@ class AdminController extends Controller
     {
         $animal = Animal::with('user')
             ->where('status', 'pending')
-            ->get();
-
+            ->paginate(5);
         return view('admin.admin-animal-reg-list', compact('animal'));
     }
 
@@ -198,7 +200,7 @@ class AdminController extends Controller
             ->whereHas('anteMortem', function ($query) {
                 $query->where('inspection_status', 'for slaughter');
             })
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-schedule-list', compact('animal'));
     }

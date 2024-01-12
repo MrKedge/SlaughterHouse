@@ -8,7 +8,6 @@
     @extends('admin.layout.admin-masterlayout')
 
     @section('admincontent')
-
         <div class="flex flex-col w-full">
 
 
@@ -85,121 +84,128 @@
             <div class="mx-auto w-full px-4">
 
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section
-                    class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border-white border-2 p-4">
+                <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
+                    <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">Slaughtered Animal</h1>
+                    <div class="relative overflow-x-auto shadow-md ">
+                        <table class="w-full text-sm text-center capitalize font-medium text-gray-500 ">
+                            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white ">
 
-                    <div class="flex justify-between ">
+                                <div class="mt-1 flex items-center justify-between text-sm font-normal text-gray-500 ">
+                                    @include('admin.tabs.tabs')
+                                    @include('admin.tabs.search-bar')
+                                </div>
+                            </caption>
+                            <thead class="text-xs text-gray-700 uppercase bg-gray-300 ">
 
-                        @include('admin.tabs.tabs')
-                        @include('admin.tabs.search-bar')
-                    </div>
-                    <div class="scrollbar-gutter overflow-y-auto h-[440px]">
-                        <table class="w-full text-center">
-                            <thead class="">
                                 <tr>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th scope="col" class="px-6 py-3">
                                         No.
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th scope="col" class="px-6 py-3">
+                                        Animal
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Owner
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                                    <th scope="col" class="px-6 py-3">
+                                        Slaughtered Date
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                        Status
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th scope="col" class="px-6 py-3">
                                         Slaughtered Time
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
+                                    <th scope="col" class="px-6 py-3">
+                                        Status
+                                    </th>
+                                    <th scope="col" class="px-6 py-3">
                                         Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="">
 
-                                @if ($animal->isEmpty())
-                                    <tr>
-                                        <td rowspan="5" colspan="6"
-                                            class="h-[500px] py-4 border-b border-black text-center">
-                                            <h1 class="font-semibold italic pb-3">No Slaughtered
-                                                Animal
-                                            </h1>
+
+                            @forelse ($animal as $animals)
+                                <tbody>
+                                    <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }} border-b hover:bg-gray-100">
+                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                            {{ $loop->iteration }}
+                                        </th>
+                                        <td class="px-6 py-4">
+                                            <p data-popover-target="popover-{{ $loop->index }}"
+                                                class="font-medium rounded-lg text-sm py-2.5 text-center">
+                                                {{ $animals->type }}
+                                            </p>
+
+                                            <!-- Popover -->
+                                            <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
+                                                class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
+                                                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
+                                                    <h3 class="font-semibold text-gray-900">{{ $animals->type }}
+                                                    </h3>
+                                                </div>
+                                                <div class="z-40 px-3 py-2">
+                                                    <p>{{ $animals->gender }}</p>
+                                                    <p>{{ $animals->live_weight }} Kg.</p>
+                                                    <p>{{ $animals->age }} Mos.</p>
+                                                </div>
+                                                <div data-popper-arrow></div>
+                                            </div>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ \Carbon\Carbon::parse($animals->slaughtered_at)->format('M d Y') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            {{ \Carbon\Carbon::parse($animals->slaughtered_at)->format('h:i a') }}
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <span
+                                                class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animals->status }}
+                                            </span>
+                                        </td>
+                                        <td class="px-6 py-4">
+                                            <div class="flex justify-center gap-3">
+                                                {{-- <a data-animal-id="{{ $animals->id }}"
+                                                    class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
+                                                    <i class='bx bx-timer'
+                                                        style='color:#ffffff; font-size: 24px;'></i>
+                                                </a> --}}
+                                                <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                                    class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                                        class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                    </svg>
+                                                    <span></span>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
-                                @else
-                                    @php $index = 1 @endphp
-                                    @foreach ($animal as $animals)
-                                        <tr
-                                            class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black">
-                                            <td class=" border-b border-black capitalize font-semibold">
-                                                {{ $loop->iteration }}
-                                            </td>
-                                            <td class=" border-b border-black capitalize font-semibold">
-                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                            </td>
-                                            <td class=" border-b border-black uppercase font-semibold">
-                                                <p data-popover-target="popover-{{ $loop->index }}"
-                                                    class="font-medium rounded-lg text-sm py-2.5 text-center">
-                                                    {{ $animals->type }}
-                                                </p>
-
-                                                <!-- Popover -->
-                                                <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                                    class="absolute z-10 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                                    <div
-                                                        class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                        <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                        </h3>
-                                                    </div>
-                                                    <div class="z-40 px-3 py-2">
-                                                        <p>{{ $animals->gender }}</p>
-                                                        <p>{{ $animals->live_weight }} Kg.</p>
-                                                        <p>{{ $animals->age }} Mos.</p>
-                                                    </div>
-                                                    <div data-popper-arrow></div>
-                                                </div>
-                                            </td>
-                                            <td class=" font-semibold border-b border-black uppercase">
-                                                <span
-                                                    class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                    {{ $animals->status }}
-                                                </span>
-                                            </td>
-                                            <td class=" border-b border-black font-semibold capitalize">
-                                                {{ \Carbon\Carbon::parse($animals->slaughtered_at)->format('M d Y h:i:s A') }}
-                                            </td>
-                                            <td class="py-4 border-b border-black font-semibold capitalize">
-                                                <div class="flex justify-center gap-3">
-                                                    <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                        class="  text-gray-900 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                            fill="currentColor" data-slot="icon" class="w-6 h-6">
-                                                            <path
-                                                                d="M6 3a3 3 0 0 0-3 3v1.5a.75.75 0 0 0 1.5 0V6A1.5 1.5 0 0 1 6 4.5h1.5a.75.75 0 0 0 0-1.5H6ZM16.5 3a.75.75 0 0 0 0 1.5H18A1.5 1.5 0 0 1 19.5 6v1.5a.75.75 0 0 0 1.5 0V6a3 3 0 0 0-3-3h-1.5ZM12 8.25a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5ZM4.5 16.5a.75.75 0 0 0-1.5 0V18a3 3 0 0 0 3 3h1.5a.75.75 0 0 0 0-1.5H6A1.5 1.5 0 0 1 4.5 18v-1.5ZM21 16.5a.75.75 0 0 0-1.5 0V18a1.5 1.5 0 0 1-1.5 1.5h-1.5a.75.75 0 0 0 0 1.5H18a3 3 0 0 0 3-3v-1.5Z" />
-                                                        </svg>
-
-                                                        <span></span>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @php $index++ @endphp
-                                    @endforeach
-                                @endif
-                            </tbody>
+                                </tbody>
+                            @empty
+                                <tr>
+                                    <td colspan="7" class="py-4  bg-white text-center">
+                                        <h1 class="font-semibold italic pb-3">No Slaughtered
+                                            Animal</h1>
+                                    </td>
+                                </tr>
+                            @endforelse
                         </table>
                     </div>
+
                 </section>
+
             </div>
         </div>
-
     @endsection
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>
 
 </html>
-
-
-{{-- --}}

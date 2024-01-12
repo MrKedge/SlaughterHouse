@@ -37,7 +37,7 @@ class AnteMortemController extends Controller
     public function AnteMortemList()
     {
         $animal = Animal::where('status', 'inspection')->doesntHave('schedule')
-            ->get();
+            ->paginate(5);
 
         // Check user role
         if (auth()->user()->role === 'admin') {

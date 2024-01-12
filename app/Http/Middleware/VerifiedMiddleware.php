@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\VerifyCodeMail;
+use App\Events\UserAuthenticated;
 
 class VerifiedMiddleware
 {
@@ -38,7 +39,7 @@ class VerifiedMiddleware
             // Redirect to the route for verifying the email account
             return redirect()->route('verify.email.account');
         }
-
+        event(new UserAuthenticated(Auth::user()));
         // Continue to the next middleware or route handler
         return $next($request);
     }

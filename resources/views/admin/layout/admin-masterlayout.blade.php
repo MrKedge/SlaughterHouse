@@ -1,7 +1,7 @@
 <div class="antialiased bg-transparent text-medium text-sm ">
-    <nav class="bg-white fixed left-0 right-0 top-0 z-50">{{-- header --}}
+    <nav class="bg-white shadow-lg fixed left-0 right-0 top-0 z-50">{{-- header --}}
         <div class="flex flex-wrap justify-between items-center">
-            <div class="text-center font-bold w-[239px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
+            <div class="text-center font-bold w-[239px] h-[50px] flex items-center justify-center text-2xl">
                 <div class="flex justify-start items-center">
                     <button data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation"
                         aria-controls="drawer-navigation"
@@ -21,21 +21,14 @@
                         <span class="sr-only">Toggle sidebar</span>
                     </button>
 
-                    <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
+                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2"><span
+                            class="text-[#EE6C4D] ">SLAUGH</span>TECH
+                    </h1>
                 </div>
             </div>
 
             <div class="flex items-center lg:order-2">
-                <button type="button" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
-                    class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300">
-                    <span class="sr-only">Toggle search</span>
-                    <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                        <path clip-rule="evenodd" fill-rule="evenodd"
-                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z">
-                        </path>
-                    </svg>
-                </button>
+
                 <!-- Notifications -->
                 <button type="button" data-dropdown-toggle="notification-dropdown"
                     class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 focus:ring-4 focus:ring-gray-300 ">
@@ -336,7 +329,9 @@
         aria-label="Sidenav" id="drawer-navigation">
         <div class="scrollbar-gutter overflow-y-auto py-5 px-3 h-full bg-[#293241] ">
             <ul class="space-y-2 pt-6 text-white">
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('admin.dashboard') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
                     <a href="{{ route('admin.dashboard') }}">
 
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -352,7 +347,9 @@
             </ul>
             <p class="py-3 text-gray-500 ">REGISTRATION</p>
             <ul class="space-y-2 text-white">
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('admin.view.animal.reg.list') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
                     <a href="{{ route('admin.view.animal.reg.list') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -385,27 +382,39 @@
                     <div class="transition-all duration-300 overflow-hidden opacity-0 max-h-0 ">
                         <ul class="">
                             <li><a href="{{ route('admin.approve.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Approve</h1>
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8 {{ request()->routeIs('admin.approve.list') ? 'bg-gray-700' : '' }}">
+                                        Approve</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.monitor.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Ante Mortem</h1>
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8 {{ request()->routeIs('admin.monitor.list') ? 'bg-gray-700' : '' }}">
+                                        Ante Mortem</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.schedule.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Schedule</h1>
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8  {{ request()->routeIs('admin.schedule.list') ? 'bg-gray-700' : '' }}">
+                                        Schedule</h1>
                                 </a>
                             </li>
-                            <li><a href="{{ route('admin.for.slaughter.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">For Slaughter</h1>
+                            <li><a href="{{ route('admin.for.slaughter.list') }} ">
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8 {{ request()->routeIs('admin.for.slaughter.list') ? 'bg-gray-700' : '' }}">
+                                        For Slaughter</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.slaughter.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Slaughtered</h1>
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8 {{ request()->routeIs('admin.slaughter.list') ? 'bg-gray-700' : '' }}">
+                                        Slaughtered</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.postmortem.list') }}">
-                                    <h1 class="hover:bg-gray-700 py-2 rounded-md pl-8">Post Mortem</h1>
+                                    <h1
+                                        class="hover:bg-gray-700 py-2 rounded-md pl-8 {{ request()->routeIs('admin.postmortem.list') ? 'bg-gray-700' : '' }}">
+                                        Post Mortem</h1>
                                 </a>
                             </li>
                         </ul>
@@ -414,10 +423,12 @@
                 </li>
 
 
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('issuing.stub') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
 
-                    <a href="{{ route('issuing.stub') }}">
+                    <a href="{{ route('issuing.stub') }} ">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -427,8 +438,22 @@
                         </div>
                     </a>
                 </li>
-
                 <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+
+                    <a href="{{ route('complete.animals') }}">
+                        <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+                            </svg>
+
+                            <h1 class="panel-text flex items-center whitespace-nowrap">Scheduled Queue</h1>
+                        </div>
+                    </a>
+                </li>
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('complete.animals') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
                     <a href="{{ route('complete.animals') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -441,7 +466,9 @@
                     </a>
                 </li>
 
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md  {{ request()->routeIs('admin.dispose.list') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
                     <a href="{{ route('admin.dispose.list') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -456,7 +483,9 @@
             </ul>
             <p class="py-3 text-gray-500 ">REPORTS</p>
             <ul class="space-y-2 text-white">
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('lrme.reports') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
                     <a href="{{ route('lrme.reports') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -470,7 +499,9 @@
 
                 </li>
 
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('sshpdp.reports') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
                     <a href="{{ route('sshpdp.reports') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -493,7 +524,7 @@
         @include('alerts.error')
         @include('alerts.success')
     </div>
-    <main class="md:ml-60 h-auto pt-10 overflow-auto ">
+    <main class="md:ml-60 h-auto pt-10">
 
         @yield('admincontent')
 

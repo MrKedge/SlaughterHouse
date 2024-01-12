@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -26,7 +27,32 @@ class User extends Authenticatable implements MustVerifyEmail
         'password',
         'address',
         'verify_code',
+        'last_seen_at',
     ];
+
+    public function isOnline($thresholdMinutes = 1): bool
+    {
+        if (!$this->last_seen_at) {
+            return false; // User has never been seen
+        }
+
+        $lastSeen = Carbon::parse($this->last_seen_at);
+        $now = Carbon::now();
+
+        return $lastSeen->diffInMinutes($now) <= $thresholdMinutes;
+    }
+
+    public function lastSeenMinutesAgo(): int
+    {
+        if (!$this->last_seen_at) {
+            return 0; // User has never been seen
+        }
+
+        $lastSeen = Carbon::parse($this->last_seen_at);
+        $now = Carbon::now();
+
+        return $lastSeen->diffInMinutes($now);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Dashboard '])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#eef0f3] scrollbar-gutter">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -80,95 +80,89 @@
             <section class="h-full gap-3 pt-0 w-full  px-4">
 
                 {{-- table wrapper --}}
-                <section class=" flex justify-center">
-                    <div class="scrollbar-gutter bg-white h-auto w-full rounded-2xl overflow-y-auto ">
-                        <h1 class="text-center font-extrabold text-[#293241] pb-2 pt-4 text-3xl">RECENT
-                            REGISTRATION
-                        </h1>
-                        <div class="p-4 ">
-                            <div class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
-                                <table class="w-full text-center">
-                                    <thead class="">
-                                        <tr>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Animal
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Status
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Destination
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="">
-
-
-                                        @php $index = 1 @endphp
-
-                                        @if ($recent->isEmpty())
-                                            <tr>
-                                                <td colspan="5" class="py-4 border-b border-black text-center">
-                                                    <h1 class="font-semibold italic pb-3">No Recent Register
-                                                        Animal
-                                                    </h1>
-                                                </td>
-                                            </tr>
-                                        @else
-                                            @foreach ($recent as $animal)
-                                                <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
-                                                    <td class="py-4 border-b border-black uppercase font-semibold">
-                                                        {{ $animal->type }}
-                                                    </td>
-                                                    <td class="py-4 border-b border-black">
-                                                        {{ \Carbon\Carbon::parse($animal->created_at)->format('M d Y H:i:s') }}
-                                                    </td>
-                                                    <td class="py-4 border-b border-black">
-                                                        @if ($animal->status === 'approved')
-                                                            <span
-                                                                class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                                {{ $animal->status }}
-                                                            </span>
-                                                        @elseif ($animal->status === 'pending')
-                                                            <span
-                                                                class="bg-yellow-50 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                                {{ $animal->status }}
-                                                            </span>
-                                                        @endif
-
-                                                    </td>
-                                                    <td class="py-4 border-b border-black font-semibold capitalize">
-                                                        {{ $animal->destination }}
-                                                    </td>
-
-                                                </tr>
-                                                @php $index++ @endphp
-                                            @endforeach
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                    <table
+                        class="w-full text-sm text-center rtl:text-right text-gray-500 capitalize font-medium shadow-2xl">
+                        <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                            Recent Register Animal
+                            <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                                {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                        </caption>
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    Animal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Owner
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
+                            </tr>
+                        </thead>
+                        @forelse ($recent as $animal)
+                            <tbody>
+                                <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }} ">
+                                    <th scope="row" class="px-6 py-4">
+                                        {{ $animal->type }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $animal->user->first_name }} {{ $animal->user->last_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if ($animal->status === 'approved')
+                                            <span
+                                                class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif ($animal->status === 'pending')
+                                            <span
+                                                class="bg-yellow-50 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
                                         @endif
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ \Carbon\Carbon::parse($animal->created_at)->format('M d Y') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ \Carbon\Carbon::parse($animal->created_at)->format('h:i a') }}
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="py-4 bg-white text-center">
+                                        <h1 class="font-semibold italic pb-3">No Recent Register Animal</h1>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        @endforelse
+                    </table>
+                </div>
 
             </section>
 
 
-            {{-- <div class="flex gap-3 m-4 justify-between items-center">
-    
-            <div class="w-[400px] h-[400px] bg-white">
-    
+            <div class=" sm:grid-cols-3 gap-4 justify-evenly grid  m-4">
+
+
+                @include('admin.dashboard-data.present-chart')
+
+                @include('admin.dashboard-data.data-chart')
+
+                @include('admin.dashboard-data.active-user-table')
+
             </div>
-    
-    
-            <div class="w-[400px] h-[400px] bg-white">
-    
-            </div>
-    
-        </div> --}}
+            {{-- Schedule chart --}}
+
 
 
 

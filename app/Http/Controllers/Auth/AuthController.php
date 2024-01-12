@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
 use App\Rules\EmailDomains;
+use App\Events\UserAuthenticated;
 
 class AuthController extends Controller
 {
@@ -138,6 +139,10 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials, true)) {
             $request->session()->regenerate();
+
+            //this line is for updating the last_seen_at in db
+            event(new UserAuthenticated(Auth::user()));
+
 
             $user = Auth::user();
             if ($user->role === 'admin') {
