@@ -13,6 +13,16 @@
 
                 </h1>
             </div>
+            <div class="w-full">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
+                    Email:</label>
+                <h1 type="text" name="name" id="name"
+                    class="font-medium capitalize  bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+                    {{ $animal->user->email }}
+
+                </h1>
+            </div>
             @if ($animal->user->role !== 'admin')
                 <div class="w-full">
 

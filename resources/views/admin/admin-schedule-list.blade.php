@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Scheduled List'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -16,7 +16,7 @@
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
@@ -34,7 +34,7 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
 
@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
 
@@ -68,7 +68,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
 
@@ -135,25 +135,7 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <p data-popover-target="popover-{{ $loop->index }}"
-                                            class="font-medium rounded-lg py-2.5 text-center">
-                                            {{ $animals->type }}
-                                        </p>
-
-                                        <!-- Popover -->
-                                        <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                            class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                </h3>
-                                            </div>
-                                            <div class="z-40 px-3 py-2">
-                                                <p>{{ $animals->gender }}</p>
-                                                <p>{{ $animals->live_weight }} Kg.</p>
-                                                <p>{{ $animals->age }} Mos.</p>
-                                            </div>
-                                            <div data-popper-arrow></div>
-                                        </div>
+                                        @include('admin.layout.animals-popover')
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -178,9 +160,8 @@
                                                 class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
                                                 type="button"
                                                 @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                                                 </svg>
@@ -206,18 +187,16 @@
                                         </div>
                                     </td>
                                 </tr>
-
                             </tbody>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-4 bg-white text-center">
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
                                     <h1 class="font-semibold italic pb-3">No Animal</h1>
                                 </td>
                             </tr>
                         @endforelse
-
                     </table>
-                    <div class="flex p-4">
+                    <div class="flex p-4 bg-slate-100">
                         <!-- Previous Button -->
                         <a href="{{ $animal->previousPageUrl() }}"
                             class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">

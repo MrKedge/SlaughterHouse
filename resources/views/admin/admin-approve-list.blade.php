@@ -11,10 +11,9 @@
         <div class="flex flex-col w-full">
 
 
-            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
+            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3 ">
                 {{-- wrapper --}}
-                <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                <div class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md ">
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
@@ -124,25 +123,7 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <p data-popover-target="popover-{{ $loop->index }}"
-                                            class="font-medium rounded-lg py-2.5 text-center">
-                                            {{ $animals->type }}
-                                        </p>
-
-                                        <!-- Popover -->
-                                        <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                            class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                </h3>
-                                            </div>
-                                            <div class="z-40 px-3 py-2">
-                                                <p>{{ $animals->gender }}</p>
-                                                <p>{{ $animals->live_weight }} Kg.</p>
-                                                <p>{{ $animals->age }} Mos.</p>
-                                            </div>
-                                            <div data-popper-arrow></div>
-                                        </div>
+                                        @include('admin.layout.animals-popover')
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -252,14 +233,14 @@
                             </tbody>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-4 bg-white text-center">
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
                                     <h1 class="font-semibold italic pb-3">No Approved Animal</h1>
                                 </td>
                             </tr>
                         @endforelse
 
                     </table>
-                    <div class="flex p-4">
+                    <div class="flex p-4 bg-slate-200">
                         <!-- Previous Button -->
                         <a href="{{ $animal->previousPageUrl() }}"
                             class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">

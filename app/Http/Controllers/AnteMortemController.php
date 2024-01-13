@@ -170,4 +170,11 @@ class AnteMortemController extends Controller
             return view('inspector.inspector-disposal', compact('animal'));
         }
     }
+
+
+    public function ShowScheduledQueue()
+    {
+
+        return view('admin.admin-scheduled-queue');
+    }
 }

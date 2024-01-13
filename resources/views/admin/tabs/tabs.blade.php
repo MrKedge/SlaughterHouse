@@ -1,6 +1,6 @@
-<div class="">
+<div class="bg-white border border-gray-300 rounded-xl p-4 hidden lg:block">
     <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-600 ">
-        <li class="me-2">
+        <li class="me-2 border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.approve.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -11,7 +11,7 @@
                 Approve
             </a>
         </li>
-        <li class="me-2">
+        <li class="me-2  border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.monitor.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900   group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -22,7 +22,7 @@
                 Ante Mortem
             </a>
         </li>
-        <li class="me-2">
+        <li class="me-2  border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.schedule.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4  hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -33,7 +33,7 @@
                 Schedule
             </a>
         </li>
-        <li class="me-2">
+        <li class="me-2  border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.for.slaughter.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4   hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -44,7 +44,7 @@
                 For Slaughter
             </a>
         </li>
-        <li class="me-2">
+        <li class="me-2  border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.slaughter.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4   hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -57,7 +57,7 @@
             </a>
         </li>
 
-        <li class="me-2">
+        <li class="me-2  border  border-gray-300 rounded-xl bg-white">
             <a href="{{ route('admin.postmortem.list') }}"
                 class="gap-1 tab-link inline-flex items-center justify-center p-4   hover:text-gray-900  group">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"

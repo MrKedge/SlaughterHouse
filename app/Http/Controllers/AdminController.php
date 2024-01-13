@@ -38,7 +38,7 @@ class AdminController extends Controller
 
     public function ShowForSlaughterList()
     {
-        $animal = Animal::where('status', 'for slaughter')->get();
+        $animal = Animal::where('status', 'for slaughter')->paginate(5);
         return view('admin.admin-for-slaughter-list', compact('animal'));
     }
 
@@ -213,7 +213,7 @@ class AdminController extends Controller
             ->whereHas('postMortem', function ($query) {
                 $query->whereNull('postmortem_status');
             })
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-slaughter-list', compact('animal'));
     }

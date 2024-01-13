@@ -3,6 +3,7 @@
         <h2 class="mb-4 text-xl font-bold text-gray-900 ">Animal Registration</h2>
         <form action="{{ route('store.animal') }}" method="POST" enctype="multipart/form-data">
             @csrf
+            <input type="hidden" name="status" id="statusInput">
             <div class="grid gap-4 mb-4 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                 {{--  --}}
                 <div class="sm:col-span-2">
@@ -86,7 +87,7 @@
                                 <input id="list-radio-female" type="radio" value="female" name="gender" required
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400 focus:ring-blue-500  ">
                                 <label for="list-radio-female"
-                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">female
+                                    class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">Female
                                 </label>
                             </div>
                         </li>
@@ -232,19 +233,12 @@
                     </a>
                 @endif
                 @if (auth()->user()->role === 'client')
-                    <a href="{{ route('client.animal.list.register') }}"
-                        class="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center ">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                            <path stroke-linecap="round" stroke-linejoin="round"
-                                d="M15.182 16.318A4.486 4.486 0 0 0 12.016 15a4.486 4.486 0 0 0-3.198 1.318M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0ZM9.75 9.75c0 .414-.168.75-.375.75S9 10.164 9 9.75 9.168 9 9.375 9s.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Zm5.625 0c0 .414-.168.75-.375.75s-.375-.336-.375-.75.168-.75.375-.75.375.336.375.75Zm-.375 0h.008v.015h-.008V9.75Z" />
-                        </svg>
-
-                        Cancel
-                    </a>
+                    <button type="submit" onclick="setStatus('draft')"
+                        class="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Save
+                        as draft</button>
                 @endif
             </div>
-
+            <input class="hidden" type="text" name="status_value" id="input_id">
             <div id="register-modal" tabindex="-1"
                 class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0  max-h-full">
                 {{-- <div class="fixed inset-0 backdrop-blur-3xl  bg-white  bg-opacity-60 transition-opacity"></div> --}}
@@ -268,7 +262,7 @@
                             </svg>
                             <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you want to register
                                 this Animal?</h3>
-                            <button type="submit" data-modal-hide="register-modal" type="button"
+                            <button type="submit" onclick="setStatus('pending')" data-modal-hide="register-modal"
                                 class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
                                 Yes, I'm sure
                             </button>
@@ -295,20 +289,25 @@
             label.innerHTML = "<i class='bx bx-plus' style='font-size: 2em;'></i> Add image";
         }
     }
+
+    function setStatus(status) {
+        document.getElementById('statusInput').value = status;
+        document.getElementById('animalForm').submit();
+    }
 </script>
 
-<script>
+{{-- <script>
     var imageUrls = {
         cow: "{{ asset('images/cow.png') }}",
         horse: "{{ asset('images/horse.png') }}",
         carabao: "{{ asset('images/carabao.png') }}",
     };
-</script>
+</script> --}}
 
 
 
 
-<script src="{{ asset('js/slaughterhouse.js') }}"></script>
+{{-- <script src="{{ asset('js/slaughterhouse.js') }}"></script> --}}
 
 <script>
     function limitInputValue(input) {

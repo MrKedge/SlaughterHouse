@@ -17,7 +17,7 @@ class ReceiptController extends Controller
         // Retrieve the stabs related to the user's animals
         $stubs = Stubs::whereHas('animals.user', function ($query) use ($userId) {
             $query->where('id', $userId)->whereNotNull('stub_id');
-        })->with('animals')->get();
+        })->with('animals')->paginate(10);
 
         return view('client.client-stub', compact('stubs'));
     }
@@ -29,7 +29,7 @@ class ReceiptController extends Controller
         $stub = Stubs::with('animals')->findOrFail($id);
 
         // Access the related animals
-        $animal = $stub->animals;
+        $animal = $stub->animals()->paginate(10);
 
         return view('client.client-receipt-table', compact('stub', 'animal'));
     }

@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Antemortem List'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa] overflow-hidden">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -14,7 +14,7 @@
 
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
@@ -30,7 +30,7 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
 
@@ -46,7 +46,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
 
@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
 
@@ -129,25 +129,8 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <p data-popover-target="popover-{{ $loop->index }}"
-                                            class="font-medium rounded-lg py-2.5 text-center">
-                                            {{ $animals->type }}
-                                        </p>
+                                        @include('admin.layout.animals-popover')
 
-                                        <!-- Popover -->
-                                        <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                            class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                </h3>
-                                            </div>
-                                            <div class="z-40 px-3 py-2">
-                                                <p>{{ $animals->gender }}</p>
-                                                <p>{{ $animals->live_weight }} Kg.</p>
-                                                <p>{{ $animals->age }} Mos.</p>
-                                            </div>
-                                            <div data-popper-arrow></div>
-                                        </div>
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -178,9 +161,8 @@
                                             @endif
                                             <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                 class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -197,14 +179,14 @@
                             </tbody>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-4 bg-white text-center">
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
                                     <h1 class="font-semibold italic pb-3">No Animal</h1>
                                 </td>
                             </tr>
                         @endforelse
 
                     </table>
-                    <div class="flex p-4">
+                    <div class="flex p-4 bg-slate-200">
                         <!-- Previous Button -->
                         <a href="{{ $animal->previousPageUrl() }}"
                             class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">

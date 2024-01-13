@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'LRME'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -11,40 +11,12 @@
         <div class="min-h-screen w-full">{{-- wrapper --}}
 
 
-
-            {{-- HEADER --}}
-
-            {{-- end header --}}
-
-
-            {{-- middle content wrapper --}}
-
-
-
-
-            {{-- table wrapper --}}
             <div class="flex flex-col w-full">
 
-
-                {{-- <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
-                 
-               
-                </section> --}}
+                <div class=" w-full px-4">
 
 
-                <div class="mx-auto w-full px-4">
-
-                    {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                    <section class=" mt-6 bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border border-white p-4">
-
-                        <div class="flex justify-between ">
-
-                            <div class="text-gray-600"> @include('admin.tabs.tabs')</div>
-                            @include('admin.tabs.search-bar')
-
-                        </div>
-
-                    </section>
+                    <div class=" mt-6  text-gray-600 w-full"> @include('admin.tabs.tabs')</div>
 
                     <div class="flex text-start items-center mt-4 gap-4">
                         <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
@@ -64,16 +36,13 @@
 
                 </div>
             </div>
-            {{-- End wrapper --}}
-
-
 
             <div class="px-4 pt-4 w-full">
                 <div class=" shadow-md sm:rounded-lg flex justify-center">
 
 
                     <div
-                        class="scrollbar-gutter overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border border-white">
+                        class="scrollbar-gutter overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border  border-gray-300">
 
                         <table class=" text-sm text-left text-gray-500">
                             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
@@ -190,7 +159,7 @@
                             <tbody>
                                 <!-- Loop through each day and display data -->
                                 @foreach ($animalData as $day)
-                                    <tr class="even:bg-gray-100 odd:bg-white border-b">
+                                    <tr class="even:bg-gray-100 odd:bg-white border  border-gray-300">
                                         <td class="px-6 py-4">{{ \Carbon\Carbon::parse($day['date'])->format('d') }}</td>
 
                                         @foreach ($animalTypes as $animalType)

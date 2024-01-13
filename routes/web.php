@@ -100,6 +100,7 @@ Route::middleware(['admin'])->group(function () {
 });
 
 
+Route::post('/client/publish/animal/{id}', [ClientController::class, 'PublishRegister'])->name('publish.animal');
 //Client pages 
 Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/overview', [ClientController::class, 'ShowClientDashboardOverview'])->name('client.overview');
@@ -114,6 +115,7 @@ Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
     Route::get('/client/stub', [ReceiptController::class, 'ShowClientStub'])->name('client.stub');
     Route::get('/client/table/receipt/{id}', [ReceiptController::class, 'ShowReceiptTable'])->name('receipt.table');
+    Route::get('/admin/schedule/queue', [AnteMortemController::class, 'ShowScheduledQueue'])->name('scheduled.queue');
 });
 
 //post clients

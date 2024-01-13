@@ -23,7 +23,7 @@ class StubController extends Controller
             ->whereHas('anteMortem', function ($query) {
                 $query->whereNotNull('arrived_at');
             })
-            ->get();
+            ->paginate(15);
 
         return view('admin.stub.admin-generate-stub', compact('animal', 'owner'));
     }
@@ -79,7 +79,7 @@ class StubController extends Controller
                         $anteMortemQuery->whereNotNull('arrived_at');
                     });
             }])
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-owners-stub', compact('owner'));
     }

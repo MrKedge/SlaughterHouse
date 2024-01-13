@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -31,16 +32,28 @@ class ClientController extends Controller
 
 
 
-    public function ShowAnimalListReg()
+    public function ShowAnimalListReg(Request $request)
     {
         $user = User::with('animals')->find(Auth::id());
 
-        // Retrieve all animals for the user
-        $animals = $user->animals;
 
-        return view('client.client-animal-list-registration', compact('user', 'animals'));
+        $status = $request->input('status', 'all');
+
+
+        $animalsQuery = $user->animals();
+
+        if ($status !== 'all') {
+            $animalsQuery->where('status', $status);
+        } else {
+
+            $animalsQuery->where('status', '!=', 'draft');
+        }
+
+
+        $animal = $animalsQuery->paginate(10);
+
+        return view('client.client-animal-list-registration', compact('user', 'animal', 'status'));
     }
-
 
 
 
@@ -67,10 +80,24 @@ class ClientController extends Controller
     public function ShowArchiveList()
     {
         $user = User::with('animals')->find(Auth::id());
-        $animal = $user->animals->where('status', 'archived');
+
+        // Retrieve all archived animals for the user with pagination
+        $animal = $user->animals()->where('status', 'archived')->paginate(10);
+
         return view('client.client-animal-archive', compact('animal', 'user'));
     }
 
+
+    public function PublishRegister($id)
+    {
+        $animal = Animal::findOrFail($id);
+
+        $animal->status = 'pending';
+        $animal->save();
+
+
+        return redirect()->back()->with('success', 'Your registration is now published.');
+    }
 
     public function ShowClientApprove()
     {
@@ -105,40 +132,9 @@ class ClientController extends Controller
 
 
 
-    public function SaveAsDraft(Request $request)
-    {
-        $request->validate([
-
-
-            'kindOfAnimal' => 'required',
-            'butcher' => 'required',
-            'destination' => 'required',
-            'gender' => 'required',
-            'age' => 'required',
-            'liveWeight' => 'required'
-        ]);
-
-        $animal = new Animal();
-
-        $animal->type = $request->kindOfAnimal;
-        $animal->user_id = Auth::user()->id;
-        $animal->butcher = $request->butcher;
-        $animal->age_classify = $request->ageClassify;
-        $animal->destination = $request->destination;
-        $animal->gender = $request->gender;
-        $animal->age = $request->age;
-        $animal->live_weight = $request->liveWeight;
-        $animal->status = 'draft';
-        $animal->save();
-
-        return redirect()->route('client.animal.list.register');
-    }
-
-
-
-
     public function Register(Request $request)
     {
+
         $request->validate([
             'kindOfAnimal' => 'required',
             'butcher' => 'required',
@@ -153,6 +149,9 @@ class ClientController extends Controller
             'source' => 'required',
             'brgyClearance' => '',
         ]);
+        $status = $request->input('status');
+
+
         $brgyClearanceName = null;
 
         // Handle 'brgyClearance' file upload if provided
@@ -206,6 +205,7 @@ class ClientController extends Controller
         $animal->cert_transfer = $imageCertTransferName;
         $animal->source = $request->source;
         $animal->brgy_clearance = $brgyClearanceName;
+        $animal->status = $status;
 
         $animal->save();
         if (auth()->check()) {
@@ -227,7 +227,9 @@ class ClientController extends Controller
 
     public function ShowDrafts()
     {
-        $animal = Animal::where('user_id', Auth::id())->get();
+        $animal = Animal::where('user_id', Auth::id())
+            ->where('status', 'draft')
+            ->paginate(10);
         return view('client.client-drafts', compact('animal'));
     }
 

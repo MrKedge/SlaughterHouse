@@ -144,7 +144,7 @@ class PostMortemController extends Controller
                 $query->where('postmortem_status', 'good');
             })
             ->whereDoesntHave('completed') // Ensure there is no related completed record
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-post-mortem', compact('animal'));
     }

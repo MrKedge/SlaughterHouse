@@ -120,25 +120,7 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        <p data-popover-target="popover-{{ $loop->index }}"
-                                            class="font-medium rounded-lg text-sm py-2.5 text-center">
-                                            {{ $animals->type }}
-                                        </p>
-
-                                        <!-- Popover -->
-                                        <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                            class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                            <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                </h3>
-                                            </div>
-                                            <div class="z-40 px-3 py-2">
-                                                <p>{{ $animals->gender }}</p>
-                                                <p>{{ $animals->live_weight }} Kg.</p>
-                                                <p>{{ $animals->age }} Mos.</p>
-                                            </div>
-                                            <div data-popper-arrow></div>
-                                        </div>
+                                        @include('admin.layout.animals-popover')
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -159,7 +141,7 @@
                                         <div class="flex justify-center gap-3">
 
                                             <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm hover:-translate-y-1 transition ease-in-out delay-150 duration-300">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -167,7 +149,6 @@
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                 </svg>
-
 
                                                 <span></span>
                                             </a>
@@ -178,14 +159,14 @@
                             </tbody>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-4 bg-white text-center">
+                                <td colspan="5" class="py-4 bg-white text-center border-b border-gray-300">
                                     <h1 class="font-semibold italic pb-3">No Pending Animal</h1>
                                 </td>
                             </tr>
                         @endforelse
 
                     </table>
-                    <div class="flex p-4">
+                    <div class="flex p-4 bg-slate-200">
                         <!-- Previous Button -->
                         <a href="{{ $animal->previousPageUrl() }}"
                             class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">

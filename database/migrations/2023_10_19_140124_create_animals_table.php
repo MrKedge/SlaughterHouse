@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('source')->nullable();
             $table->string('butcher')->nullable();
             $table->string('age_classify')->nullable();
-            $table->string('status')->default('pending')->nullable();
+            $table->string('status')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->string('cert_transfer')->nullable();
             $table->string('remarks')->nullable();

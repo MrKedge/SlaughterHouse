@@ -3,59 +3,30 @@
 
 @include('layout.html-head', ['pageTitle' => 'SSHPDP'])
 
-<body class="bg-[#D5DFE8]">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 
     @section('admincontent')
-        {{-- wrapper --}}
+        <div class="flex flex-col w-full">
+            <div class="mx-auto mt-6 w-full px-4">
+
+                {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
 
 
 
-        {{-- HEADER --}}
 
-        {{-- end header --}}
-
-
-        <div class="flex">{{-- middle content wrapper --}}
+                <div class="text-gray-600"> @include('admin.tabs.tabs')</div>
 
 
 
-            {{-- table wrapper --}}
-            <div class="flex flex-col w-full">
 
-
-                {{-- <section class="flex justify-evenly gap-3 pb-3 w-full h-auto px-4">
-                 
-               
-                </section> --}}
-
-
-                <div class="mx-auto mt-6 w-full px-4">
-
-                    {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                    <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg  border border-white p-4">
-
-                        <div class="flex justify-between ">
-
-                            <div class="text-gray-600"> @include('admin.tabs.tabs')</div>
-                            @include('admin.tabs.search-bar')
-
-                        </div>
-
-                    </section>
-
-                    <div class="flex text-start items-center mt-4 gap-4">
-                        <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
-                            SSHPDP</h1>
-
-
-
-                    </div>
-
+                <div class="flex text-start items-center mt-4 gap-4">
+                    <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
+                        SSHPDP
+                    </h1>
                 </div>
             </div>
-            {{-- End wrapper --}}
         </div>
 
 
@@ -65,7 +36,7 @@
 
 
                 <div
-                    class="overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border border-white">
+                    class="w-full overflow-x-auto overflow-y-auto  h-[500px] sm:rounded-lg rounded-b-xl border border-gray-300">
 
 
                     <div class="grid  mb-4 grid-cols-2 gap-4">

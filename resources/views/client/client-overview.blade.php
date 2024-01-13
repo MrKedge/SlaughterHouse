@@ -3,18 +3,19 @@
 
 @include('layout.html-head', ['pageTitle' => 'Overview'])
 
-<body class="bg-[#D5DFE8] overflow-hidden ">
+<body class="bg-[#f6f8fa]">
 
 
     @extends('client.layout.masterlayout')
 
     @section('content')
+        <div class="flex flex-col w-full">{{-- below header wrapper --}}
 
-        <div class="flex flex-col w-full"> {{-- below header wrapper --}}
-            <section class="flex justify-evenly gap-3 py-3 overflow-x-auto w-auto h-auto">
+
+            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
 
@@ -28,7 +29,7 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
 
@@ -46,7 +47,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SLAUGHTERED</h1>
 
@@ -61,7 +62,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
 
@@ -77,79 +78,119 @@
                 </div>
             </section>
 
-            <div class="flex justify-center items-center px-3">
 
-                {{-- table wrapper --}}
-                <section class="w-full">
-                    <div class="bg-white h-auto rounded-md overflow-y-auto">
-                        <h1 class="text-center font-extrabold text-[#293241] pb pt-4 text-2xl">RECENT
-                            REGISTRATION
-                        </h1>
-                        <div class="p-4 ">
-                            <div class="scrollbar-gutter flex justify-center relative px-4 max-h-[300px] overflow-y-auto">
-                                <table class="w-full text-center">
-                                    <thead class="">
-                                        <tr>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Animal
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Status
-                                            </th>
-                                            <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">
-                                                Destination
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="">
 
-                                        @php $index = 1 @endphp
+            {{-- table wrapper --}}
+            <div class="mx-auto w-full px-4">
+                <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
+                    <table class="w-full text-center text-base capitalize font-medium text-gray-500 ">
+                        <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                            Recent Register
+                            <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                                {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                        </caption>
+                        <thead class="text-xs text-white uppercase bg-slate-600 ">
 
-                                        @if ($recent->isEmpty())
-                                            <tr>
-                                                <td colspan="5" class="py-4 border-b border-black text-center">
-                                                    <h1 class="font-semibold italic pb-3">No Recent Register
-                                                        Animal
-                                                    </h1>
-                                                    <a href="{{ route('client.animal.register') }}"
-                                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
-                                                        <box-icon name='pencil' color='#ffffff'></box-icon><span>Register
-                                                            Animal</span>
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        @else
-                                            @foreach ($recent as $animal)
-                                                <tr class="{{ $index % 2 === 0 ? 'bg-gray-200' : 'bg-white' }}">
-                                                    <td class="py-4 border-b border-black uppercase font-semibold">
-                                                        {{ $animal->type }}
-                                                    </td>
-                                                    <td class="py-4 border-b border-black">
-                                                        {{ $animal->created_at }}
-                                                    </td>
-                                                    <td class="py-4 font-semibold border-b border-black uppercase"
-                                                        style="color: {{ $animal->status === 'pending' ? 'orange' : ($animal->status === 'approved' ? 'green' : ($animal->status === 'rejected' ? 'red' : 'black')) }}">
-                                                        {{ $animal->status }}</td>
-                                                    <td class="py-4 border-b border-black font-semibold capitalize">
-                                                        {{ $animal->destination }}
-                                                    </td>
-                                                </tr>
-                                                @php $index++ @endphp
-                                            @endforeach
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No.
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Animal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Destination
+                                </th>
+                            </tr>
+                        </thead>
+
+
+                        @forelse ($animals as $animal)
+                            <tbody>
+                                <tr
+                                    class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap ">
+                                        {{ $loop->iteration }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $animal->type }}
+
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        @if ($animal->status === 'approved')
+                                            <span
+                                                class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif($animal->status === 'pending')
+                                            <span
+                                                class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif($animal->status === 'inspection')
+                                            <span
+                                                class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif($animal->status === 'rejected')
+                                            <span
+                                                class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif($animal->status === 'for slaughter')
+                                            <span
+                                                class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
+                                        @elseif($animal->status === 'slaughtered')
+                                            <span
+                                                class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                                {{ $animal->status }}
+                                            </span>
                                         @endif
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animal->created_at->format('M d Y ') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animal->created_at->format('h:i A') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animal->destination }}
+                                    </td>
+                                </tr>
 
+                            </tbody>
+                        @empty
+                            <tr>
+                                <td colspan="6" class="py-4 border-b border-gray-300 text-center">
+                                    <h1 class="font-semibold italic pb-3">No Recent Register
+                                        Animal
+                                    </h1>
+                                    <a href="{{ route('client.animal.register') }}"
+                                        class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 w-40 rounded flex mx-auto">
+                                        <box-icon name='pencil' color='#ffffff'></box-icon><span>Register
+                                            Animal</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        @endforelse
+
+                    </table>
+                </div>
             </div>
 
-        </div>
 
+        </div>
     @endsection
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
 </body>

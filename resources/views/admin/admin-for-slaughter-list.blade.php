@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'For slaughter List'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa] overflow-hidden">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -14,7 +14,7 @@
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
@@ -31,8 +31,7 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
-
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
 
@@ -65,7 +64,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
 
@@ -87,120 +86,117 @@
             <div class="mx-auto w-full px-4">
 
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section class=" bg-white rounded-sm shadow-2xl bg-opacity-20 bg-blur-lg border-white border-2 p-4">
-                    <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">For Slaughter Animal</h1>
-                    <div class="relative overflow-x-auto shadow-md ">
-                        <table class="w-full text-sm text-center capitalize font-medium text-gray-500 ">
-                            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white ">
 
-                                <div class="mt-1 flex items-center justify-between text-sm font-normal text-gray-500 ">
-                                    @include('admin.tabs.tabs')
-                                    @include('admin.tabs.search-bar')
-                                </div>
-                            </caption>
-                            <thead class="text-xs text-gray-700 uppercase bg-gray-300 ">
+                <div class="text-2xl font-bold py-3"> @include('admin.tabs.tabs')</div>
+                <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
+                    <table class="w-full text-center text-base capitalize font-medium text-gray-500 ">
+                        <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                            Active For Slaughtering
+                            <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                                {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                        </caption>
+                        <thead class="text-xs text-white uppercase bg-slate-600 ">
 
-                                <tr>
-                                    <th scope="col" class="px-6 py-3">
-                                        No.
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Animal
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Owner
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Scheduled Date
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Scheduled Time
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Butcher
-                                    </th>
-                                    <th scope="col" class="px-6 py-3">
-                                        Action
-                                    </th>
-                                </tr>
-                            </thead>
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No.
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Animal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Owner
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Scheduled Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Scheduled Time
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Butcher
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
 
 
-                            @forelse ($animal as $animals)
-                                <tbody>
-                                    <tr class="{{ $loop->even ? 'bg-gray-100' : 'bg-white' }} border-b hover:bg-gray-100">
-                                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
-                                            {{ $loop->iteration }}
-                                        </th>
-                                        <td class="px-6 py-4">
-                                            <p data-popover-target="popover-{{ $loop->index }}"
-                                                class="font-medium rounded-lg text-sm py-2.5 text-center">
-                                                {{ $animals->type }}
-                                            </p>
+                        @forelse ($animal as $animals)
+                            <tbody>
+                                <tr
+                                    class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap ">
+                                        {{ $loop->iteration }}
+                                    </th>
+                                    <td class="px-6 py-4">
+                                        @include('admin.layout.animals-popover')
 
-                                            <!-- Popover -->
-                                            <div data-popover id="popover-{{ $loop->index }}" role="tooltip"
-                                                class="absolute border border-gray-400 z-50 invisible inline-block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white rounded-lg shadow-2xl opacity-0">
-                                                <div class="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg">
-                                                    <h3 class="font-semibold text-gray-900">{{ $animals->type }}
-                                                    </h3>
-                                                </div>
-                                                <div class="z-40 px-3 py-2">
-                                                    <p>{{ $animals->gender }}</p>
-                                                    <p>{{ $animals->live_weight }} Kg.</p>
-                                                    <p>{{ $animals->age }} Mos.</p>
-                                                </div>
-                                                <div data-popper-arrow></div>
-                                            </div>
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i a') : 'N/A' }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            {{ $animals->butcher }}
-                                        </td>
-                                        <td class="px-6 py-4">
-                                            <div class="flex justify-center gap-3">
-                                                {{-- <a data-animal-id="{{ $animals->id }}"
-                                                    class="btnForSchedNav bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-2 rounded flex items-center">
-                                                    <i class='bx bx-timer'
-                                                        style='color:#ffffff; font-size: 24px;'></i>
-                                                </a> --}}
-                                                <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                    class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                                                    </svg>
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i A') : 'N/A' }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        <span
+                                            class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->butcher }}</span>
+                                    </td>
+                                    <td class="px-6 py-4 text-gray-600">
+                                        <div class="flex justify-center gap-3">
 
-                                                    <span></span>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            @empty
-                                <tr>
-                                    <td colspan="7" class="py-4  bg-white text-center">
-                                        <h1 class="font-semibold italic pb-3">No Scheduled
-                                            Animal</h1>
+                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                                class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm hover:-translate-y-1 transition ease-in-out delay-150 duration-300">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+
+                                                <span></span>
+                                            </a>
+                                        </div>
                                     </td>
                                 </tr>
-                            @endforelse
-                        </table>
+                            </tbody>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
+                                    <h1 class="font-semibold italic pb-3">No Animal</h1>
+                                </td>
+                            </tr>
+                        @endforelse
+                    </table>
+                    <div class="flex p-4">
+                        <!-- Previous Button -->
+                        <a href="{{ $animal->previousPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+                            </svg>
+                            Previous
+                        </a>
+                        <a href="{{ $animal->nextPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            Next
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
                     </div>
+                </div>
 
-                </section>
 
             </div>
         </div>

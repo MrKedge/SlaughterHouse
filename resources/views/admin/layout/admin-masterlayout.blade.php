@@ -438,9 +438,11 @@
                         </div>
                     </a>
                 </li>
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('scheduled.queue') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
-                    <a href="{{ route('complete.animals') }}">
+                    <a href="{{ route('scheduled.queue') }}">
                         <div class="flex gap-4 items-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round"

@@ -42,7 +42,7 @@ class CompletedController extends Controller
                     $subQuery->where('archive_status', 'archived');
                 });
             }])
-            ->get();
+            ->paginate(5);
 
         return view('admin.admin-completed', compact('owner'));
     }

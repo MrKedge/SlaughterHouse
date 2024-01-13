@@ -23,6 +23,7 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->string('verify_code')->nullable();
+            $table->timestamp('last_seen_at')->nullable();
         });
     }
 

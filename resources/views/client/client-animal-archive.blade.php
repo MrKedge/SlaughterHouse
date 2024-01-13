@@ -3,111 +3,117 @@
 
 @include('layout.html-head', ['pageTitle' => 'Archive'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa] overflow-hidden">
 
     @extends('client.layout.masterlayout')
 
     @section('content')
         {{-- main content --}}
-        <div class="flex flex-col w-full ">
+        <div class="flex flex-col w-full mt-20">
+
+            <div class="mx-auto w-full px-4">
+
+                <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
+                    <table class="w-full whitespace-nowrap text-center text-base capitalize font-medium text-gray-500 ">
+                        <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                            Archives
+                            <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                                {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                        </caption>
+                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                            <tr>
+                                <th scope="col" class="px-6 py-3">
+                                    No.
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Animal
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Date
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Time
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Status
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
 
 
-            <section class="flex justify-start gap-20 pl-6  py-3 overflow-x-auto w-full h-auto pr-6 pb-6">
-                {{-- wrapper --}}
-                <div
-                    class="h-28 w-full bg-white rounded-r-md border-l-[16px] border-[#61718e] rounded-l-md relative shadow-2xl bg-opacity-70">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg"></h1>
-                </div>
-                <div
-                    class="h-28 w-full bg-white rounded-r-md border-l-[16px] border-[#61718e] rounded-l-md relative shadow-2xl bg-opacity-70">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg"></h1>
-
-                    {{-- <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                    name='check-double' type='solid' color='#ee6c4d'
-                                    style="width: 32px; height: 32px;"></box-icon>
-                            </div> --}}
-                </div>
-                <div
-                    class="h-28 w-full bg-white rounded-r-md border-l-[16px] border-[#61718e] rounded-l-md relative shadow-2xl bg-opacity-70">
-
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg"></h1>
-
-                    {{-- <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400"><box-icon
-                                    name='list-check' type='solid' color='#ee6c4d'
-                                    style="width: 32px; height: 32px;"></box-icon>
-                            </div> --}}
-                </div>
-            </section>
-
-
-            <div class="mx-auto w-full">
-
-                {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section
-                    class="z-10 mx-5 w-auto h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                    <h1 class="text-2xl font-bold py-3 text-[#293241]">Archives</h1>
-                    <div class="scrollbar-gutter overflow-y-auto h-[420px]">
-                        <table class="w-full">
-                            <thead>
-                                <tr>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">No.</th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal
+                        @forelse ($animal as $animals)
+                            <tbody>
+                                <tr
+                                    class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-600 whitespace-nowrap ">
+                                        {{ $loop->iteration }}
                                     </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Date
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Action
-                                    </th>
+                                    <td class="px-6 py-4">
+                                        {{ $animals->type }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ \Carbon\Carbon::parse($animals->created_at)->format('M Y D') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ \Carbon\Carbon::parse($animals->created_at)->format('h:i A') }}
+                                    </td>
+                                    <td class="px-6 py-4">
+                                        {{ $animals->status }}
+                                    </td>
+                                    <td class="px-6 py-4 text-gray-600">
+                                        <div class="flex justify-center gap-3">
+                                            <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"
+                                                class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                                <span></span>
+                                            </a>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody class="">
 
-                                @php
-                                    $index = 1;
-
-                                @endphp
-                                @if ($animal->isEmpty())
-                                    <tr>
-                                        <td colspan="5" class="py-4 border-b border-black text-center">
-                                            <h1 class="font-bold italic pb-3">No Archives</h1>
-
-                                        </td>
-                                    </tr>
-                                @else
-                                    @foreach ($animal as $animals)
-                                        <tr class="">
-                                            <td class="py-4 border-b border-black">{{ $index }}.</td>
-                                            <td class="py-4 border-b border-black uppercase font-semibold">
-                                                {{ $animals->type }}
-                                            </td>
-                                            <td class="py-4 border-b border-black">
-                                                {{ $animals->created_at }}
-                                            </td>
-                                            <td class="py-4 font-semibold border-b text-[#7393B3] border-black uppercase">
-                                                {{ $animals->status }}
-                                            </td>
-                                            <td class="py-4 border-b border-black">
-                                                <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"
-                                                    class="px-2 bg-blue-500 hover:bg-blue-700 text-white font-bold p-1 rounded w-14 mx-1 py-1">
-                                                    View
-                                                </a>
-                                                {{-- <a href="{{ route('client.edit.animal.form', ['id' => $animals->id]) }}"
-                                                        class="px-4 bg-green-500 hover:bg-green-700 text-white font-bold  rounded mx-1 py-1">
-                                                        Edit
-                                                    </a> --}}
-                                            </td>
-                                        </tr>
-                                        @php $index++ @endphp
-                                    @endforeach
-                                @endif
                             </tbody>
-                        </table>
+                        @empty
+                            <tr>
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
+                                    <h1 class="font-semibold italic pb-3">No data</h1>
+                                </td>
+                            </tr>
+                        @endforelse
+
+                    </table>
+                    <div class="flex p-4 w-full bg-slate-200">
+                        <!-- Previous Button -->
+                        <a href="{{ $animal->previousPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 5H1m0 0 4 4M1 5l4-4" />
+                            </svg>
+                            Previous
+                        </a>
+                        <a href="{{ $animal->nextPageUrl() }}"
+                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                            Next
+                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
                     </div>
-                </section>
+                </div>
             </div>
+
         </div>
     @endsection
 </body>
