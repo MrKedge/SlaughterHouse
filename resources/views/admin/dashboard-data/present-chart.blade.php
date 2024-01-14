@@ -190,7 +190,7 @@
     $pendingCount = $animalChart->where('status', 'pending')->count();
     $approveCount = $animalChart->where('status', 'approved')->count();
     $slaughterCount = $animalChart->where('status', 'slaughtered')->count();
-    $forSlaughterCount = $animalChart->where('status', 'slaughtered')->count();
+    $forSlaughterCount = $animalChart->where('status', 'for slaughter')->count();
 
 @endphp
 <script>

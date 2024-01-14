@@ -9,7 +9,7 @@
         </svg>
         <span class="sr-only">Info</span>
         <div>
-            <span class="font-medium">Success alert!</span> {{ session('success') }}.
+            <span class="font-medium">Success! </span> {{ session('success') }}.
         </div>
     </div>
 

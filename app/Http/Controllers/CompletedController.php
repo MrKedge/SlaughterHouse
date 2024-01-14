@@ -13,15 +13,24 @@ class CompletedController extends Controller
 {
     public function CompleteRecord(Request $request, $id)
     {
+
         $animal = Animal::find($id);
+
 
         if (!$animal) {
             return redirect()->route('your.error.route')->with('error', 'Animal not found');
         }
+
+
         Completed::updateOrCreate(
             ['animal_id' => $animal->id],
             ['complete_status' => 'completed']
         );
+
+
+        $animal->status = 'processed';
+        $animal->save();
+
 
         return redirect()->back()->with('success', 'Animal marked as completed');
     }
