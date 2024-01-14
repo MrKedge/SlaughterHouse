@@ -3,15 +3,19 @@
 
 @include('layout.html-head', ['pageTitle' => 'form'])
 
-<body class="bg-[#D5DFE8]">
+<body class="bg-white">
 
     @extends('layout.masterlayout')
 
     @section('content')
-        <div class="flex flex-col w-full ">
-            @include('form.view-animal-form')
-        </div>
+        @include('view-form.all-view-form')
+
+
+        @include('view-form.form-popup')
     @endsection
+    @include('view-form.antemortem-popup')
+    @include('view-form.postmortem-popup')
+    @include('view-form.other-popup')
 </body>
 
 </html>

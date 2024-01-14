@@ -28,7 +28,7 @@ class ButcherController extends Controller
     {
         $animal = Animal::where('status', 'for slaughter')
             ->where('butcher', 'public')
-            ->get();
+            ->paginate(5);
         return view('butcher.butcher-animals', compact('animal'));
     }
 

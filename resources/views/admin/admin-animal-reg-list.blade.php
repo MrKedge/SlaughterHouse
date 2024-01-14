@@ -120,7 +120,8 @@
                                         {{ $loop->iteration }}
                                     </th>
                                     <td class="px-6 py-4">
-                                        @include('admin.layout.animals-popover')
+                                        {{-- @include('admin.layout.animals-popover') --}}
+                                        {{ $animals->type }}
                                     </td>
                                     <td class="px-6 py-4">
                                         {{ $animals->user->first_name }} {{ $animals->user->last_name }}
@@ -160,7 +161,7 @@
                         @empty
                             <tr>
                                 <td colspan="5" class="py-4 bg-white text-center border-b border-gray-300">
-                                    <h1 class="font-semibold italic pb-3">No Pending Animal</h1>
+                                    <h1 class="font-semibold italic pb-3">No Animal</h1>
                                 </td>
                             </tr>
                         @endforelse

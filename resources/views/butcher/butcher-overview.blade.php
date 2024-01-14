@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'overview'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('layout.masterlayout')
 
@@ -11,10 +11,10 @@
         <div class="flex flex-col w-full ">
 
 
-            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4">
+            <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
 
@@ -31,8 +31,7 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
-
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
@@ -48,7 +47,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
 
@@ -65,7 +64,7 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
 
@@ -83,75 +82,115 @@
                 </div>
             </section>
 
+    </html>
+    <div class="mx-auto w-full px-4 h-screen">
+        {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
 
-            <div class="mx-auto w-full">
 
-                {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
-                <section
-                    class="z-10 mx-5 w-auto h-auto bg-white rounded-md shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-                    <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">Public Butcher Animals</h1>
-                    <div class="scrollbar-gutter overflow-y-auto h-[420px]">
-                        <table class="w-full text-center">
-                            <thead>
-                                <tr>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Id</th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Animal</th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Owner
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Time of
-                                        Slaughter
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Status
-                                    </th>
-                                    <th class="sticky text-white bg-[#293241] top-0 p-2 border-r-2">Butcher
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="">
+        <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80">
 
-                                @php
-                                    $index = 1;
+        </h1>
+        <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
+            <table class="w-full whitespace-nowrap text-sm text-center capitalize font-medium text-gray-500 ">
+                <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
+                    Recent For Slaughter
+                    <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
+                        {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
+                </caption>
+                <thead class="text-xs text-white uppercase bg-slate-600 ">
 
-                                @endphp
-                                @if ($animal->isEmpty())
-                                    <tr>
-                                        <td colspan="6" class="py-4 border-b border-black text-center h-[400px]">
-                                            <h1 class="font-bold italic pb-3">No For Slaughter Animal</h1>
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            No.
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Animal
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Owner
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Status
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Date of Slaughter
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Time of Slaughter
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Butcher
+                        </th>
 
-                                        </td>
-                                    </tr>
-                                @else
-                                    @foreach ($animal as $animals)
-                                        <tr
-                                            class="{{ $index % 2 === 0 ? 'bg-gray-300 ' : 'bg-white bg-opacity-20' }} border border-black ">
-                                            <td class="py-4 border-b border-black">{{ $animals->id }}.</td>
-                                            <td class="py-4 border-b border-black uppercase font-semibold">
-                                                {{ $animals->type }}
-                                            </td>
-                                            <td class="py-4 border-b border-black capitalize">
-                                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
-                                            </td>
-                                            <td class="py-4 border-b border-black">
-                                                {{ $animals->schedule->scheduled_at }}
-                                            </td>
-                                            <td class="py-4 border-b border-black uppercase ">
-                                                {{ $animals->status }}
-                                            </td>
-                                            <td class="py-4 border-b border-black capitalize">
-                                                {{ $animals->butcher }}
-                                            </td>
-                                        </tr>
-                                        @php $index++ @endphp
-                                    @endforeach
-                                @endif
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
-            </div>
+                    </tr>
+                </thead>
+
+
+                @forelse ($animal as $animals)
+                    <tbody>
+                        <tr
+                            class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">
+                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap ">
+                                {{ $loop->iteration }}
+                            </th>
+                            <td class="px-6 py-4">
+                                @include('admin.layout.animals-popover')
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $animals->user->first_name }} {{ $animals->user->last_name }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <span
+                                    class="bg-yellow-50 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
+                                    {{ $animals->status }}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('M d Y') }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i a') }}
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $animals->butcher }}
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                @empty
+                    <tr>
+                        <td colspan="8" class="py-4 bg-white text-center border-b border-gray-300">
+                            <h1 class="font-semibold italic pb-3">No Animal</h1>
+                        </td>
+                    </tr>
+                @endforelse
+
+            </table>
+            {{-- <div class="flex p-4 bg-slate-200">
+                <!-- Previous Button -->
+                <a href="{{ $animal->previousPageUrl() }}"
+                    class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                    <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 5H1m0 0 4 4M1 5l4-4" />
+                    </svg>
+                    Previous
+                </a>
+                <a href="{{ $animal->nextPageUrl() }}"
+                    class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                    Next
+                    <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 14 10">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M1 5h12m0 0L9 1m4 4L9 9" />
+                    </svg>
+                </a>
+            </div> --}}
         </div>
 
-    @endsection
+    </div>
+    </div>
+@endsection
 </body>
-
-</html>

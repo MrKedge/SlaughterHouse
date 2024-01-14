@@ -185,7 +185,7 @@
                                                     </svg>
                                                 </a>
                                             @endif
-                                            <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                            <a href="{{ route('client.view.animal.form', ['id' => $animals->id]) }}"
                                                 class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm hover:-translate-y-1 transition ease-in-out delay-150 duration-300">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                                     stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
