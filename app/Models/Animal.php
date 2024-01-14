@@ -71,6 +71,6 @@ class Animal extends Model
 
     public function archive()
     {
-        return $this->hasOne(archive::class);
+        return $this->hasOne(Archive::class);
     }
 }
