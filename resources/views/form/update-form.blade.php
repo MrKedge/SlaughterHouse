@@ -41,7 +41,7 @@
                 </div>
                 <div class="w-full">
                     <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
-                        Animal Type</label>
+                        Animal Type (You are required to choose type of animal)</label>
                     <select name="kindOfAnimal" id="typeOfAnimal" required
                         class="type-animal font-medium  bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
                         <option value="" disabled selected>Select</option>
@@ -59,10 +59,10 @@
                     </label>
                     <select name="source" id="" required
                         class="font-medium bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="" disabled selected>Select</option>
                         @foreach ($animal as $animals)
                             @if (!is_null($animals->animal_source) && $animals->animal_source !== '')
-                                <option value="{{ $animals->animal_source }}">
+                                <option value="{{ $animals->animal_source }}"
+                                    {{ $updateForm->source == $animals->animal_source ? 'selected' : '' }}>
                                     {{ $animals->animal_source }}
                                 </option>
                             @endif
@@ -76,6 +76,7 @@
                         <li class="w-full border-b border-gray-200 rounded-t-lg  ">
                             <div class="flex items-center ps-3">
                                 <input id="list-radio-male" type="radio" value="male" name="gender"
+                                    {{ $updateForm->gender === 'male' ? 'checked' : '' }}
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400 focus:ring-blue-500 ">
                                 <label for="list-radio-male"
                                     class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">Male
@@ -85,6 +86,7 @@
                         <li class="w-full border-gray-200 rounded-t-lg ">
                             <div class="flex items-center ps-3">
                                 <input id="list-radio-female" type="radio" value="female" name="gender" required
+                                    {{ $updateForm->gender === 'female' ? 'checked' : '' }}
                                     class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-400 focus:ring-blue-500  ">
                                 <label for="list-radio-female"
                                     class="w-full py-3 ms-2 text-sm font-medium text-gray-900 ">Female
@@ -95,7 +97,7 @@
                     <div>
                         <label class="block mb-2 text-sm font-medium text-gray-900  "
                             for="">Age:(months)</label>
-                        <input type="number" name="age" required
+                        <input type="number" name="age" required value="{{ $updateForm->age }}"
                             oninput="formatAge(this); limitInputValue(this, 2000)" min="1" max="2000"
                             placeholder="Age"
                             class="font-medium  bg-gray-50 border border-gray-400  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5   text-gray-800  ">
@@ -106,7 +108,8 @@
                             for="">Live Wt.
                             (Kilogram)</label>
                         <input type="number" max="2000" name="liveWeight" required min="1"
-                            placeholder="Weight" step="0.01" oninput="limitInputValue(this)"
+                            value="{{ $updateForm->live_weight }}" placeholder="Weight" step="0.01"
+                            oninput="limitInputValue(this)"
                             class="font-medium bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  ">
 
                     </div>
@@ -116,10 +119,10 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900  " for="">Butcher:</label>
                     <select name="butcher" id="" required
                         class="font-medium  bg-gray-50 border border-gray-400 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  text-gray-800  ">
-                        <option value="" disabled selected>Select</option>
                         @foreach ($animal as $animals)
                             @if (!is_null($animals->animal_butcher) && $animals->animal_butcher !== '')
-                                <option value="{{ $animals->animal_butcher }}">
+                                <option value="{{ $animals->animal_butcher }}"
+                                    {{ $updateForm->butcher == $animals->animal_butcher ? 'selected' : '' }}>
                                     {{ $animals->animal_butcher }}
                                 </option>
                             @endif
@@ -130,7 +133,7 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 " for="">Destination:</label>
                     <select name="destination" id="" required
                         class="font-medium bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        <option value="" disabled selected>Select</option>
+                        <option value="{{ $updateForm->destination }}">{{ $updateForm->destination }}</option>
                         @foreach ($animal as $animals)
                             @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
                                 <option value="{{ $animals->animal_destination }}">
@@ -146,13 +149,14 @@
                     <select name="ageClassify" id="putAgeClassify"
                         class="capitalize  font-medium  age-classify bg-gray-50 border border-gray-300
                                 text-gray-900 text-sm rounded-lg focus:ring-blue-500
-                                focus:border-blue-500 block w-full p-2.5 ">
-
-
+                                focus:border-blue-500 block w-full p-2.5 
+                                
+                                ">
                         <option value="" disabled selected>select</option>
                         @foreach ($animal as $animals)
                             @if (!is_null($animals->animal_ageclassify) && $animals->animal_ageclassify !== '')
-                                <option value="{{ $animals->animal_ageclassify }}">
+                                <option value="{{ $animals->animal_ageclassify }}"
+                                    {{ $updateForm->age_classify == $animals->animal_ageclassify ? 'selected' : '' }}>
                                     {{ $animals->animal_ageclassify }}
                                 </option>
                             @endif

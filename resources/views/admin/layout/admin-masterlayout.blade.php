@@ -1,7 +1,7 @@
 <div class="antialiased bg-transparent text-medium text-sm ">
     <nav class="bg-white shadow-lg fixed left-0 right-0 top-0 z-50">{{-- header --}}
         <div class="flex flex-wrap justify-between items-center">
-            <div class="text-center font-bold w-[239px] h-[50px] flex items-center justify-center text-2xl">
+            <div class="text-center font-bold w-[239px] h-[50px] flex flex-wrap justify-between items-center text-xl">
                 <div class="flex justify-start items-center">
                     <button data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation"
                         aria-controls="drawer-navigation"
@@ -21,7 +21,8 @@
                         <span class="sr-only">Toggle sidebar</span>
                     </button>
 
-                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2"><span
+
+                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10"><span
                             class="text-[#EE6C4D] ">SLAUGH</span>TECH
                     </h1>
                 </div>

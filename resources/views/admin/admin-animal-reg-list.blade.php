@@ -78,7 +78,7 @@
 
                 <h1 class="text-2xl font-bold py-3 text-[#293241] opacity-80"> </h1>
                 <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300 ">
-                    <table class="w-full text-sm text-center capitalize font-medium text-gray-500 ">
+                    <table class="w-full whitespace-nowrap text-sm text-center capitalize font-medium text-gray-500 ">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
                             Pending Animal
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of

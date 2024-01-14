@@ -114,7 +114,7 @@
                         </thead>
 
 
-                        @forelse ($animals as $animal)
+                        @forelse ($recent as $animal)
                             <tbody>
                                 <tr
                                     class="{{ $loop->even ? 'bg-white' : 'bg-white' }} border-b cursor-pointer border-gray-300 hover:bg-gray-100">

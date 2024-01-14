@@ -162,7 +162,7 @@ class AnteMortemController extends Controller
     {
         $animal = Animal::with('anteMortem')
             ->where('status', 'not available')
-            ->get();
+            ->paginate(10);
 
         if (auth()->user()->role === 'admin') {
             return view('admin.admin-disposal-list', compact('animal'));

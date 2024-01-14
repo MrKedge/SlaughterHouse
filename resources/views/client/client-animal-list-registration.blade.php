@@ -20,7 +20,8 @@
                 {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
 
                 <div class="relative overflow-x-auto rounded-lg sm:rounded-lg border  border-gray-300">
-                    <table class="scrollbar-gutter w-full text-sm text-center capitalize font-medium text-gray-500 ">
+                    <table
+                        class="scrollbar-gutter whitespace-nowrap  w-full text-sm text-center capitalize font-medium text-gray-500 ">
                         <caption class=" text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
                             <caption
                                 class="p-3 space-y-3 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
@@ -204,7 +205,7 @@
                         @empty
                             <tr>
                                 <td colspan="6" class="py-4 bg-white text-center border-b border-gray-300">
-                                    <h1 class="font-semibold italic pb-3">No Animal</h1>
+                                    <h1 class="font-semibold italic pb-3">No {{ $status }} Animal</h1>
                                 </td>
                             </tr>
                         @endforelse

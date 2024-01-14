@@ -80,7 +80,7 @@
             <section class="h-full gap-3 pt-0 w-full  px-4">
 
                 {{-- table wrapper --}}
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+                <div class="relative overflow-x-auto shadow-md sm:rounded-lg  border  border-gray-300">
                     <table
                         class="w-full text-sm text-center rtl:text-right text-gray-500 capitalize font-medium shadow-2xl">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
@@ -88,7 +88,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-100 ">
+                        <thead class="text-xs text-gray-100 uppercase bg-slate-600 ">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Animal
@@ -109,7 +109,7 @@
                         </thead>
                         @forelse ($recent as $animal)
                             <tbody>
-                                <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }} ">
+                                <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }}  border  border-gray-300">
                                     <th scope="row" class="px-6 py-4">
                                         {{ $animal->type }}
                                     </th>

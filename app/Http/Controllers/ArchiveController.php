@@ -13,7 +13,7 @@ class ArchiveController extends Controller
             ->whereHas('archive', function ($query) {
                 $query->where('archive_status', 'archived');
             })
-            ->get();
+            ->paginate(10);
 
         return view('admin.admin-archive', compact('animal'));
     }

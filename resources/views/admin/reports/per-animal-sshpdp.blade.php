@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Animal SSHPDP'])
 
-<body class="bg-[#D5DFE8] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 

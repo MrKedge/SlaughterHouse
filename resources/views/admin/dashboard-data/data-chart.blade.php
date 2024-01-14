@@ -1,4 +1,4 @@
-<div class="max-w-sm w-full bg-white rounded-lg shadow  p-4 md:p-6">
+<div class="max-w-sm w-full bg-white rounded-lg shadow  p-4 md:p-6  border  border-gray-300">
     <div class="flex justify-between mb-3">
         <div class="flex items-center">
             <div class="flex justify-center items-center">

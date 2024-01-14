@@ -1,7 +1,7 @@
 <div class="antialiased bg-transparent text-medium text-sm ">
-    <nav class="bg-transparent fixed left-0 right-0 top-0 z-50">{{-- header --}}
+    <nav class="bg-white shadow-lg fixed left-0 right-0 top-0 z-50">{{-- header --}}
         <div class="flex flex-wrap justify-between items-center">
-            <div class="text-center font-bold w-[239px] bg-[#293241] h-[50px] flex items-center justify-center text-2xl">
+            <div class="text-center font-bold w-[239px] h-[50px] flex flex-wrap justify-between items-center text-xl">
                 <div class="flex justify-start items-center">
                     <button data-drawer-target="drawer-navigation" data-drawer-toggle="drawer-navigation"
                         aria-controls="drawer-navigation"
@@ -21,10 +21,12 @@
                         <span class="sr-only">Toggle sidebar</span>
                     </button>
 
-                    <h1 class="text-white"><span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
+                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10"><span
+                            class="text-[#EE6C4D] ">SLAUGH</span>TECH
+                    </h1>
                 </div>
-                {{-- next to logo --}}
             </div>
+
             <div class="flex items-center lg:order-2">
                 <button type="button" data-drawer-toggle="drawer-navigation" aria-controls="drawer-navigation"
                     class="p-2 mr-1 text-gray-500 rounded-lg md:hidden hover:text-gray-900 hover:bg-gray-100  focus:ring-gray-300">
@@ -266,7 +268,9 @@
                         </div>
                     </a>
                 </li>
-                <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                <li
+                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('client.archive.list') ? 'bg-gray-700' : '' }}">
+                    {{-- this for icon --}}
 
                     <a href="{{ route('client.archive.list') }}">
                         <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -285,7 +289,10 @@
         </div>
 
     </aside>
-
+    <div>
+        @include('alerts.error')
+        @include('alerts.success')
+    </div>
     <main class="md:ml-60 h-auto pt-10">
 
 

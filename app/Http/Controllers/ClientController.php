@@ -16,16 +16,22 @@ class ClientController extends Controller
 {
 
 
-    public function ShowClientDashboardOverview()
+    public function showClientDashboardOverview()
     {
-        $animals = Animal::where('user_id', Auth::id())->get();
+        $user_id = Auth::id();
 
-        $recent = Animal::where('user_id', Auth::id())
-            ->where('status', '!=', 'archived')
-            ->where('created_at', '>=', Carbon::now()->subHours(8))
+        // Use eager loading if there are relationships
+        $animals = Animal::where('user_id', $user_id)->with('user')->get();
+
+        $eightHoursAgo = Carbon::now()->subHours(8);
+
+        $recent = Animal::where('user_id', $user_id)
+            ->whereNot('status', 'draft') // Use whereNot to exclude 'draft' status
+            ->where('created_at', '>=', $eightHoursAgo)
             ->latest('created_at')
             ->limit(5)
             ->get();
+
         return view('client.client-overview', compact('recent', 'animals'));
     }
 
@@ -77,15 +83,17 @@ class ClientController extends Controller
 
 
 
-    public function ShowArchiveList()
+    public function showArchiveList()
     {
         $user = User::with('animals')->find(Auth::id());
 
-        // Retrieve all archived animals for the user with pagination
-        $animal = $user->animals()->where('status', 'archived')->paginate(10);
+        $animal = Animal::where('user_id', Auth::id())
+            ->whereHas('archive')
+            ->paginate(10);
 
         return view('client.client-animal-archive', compact('animal', 'user'));
     }
+
 
 
     public function PublishRegister($id)
@@ -238,9 +246,9 @@ class ClientController extends Controller
 
     public function ShowEditFormClient($id)
     {
-        $formValue = FormMaintenance::all();
-        $animal = Animal::with('user')->find($id);
-        return view('client.client-edit-form', compact('animal', 'formValue'));
+        $animal = FormMaintenance::all();
+        $updateForm = Animal::with('user')->find($id);
+        return view('client.client-edit-form', compact('updateForm', 'animal'));
     }
 
 
