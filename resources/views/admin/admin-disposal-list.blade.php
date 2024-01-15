@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Approved List'])
+@include('layout.html-head', ['pageTitle' => 'Disposal'])
 
-<body class="bg-[#f6f8fa] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 

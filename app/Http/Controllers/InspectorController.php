@@ -33,7 +33,7 @@ class InspectorController extends Controller
             ->where('status', 'slaughtered')
             ->whereDoesntHave('archive')
             ->whereDoesntHave('completed')
-            ->get();
+            ->paginate(10);
         return view('inspector.inspector-postmortem', compact('animal'));
     }
 
