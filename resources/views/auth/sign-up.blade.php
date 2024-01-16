@@ -3,133 +3,145 @@
 
 @include('layout.html-head', ['pageTitle' => 'SignUp'])
 
-<body class="overflow-hidden">
-    <div class="flex justify-center items-center h-screen bg-cover bg-center"
+<body class="">
+    <section class="bg-gray-50 bg-no-repeat bg-cover h-screen bg-origin-content bg-center"
         style="background-image: url('{{ asset('images/background.png') }}');">
-        <div class="z-40 absolute top-0 left-0 w-full h-4 text-end font-sans font-semibold text-gray-800"><span><a
-                    href="">About
-                    us</a></span>
-            <span class="px-4"><a href="">Contact</a></span>
-        </div>
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            {{-- <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 ">
+        <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+            alt="logo">
+        Flowbite
+    </a> --}}
+            <div
+                class="w-full md:mt-0 sm:max-w-md xl:p-0 bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
+                <div class="p-6 space-y-2 md:space-y-4 sm:p-8">
+                    <h1 class="text-xl text-center font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+                        Create Account
+                    </h1>
+                    <form class="space-y-4 md:space-y-6 text-sm lg:text-base" action="{{ route('store.account') }}"
+                        method="POST">
+                        @csrf
+                        <div>
+                            <div class="relative">{{-- f name --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path fill-rule="evenodd"
+                                            d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
 
-        @include('alerts.error')
-        <section
-            class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-auto lg:py-0 bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-            <h1 class="text-center text-4xl font-bold py-8 ">SIGN UP</h1>
-            {{-- <pre class="hidden">{{ var_dump(session()->all()) }}</pre> --}}
-            <div class="flex justify-center">
-                <form class="max-w-sm mx-auto">
-                    <label for="email-address-icon" class="block mb-2 text-sm font-medium text-gray-900 ">Your
-                        Email</label>
-                    <div class="relative">
-                        <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="currentColor" viewBox="0 0 20 16">
-                                <path
-                                    d="m10.036 8.278 9.258-7.79A1.979 1.979 0 0 0 18 0H2A1.987 1.987 0 0 0 .641.541l9.395 7.737Z" />
-                                <path
-                                    d="M11.241 9.817c-.36.275-.801.425-1.255.427-.428 0-.845-.138-1.187-.395L0 2.6V14a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V2.5l-8.759 7.317Z" />
-                            </svg>
+
+                                </div>
+                                <input minlength="3" value="{{ old('firstName') }}" type="text" name="firstName"
+                                    placeholder="First Name" required
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5"
+                                    placeholder="First name">
+                            </div>
                         </div>
-                        <input type="text" id="email-address-icon"
-                            class="bg-transparent border-b border-gray-300 text-gray-900 text-sm rounded-lg  block w-full ps-10 p-2.5"
-                            placeholder="name@flowbite.com">
-                    </div>
-                </form>
-                <form action="{{ route('store.account') }}" method="POST" class="text-lg font-semibold text-center">
-                    @csrf
-                    <div class="pb-5 relative">
-                        <input minlength="3" value="{{ old('firstName') }}" type="text" name="firstName"
-                            placeholder="First Name" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500 ">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
-                                name='user'></box-icon></span>
-                    </div>
+                        <div>
+                            <div class="relative">{{-- l name --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path fill-rule="evenodd"
+                                            d="M7.5 6a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM3.751 20.105a8.25 8.25 0 0 1 16.498 0 .75.75 0 0 1-.437.695A18.683 18.683 0 0 1 12 22.5c-2.786 0-5.433-.608-7.812-1.7a.75.75 0 0 1-.437-.695Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
 
-                    <div class="pb-5 relative">
 
-                        <input minlength="3" type="text" name="lastName" placeholder="Last Name" required
-                            value="{{ old('lastName') }}"
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
-                                name='user'></box-icon></span>
-                    </div>
-                    {{-- <div class="pb-5 relative">
+                                </div>
+                                <input minlength="3" type="text" name="lastName" placeholder="Last Name" required
+                                    value="{{ old('lastName') }}"
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5"
+                                    placeholder="Last name">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="relative">{{-- address --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path
+                                            d="M11.584 2.376a.75.75 0 0 1 .832 0l9 6a.75.75 0 1 1-.832 1.248L12 3.901 3.416 9.624a.75.75 0 0 1-.832-1.248l9-6Z" />
+                                        <path fill-rule="evenodd"
+                                            d="M20.25 10.332v9.918H21a.75.75 0 0 1 0 1.5H3a.75.75 0 0 1 0-1.5h.75v-9.918a.75.75 0 0 1 .634-.74A49.109 49.109 0 0 1 12 9c2.59 0 5.134.202 7.616.592a.75.75 0 0 1 .634.74Zm-7.5 2.418a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Zm3-.75a.75.75 0 0 1 .75.75v6.75a.75.75 0 0 1-1.5 0v-6.75a.75.75 0 0 1 .75-.75ZM9 12.75a.75.75 0 0 0-1.5 0v6.75a.75.75 0 0 0 1.5 0v-6.75Z"
+                                            clip-rule="evenodd" />
+                                        <path d="M12 7.875a1.125 1.125 0 1 0 0-2.25 1.125 1.125 0 0 0 0 2.25Z" />
+                                    </svg>
 
-                        <select name="role" id="role" onchange="toggleAddressField()" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] text-red-500 focus:outline-[#293241] focus:ring focus:border-blue-200 focus:border-2">
-                            <option value="" disabled selected><span class=" text-gray-500">Select Role</span>
-                            </option>
-                            <option class="text-black" value="client">Client</option>
-                            <option class="text-black" value="admin">Admin</option>
-                            <option class="text-black" value="inspector">Inspector</option>
-                            <option class="text-black" value="butcher">Butcher</option>
-                        </select>
 
-                    </div> --}}
-                    <div id="addressDiv" class="pb-5 relative">
 
-                        <input minlength="3" id="addressInput" type="text" name="address" placeholder="Address"
-                            required value="{{ old('address') }}"
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='bank'
-                                type='solid'></box-icon></span>
-                    </div>
-                    <div class="pb-5 relative">
+                                </div>
+                                <input minlength="3" id="addressInput" type="text" name="address"
+                                    placeholder="Address" required value="{{ old('address') }}"
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="relative">{{-- email --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path
+                                            d="M1.5 8.67v8.58a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3V8.67l-8.928 5.493a3 3 0 0 1-3.144 0L1.5 8.67Z" />
+                                        <path
+                                            d="M22.5 6.908V6.75a3 3 0 0 0-3-3h-15a3 3 0 0 0-3 3v.158l9.714 5.978a1.5 1.5 0 0 0 1.572 0L22.5 6.908Z" />
+                                    </svg>
 
-                        <input type="email" name="email" placeholder="Email" required
-                            value="{{ session('newEmail') }}"
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='envelope'
-                                type='solid'></box-icon></span>
-                    </div>
-                    <div class="pb-5 relative">
+                                </div>
+                                <input type="email" name="email" placeholder="Email" required
+                                    value="{{ session('newEmail') }}"
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="relative">{{-- password --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path fill-rule="evenodd"
+                                            d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
 
-                        <input minlength="6" type="password" name="password" placeholder="Password" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
-                                name='lock'></box-icon></span>
-                    </div>
-                    <div class="pb-5 relative">
+                                </div>
+                                <input minlength="6" type="password" name="password" placeholder="Password" required
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5">
+                            </div>
+                        </div>
+                        <div>
+                            <div class="relative">{{-- C password --}}
+                                <div class="absolute inset-y-0 end-0 flex items-center pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
+                                        class="w-6 h-6">
+                                        <path fill-rule="evenodd"
+                                            d="M12 1.5a5.25 5.25 0 0 0-5.25 5.25v3a3 3 0 0 0-3 3v6.75a3 3 0 0 0 3 3h10.5a3 3 0 0 0 3-3v-6.75a3 3 0 0 0-3-3v-3c0-2.9-2.35-5.25-5.25-5.25Zm3.75 8.25v-3a3.75 3.75 0 1 0-7.5 0v3h7.5Z"
+                                            clip-rule="evenodd" />
+                                    </svg>
 
-                        <input minlength="6" type="password" name="password_confirmation"
-                            placeholder="Confirm Password" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='pencil'
-                                type='solid'></box-icon></span>
-                    </div>
-                    <div class="block text-center p-2 pb-3"><button
-                            class="py-1 rounded-md bg-[#293241] text-white w-[300px]" type="submit">SIGN UP
+                                </div>
+                                <input minlength="6" type="password" name="password_confirmation"
+                                    placeholder="Confirm Password" required
+                                    class="bg-transparent text-sm lg:text-base placeholder-gray-500 border-b outline-none border-gray-900 text-gray-900 block w-full pr-6 p-2.5">
+                            </div>
+                        </div>
+
+                        <button type="submit"
+                            class="w-full text-white bg-gray-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Sign
+                            Up
                         </button>
-                        <div class="">
-                            <h1 class="text-center font-semibold pt-4 pb-8">Already have an account? <a
-                                    href="{{ route('log.in') }}" class="text-[#0E7BBB]">Log
-                                    in</a>
-                            </h1>
-                        </div>
-                    </div>
-                </form>
+                        <p class="text-sm font-medium text-gray-700 ">
+                            Already have an account? <a href="{{ route('log.in') }}"
+                                class="font-medium text-blue-600 hover:underline">Log in</a>
+                        </p>
+                    </form>
+                </div>
             </div>
-        </section>
-    </div>
-    {{-- <script>
-        function toggleAddressField() {
-            var roleSelect = document.getElementById("role");
-            var addressField = document.getElementById("addressDiv");
-            var addressInput = document.getElementById("addressInput");
-
-            if (roleSelect.value === "client") {
-                addressField.style.display = "block";
-                addressInput.required = true;
-            } else {
-                addressField.style.display = "none";
-                addressInput.required = false;
-            }
-        }
-
-        // Call function on page load to initialize the form state
-        toggleAddressField();
-    </script> --}}
+        </div>
+    </section>
+    @include('alerts.error')
+    @include('alerts.success')
 </body>
 
 </html>

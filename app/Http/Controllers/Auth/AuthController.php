@@ -185,9 +185,9 @@ class AuthController extends Controller
             $user->verify_code = null;
             $user->save();
             session(['email' => $user->email]);
-            return redirect()->route('log.in')->with('success', 'Verification successful');
+            return redirect()->route('log.in')->with('success', 'Your email is now verified.');
         } else {
-            return redirect()->route('verify.email.account')->with('error', 'Invalid verification code. Please try again.');
+            return redirect()->route('verify.email.account')->with(['error' => 'Invalid verification code. Please try again.']);
         }
     }
 
@@ -203,7 +203,7 @@ class AuthController extends Controller
             $lastResendTime = Cache::get($cooldownKey);
             $cooldownRemaining = $lastResendTime->addSeconds($cooldownDuration)->diffInSeconds(now());
 
-            return redirect()->route('verify.email.account')->with('error', 'Resend is on cooldown. Please wait ' . $cooldownRemaining . ' seconds.');
+            return redirect()->route('verify.email.account')->with('counter', 'Resend is on cooldown. Please wait ' . $cooldownRemaining . ' seconds.');
         }
 
         // Retrieve the user based on the provided email
