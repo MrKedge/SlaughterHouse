@@ -34,7 +34,7 @@
                     <div class="pb-3">
 
                         <div class="w-full flex gap-4">
-                            <input name="dateOfSlaughter" required type="date"
+                            <input name="dateOfSlaughter" required type="date" min="{{ now()->format('Y-m-d') }}"
                                 class="w-full p-2 border font-semibold border-gray-800 rounded focus:ring-4 focus:ring-blue-900">
                             <input name="timeOfSlaughter" required type="time"
                                 class="w-full p-2 border font-semibold border-gray-800 rounded focus:ring-4 focus:ring-blue-900">

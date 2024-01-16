@@ -170,11 +170,13 @@ class AnteMortemController extends Controller
             return view('inspector.inspector-disposal', compact('animal'));
         }
     }
-
-
-    public function ShowScheduledQueue()
+    public function ShowScheduledQueue(Request $request)
     {
+        $myDate = $request->input('schedDate', now()->format('m/d/Y'));
 
-        return view('admin.admin-scheduled-queue');
+        // Parse the date using Carbon
+        $parsedDate = Carbon::parse($myDate);
+
+        return view('admin.admin-scheduled-queue', compact('parsedDate', 'myDate'));
     }
 }

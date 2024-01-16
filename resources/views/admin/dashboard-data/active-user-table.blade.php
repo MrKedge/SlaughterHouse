@@ -1,5 +1,6 @@
 <div class="scrollbar-gutter h-fit relative overflow-x-auto shadow-md sm:rounded-lg  border  border-gray-300">
-    <table class="w-full text-sm text-center rtl:text-right text-gray-500 capitalize font-medium shadow-2xl">
+    <table
+        class="w-full whitespace-nowrap  text-sm text-center rtl:text-right text-gray-500 capitalize font-medium shadow-2xl">
         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
             Staffs Activity
             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of

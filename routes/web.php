@@ -97,6 +97,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/user/complete/list/{ownerId}', [CompletedController::class, 'ShowUserMic'])->name('owner.mic.list');
     Route::get('/admin/generate/mic/', [CompletedController::class, 'GenerateMic'])->name('generate.mic');
     Route::get('/admin/archive/list', [ArchiveController::class, 'ShowArchive'])->name('archive.list');
+    Route::any('/admin/schedule/queue', [AnteMortemController::class, 'ShowScheduledQueue'])->name('scheduled.queue');
 });
 
 
@@ -115,7 +116,6 @@ Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
     Route::get('/client/stub', [ReceiptController::class, 'ShowClientStub'])->name('client.stub');
     Route::get('/client/table/receipt/{id}', [ReceiptController::class, 'ShowReceiptTable'])->name('receipt.table');
-    Route::get('/admin/schedule/queue', [AnteMortemController::class, 'ShowScheduledQueue'])->name('scheduled.queue');
 });
 
 //post clients
