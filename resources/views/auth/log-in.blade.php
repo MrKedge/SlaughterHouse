@@ -4,66 +4,62 @@
 @include('layout.html-head', ['pageTitle' => 'Login'])
 
 <body class="overflow-hidden">
-    <div class="flex justify-center items-center h-screen bg-cover bg-center"
-        style="background-image: url('{{ asset('images/background.png') }}');">
-        <div class="z-40 absolute top-0 left-0 w-full h-4 text-end font-sans font-semibold text-gray-800"><span><a
-                    href="">About
-                    us</a></span>
-            <span class="px-4"><a href="">Contact</a></span>
-        </div>
-
-        @include('alerts.error')
-        <section
-            class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-auto lg:py-0 bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
-            @if (session('success'))
-                <div id="success-alert" class="alert alert-success text-sm text-green-800 font-medium text-center">
-                    {{ session('success') }}
-                </div>
-
-                <script>
-                    // Automatically hide the success alert after 3 seconds
-                    setTimeout(function() {
-                        document.getElementById('success-alert').style.display = 'none';
-                    }, 3000);
-                </script>
-            @endif
-            <h1 class="text-center text-4xl font-bold pb-8 pt-4 ">LOG IN</h1>
-            <div class="flex justify-center">
-                <form action="{{ route('login.authenticate') }}" method="POST"
-                    class="text-lg font-semibold text-center">
-                    @csrf
-                    <div class="pb-5 relative">
-
-                        <input type="email" name="email" placeholder="Email"
-                            value="{{ old('email') ?: session('email') }}" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon name='envelope'
-                                type='solid'></box-icon></span>
-                    </div>
-                    <div class="pb-5 relative">
-
-                        <input type="password" name="password" placeholder="Password" required
-                            class="bg-transparent outline-none border-black border-b w-[310px] placeholder-gray-500">
-                        <span class="absolute inset-y-0 right-1 pl-3 flex items-between"><box-icon type='solid'
-                                name='lock'></box-icon></span>
-                    </div>
-
-                    <div class="block text-center p-2 pb-3"><button
-                            class="py-1 rounded-md bg-[#293241] text-white w-[300px]" type="submit">LOG IN
-                        </button>
-                        <div class="py-4">
-                            <h1 class="text-center font-semibold">Don't have an account?
-                            </h1>
-                            <h1 class="text-center font-semibold"><a href="{{ route('sign.up') }}"
-                                    class="text-[#0E7BBB]">Create
-                                    an account? </a>
-                            </h1>
+    <section class="bg-gray-50 dark:bg-gray-900">
+        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+            <a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
+                <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
+                    alt="logo">
+                Flowbite
+            </a>
+            <div
+                class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1
+                        class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Sign in to your account
+                    </h1>
+                    <form class="space-y-4 md:space-y-6" action="#">
+                        <div>
+                            <label for="email"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                            <input type="email" name="email" id="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="name@company.com" required="">
                         </div>
-                    </div>
-                </form>
+                        <div>
+                            <label for="password"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <input type="password" name="password" id="password" placeholder="••••••••"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required="">
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-start">
+                                <div class="flex items-center h-5">
+                                    <input id="remember" aria-describedby="remember" type="checkbox"
+                                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                                        required="">
+                                </div>
+                                <div class="ml-3 text-sm">
+                                    <label for="remember" class="text-gray-500 dark:text-gray-300">Remember me</label>
+                                </div>
+                            </div>
+                            <a href="#"
+                                class="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">Forgot
+                                password?</a>
+                        </div>
+                        <button type="submit"
+                            class="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Sign
+                            in</button>
+                        <p class="text-sm font-light text-gray-500 dark:text-gray-400">
+                            Don’t have an account yet? <a href="#"
+                                class="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign up</a>
+                        </p>
+                    </form>
+                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 
 </body>
 
