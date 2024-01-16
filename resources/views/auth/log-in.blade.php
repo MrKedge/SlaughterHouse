@@ -4,16 +4,17 @@
 @include('layout.html-head', ['pageTitle' => 'Login'])
 
 <body class="overflow-hidden">
-    <div class="flex justify-center items-center h-screen">
+    <div class="flex justify-center items-center h-screen bg-cover bg-center"
+        style="background-image: url('{{ asset('images/background.png') }}');">
         <div class="z-40 absolute top-0 left-0 w-full h-4 text-end font-sans font-semibold text-gray-800"><span><a
                     href="">About
                     us</a></span>
             <span class="px-4"><a href="">Contact</a></span>
         </div>
-        <img class="z-1 absolute h-screen w-screen" src="{{ asset('images/background.png') }}" alt="image">
+
         @include('alerts.error')
         <section
-            class="z-10 w-[400px] h-auto bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
+            class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-auto lg:py-0 bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border p-4">
             @if (session('success'))
                 <div id="success-alert" class="alert alert-success text-sm text-green-800 font-medium text-center">
                     {{ session('success') }}
