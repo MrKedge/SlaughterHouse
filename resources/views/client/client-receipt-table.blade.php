@@ -109,20 +109,20 @@
         </div>
 
 
-        <div id="receipt-modal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
+
+        <div id="receipt-modal" tabindex="-1" aria-hidden="true"
             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
-            <div class="relative p-4 w-full max-w-2xl max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
                 <!-- Modal content -->
-                <div class="relative bg-white rounded-lg shadow ">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                     <!-- Modal header -->
-                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t ">
-                        <h3 class="text-xl font-semibold text-gray-900 ">
-                            Upload Receipt
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            Receipt
                         </h3>
                         <button type="button"
-                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                            data-modal-hide="receipt-modal">
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm h-8 w-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="receipt-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 14 14">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -132,46 +132,77 @@
                         </button>
                     </div>
                     <!-- Modal body -->
-                    <div class="p-4 md:p-5 space-y-4">
-                        <div class="flex items-center justify-center w-full">
-                            <label for="receipt-upload"
-                                class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 ">
-                                <div class="flex  flex-col items-center justify-center pt-5 pb-6">
-                                    <svg class="w-8 h-8 mb-4 text-gray-500 " aria-hidden="true"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                                    </svg>
-                                    <img id="receipt-image" src="#" alt="your image" class="hidden max-w-sm ">
-                                    <p class="mb-2 text-sm text-gray-500 "><span class="font-semibold">Click to
-                                            upload</span> or drag and drop</p>
-                                    <p class="text-xs text-gray-500 ">SVG, PNG, JPG or GIF (MAX.
-                                        800x400px)</p>
-                                </div>
-
-                            </label>
-                        </div>
-                    </div>
-                    <!-- Modal footer -->
-                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b ">
+                    <div class="p-4 md:p-5">
                         <form action="{{ route('upload.receipt', ['id' => $stub->id]) }}" method="post"
                             enctype="multipart/form-data">
                             @csrf
-                            <input id="receipt-upload" type="file" name="receipt_image" accept="image/*"
-                                onchange="readURL(this, 'receipt-image');" class="hidden" />
+                            <p class="text-gray-500 dark:text-gray-400 mb-4">Upload the images here:</p>
+                            <ul class="space-y-4 mb-4">
+                                <li>
+
+                                    <label for="receipt" class="block mb-2 text-sm font-medium text-gray-900 ">
+                                        Receipt:</label>
+                                    <label for="receipt-upload"
+                                        class="cursor-pointer flex justify-center bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5">
+                                        <span id="receiptName" class="text-left font-medium flex items-center">
+                                            <i class='bx bx-plus' style='font-size: 2em;'></i> Add Image
+                                        </span>
+                                        <input id="receipt-upload" name="receipt" accept="image/*" type="file"
+                                            class="hidden" onchange="updateLabel(this, 'receiptName');">
+                                    </label>
+
+                                </li>
+                                <li>
+                                    <label for="permit" class="block mb-2 text-sm font-medium text-gray-900">
+                                        Permit to slaughter
+                                    </label>
+                                    <label for="permit-upload"
+                                        class="cursor-pointer flex justify-center bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full p-2.5">
+                                        <span id="permitName" class="font-medium flex items-center"><i class='bx bx-plus'
+                                                style='font-size: 2em;'></i> Add image</span>
+                                        <input id="permit-upload" name="permit" accept="image/*" type="file"
+                                            class="hidden" onchange="updateLabel(this, 'permitName');">
+                                    </label>
+                                </li>
+                                <li>
+                                    <label for="receipt-number" class="block mb-2 text-sm font-medium text-gray-900 ">
+                                        Receipt No.</label>
+                                    <input type="text" name="receiptNumber" id="receipt-number"
+                                        placeholder="e.g., 123456"
+                                        class="bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 ">
+
+                                </li>
+                            </ul>
                             <button data-modal-hide="receipt-modal" type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                 Continue
                             </button>
                         </form>
-
                     </div>
                 </div>
             </div>
         </div>
-    @endsection
 
+
+
+        {{-- <input id="receipt-upload" type="file" name="receipt_image" accept="image/*"
+                                onchange="readURL(this, 'receipt-image');" class="hidden" /> --}}
+    @endsection
+    <script>
+        function updateLabel(input, labelId) {
+            const label = document.getElementById(labelId);
+            if (input.files.length > 0) {
+                label.innerHTML = input.files[0].name;
+            } else {
+                label.innerHTML = "<i class='bx bx-plus' style='font-size: 2em;'></i> Add image";
+            }
+        }
+
+        function setStatus(status) {
+            document.getElementById('statusInput').value = status;
+            document.getElementById('animalForm').submit();
+        }
+    </script>
     <script>
         function readURL(input, targetId) {
             if (input.files && input.files[0]) {

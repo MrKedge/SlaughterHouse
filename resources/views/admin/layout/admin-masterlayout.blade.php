@@ -313,7 +313,7 @@
                     <ul class="py-1 text-gray-700" aria-labelledby="dropdown">
                         <li>
                             <button data-modal-target="log-out-modal" data-modal-toggle="log-out-modal"
-                                class="block w-full text-left py-2 px-4 text-sm hover:bg-gray-100">Sign
+                                class="block w-full text-left py-2 px-4 text-sm hover:bg-gray-100 rounded-b-lg">Sign
                                 out
                             </button>
                         </li>

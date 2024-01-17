@@ -9,10 +9,10 @@ class FormMaintenance extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'animalType',
-        'animalDestination',
-        'animalButcher',
-        'animalAgeClassify',
-        'animalSource',
+        'animal_type',
+        'animal_destination',
+        'animal_butcher',
+        'animal_ageclassify',
+        'animal_source',
     ];
 }

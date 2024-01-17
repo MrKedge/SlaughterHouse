@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('layout.html-head', ['pageTitle' => 'Generate Stub'])
+@include('layout.html-head', ['pageTitle' => 'MIC'])
 
-<body class="bg-[#f6f8fa] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 
@@ -14,53 +14,53 @@
 
 
             <div class="mx-auto w-full px-4 mt-20">
-                <form action="{{ route('issue.stub') }}" method="get" id="animalForm">
+                <form action="{{ route('generate.mic') }}" method="get" id="animalForm">
                     @csrf {{-- <div class="scrollbar-gutter bg-white h-auto w-[1200px] rounded-2xl overflow-y-auto"> --}}
 
 
 
-
-
-
-                    <div id="generate-modal" tabindex="-1"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        {{-- <div
-                                        class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity">
-                                    </div> --}}
-                        <div class="relative p-4 w-full max-w-md max-h-full">
-                            <div class="relative bg-white rounded-lg shadow ">
-                                <button type="button"
-                                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
-                                    data-modal-hide="generate-modal">
-                                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 14 14">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                            stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                    </svg>
-                                    <span class="sr-only">Close modal</span>
-                                </button>
-                                <div class="p-4 md:p-5 text-center">
-                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 " xmlns="http://www.w3.org/2000/svg"
-                                        fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                        class="w-6 h-6">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-                                    </svg>
-
-
-                                    <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you
-                                        want to
-                                        generate stub for this Animals?</h3>
-                                    <button id="generateBtn" data-modal-hide="generate-modal"
-                                        class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
-                                        Yes, I'm sure
+                    <div class="text-end w-full pr-3">
+                        <div id="mic-modal" tabindex="-1"
+                            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                            {{-- <div
+                                    class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity">
+                                </div> --}}
+                            <div class="relative p-4 w-full max-w-md max-h-full">
+                                <div class="relative bg-white rounded-lg shadow ">
+                                    <button type="button"
+                                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center "
+                                        data-modal-hide="mic-modal">
+                                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 14 14">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                        </svg>
+                                        <span class="sr-only">Close modal</span>
                                     </button>
-                                    <button data-modal-hide="generate-modal" type="button"
-                                        class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">No,
-                                        cancel</button>
+                                    <div class="p-4 md:p-5 text-center">
+                                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 "
+                                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                                        </svg>
+
+
+                                        <h3 class="mb-5 text-lg font-normal text-gray-500 ">Are you sure you
+                                            want to
+                                            generate MIC for this Animals?</h3>
+                                        <button id="generateBtn" data-modal-hide="mic-modal"
+                                            class="text-white bg-blue-600 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center me-2">
+                                            Yes, I'm sure
+                                        </button>
+                                        <button data-modal-hide="mic-modal" type="button"
+                                            class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 ">No,
+                                            cancel</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
                     <input type="hidden" name="selected_animals" id="selectedAnimalsInput">
@@ -70,9 +70,8 @@
                         <table class="w-full text-center text-base capitalize font-medium text-gray-500 ">
                             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
                                 <div class="flex items-center justify-between">
-                                    <h1> Generate Stub</h1>
-                                    <button data-modal-target="generate-modal" data-modal-toggle="generate-modal"
-                                        type="button"
+                                    <h1>Meat Inspection Certificate</h1>
+                                    <button data-modal-target="mic-modal" data-modal-toggle="mic-modal" type="button"
                                         class="generateBtn px-3 py-2 text-sm font-medium text-center inline-flex items-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                             class="w-6 h-6">
@@ -104,16 +103,16 @@
                                         No.
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Animal
+                                        Amimal
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Owner
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Arrived Date
+                                        Completed Date
                                     </th>
                                     <th scope="col" class="px-6 py-3">
-                                        Arrived Time
+                                        Completed Time
                                     </th>
                                     <th scope="col" class="px-6 py-3">
                                         Status
@@ -150,10 +149,10 @@
                                             </div>
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ optional($animals->anteMortem)->arrived_at ? \Carbon\Carbon::parse($animals->anteMortem->arrived_at)->format('M d Y') : 'N/A' }}
+                                            {{ optional($animals->completed)->created_at ? \Carbon\Carbon::parse($animals->completed->created_at)->format('M d Y') : 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4">
-                                            {{ optional($animals->anteMortem)->arrived_at ? \Carbon\Carbon::parse($animals->anteMortem->arrived_at)->format('h:i A') : 'N/A' }}
+                                            {{ optional($animals->completed)->created_at ? \Carbon\Carbon::parse($animals->completed->created_at)->format('h:i A') : 'N/A' }}
                                         </td>
                                         <td class="px-6 py-4">
                                             <span
@@ -163,7 +162,6 @@
                                         </td>
                                         <td class="px-6 py-4 text-gray-600">
                                             <div class="flex justify-center gap-3">
-
                                                 <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                     class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
                                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -218,8 +216,10 @@
 
                 </form>
             </div>
+
         </div>
     @endsection
+
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
     <script>
         $(document).ready(function() {

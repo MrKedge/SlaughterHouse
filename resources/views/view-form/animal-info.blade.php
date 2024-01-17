@@ -17,7 +17,7 @@
                 <label for="name" class="block mb-2 text-sm font-medium text-gray-900 ">
                     Email:</label>
                 <h1 type="text" name="name" id="name"
-                    class="font-medium capitalize  bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                    class="font-medium  bg-gray-50 border border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
 
                     {{ $animal->user->email }}
 
@@ -134,21 +134,21 @@
 
                     View Documents
                 </button>
+                @if ($animal->animal_mark)
+                    <button data-modal-target="mark-modal" data-modal-toggle="mark-modal"
+                        class="flex items-center mx-auto px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-[#f1623e] hover:bg-[#EE6C4D]/90 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg"
+                        type="button">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                            stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+                        </svg>
 
-                <button data-modal-target="mark-modal" data-modal-toggle="mark-modal"
-                    class="flex items-center mx-auto px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center bg-[#f1623e] hover:bg-[#EE6C4D]/90 text-white focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg"
-                    type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                        stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                    </svg>
-
-                    View marks
-                </button>
-
+                        View marks
+                    </button>
+                @endif
             </div>
         </div>
 

@@ -39,37 +39,42 @@ class ReceiptController extends Controller
 
     public function UploadReceipt(Request $request, $id)
     {
-        // Validate the uploaded file
+
         $request->validate([
-            'receipt_image' => 'required', // Adjust the validation rules as needed
+            'receipt' => 'required',
+            'permit' => 'required',
+            'receiptNumber' => 'required',
         ]);
 
-        // Get the Stub by ID with its associated Animals
+
         $stub = Stubs::with('animals')->findOrFail($id);
 
-        // Store the uploaded image in the 'owner-receipt' directory
-        $receiptName = time() . '_' . $stub->id . '.png'; // Use the stub's ID in the file name
-        $request->file('receipt_image')->storeAs('public/owner-receipt', $receiptName);
 
-        // Create a Receipt for the Stub
+        $receiptName = time() . '_' . $stub->id . '.png';
+        $request->file('receipt')->storeAs('public/owner-receipt', $receiptName);
+
+        $permitName = time() . '_' . $stub->id . '.png';
+        $request->file('permit')->storeAs('public/slaughter-permit', $permitName);
+
+
         $receipt = Receipt::create([
-            'receipt_name' => $receiptName, // Store the image name with extension
+            'receipt_name' => $receiptName,
+            'slaughter_permit' => $permitName,
+            'receipt_no' => $request->receiptNumber,
         ]);
 
-        // Retrieve the ID of the created Receipt
+
         $receiptId = $receipt->id;
 
-        // Update the receipt_id in the Animal table for each Animal
+
         $animalIds = $stub->animals->pluck('id')->toArray();
 
-        // Update the receipt_id in the Animal table
 
 
         Animal::whereIn('id', $animalIds)->update(['receipt_id' => $receiptId]);
 
-        // Retrieve the updated animals based on the selected IDs
 
-        // Redirect or respond as needed
+
         return redirect()->back()->with('success', 'Receipt images uploaded successfully');
     }
 }

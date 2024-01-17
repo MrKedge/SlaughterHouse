@@ -15,7 +15,7 @@
             <div
                 class="w-full md:mt-0 sm:max-w-md xl:p-0 bg-white rounded-2xl shadow-2xl bg-opacity-20 bg-blur-lg backdrop-filter backdrop-blur-lg border">
                 <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl ">
+                    <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl text-center">
                         Sign in to your account
                     </h1>
                     <form class="space-y-4 md:space-y-6 text-sm lg:text-lg" action="{{ route('login.authenticate') }}"

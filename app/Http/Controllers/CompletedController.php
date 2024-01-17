@@ -75,10 +75,10 @@ class CompletedController extends Controller
                 $query->whereHas('completed', function ($subQuery) {
                     $subQuery->where('complete_status', 'completed');
                 });
-            })->get();
+            })->paginate(10);
 
 
-        return view('admin.admin-mic', compact('animal'));
+        return view('admin.admin-mic-table', compact('animal'));
     }
 
 

@@ -143,7 +143,7 @@
                         <li>
                             <button data-modal-target="inspector-logout-modal"
                                 data-modal-toggle="inspector-logout-modal" type="button"
-                                class="block py-2 w-full text-left px-4 text-sm hover:bg-gray-100 ">Sign
+                                class="block py-2 w-full text-left px-4 text-sm hover:bg-gray-100 rounded-b-lg  ">Sign
                                 out
                             </button>
 

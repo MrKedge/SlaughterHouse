@@ -3,7 +3,7 @@
 
 @include('layout.html-head', ['pageTitle' => 'Antemortem List'])
 
-<body class="bg-[#f6f8fa] overflow-hidden">
+<body class="bg-[#f6f8fa]">
 
     @extends('admin.layout.admin-masterlayout')
 
