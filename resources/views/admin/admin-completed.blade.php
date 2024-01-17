@@ -53,9 +53,9 @@
                                     <td scope="row" class="flex items-center px-6 py-4 text-gray-600 whitespace-nowrap">
 
                                         <div class=" text-center w-full">
-                                            <div class="text-sm font-medium "> {{ $animals->user->first_name }}
-                                                {{ $animals->user->last_name }}</div>
-                                            <div class="font-normal text-gray-500">{{ $animals->user->email }}</div>
+                                            <div class="text-sm font-medium "> {{ $owners->first_name }}
+                                                {{ $owners->last_name }}</div>
+                                            <div class="font-normal text-gray-500">{{ $owners->email }}</div>
                                         </div>
                                     </td>
                                     <td class="px-6 py-4">

@@ -40,12 +40,12 @@ class AuthController extends Controller
     public function LogOut(Request $request)
     {
         // Get the user's email before logging out
-        $email = Auth::user()->email;
+        // $email = Auth::user()->email;
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        session(['email' => $email]);
+        // session(['email' => $email]);
         return redirect('log-in')->with('status', 'Logout Successful');
     }
 
