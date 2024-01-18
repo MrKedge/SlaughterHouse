@@ -159,7 +159,7 @@
                                         @elseif($animals->status === 'rejected')
                                             <span
                                                 class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                {{ $animal->status }}
+                                                {{ $animals->status }}
                                             </span>
                                         @elseif($animals->status === 'for slaughter')
                                             <span
