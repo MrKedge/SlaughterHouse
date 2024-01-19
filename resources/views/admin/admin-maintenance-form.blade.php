@@ -15,7 +15,7 @@
 
             {{-- main content --}}
 
-            <div class="mb-4 border-b border-gray-200 dark:border-gray-700">
+            <div class="mb-4 border-b border-gray-200 ">
                 <ul class="flex flex-wrap -mb-px text-sm font-medium text-center" id="default-tab"
                     data-tabs-toggle="#default-tab-content" role="tablist">
                     <li class="me-2" role="presentation">
@@ -24,8 +24,7 @@
                             aria-selected="false">Add on form</button>
                     </li>
                     <li class="me-2" role="presentation">
-                        <button
-                            class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
+                        <button class="inline-block p-4 border-b-2 rounded-t-lg hover:text-gray-600 hover:border-gray-300"
                             id="dashboard-tab" data-tabs-target="#dashboard" type="button" role="tab"
                             aria-controls="dashboard" aria-selected="false">Delete on form</button>
                     </li>
@@ -40,7 +39,7 @@
                             <div class="flex gap-4">
                                 <div id="animal-dropdown"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="animal">
+                                    <ul class="py-2 text-sm text-gray-700 " aria-labelledby="animal">
                                         @foreach ($animal as $animals)
                                             @if (!is_null($animals->animal_type) && $animals->animal_type !== '')
                                                 <li>
@@ -54,14 +53,12 @@
                                 </div>
 
                                 <div id="destination-dropdown"
-                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200"
-                                        aria-labelledby="destination-btn">
+                                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
+                                    <ul class="py-2 text-sm text-gray-700 " aria-labelledby="destination-btn">
                                         @foreach ($animal as $animals)
                                             @if (!is_null($animals->animal_destination) && $animals->animal_destination !== '')
                                                 <li>
-                                                    <p
-                                                        class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">
+                                                    <p class="block px-4 py-2 hover:bg-gray-100">
                                                         {{ $animals->animal_destination }}
                                                     </p>
                                                 </li>
@@ -71,7 +68,7 @@
                                 </div>
                                 <div id="source-dropdown"
                                     class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 ">
-                                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="sourceBtn">
+                                    <ul class="py-2 text-sm text-gray-700 " aria-labelledby="sourceBtn">
                                         @foreach ($animal as $animals)
                                             @if (!is_null($animals->animal_source) && $animals->animal_source !== '')
                                                 <li>
@@ -212,7 +209,7 @@
                     </form>
 
                 </div>
-                <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="dashboard" role="tabpanel"
+                <div class="hidden p-4 rounded-lg bg-gray-50" id="dashboard" role="tabpanel"
                     aria-labelledby="dashboard-tab">
 
                     <form action="{{ route('delete.on.form') }}" method="post">

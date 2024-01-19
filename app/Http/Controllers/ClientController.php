@@ -11,6 +11,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Log;
+use App\Notifications\AnimalNotification;
+use Illuminate\Support\Facades\Notification;
 
 class ClientController extends Controller
 {
@@ -159,6 +161,7 @@ class ClientController extends Controller
         ]);
         $status = $request->input('status');
 
+        $adminUser = User::where('role', 'admin')->get();
 
         $brgyClearanceName = null;
 
@@ -216,6 +219,9 @@ class ClientController extends Controller
         $animal->status = $status;
 
         $animal->save();
+
+        Notification::send($adminUser, new AnimalNotification($animal));
+
         if (auth()->check()) {
             if (auth()->user()->role === 'client') {
                 return redirect()->route('client.animal.list.register');

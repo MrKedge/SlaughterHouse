@@ -13,8 +13,8 @@
 
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3 ">
                 {{-- wrapper --}}
-                <div class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md ">
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
+                <div class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md ">
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">COW</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -27,9 +27,9 @@
 
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -42,9 +42,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">CARABAO</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -57,9 +57,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">SWINE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -87,7 +87,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                        <thead class="text-xs text-white uppercase bg-[#38419D]">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -141,25 +141,34 @@
                                         </span>
                                     </td>
                                     <td class="px-6 py-4 text-gray-600">
-                                        <div class="flex justify-center gap-3">
+                                        <div class="flex justify-center gap-3 text-[#38419D]">
                                             @if ($animals->qr_code !== null)
                                                 <button data-modal-target="print-qr-modal{{ $animals->id }}"
                                                     data-modal-toggle="print-qr-modal{{ $animals->id }}" type="button"
+                                                    data-tooltip-target="tooltip-printQr{{ $animals->id }}"
+                                                    data-tooltip-style="light"
                                                     class="font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M6.72 13.829c-.24.03-.48.062-.72.096m.72-.096a42.415 42.415 0 0 1 10.56 0m-10.56 0L6.34 18m10.94-4.171c.24.03.48.062.72.096m-.72-.096L17.66 18m0 0 .229 2.523a1.125 1.125 0 0 1-1.12 1.227H7.231c-.662 0-1.18-.568-1.12-1.227L6.34 18m11.318 0h1.091A2.25 2.25 0 0 0 21 15.75V9.456c0-1.081-.768-2.015-1.837-2.175a48.055 48.055 0 0 0-1.913-.247M6.34 18H5.25A2.25 2.25 0 0 1 3 15.75V9.456c0-1.081.768-2.015 1.837-2.175a48.041 48.041 0 0 1 1.913-.247m10.5 0a48.536 48.536 0 0 0-10.5 0m10.5 0V3.375c0-.621-.504-1.125-1.125-1.125h-8.25c-.621 0-1.125.504-1.125 1.125v3.659M18 10.5h.008v.008H18V10.5Zm-3 0h.008v.008H15V10.5Z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="w-6 h-6">
+                                                        <path fill-rule="evenodd"
+                                                            d="M7.875 1.5C6.839 1.5 6 2.34 6 3.375v2.99c-.426.053-.851.11-1.274.174-1.454.218-2.476 1.483-2.476 2.917v6.294a3 3 0 0 0 3 3h.27l-.155 1.705A1.875 1.875 0 0 0 7.232 22.5h9.536a1.875 1.875 0 0 0 1.867-2.045l-.155-1.705h.27a3 3 0 0 0 3-3V9.456c0-1.434-1.022-2.7-2.476-2.917A48.716 48.716 0 0 0 18 6.366V3.375c0-1.036-.84-1.875-1.875-1.875h-8.25ZM16.5 6.205v-2.83A.375.375 0 0 0 16.125 3h-8.25a.375.375 0 0 0-.375.375v2.83a49.353 49.353 0 0 1 9 0Zm-.217 8.265c.178.018.317.16.333.337l.526 5.784a.375.375 0 0 1-.374.409H7.232a.375.375 0 0 1-.374-.409l.526-5.784a.373.373 0 0 1 .333-.337 41.741 41.741 0 0 1 8.566 0Zm.967-3.97a.75.75 0 0 1 .75-.75h.008a.75.75 0 0 1 .75.75v.008a.75.75 0 0 1-.75.75H18a.75.75 0 0 1-.75-.75V10.5ZM15 9.75a.75.75 0 0 0-.75.75v.008c0 .414.336.75.75.75h.008a.75.75 0 0 0 .75-.75V10.5a.75.75 0 0 0-.75-.75H15Z"
+                                                            clip-rule="evenodd" />
                                                     </svg>
 
                                                 </button>
+                                                <div id="tooltip-printQr{{ $animals->id }}" role="tooltip"
+                                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+                                                    Print Qr
+                                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                                </div>
                                             @endif
                                             @if ($animals->qr_code === null)
                                                 <form action="{{ route('generate.qr.code', ['id' => $animals->id]) }}"
                                                     method="post">
                                                     @csrf
                                                     <button type="submit"
+                                                        data-tooltip-target="tooltip-generateQr{{ $animals->id }}"
+                                                        data-tooltip-style="light"
                                                         class="font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110">
                                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -169,26 +178,37 @@
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M6.75 6.75h.75v.75h-.75v-.75ZM6.75 16.5h.75v.75h-.75v-.75ZM16.5 6.75h.75v.75h-.75v-.75ZM13.5 13.5h.75v.75h-.75v-.75ZM13.5 19.5h.75v.75h-.75v-.75ZM19.5 13.5h.75v.75h-.75v-.75ZM19.5 19.5h.75v.75h-.75v-.75ZM16.5 16.5h.75v.75h-.75v-.75Z" />
                                                         </svg>
-
                                                     </button>
+                                                    <div id="tooltip-generateQr{{ $animals->id }}" role="tooltip"
+                                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+                                                        Generate Qr
+                                                        <div class="tooltip-arrow" data-popper-arrow></div>
+                                                    </div>
                                                 </form>
                                             @endif
-                                            {{-- @if  --}}
+                                            {{-- arrival btn  --}}
                                             @if ($animals->status === 'approved' && !($animals->anteMortem && $animals->anteMortem->arrived_at !== null))
                                                 @include('admin.layout.pop-up', [
                                                     'animalId' => $animals->id,
                                                 ])
                                                 <button data-modal-target="crud-modal{{ $animals->id }}"
                                                     data-modal-toggle="crud-modal{{ $animals->id }}"
+                                                    data-tooltip-target="tooltip-arrival{{ $animals->id }}"
+                                                    data-tooltip-style="light"
                                                     class="font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110 "
                                                     type="button">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="w-6 h-6">
+                                                        <path fill-rule="evenodd"
+                                                            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 6a.75.75 0 0 0-1.5 0v6c0 .414.336.75.75.75h4.5a.75.75 0 0 0 0-1.5h-3.75V6Z"
+                                                            clip-rule="evenodd" />
                                                     </svg>
                                                 </button>
+                                                <div id="tooltip-arrival{{ $animals->id }}" role="tooltip"
+                                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+                                                    Record arrival date
+                                                    <div class="tooltip-arrow" data-popper-arrow></div>
+                                                </div>
                                             @endif
                                             @if ($animals->anteMortem && $animals->anteMortem->arrived_at !== null && $animals->qr_code !== null)
                                                 @include('admin.layout.pop-up', [
@@ -198,11 +218,11 @@
                                                     data-modal-toggle="monitor-modal{{ $animals->id }}" type="button"
                                                     class="{{ optional($animals->stub)->issued_at === null ? 'cursor-not-allowed' : '' }}  font-medium py-1 px-3 rounded-lg flex items-center text-sm transition ease-in-out delay-150 hover:-translate-y-1 duration-300 hover:scale-110"
                                                     @if (optional($animals->stub)->issued_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                        data-slot="icon" class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" />
+                                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                        fill="currentColor" class="w-6 h-6">
+                                                        <path fill-rule="evenodd"
+                                                            d="M9.401 3.003c1.155-2 4.043-2 5.197 0l7.355 12.748c1.154 2-.29 4.5-2.599 4.5H4.645c-2.309 0-3.752-2.5-2.598-4.5L9.4 3.003ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+                                                            clip-rule="evenodd" />
                                                     </svg>
 
                                                 </button>
@@ -213,19 +233,23 @@
                                                 ])
                                             @endif
                                             <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
+                                                data-tooltip-target="tooltip-Viewform{{ $animals->id }}"
+                                                data-tooltip-style="light"
                                                 class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300   font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor" class="w-6 h-6">
+                                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                                        clip-rule="evenodd" />
                                                 </svg>
-
-
                                                 <span></span>
                                             </a>
+                                            <div id="tooltip-Viewform{{ $animals->id }}" role="tooltip"
+                                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+                                                View form
+                                                <div class="tooltip-arrow" data-popper-arrow></div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -240,26 +264,30 @@
                         @endforelse
 
                     </table>
-                    <div class="flex p-4 bg-slate-200">
+                    <div class="flex p-4 bg-white text-[#38419D]">
                         <!-- Previous Button -->
-                        <a href="{{ $animal->previousPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
-                            </svg>
-                            Previous
-                        </a>
-                        <a href="{{ $animal->nextPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            Next
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                        @if ($animal->previousPageUrl())
+                            <a href="{{ $animal->previousPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+                                </svg>
+                                <span> Previous</span>
+                            </a>
+                        @endif
+                        @if ($animal->hasMorePages())
+                            <a href="{{ $animal->nextPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                Next
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
+                        @endif
                     </div>
                 </div>
 

@@ -13,10 +13,11 @@
 
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
-                <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl  ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">PENDING</h1>
+                <div
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
+
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">PENDING</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -28,9 +29,10 @@
 
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-2xl">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">ANIMAL</h1>
+
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">ANIMAL</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -46,9 +48,9 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">OWNER</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">OWNER</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -60,9 +62,10 @@
                     </div>
                 </div>
                 <div
-                    class="h-28 bg-white w-full rounded-r-md border-l-[16px] border-[#293241] rounded-l-md relative shadow-xl bg-blur-lg backdrop-filter  ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">APPROVE</h1>
+
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">APPROVE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -80,15 +83,14 @@
             <section class="h-full gap-3 pt-0 w-full  px-4">
 
                 {{-- table wrapper --}}
-                <div class="relative overflow-x-auto shadow-md sm:rounded-lg  border  border-gray-300">
-                    <table
-                        class="w-full text-sm text-center rtl:text-right text-gray-500 capitalize font-medium shadow-2xl">
+                <div class="relative overflow-x-auto sm:rounded-lg  border  border-gray-300">
+                    <table class="w-full text-sm text-center rtl:text-right text-gray-500 capitalize font-medium">
                         <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
                             Recent Register Animal
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-gray-100 uppercase bg-slate-600 ">
+                        <thead class="text-xs text-gray-100 uppercase bg-[#38419D] ">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Animal
@@ -109,7 +111,7 @@
                         </thead>
                         @forelse ($recent as $animal)
                             <tbody>
-                                <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }}  border  border-gray-300">
+                                <tr class="{{ $loop->even ? 'bg-gray-50' : 'bg-white' }}  border-b  border-gray-300">
                                     <th scope="row" class="px-6 py-4">
                                         {{ $animal->type }}
                                     </th>

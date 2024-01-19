@@ -16,9 +16,9 @@
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">COW</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -34,9 +34,9 @@
 
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -51,9 +51,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">CARABAO</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -68,9 +68,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">SWINE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -99,7 +99,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                        <thead class="text-xs text-white uppercase bg-[#38419D]">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -151,7 +151,7 @@
                                             class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->anteMortem->inspection_status }}</span>
                                     </td>
                                     <td class="px-6 py-4 text-gray-600">
-                                        <div class="flex justify-center gap-3">
+                                        <div class="flex justify-center gap-3 text-[#38419D]">
                                             @include('admin.layout.pop-up', [
                                                 'animalId' => $animals->id,
                                             ])
@@ -160,11 +160,14 @@
                                                 class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
                                                 type="button"
                                                 @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                    stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor" class="w-6 h-6">
+                                                    <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
+                                                        clip-rule="evenodd" />
                                                 </svg>
+
                                                 @include('admin.layout.tooltip', [
                                                     'tooltipId' => 'tooltip-light-' . $animals->id,
                                                     'tooltipContent' => 'no receipt.',
@@ -172,18 +175,23 @@
                                                 ])
                                             </button>
                                             <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
-                                                class="  text-gray-600 font-semibold py-1 px-3 rounded-lg flex items-center text-sm hover:-translate-y-1 transition ease-in-out delay-150 duration-300">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                    class="w-6 h-6">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                data-tooltip-target="tooltip-Viewform{{ $animals->id }}"
+                                                data-tooltip-style="light"
+                                                class="transition ease-in-out delay-150 hover:-translate-y-1 duration-300   font-semibold py-1 px-3 rounded-lg flex items-center text-sm">
+                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                                    fill="currentColor" class="w-6 h-6">
+                                                    <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                                    <path fill-rule="evenodd"
+                                                        d="M1.323 11.447C2.811 6.976 7.028 3.75 12.001 3.75c4.97 0 9.185 3.223 10.675 7.69.12.362.12.752 0 1.113-1.487 4.471-5.705 7.697-10.677 7.697-4.97 0-9.186-3.223-10.675-7.69a1.762 1.762 0 0 1 0-1.113ZM17.25 12a5.25 5.25 0 1 1-10.5 0 5.25 5.25 0 0 1 10.5 0Z"
+                                                        clip-rule="evenodd" />
                                                 </svg>
-
                                                 <span></span>
                                             </a>
+                                            <div id="tooltip-Viewform{{ $animals->id }}" role="tooltip"
+                                                class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 tooltip">
+                                                View form
+                                                <div class="tooltip-arrow" data-popper-arrow></div>
+                                            </div>
                                         </div>
                                     </td>
                                 </tr>
@@ -196,26 +204,30 @@
                             </tr>
                         @endforelse
                     </table>
-                    <div class="flex p-4 bg-slate-100">
+                    <div class="flex p-4 bg-white text-[#38419D]">
                         <!-- Previous Button -->
-                        <a href="{{ $animal->previousPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
-                            </svg>
-                            Previous
-                        </a>
-                        <a href="{{ $animal->nextPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            Next
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                        @if ($animal->previousPageUrl())
+                            <a href="{{ $animal->previousPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+                                </svg>
+                                <span> Previous</span>
+                            </a>
+                        @endif
+                        @if ($animal->hasMorePages())
+                            <a href="{{ $animal->nextPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                Next
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
+                        @endif
                     </div>
                 </div>
 

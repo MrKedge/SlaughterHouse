@@ -172,11 +172,11 @@ class AnteMortemController extends Controller
     }
     public function ShowScheduledQueue(Request $request)
     {
-        $myDate = $request->input('schedDate', now()->format('m/d/Y'));
+        $selectedDate = $request->input('selectedDate');
 
         // Parse the date using Carbon
-        $parsedDate = Carbon::parse($myDate);
 
-        return view('admin.admin-scheduled-queue', compact('parsedDate', 'myDate'));
+
+        return view('admin.admin-scheduled-queue', compact('selectedDate'));
     }
 }

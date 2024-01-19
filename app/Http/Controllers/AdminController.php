@@ -13,11 +13,14 @@ use App\Mail\ApproveMail;
 use App\Mail\RejectMail;
 use Illuminate\Support\Facades\Log;
 use App\Models\FormMaintenance;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
     public function ShowAdminDashboardOverview()
     {
+        $adminUser = Auth::user();
+        $newAnimal = Animal::all();
         $userChart = User::All();
         $animalChart = Animal::doesntHave('archive')->get();
 
@@ -29,7 +32,7 @@ class AdminController extends Controller
             ->limit(5)
             ->get();
 
-        return view('admin.dashboard-data.admin-dashboard', compact('recent', 'animal', 'user', 'animalChart', 'userChart'));
+        return view('admin.dashboard-data.admin-dashboard', compact('recent', 'animal', 'user', 'animalChart', 'userChart', 'adminUser'));
     }
 
 

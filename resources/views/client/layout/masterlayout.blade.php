@@ -164,8 +164,7 @@
                     </ul>
                     <ul class="py-1 text-gray-700 " aria-labelledby="dropdown">
                         <li>
-                            <button data-modal-target="inspector-logout-modal"
-                                data-modal-toggle="inspector-logout-modal" type="button"
+                            <button data-modal-target="logout-modal" data-modal-toggle="logout-modal" type="button"
                                 class="block py-2 w-full text-left px-4 text-sm hover:bg-gray-100 rounded-b-lg">Sign
                                 out
                             </button>

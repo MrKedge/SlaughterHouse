@@ -15,6 +15,7 @@ use App\Http\Controllers\ReceiptController;
 use App\Http\Controllers\ReportsController;
 use App\Http\Controllers\StubController;
 use App\Models\AnteMortem;
+use Database\Seeders\AdminSeeder;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
