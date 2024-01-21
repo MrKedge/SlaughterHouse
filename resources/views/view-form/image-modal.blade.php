@@ -42,24 +42,24 @@
                             </li>
                         </a>
                     @endif
-                    @if ($animal->cert_transfer)
-                        <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                            data-lightbox="animal-gallery">
-                            <li
-                                class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow max-h-20 md:max-w-lg hover:bg-gray-100">
 
-                                <img class="object-cover w-40 max-w-40  max-h-20  rounded-l-lg md:rounded-l-lg"
-                                    src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}" alt="">
-                                <div class="flex flex-col justify-between p-4 leading-normal">
-                                    <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer
-                                        of
-                                        Large Cattle</h5>
+                    <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                        data-lightbox="animal-gallery">
+                        <li
+                            class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow max-h-20 md:max-w-lg hover:bg-gray-100">
 
-                                </div>
+                            <img class="object-cover w-40 max-w-40  max-h-20  rounded-l-lg md:rounded-l-lg"
+                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}" alt="">
+                            <div class="flex flex-col justify-between p-4 leading-normal">
+                                <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer
+                                    of
+                                    Large Cattle</h5>
 
-                            </li>
-                        </a>
-                    @endif
+                            </div>
+
+                        </li>
+                    </a>
+
                     @if ($animal->brgy_clearance)
                         <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
                             data-lightbox="animal-gallery">
