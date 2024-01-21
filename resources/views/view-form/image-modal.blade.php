@@ -42,21 +42,25 @@
                             </li>
                         </a>
                     @endif
-
-                    <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                        data-lightbox="animal-gallery">
-                        <li
-                            class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow md:max-w-lg hover:bg-gray-100">
-                            <img class="object-cover w-40 max-w-40 max-h-20 rounded-l-lg md:rounded-l-none"
-                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
-                                alt="Certificate of Transfer of Large Cattle">
-                            <div class="flex flex-col justify-between p-4 leading-normal">
-                                <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer of Large
-                                    Cattle</h5>
-                            </div>
-                        </li>
-                    </a>
-
+                    @if ($animal->cert_transfer)
+                        <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                            data-lightbox="animal-gallery">
+                            @php
+                                dd($animal->cert_transfer);
+                            @endphp
+                            <li
+                                class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow md:max-w-lg hover:bg-gray-100">
+                                <img class="object-cover w-40 max-w-40 max-h-20 rounded-l-lg md:rounded-l-none"
+                                    src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                    alt="Certificate of Transfer of Large Cattle">
+                                <div class="flex flex-col justify-between p-4 leading-normal">
+                                    <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer of
+                                        Large
+                                        Cattle</h5>
+                                </div>
+                            </li>
+                        </a>
+                    @endif
                     @if ($animal->brgy_clearance)
                         <a href="{{ asset('storage/brgy-clearance/' . $animal->brgy_clearance) }}"
                             data-lightbox="animal-gallery">
