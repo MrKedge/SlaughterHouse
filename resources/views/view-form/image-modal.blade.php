@@ -46,17 +46,14 @@
                     <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
                         data-lightbox="animal-gallery">
                         <li
-                            class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow max-h-20 md:max-w-lg hover:bg-gray-100">
-
-                            <img class="object-cover w-40 max-w-40  max-h-20  rounded-l-lg md:rounded-l-lg"
-                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}" alt="">
+                            class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow md:max-w-lg hover:bg-gray-100">
+                            <img class="object-cover w-40 max-w-40 max-h-20 rounded-l-lg md:rounded-l-none"
+                                src="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
+                                alt="Certificate of Transfer of Large Cattle">
                             <div class="flex flex-col justify-between p-4 leading-normal">
-                                <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer
-                                    of
-                                    Large Cattle</h5>
-
+                                <h5 class="mb-2 font-bold tracking-tight text-gray-900">Certificate of Transfer of Large
+                                    Cattle</h5>
                             </div>
-
                         </li>
                     </a>
 
