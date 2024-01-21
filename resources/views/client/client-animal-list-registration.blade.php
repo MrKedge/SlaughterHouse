@@ -101,7 +101,7 @@
                             </caption>
 
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-[#38419D]">
+                        <thead class="text-xs text-white uppercase bg-[#37B5B6]">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">

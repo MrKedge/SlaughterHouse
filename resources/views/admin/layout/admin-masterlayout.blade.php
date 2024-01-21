@@ -368,7 +368,7 @@
                 <li class="group relative ">{{-- this for icon --}}
 
                     <button
-                        class="flex justify-between items-center w-full panel-text p-2 rounded-md group {{ request()->routeIs(['admin.approve.list', 'admin.monitor.list', 'admin.schedule.list', 'admin.for.slaughter.list', 'admin.slaughter.list', 'admin.postmortem.list']) ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        class="flex justify-between items-center w-full panel-text p-2 rounded-md group {{ request()->routeIs(['admin.approve.list', 'admin.monitor.list', 'admin.schedule.list', 'admin.for.slaughter.list', 'admin.slaughter.list', 'admin.postmortem.list']) ? 'text-[#38419D] ' : 'hover:bg-gray-200' }}">
                         <div class="flex items-center justify-start gap-4">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

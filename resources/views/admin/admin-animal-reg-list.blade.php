@@ -14,7 +14,7 @@
                 {{-- wrapper --}}
 
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">COW</h1>
 
@@ -28,7 +28,7 @@
 
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
                     <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">CARABAO</h1>
 
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#38419D] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
                     <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">SWINE</h1>
 
@@ -84,7 +84,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-[#38419D] ">
+                        <thead class="text-xs text-white uppercase bg-[#37B5B6] ">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">

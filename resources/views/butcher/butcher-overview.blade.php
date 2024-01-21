@@ -14,9 +14,9 @@
             <section class="flex justify-evenly gap-3 py-3 w-full h-auto px-4 mt-3">
                 {{-- wrapper --}}
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">COW</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">COW</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-3xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -31,8 +31,8 @@
 
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">HORSE</h1>
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">HORSE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -47,9 +47,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">CARABAO</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">CARABAO</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -64,9 +64,9 @@
                     </div>
                 </div>
                 <div
-                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#485d82] rounded-l-md   ">
+                    class="max-h-fit bg-white w-full rounded-r-md shadow-xl border-l-[16px] border-[#37B5B6] rounded-l-md   ">
 
-                    <h1 class="pl-2 text-start flex items-center text-[#EE6C4D] font-bold text-lg">SWINE</h1>
+                    <h1 class="pl-2 text-start flex items-center text-gray-600 font-bold text-lg">SWINE</h1>
 
                     <div class="flex items-center pt-6 pl-2 gap-3 text-4xl text-gray-400">
                         <svg class="w-12" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -97,7 +97,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                        <thead class="text-xs text-white uppercase bg-[#37B5B6] ">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">

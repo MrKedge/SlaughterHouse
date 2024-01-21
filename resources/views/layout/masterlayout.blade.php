@@ -22,8 +22,9 @@
                     </button>
 
 
-                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10"><span
-                            class="text-[#EE6C4D] ">SLAUGH</span>TECH
+                    <h1
+                        class="font-exo2 tracking-wide  text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10">
+                        <span class="text-[#EE6C4D] ">Slaugh</span>tech
                     </h1>
                 </div>
             </div>
@@ -40,7 +41,7 @@
                 </button>
                 <!-- Notifications -->
                 <button type="button" data-dropdown-toggle="notification-dropdown"
-                    class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300 ">
+                    class="p-2 mr-1 text-[#38419D] rounded-lg hover:text-blue-900 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300 ">
                     <span class="sr-only">View notifications</span>
                     <!-- Bell icon -->
                     <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -107,7 +108,7 @@
 
                 <!-- Dropdown menu -->
                 <button type="button"
-                    class="flex mr-4 pr-4 items-center text-medium pe-1 font-bold  text-gray-700 hover:text-blue-600 md:me-0"
+                    class="flex mr-4 pr-4 items-center text-medium pe-1 font-bold  text-[#38419D] hover:text-blue-600 md:me-0"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     @auth
@@ -157,12 +158,14 @@
     <!-- Sidebar -->
 
     <aside
-        class="fixed top-0 left-0 z-40 w-[240px] h-screen pt-14 transition-transform -translate-x-full bg-[#293241] border-r border-gray-200 md:translate-x-0"
+        class="fixed top-0 left-0 z-40 w-[240px] h-screen pt-14 transition-transform -translate-x-full bg-[#ffffff] border-r border-gray-300 md:translate-x-0"
         aria-label="Sidenav" id="drawer-navigation">
-        <div class="overflow-y-auto py-5 px-3 h-full bg-[#293241] ">
+        <div class="overflow-y-auto py-5 px-3 h-full bg-[#ffffff] font-semibold">
             @if (auth()->user()->role === 'inspector')
-                <ul class="space-y-2 pt-10 text-white">
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
+                <ul class="space-y-2 pt-10 text-gray-600">
+                    <li
+                        class="flex gap-4  p-2 rounded-md w-full {{ request()->routeIs('inspector.overview') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
                         <a href="{{ route('inspector.overview') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -174,7 +177,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md transition-opacity duration-500">
+                    <li
+                        class="flex gap-4 p-2 rounded-md transition-opacity duration-500 {{ request()->routeIs('inspector.antemortem.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                         <a href="{{ route('inspector.antemortem.list') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -187,7 +191,9 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                    <li
+                        class="flex gap-4  p-2 rounded-md {{ request()->routeIs('inspector.postmortem.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
 
                         <a href="{{ route('inspector.postmortem.list') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -200,7 +206,9 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                    <li
+                        class="flex gap-4 p-2 rounded-md {{ request()->routeIs('inspector.dispose.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
 
                         <a href="{{ route('inspector.dispose.list') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -213,7 +221,9 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                    <li
+                        class="flex gap-4  p-2 rounded-md {{ request()->routeIs('scan.qr') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
 
                         <a href="{{ route('scan.qr') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -231,8 +241,10 @@
                     </li>
                 </ul>
             @elseif(auth()->user()->role === 'butcher')
-                <ul class="space-y-2 pt-10 text-white">
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full">{{-- this for icon --}}
+                <ul class="space-y-2 pt-10 text-gray-600">
+                    <li
+                        class="flex gap-4 p-2 rounded-md w-full{{ request()->routeIs('butcher.overview') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
                         <a href="{{ route('butcher.overview') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -244,7 +256,8 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md transition-opacity duration-500">
+                    <li
+                        class="flex gap-4 p-2 rounded-md transition-opacity duration-500 {{ request()->routeIs('butcher.animal') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                         <a href="{{ route('butcher.animal') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -258,7 +271,9 @@
                             </div>
                         </a>
                     </li>
-                    <li class="flex gap-4 hover:bg-gray-700 p-2 rounded-md">{{-- this for icon --}}
+                    <li
+                        class="flex gap-4 p-2 rounded-md {{ request()->routeIs('scan.qr') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                        {{-- this for icon --}}
                         <a href="{{ route('scan.qr') }}">
                             <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
                                     fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
