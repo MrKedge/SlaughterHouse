@@ -20,23 +20,39 @@
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>{{-- pdf --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>{{-- date picker --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script> --}}
+    {{-- date picker --}}
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>{{-- charts --}}
 
+    {{-- for date picker --}}
+    {{-- <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script> --}}
+    <script src="https://unpkg.com/flowbite-datepicker@1.2.2/dist/js/datepicker-full.js"></script>
+
+
+    {{-- <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.3/dist/flowbite.min.css" /> --}}
 
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital@1&family=Hammersmith+One&family=Noto+Sans+JP&family=Oswald:wght@300;400;700&family=Raleway&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 fontFamily: {
-                    open: '"Open Sans"',
-                    poppins: "'Poppins', sans-serif",
+
                     raleway: "'Raleway', sans-serif",
+                    exo2: "'Exo 2', sans-serif",
+                    hammersmith: "'Hammersmith One', sans-serif",
+                    noto: "'Noto Sans JP', sans-serif",
+                    oswald: "'Oswald', sans-serif",
+
                 },
                 extend: {},
             }
-        }
+        };
     </script>
-
 </head>

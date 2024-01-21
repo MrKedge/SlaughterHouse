@@ -17,8 +17,8 @@
                 {{-- wrapper --}}
                 <div class="">
                     <a href="{{ route('client.animal.register') }}">
-                        <div class="flex items-center text-white"><box-icon name='file-plus' type='solid' color='#293241'
-                                size='64px'></box-icon><span class="text-[#293241]">
+                        <div class=" items-center text-white  sm:hidden inline-block "><box-icon name='file-plus'
+                                type='solid' color='#38419D' size='64px'></box-icon><span class="text-[#38419D]">
                             </span></div>
                     </a>
                 </div>
@@ -33,7 +33,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                        <thead class="text-xs text-white uppercase bg-[#38419D] ">
 
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -144,26 +144,30 @@
                         @endforelse
 
                     </table>
-                    <div class="flex p-4 bg-slate-200">
+                    <div class="flex p-4 bg-white text-[#38419D]">
                         <!-- Previous Button -->
-                        <a href="{{ $animal->previousPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 5H1m0 0 4 4M1 5l4-4" />
-                            </svg>
-                            Previous
-                        </a>
-                        <a href="{{ $animal->nextPageUrl() }}"
-                            class="flex items-center justify-center px-3 h-8 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
-                            Next
-                            <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
+                        @if ($animal->previousPageUrl())
+                            <a href="{{ $animal->previousPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 me-3 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                <svg class="w-3.5 h-3.5 me-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M13 5H1m0 0 4 4M1 5l4-4" />
+                                </svg>
+                                <span> Previous</span>
+                            </a>
+                        @endif
+                        @if ($animal->hasMorePages())
+                            <a href="{{ $animal->nextPageUrl() }}"
+                                class="flex items-center justify-center px-3 h-8 text-sm font-medium  bg-white border border-gray-300 rounded-lg hover:bg-gray-100 hover:text-gray-700">
+                                Next
+                                <svg class="w-3.5 h-3.5 ms-2 rtl:rotate-180" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

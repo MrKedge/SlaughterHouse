@@ -22,8 +22,9 @@
                     </button>
 
 
-                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10"><span
-                            class="text-[#EE6C4D] ">SLAUGH</span>TECH
+                    <h1
+                        class="font-exo2 tracking-wide  text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10">
+                        <span class="text-[#EE6C4D] ">Slaugh</span>tech
                     </h1>
                 </div>
             </div>
@@ -82,8 +83,7 @@
                             </div>
                         </a> --}}
                         @forelse ($adminUser->notifications as $notification)
-                            <a href="#"
-                                class="flex py-3 px-4 border-b hover:bg-gray-100 dark:hover:bg-gray-600 dark:border-gray-600">
+                            <a href="#" class="flex py-3 px-4 border-b hover:bg-gray-100 ">
                                 <div class="flex-shrink-0 text-gray-600">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="w-10 h-10">
@@ -93,14 +93,14 @@
 
                                 </div>
                                 <div class="pl-3 w-full">
-                                    <div class="text-gray-500 font-normal text-sm mb-1.5 dark:text-gray-400">
+                                    <div class="text-gray-500 font-normal text-sm mb-1.5 ">
                                         New register
                                         <span
-                                            class="font-semibold text-gray-900 dark:text-white">{{ isset($notification->data['type']) ? $notification->data['type'] : 'Unknown Type' }}</span>
+                                            class="font-semibold text-gray-900 ">{{ isset($notification->data['type']) ? $notification->data['type'] : 'Unknown Type' }}</span>
                                         from
                                         {{ isset($notification->data['user_name']) ? $notification->data['user_name'] : 'Unknown User' }}.
                                     </div>
-                                    <div class="text-xs font-medium text-primary-600 dark:text-primary-500">
+                                    <div class="text-xs font-medium text-primary-600">
                                         {{ $notification->created_at->diffForHumans() }}
                                     </div>
                                 </div>
@@ -368,7 +368,7 @@
                 <li class="group relative ">{{-- this for icon --}}
 
                     <button
-                        class="flex justify-between items-center w-full panel-text hover:bg-gray-200 p-2 rounded-md group">
+                        class="flex justify-between items-center w-full panel-text p-2 rounded-md group {{ request()->routeIs(['admin.approve.list', 'admin.monitor.list', 'admin.schedule.list', 'admin.for.slaughter.list', 'admin.slaughter.list', 'admin.postmortem.list']) ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                         <div class="flex items-center justify-start gap-4">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                 stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -385,37 +385,37 @@
                         <ul class="">
                             <li><a href="{{ route('admin.approve.list') }}">
                                     <h1
-                                        class=" py-2 rounded-md pl-8 {{ request()->routeIs('admin.approve.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 my-1 {{ request()->routeIs('admin.approve.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         Approved</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.monitor.list') }}">
                                     <h1
-                                        class=" py-2 rounded-md pl-8 {{ request()->routeIs('admin.monitor.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 mb-1 {{ request()->routeIs('admin.monitor.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         Ante Mortem</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.schedule.list') }}">
                                     <h1
-                                        class=" py-2 rounded-md pl-8  {{ request()->routeIs('admin.schedule.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 mb-1  {{ request()->routeIs('admin.schedule.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         Schedule</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.for.slaughter.list') }} ">
                                     <h1
-                                        class=" py-2 rounded-md pl-8 {{ request()->routeIs('admin.for.slaughter.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 mb-1 {{ request()->routeIs('admin.for.slaughter.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         For Slaughter</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.slaughter.list') }}">
                                     <h1
-                                        class=" py-2 rounded-md pl-8 {{ request()->routeIs('admin.slaughter.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 mb-1 {{ request()->routeIs('admin.slaughter.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         Slaughtered</h1>
                                 </a>
                             </li>
                             <li><a href="{{ route('admin.postmortem.list') }}">
                                     <h1
-                                        class=" py-2 rounded-md pl-8 {{ request()->routeIs('admin.postmortem.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
+                                        class=" py-2 rounded-md pl-8 mb-1 {{ request()->routeIs('admin.postmortem.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                                         Post Mortem</h1>
                                 </a>
                             </li>

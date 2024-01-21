@@ -20,7 +20,7 @@
                             <p class="mt-1 text-sm font-semibold uppercase text-gray-500">as of
                                 {{ \Carbon\Carbon::now()->format('M d Y h:i a') }}</p>
                         </caption>
-                        <thead class="text-xs text-white uppercase bg-slate-600 ">
+                        <thead class="text-xs text-white uppercase bg-[#38419D] ">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     No.

@@ -9,6 +9,7 @@ use App\Models\AnteMortem;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 
 class AnteMortemController extends Controller
 {
@@ -172,11 +173,19 @@ class AnteMortemController extends Controller
     }
     public function ShowScheduledQueue(Request $request)
     {
-        $selectedDate = $request->input('selectedDate');
 
-        // Parse the date using Carbon
+        $selectedDate = $request->input('selectedDate', Carbon::now()->toDateString());
 
+        // Convert 'month/day/year' format to 'Y-m-d' format
+        $timestamp = strtotime($selectedDate);
+        $formattedDate = date('Y-m-d', $timestamp);
 
-        return view('admin.admin-scheduled-queue', compact('selectedDate'));
+        // Assuming 'scheduled_at' is a timestamp column
+        $animal = Animal::where('status', 'for slaughter')
+            ->whereHas('schedule', function ($query) use ($formattedDate) {
+                $query->whereDate('scheduled_at', '=', $formattedDate);
+            })->paginate(10);
+
+        return view('admin.admin-scheduled-queue', compact('selectedDate', 'animal'));
     }
 }

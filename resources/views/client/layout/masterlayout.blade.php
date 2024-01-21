@@ -21,8 +21,9 @@
                         <span class="sr-only">Toggle sidebar</span>
                     </button>
 
-                    <h1 class="text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10"><span
-                            class="text-[#EE6C4D] ">SLAUGH</span>TECH
+                    <h1
+                        class="font-exo2 tracking-wide  text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10">
+                        <span class="text-[#EE6C4D] ">Slaugh</span>tech
                     </h1>
                 </div>
             </div>
@@ -40,7 +41,7 @@
                 </button>
                 <!-- Notifications -->
                 <button type="button" data-dropdown-toggle="notification-dropdown"
-                    class="p-2 mr-1 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300 ">
+                    class="p-2 mr-1 text-[#38419D] rounded-lg hover:text-blue-700 hover:bg-gray-100  focus:ring-4 focus:ring-gray-300 ">
                     <span class="sr-only">View notifications</span>
                     <!-- Bell icon -->
                     <svg aria-hidden="true" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -53,7 +54,7 @@
                 <!-- Dropdown menu -->
                 <div class="hidden overflow-hidden z-50 my-4 max-w-sm text-base list-none bg-white rounded divide-y divide-gray-100 shadow-lg  "
                     id="notification-dropdown">
-                    <div class="block py-2 px-4 text-base font-medium text-center text-gray-700 bg-gray-50 ">
+                    <div class="block py-2 px-4 text-base font-medium text-center text-[#38419D] bg-gray-50 ">
                         Notifications
                     </div>
                     <div>
@@ -107,7 +108,7 @@
 
                 <!-- Dropdown menu -->
                 <button type="button"
-                    class="flex mr-4 pr-4 items-center text-medium pe-1 font-bold  text-gray-700 hover:text-blue-600 md:me-0"
+                    class="flex mr-4 pr-4 items-center text-medium pe-1 font-bold  text-[#38419D] hover:text-blue-600 md:me-0"
                     id="user-menu-button" aria-expanded="false" data-dropdown-toggle="dropdown">
                     <span class="sr-only">Open user menu</span>
                     @auth
@@ -179,16 +180,16 @@
     <!-- Sidebar -->
 
     <aside
-        class="fixed top-0 left-0 z-40 w-[240px] h-screen pt-14 transition-transform -translate-x-full bg-[#293241] border-r border-gray-200 md:translate-x-0"
+        class="fixed top-0 left-0 z-40 w-[240px] h-screen pt-14 transition-transform -translate-x-full bg-[#ffffff] border-r border-gray-300 md:translate-x-0"
         aria-label="Sidenav" id="drawer-navigation">
-        <div class="overflow-y-auto py-5 px-3 h-full bg-[#293241] ">
+        <div class="overflow-y-auto py-5 px-3 h-full bg-[#ffffff] font-semibold">
 
-            <ul class="space-y-2 text-white">
+            <ul class="space-y-2 text-gray-600">
                 <li>
                     <div class="panel-text pt-6 pb-6 border-white flex justify-center items-center">
                         <a href="{{ route('client.animal.register') }}">
                             <div
-                                class="flex items-center whitespace-nowrap text-white bg-gray-700 px-4 rounded-2xl py-2">
+                                class="flex items-center whitespace-nowrap text-white bg-[#38419D] px-4 rounded-2xl py-2">
                                 <box-icon name='file-plus' type='solid' color='#ffffff' size='64px'></box-icon>
                                 Add Animal
                             </div>
@@ -196,7 +197,7 @@
                     </div>
                 </li>
                 <li
-                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md w-full {{ request()->routeIs('client.overview') ? 'bg-gray-700' : '' }}">
+                    class="flex gap-4   p-2 rounded-md w-full {{ request()->routeIs('client.overview') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                     {{-- this for icon --}}
                     <a href="{{ route('client.overview') }}">
                         <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -210,7 +211,7 @@
                     </a>
                 </li>
                 <li
-                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md transition-opacity duration-500  {{ request()->routeIs('client.drafts') ? 'bg-gray-700' : '' }}">
+                    class="flex gap-4   p-2 rounded-md transition-opacity duration-500  {{ request()->routeIs('client.drafts') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                     {{-- this for icon --}}
                     <a href="{{ route('client.drafts') }}">
                         <div class="flex items-center panel-text gap-2"><svg xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +225,7 @@
                     </a>
                 </li>
                 <li
-                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('client.animal.list.register') ? 'bg-gray-700' : '' }}">
+                    class="flex gap-4   p-2 rounded-md {{ request()->routeIs('client.animal.list.register') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                     {{-- this for icon --}}
 
                     <a href="{{ route('client.animal.list.register') }}">
@@ -241,7 +242,7 @@
                 </li>
 
                 <li
-                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('client.stub') ? 'bg-gray-700' : '' }}">
+                    class="flex gap-4   p-2 rounded-md {{ request()->routeIs('client.stub') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                     {{-- this for icon --}}
 
                     <a href="{{ route('client.stub') }}">
@@ -257,7 +258,7 @@
                     </a>
                 </li>
                 <li
-                    class="flex gap-4 hover:bg-gray-700 p-2 rounded-md {{ request()->routeIs('client.archive.list') ? 'bg-gray-700' : '' }}">
+                    class="flex gap-4   p-2 rounded-md {{ request()->routeIs('client.archive.list') ? 'text-[#38419D] bg-gray-200 hover-none' : 'hover:bg-gray-200' }}">
                     {{-- this for icon --}}
 
                     <a href="{{ route('client.archive.list') }}">
