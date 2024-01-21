@@ -45,9 +45,6 @@
                     @if ($animal->cert_transfer)
                         <a href="{{ asset('storage/cert-transfer/' . $animal->cert_transfer) }}"
                             data-lightbox="animal-gallery">
-                            @php
-                                dd($animal->cert_transfer);
-                            @endphp
                             <li
                                 class="flex items-center justify-evenly bg-white border border-gray-200 rounded-lg shadow md:max-w-lg hover:bg-gray-100">
                                 <img class="object-cover w-40 max-w-40 max-h-20 rounded-l-lg md:rounded-l-none"
