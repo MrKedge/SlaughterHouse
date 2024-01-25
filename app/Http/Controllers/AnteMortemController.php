@@ -119,7 +119,6 @@ class AnteMortemController extends Controller
 
 
 
-
     public function SetSchedule(Request $request, $id)
     {
         $request->validate([
@@ -159,6 +158,7 @@ class AnteMortemController extends Controller
         return redirect()->back()->with('success', 'Set Schedule For Animal');
     }
 
+
     public function ShowDisposedList()
     {
         $animal = Animal::with('anteMortem')
@@ -171,6 +171,9 @@ class AnteMortemController extends Controller
             return view('inspector.inspector-disposal', compact('animal'));
         }
     }
+
+
+
     public function ShowScheduledQueue(Request $request)
     {
 

@@ -69,7 +69,7 @@ Route::post('/admin/seed/account/', [AuthController::class, 'CreateAccount'])->n
 Route::get('/admin/download/lrme', [ReportsController::class, 'DownloadLRME'])->name('download.lrme');
 Route::post('/comple/process/{id}', [CompletedController::class, 'CompleteRecord'])->name('complete.process');
 Route::post('/admin/slaughter/private/{id}', [PostMortemController::class, 'PrivateButcher'])->name('private.butcher');
-
+Route::post('/reject/receipt/{receiptId}', [ReceiptController::class, 'RejectReceipt'])->name('reject.receipt');
 //admin pages
 
 
@@ -99,6 +99,7 @@ Route::middleware(['admin'])->group(function () {
     Route::get('/admin/generate/mic/', [CompletedController::class, 'GenerateMic'])->name('generate.mic');
     Route::get('/admin/archive/list', [ArchiveController::class, 'ShowArchive'])->name('archive.list');
     Route::any('/admin/schedule/queue', [AnteMortemController::class, 'ShowScheduledQueue'])->name('scheduled.queue');
+    Route::get('/admin/invalid/receipt', [ReceiptController::class, 'ShowInvalidReceipts'])->name('invalid.receipt');
 });
 
 

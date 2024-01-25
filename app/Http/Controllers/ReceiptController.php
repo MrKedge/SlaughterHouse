@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Animal;
 use App\Models\Stubs;
 use App\Models\Receipt;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+
 
 class ReceiptController extends Controller
 {
@@ -25,10 +28,10 @@ class ReceiptController extends Controller
 
     public function ShowReceiptTable($id)
     {
-        // Retrieve the stab and its associated animals
+
         $stub = Stubs::with('animals')->findOrFail($id);
 
-        // Access the related animals
+
         $animal = $stub->animals()->paginate(10);
 
         return view('client.client-receipt-table', compact('stub', 'animal'));
@@ -76,5 +79,50 @@ class ReceiptController extends Controller
 
 
         return redirect()->back()->with('success', 'Receipt images uploaded successfully');
+    }
+
+
+    public function RejectReceipt(Request $request, $receiptId)
+    {
+        $request->validate([
+            'receipt-remarks' => 'required',
+        ]);
+
+        try {
+            // Update 'receipt_remarks' column in the 'receipts' table
+            DB::table('receipts')
+                ->where('id', $receiptId)
+                ->update(['receipt_remarks' => $request->input('receipt-remarks')]);
+
+            // Update 'status' column in the 'animals' table
+            DB::table('animals')
+                ->where('receipt_id', $receiptId)
+                ->update(['status' => 'receipt invalid']);
+
+            return redirect()->back()->with([
+                'status' => 'receipt invalid',
+                'receipt_remarks' => $request->input('receipt-remarks'),
+                'success' => 'Receipt rejection processed successfully.',
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json(['error' => 'Error occurred while processing the request.'], 500);
+        }
+    }
+
+
+
+
+    public function ShowInvalidReceipts()
+    {
+        $animal = Animal::where('status', 'receipt invalid')
+            ->whereHas('schedule', function ($query) {
+                $query->whereNotNull('scheduled_at');
+            })
+            ->whereHas('anteMortem', function ($query) {
+                $query->where('inspection_status', 'for slaughter');
+            })
+            ->paginate(5);
+
+        return view('admin.admin-invalid-receipt', compact('animal'));
     }
 }

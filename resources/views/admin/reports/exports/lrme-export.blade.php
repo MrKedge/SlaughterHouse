@@ -1,26 +1,27 @@
-<table class="text-sm text-left text-gray-500">
-    <thead class="">
+<table id="pdfTable" class=" text-sm text-left text-gray-500">
+
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
-            <th rowspan="2">
-                Date
-            </th>
+            <th rowspan="2" class="px-6 py-3 border">
+                Date</th>
             <!-- Loop through animal types and generate headers -->
             @foreach ($animalTypes as $animalType)
                 @if ($animalType !== null && $animalType !== '')
-                    <th scope="col" colspan="4">
+                    <th scope="col" colspan="4" class="px-6 py-3 text-center border">
                         {{ ucfirst($animalType) }}
                     </th>
                 @endif
             @endforeach
         </tr>
         <tr>
-            {{-- Loop through animal types and generate subheaders --}}
+            {{-- <th scope="col" class="px-6 py-3 border"></th> --}}
+            <!-- Loop through animal types and generate subheaders -->
             @foreach ($animalTypes as $animalType)
                 @if ($animalType !== null && $animalType !== '')
                     <th class="px-6 py-3 border">
                         Head
                     </th>
-                    <th class="px-6 py-3 border">
+                    <th class="px-6 py-3 border whitespace-nowrap">
                         Carcass wt.
                     </th>
                     <th class="px-6 py-3 border">
@@ -36,7 +37,7 @@
     <tbody>
         <!-- Loop through each day and display data -->
         @foreach ($animalData as $day)
-            <tr class="even:bg-gray-100 odd:bg-white border-b">
+            <tr class="even:bg-gray-100 odd:bg-white border  border-gray-300">
                 <td class="px-6 py-4">{{ \Carbon\Carbon::parse($day['date'])->format('d') }}</td>
 
                 @foreach ($animalTypes as $animalType)
@@ -85,45 +86,47 @@
             </tr>
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <th>Total</th>
+    <tfoot class="bg-white ">
+        <tr class="border-t">
+            <th class="px-6 py-3 border">Total</th>
 
             <!-- Initialize totals for each column -->
             @foreach ($animalTypes as $animalType)
-                @php
-                    $totalAnimalCount = 0;
-                    $totalPostWeight = 0;
-                @endphp
-
-                <!-- Loop through each day and accumulate totals for the current column -->
-                @foreach ($animalData as $day)
+                @if ($animalType !== null && $animalType !== '')
                     @php
-                        // Check if $day['animals'] is an array or object
-                        if (is_array($day['animals']) || is_object($day['animals'])) {
-                            // Loop through animals of the current type
-                            foreach ($day['animals'] as $animal) {
-                                // Check if the animal is of the current type
-                                if (isset($animal->type) && $animal->type === $animalType) {
-                                    // Check if postMortem data is available for the current animal
-                                    if (isset($animal->postMortem)) {
-                                        // Increment the total animal count for the current type
-                                        $totalAnimalCount++;
+                        $totalAnimalCount = 0;
+                        $totalPostWeight = 0;
+                    @endphp
 
-                                        // Accumulate post_weight for the current animal
-                                        $totalPostWeight += $animal->postMortem->post_weight;
+                    <!-- Loop through each day and accumulate totals for the current column -->
+                    @foreach ($animalData as $day)
+                        @php
+                            // Check if $day['animals'] is an array or object
+                            if (is_array($day['animals']) || is_object($day['animals'])) {
+                                // Loop through animals of the current type
+                                foreach ($day['animals'] as $animal) {
+                                    // Check if the animal is of the current type
+                                    if (isset($animal->type) && $animal->type === $animalType) {
+                                        // Check if postMortem data is available for the current animal
+                                        if (isset($animal->postMortem)) {
+                                            // Increment the total animal count for the current type
+                                            $totalAnimalCount++;
+
+                                            // Accumulate post_weight for the current animal
+                                            $totalPostWeight += $animal->postMortem->post_weight;
+                                        }
                                     }
                                 }
                             }
-                        }
-                    @endphp
-                @endforeach
+                        @endphp
+                    @endforeach
 
-                <!-- Display totals for the current column -->
-                <td class="px-6 py-3">{{ $totalAnimalCount }}</td>
-                <td class="px-6 py-3">{{ $totalPostWeight }}</td>
-                <td class="px-6 py-3"></td>
-                <td class="px-6 py-3"></td>
+                    <!-- Display totals for the current column -->
+                    <td class="px-6 py-3 border font-semibold">{{ $totalAnimalCount }}</td>
+                    <td class="px-6 py-3 border font-semibold">{{ $totalPostWeight }}</td>
+                    <td class="px-6 py-3 border"></td>
+                    <td class="px-6 py-3 border"></td>
+                @endif
             @endforeach
         </tr>
     </tfoot>

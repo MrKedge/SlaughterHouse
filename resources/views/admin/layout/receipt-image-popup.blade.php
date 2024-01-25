@@ -60,7 +60,48 @@
                         </a>
                     @endif
                 </ul>
+                @if ($animals->status !== 'receipt invalid')
+                    <div class="w-full text-start pt-4">
+                        <button type="button" data-modal-target="rejectReceipt-modal"
+                            data-modal-hide="image-modal-{{ $animals->id }}" data-modal-toggle="rejectReceipt-modal"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Reject</button>
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+</div>
 
+
+
+
+<div id="rejectReceipt-modal" tabindex="-1"
+    class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <div class="relative bg-white rounded-lg shadow ">
+
+            <div class="p-4 md:p-5 text-center">
+                <form action="{{ route('reject.receipt', ['receiptId' => $animals->receipt->id]) }}" method="post">
+                    @csrf
+                    <div class="w-full  border border-gray-500 rounded-lg bg-gray-50">
+                        <div class="px-4 py-2 bg-white rounded-t-lg">
+                            <label for="comment" class="sr-only">Your comment</label>
+                            <textarea name="receipt-remarks" id="comment" rows="4"
+                                class="w-full px-0 text-sm text-gray-900 bg-white outline-0" placeholder="Write a remarks..." required></textarea>
+                        </div>
+                        <div class="flex items-center gap-3 px-3 py-2 border-t">
+                            <button type="submit"
+                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800">
+                                Continue
+                            </button>
+                            <button type="button" data-modal-target="rejectReceipt-modal"
+                                data-modal-toggle="rejectReceipt-modal"
+                                class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-200 border border-gray-500">
+                                Cancel
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

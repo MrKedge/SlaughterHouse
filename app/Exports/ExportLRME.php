@@ -2,17 +2,24 @@
 
 namespace App\Exports;
 
+
 use App\Models\Animal;
-use Illuminate\Contracts\View\View;
-use Maatwebsite\Excel\Concerns\FromView;
-use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use App\Models\FormMaintenance;
+use Carbon\Carbon;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Facades\Excel;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\PageSetup;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use Maatwebsite\Excel\Concerns\WithTitle;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-
-class ExportLRME implements FromView
+class ExportLRME implements FromView, WithStyles
 {
+    use Exportable;
     protected $startDate;
     protected $endDate;
 
@@ -25,44 +32,41 @@ class ExportLRME implements FromView
 
     public function view(): View
     {
-        // Retrieve all form data
+
         $allFormData = FormMaintenance::all();
 
-        // Get distinct animal types from form_maintenances table
+
         $animalTypes = $allFormData->pluck('animal_type')->unique();
 
-        // Initialize an array to store data for each date
         $animalData = [];
 
-        // Ensure $this->startDate and $this->endDate are Carbon instances
+
         $startDate = $this->getStartDate();
         $endDate = $this->getEndDate();
 
-        // Iterate through the date range
-        if ($startDate && $endDate) {
-            $currentDate = $startDate->copy(); // Use copy to avoid modifying the original date
 
+        if ($startDate && $endDate) {
+            $currentDate = $startDate->copy();
             while ($currentDate <= $endDate) {
                 $currentDateFormatted = $currentDate->toDateString();
 
-                // Retrieve animals with related postMortem for the current date
+
                 $animalsForDate = $this->getAnimalsForDate($currentDateFormatted);
 
-                // Add the results to the array
+
                 $animalData[] = [
                     'date' => $currentDateFormatted,
                     'animals' => $animalsForDate,
                 ];
 
-                // Move to the next date
+
                 $currentDate->addDay();
             }
         }
 
-        // Pass the dates, animalData, and animalTypes to the view
+
         return view('admin.reports.exports.lrme-export', compact('animalData', 'animalTypes', 'startDate', 'endDate', 'allFormData'));
     }
-
     /**
      * Get the start date for the report.
      *
@@ -98,5 +102,55 @@ class ExportLRME implements FromView
                 $query->whereDate('slaughtered_at', $dateFormatted)->where('postmortem_status', 'good');
             })
             ->get();
+    }
+
+
+
+
+    public function styles(Worksheet $sheet)
+    {
+        // Apply styles to the header row (A1:F1)
+        $headerRow = $sheet->getStyle('A1:E1');
+        $headerRow->applyFromArray([
+            'font' => [
+                'bold' => true,
+            ],
+            'alignment' => [
+                'wrapText' => true,
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+        ]);
+
+        // Set margin (column width) for each data column
+        // $columnWidths = [
+        //     'A' => 5,  // Adjust the width for column A
+        //     'B' => 5,  // Adjust the width for column B
+        //     'C' => 5,  // Adjust the width for column C
+        //     'D' => 5,  // Adjust the width for column D
+        //     'E' => 5,  // Adjust the width for column E
+
+        // ];
+
+        $sheet->getPageSetup()->setPaperSize(PageSetup::PAPERSIZE_LEGAL);
+
+        // Set the orientation to landscape
+        $sheet->getPageSetup()->setOrientation(PageSetup::ORIENTATION_LANDSCAPE);
+
+        // Calculate and set equal width for all columns
+        $totalWidth = 25; // Adjust total width based on your requirements
+        $columnCount = count(range('A', 'E')); // Assuming columns A to E
+        $equalWidth = $totalWidth / $columnCount;
+
+        $columnWidths = array_fill_keys(range('A', 'E'), $equalWidth);
+
+        // Set column widths
+        foreach ($columnWidths as $column => $width) {
+            $sheet->getColumnDimension($column)->setWidth($width);
+        }
+        // $sheet->getPageSetup()->setPaperSize(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::PAPERSIZE_A4);
+        $sheet->getPageSetup()->setOrientation(\PhpOffice\PhpSpreadsheet\Worksheet\PageSetup::ORIENTATION_LANDSCAPE);
+        // Center-align all the cells in the worksheet
+        $sheet->getStyle($sheet->calculateWorksheetDimension())->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
     }
 }

@@ -1,4 +1,4 @@
-<h1 class="mt-3  text-2xl font-bold text-left pl-6 pb-6 text-[#293241] ">
+<h1 class="font-oswald mt-3  text-2xl font-bold text-left pl-6 pb-6 text-[#293241] ">
     ANIMAL
     DETAILS</h1>
 <h1 class="pl-6 text-2xl font-medium text-[#293241]">

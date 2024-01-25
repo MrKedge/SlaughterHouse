@@ -31,6 +31,15 @@
                             </svg>
 
                         </a>
+                        {{-- <button id="exportPdf" onclick="exportToPdf()" type="button"
+                            class="px-3 py-2 text-xs font-medium text-center inline-flex items-center text-white bg-red-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"><svg
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                            </svg>
+
+                        </button> --}}
 
                     </div>
 
@@ -44,7 +53,7 @@
                     <div
                         class="scrollbar-gutter overflow-x-auto overflow-y-auto w-full h-[500px] sm:rounded-lg rounded-b-xl border  border-gray-300">
 
-                        <table class=" text-sm text-left text-gray-500">
+                        <table id="pdfTable" class=" text-sm text-left text-gray-500">
                             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-600 bg-white">
                                 {{-- <h1 class=" text-gray-600 font-medium text-2xl rounded-lg px-5 ">
                                 LRME</h1> --}}
@@ -266,6 +275,12 @@
     @endsection
 
     <script src="{{ asset('js/slaughterhouse.js') }}"></script>
+    <script>
+        function exportToPdf() {
+            var element = document.getElementById('pdfTable'); // Replace 'pdfTable' with the ID of your table
+            html2pdf(element);
+        }
+    </script>
 </body>
 
 </html>
