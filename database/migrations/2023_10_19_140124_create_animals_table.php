@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('animal_mark')->nullable();
             $table->string('cert_ownership')->nullable();
             $table->string('qr_code')->nullable();
+
             $table->string('brgy_clearance')->nullable();
         });
     }
