@@ -30,12 +30,11 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->timestamp('approved_at')->nullable();
             $table->string('cert_transfer')->nullable();
+            $table->string('brgy_clearance')->nullable();
             $table->string('remarks')->nullable();
             $table->string('animal_mark')->nullable();
             $table->string('cert_ownership')->nullable();
             $table->string('qr_code')->nullable();
-
-            $table->string('brgy_clearance')->nullable();
         });
     }
 

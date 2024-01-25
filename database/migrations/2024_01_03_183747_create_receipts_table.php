@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('receipt_name')->nullable();
             $table->string('receipt_no')->nullable();
             $table->string('payment')->nullable();
+            $table->string('receipt_remarks')->nullable();
+            $table->string('slaughter_permit')->nullable();
         });
     }
 
