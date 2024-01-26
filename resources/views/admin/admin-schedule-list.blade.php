@@ -179,7 +179,7 @@
                                             ])
                                             <button data-modal-target="popup-modal{{ $animals->id }}"
                                                 data-modal-toggle="popup-modal{{ $animals->id }}"
-                                                class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
+                                                class="whitespace-nowrap  {{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
                                                 type="button"
                                                 @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -192,7 +192,7 @@
 
                                                 @include('admin.layout.tooltip', [
                                                     'tooltipId' => 'tooltip-light-' . $animals->id,
-                                                    'tooltipContent' => 'no receipt.',
+                                                    'tooltipContent' => 'No receipt',
                                                     'tooltipStyle' => 'light',
                                                 ])
                                             </button>

@@ -61,11 +61,14 @@
                     @endif
                 </ul>
                 @if ($animals->status !== 'receipt invalid')
-                    <div class="w-full text-start pt-4">
-                        <button type="button" data-modal-target="rejectReceipt-modal"
-                            data-modal-hide="image-modal-{{ $animals->id }}" data-modal-toggle="rejectReceipt-modal"
-                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Reject</button>
-                    </div>
+                    @if (isset($animals->receipt))
+                        <div class="w-full text-start pt-4">
+                            <button type="button" data-modal-target="rejectReceipt-modal"
+                                data-modal-hide="image-modal-{{ $animals->id }}"
+                                data-modal-toggle="rejectReceipt-modal"
+                                class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Reject</button>
+                        </div>
+                    @endif
                 @endif
             </div>
         </div>
@@ -81,12 +84,13 @@
         <div class="relative bg-white rounded-lg shadow ">
 
             <div class="p-4 md:p-5 text-center">
-                <form action="{{ route('reject.receipt', ['receiptId' => $animals->receipt->id]) }}" method="post">
+                <form method="post"
+                    action="{{ isset($animals->receipt) ? route('reject.receipt', ['receiptId' => $animals->receipt->id]) : '#' }}">
                     @csrf
                     <div class="w-full  border border-gray-500 rounded-lg bg-gray-50">
                         <div class="px-4 py-2 bg-white rounded-t-lg">
                             <label for="comment" class="sr-only">Your comment</label>
-                            <textarea name="receipt-remarks" id="comment" rows="4"
+                            <textarea name="receipt-remarks" id="comment" ws="4" cols="50" maxlength="100"
                                 class="w-full px-0 text-sm text-gray-900 bg-white outline-0" placeholder="Write a remarks..." required></textarea>
                         </div>
                         <div class="flex items-center gap-3 px-3 py-2 border-t">

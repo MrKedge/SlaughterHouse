@@ -1,5 +1,5 @@
 <div class="antialiased bg-transparent text-medium text-sm ">
-    <nav class="bg-white shadow-lg fixed left-0 right-0 top-0 z-50">{{-- header --}}
+    <nav class="bg-white shadow-md  fixed left-0 right-0 top-0 z-50">{{-- header --}}
         <div class="flex flex-wrap justify-between items-center">
             <div class="text-center font-bold w-[239px] h-[50px] flex flex-wrap justify-between items-center text-xl">
                 <div class="flex justify-start items-center">

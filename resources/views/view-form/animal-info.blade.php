@@ -3,7 +3,7 @@
         <h2 class="mb-4 text-xl font-bold text-gray-900 "></h2>
 
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
-            @if ($animal->status === 'rejected')
+            @if ($animal->status === 'rejected' || $animal->status === 'receipt invalid')
                 <div class="col-span-2">
                     <div id="alert-additional-content-2"
                         class="p-4 mb-4 text-red-800 border border-red-300 rounded-lg bg-red-50 " role="alert">
@@ -14,23 +14,34 @@
                                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                             </svg>
                             <span class="sr-only">Info</span>
-                            <h3 class="text-lg font-medium">Reject Remarks</h3>
+                            @if ($animal->status === 'rejected')
+                                <h3 class="text-lg font-medium">Reject Remarks</h3>
+                            @elseif($animal->status === 'receipt invalid')
+                                <h3 class="text-lg font-medium">Receipt Notice</h3>
+                            @endif
                         </div>
                         <div class="mt-2 mb-4 text-sm">
                             <h1>
-                                {{ $animal->remarks }}
+                                @if ($animal->status === 'rejected')
+                                    {{ $animal->remarks }}
+                                @endif
+                                @if ($animal->status === 'receipt invalid')
+                                    {{ $animal->receipt->receipt_remarks }}
+                                @endif
                             </h1>
                         </div>
                         <div class="flex">
-                            <button type="button"
-                                class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center ">
-                                <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" viewBox="0 0 20 14">
-                                    <path
-                                        d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
-                                </svg>
-                                Update form
-                            </button>
+                            @if ($animal->status === 'rejected')
+                                <button type="button"
+                                    class="text-white bg-red-800 hover:bg-red-900 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 me-2 text-center inline-flex items-center ">
+                                    <svg class="me-2 h-3 w-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 14">
+                                        <path
+                                            d="M10 0C4.612 0 0 5.336 0 7c0 1.742 3.546 7 10 7 6.454 0 10-5.258 10-7 0-1.664-4.612-7-10-7Zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z" />
+                                    </svg>
+                                    Update form
+                                </button>
+                            @endif
                             <button type="button"
                                 class="text-red-800 bg-transparent border border-red-800 hover:bg-red-900 hover:text-white focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center "
                                 data-dismiss-target="#alert-additional-content-2" aria-label="Close">

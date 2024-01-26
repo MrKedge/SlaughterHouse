@@ -113,9 +113,7 @@
                                 <th scope="col" class="px-6 py-3">
                                     Scheduled Time
                                 </th>
-                                <th scope="col" class="px-6 py-3">
-                                    Status
-                                </th>
+
                                 <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
@@ -142,10 +140,7 @@
                                     <td class="px-6 py-4">
                                         {{ optional($animals->schedule)->scheduled_at ? \Carbon\Carbon::parse($animals->schedule->scheduled_at)->format('h:i A') : 'N/A' }}
                                     </td>
-                                    <td class="px-6 py-4">
-                                        <span
-                                            class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-1 rounded">{{ $animals->anteMortem->inspection_status }}</span>
-                                    </td>
+
                                     <td class="px-6 py-4 text-gray-600">
                                         <div class="flex justify-center gap-3 text-[#38419D]">
                                             @include('admin.layout.receipt-image-popup')

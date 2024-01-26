@@ -166,7 +166,7 @@
                             </tbody>
                         @empty
                             <tr>
-                                <td colspan="5" class="py-4 bg-white text-center border-b border-gray-300">
+                                <td colspan="7" class="py-4 bg-white text-center border-b border-gray-300">
                                     <h1 class="font-semibold italic pb-3">No Animal</h1>
                                 </td>
                             </tr>
