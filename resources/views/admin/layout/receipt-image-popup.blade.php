@@ -23,7 +23,7 @@
             <div class="p-4 md:p-5">
                 <p class="text-gray-500 mb-4"></p>
                 <ul class="space-x-10   text-lg">
-                    @if ($animals->receipt)
+                    @if (isset($animals->receipt) && isset($animals->receipt->slaughter_permit))
                         <a href="{{ asset('storage/owner-receipt/' . $animals->receipt->receipt_name) }}"
                             data-lightbox="animals-gallery">
                             <li
@@ -40,9 +40,9 @@
                             </li>
                         </a>
                     @else
-                        <h1>No upload receipt.</h1>
+                        <h1>No uploads</h1>
                     @endif
-                    @if ($animals->receipt)
+                    @if (isset($animals->receipt) && isset($animals->receipt->slaughter_permit))
                         <a href="{{ asset('storage/slaughter-permit/' . $animals->receipt->slaughter_permit) }}"
                             data-lightbox="animals-gallery">
                             <li

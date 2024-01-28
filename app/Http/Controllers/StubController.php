@@ -14,11 +14,11 @@ class StubController extends Controller
     {
         $owner = User::findOrFail($ownerId);
 
-        // Retrieve animals where 'stub_id' is either empty or null and with a non-null 'arrived_at' field
+
         $animal = $owner->animals()
             ->where(function ($query) {
                 $query->whereNull('stub_id')
-                    ->orWhere('stub_id', ''); // Assuming 'stub_id' is a string field; adjust if needed
+                    ->orWhere('stub_id', '');
             })
             ->whereHas('anteMortem', function ($query) {
                 $query->whereNotNull('arrived_at');
@@ -82,5 +82,24 @@ class StubController extends Controller
             ->paginate(5);
 
         return view('admin.admin-owners-stub', compact('owner'));
+    }
+
+
+    public function ShowClientStub()
+    {
+        // Assuming you have the authenticated user, retrieve the user's ID
+        $userId = auth()->id();
+
+        // Retrieve the stubs related to the user's animals
+        $stubs = Stubs::whereHas('animals.user', function ($query) use ($userId) {
+            $query->where('id', $userId)
+                ->whereNotNull('stub_id')
+                ->whereNull('receipt_id')
+                ->orWhere('status', 'receipt invalid');
+        })
+            ->with('animals')
+            ->paginate(10);
+
+        return view('client.client-stub', compact('stubs'));
     }
 }

@@ -168,25 +168,7 @@
                                             @include('admin.layout.pop-up', [
                                                 'animalId' => $animals->id,
                                             ])
-                                            <button data-modal-target="popup-modal{{ $animals->id }}"
-                                                data-modal-toggle="popup-modal{{ $animals->id }}"
-                                                class="{{ optional($animals->receipt)->created_at === null ? 'cursor-not-allowed' : '' }} hover:-translate-y-1 transition ease-in-out delay-150 duration-300 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-1"
-                                                type="button"
-                                                @if (optional($animals->receipt)->created_at === null) disabled data-tooltip-target="tooltip-light-{{ $animals->id }}" data-tooltip-style="light" @endif>
-                                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                                                    fill="currentColor" class="w-6 h-6">
-                                                    <path d="M4.5 3.75a3 3 0 0 0-3 3v.75h21v-.75a3 3 0 0 0-3-3h-15Z" />
-                                                    <path fill-rule="evenodd"
-                                                        d="M22.5 9.75h-21v7.5a3 3 0 0 0 3 3h15a3 3 0 0 0 3-3v-7.5Zm-18 3.75a.75.75 0 0 1 .75-.75h6a.75.75 0 0 1 0 1.5h-6a.75.75 0 0 1-.75-.75Zm.75 2.25a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
 
-                                                @include('admin.layout.tooltip', [
-                                                    'tooltipId' => 'tooltip-light-' . $animals->id,
-                                                    'tooltipContent' => 'no receipt.',
-                                                    'tooltipStyle' => 'light',
-                                                ])
-                                            </button>
                                             <a href="{{ route('admin.view.animal.reg.form', ['id' => $animals->id]) }}"
                                                 data-tooltip-target="tooltip-Viewform{{ $animals->id }}"
                                                 data-tooltip-style="light"

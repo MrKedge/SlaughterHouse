@@ -33,9 +33,10 @@
                 </div>
                 <div class="text-center">
                     <h1
-                        class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
+                        class="font-raleway mb-4 text-4xl font-extrabold tracking-tight leading-none text-white md:text-5xl lg:text-6xl">
                         Welcome to <span class="text-[#EE6C4D] ">SLAUGH</span>TECH</h1>
-                    <p class="mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Here at Slaughtech we
+                    <p class="font-exo2 mb-8 text-lg font-normal text-gray-300 lg:text-xl sm:px-16 lg:px-48">Here at
+                        Slaughtech we
                         focus on quality meat processing and with sanitary.</p>
                     <div class="mt-10 flex items-center justify-center gap-x-6">
                         <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">

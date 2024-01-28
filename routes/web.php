@@ -116,7 +116,7 @@ Route::middleware(['verifiedUser'])->group(function () {
     Route::get('/client/approve/list/', [ClientController::class, 'ShowClientApprove'])->name('client.approve.list');
     Route::get('/client/schedule/list/', [ClientController::class, 'ShowClientSchedule'])->name('client.schedule.list');
     Route::get('/client/slaughter/list/', [ClientController::class, 'ShowClientSlaughter'])->name('client.slaughter.list');
-    Route::get('/client/stub', [ReceiptController::class, 'ShowClientStub'])->name('client.stub');
+    Route::get('/client/stub', [StubController::class, 'ShowClientStub'])->name('client.stub');
     Route::get('/client/table/receipt/{id}', [ReceiptController::class, 'ShowReceiptTable'])->name('receipt.table');
 });
 

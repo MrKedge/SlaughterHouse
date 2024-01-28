@@ -70,7 +70,7 @@ class AnteMortemController extends Controller
         $request->validate([
             'causes' => 'nullable',
             'anteRemarks' => 'nullable',
-            'disposeWeight' => 'nullable',
+
             'examinedBy' => 'nullable',
         ]);
 
@@ -89,7 +89,7 @@ class AnteMortemController extends Controller
             $animal->anteMortem->ante_remarks = $request->anteRemarks;
             $animal->anteMortem->causes = $request->causes;
             $animal->anteMortem->examined_by = $request->examinedBy;
-            $animal->anteMortem->dispose_weight = $request->disposeWeight;
+
             $animal->anteMortem->inspected_at = now();
 
             // Save the changes to the anteMortem record
