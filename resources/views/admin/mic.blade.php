@@ -5,7 +5,15 @@
 
 <body class="bg-[#D5DFE8] ">
 
-
+    <style>
+        select {
+            /* Remove default arrow icon */
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            /* Add your custom styling here */
+        }
+    </style>
     <div id="extralarge-modal" tabindex="-1"
         class="fixed text-sm max-h-6xl top-0 left-0 right-0 z-50 flex justify-center w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="fixed inset-0 backdrop-blur-sm bg-gray-500 bg-opacity-75 transition-opacity"></div>
@@ -68,6 +76,18 @@
                     <div class="text-base leading-relaxed text-gray-500 ">
                         <div class=" gap-4">
                             <div class="w-full text-center">
+                                @php
+                                    $groupedAnimals = $animals->groupBy('type');
+                                    $meatTypes = [];
+
+                                    // Fetch meat type mappings from form_maintenance table
+                                    $meatTypeMappings = DB::table('form_maintenances')->pluck('meat_type', 'animal_type');
+
+                                    // Loop through the mappings and build the $meatTypes array
+                                    foreach ($meatTypeMappings as $animalType => $meatType) {
+                                        $meatTypes[$animalType] = $meatType;
+                                    }
+                                @endphp
                                 <table class="w-full">
                                     <thead>
                                         <tr>
@@ -77,12 +97,11 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php
-                                            $groupedAnimals = $animals->groupBy('type');
-                                        @endphp
                                         @foreach ($groupedAnimals as $type => $animalsOfType)
                                             <tr>
-                                                <td class="border-b-2">{{ $type }}</td>
+                                                <td class="border-b-2">
+                                                    {{ $meatTypes[$type] ?? 'Unknown' }} {{-- Display meat type based on animal type --}}
+                                                </td>
                                                 <td class="border-b-2">{{ $animalsOfType->count() }}</td>
                                                 <td class="border-b-2">
                                                     {{ $animalsOfType->sum(function ($animal) {
@@ -159,8 +178,16 @@
                         </p>
                     </div>
                     <div class="text-base text-end leading-relaxed text-gray-500 ">
-                        <p>Meat Inspector III
-                        </p>
+
+                        <select id="role" name="role" required
+                            class="uppercase text-black font-semibold text-center">
+                            @foreach ($inspector as $user)
+                                <option value="{{ $user->id }}">{{ $user->first_name }} {{ $user->last_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                        <p>Meat Inspector III</p>
+
                     </div>
                     <div class="text-base text-start leading-relaxed text-gray-500 ">
                         <p>Received by:

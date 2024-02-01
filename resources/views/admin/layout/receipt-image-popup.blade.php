@@ -63,9 +63,9 @@
                 @if ($animals->status !== 'receipt invalid')
                     @if (isset($animals->receipt))
                         <div class="w-full text-start pt-4">
-                            <button type="button" data-modal-target="rejectReceipt-modal"
+                            <button type="button" data-modal-target="rejectReceipt-modal-{{ $animals->id }}"
                                 data-modal-hide="image-modal-{{ $animals->id }}"
-                                data-modal-toggle="rejectReceipt-modal"
+                                data-modal-toggle="rejectReceipt-modal-{{ $animals->id }}"
                                 class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Reject</button>
                         </div>
                     @endif
@@ -78,7 +78,7 @@
 
 
 
-<div id="rejectReceipt-modal" tabindex="-1"
+<div id="rejectReceipt-modal-{{ $animals->id }}" tabindex="-1"
     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full">
         <div class="relative bg-white rounded-lg shadow ">
@@ -98,8 +98,8 @@
                                 class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200  hover:bg-blue-800">
                                 Continue
                             </button>
-                            <button type="button" data-modal-target="rejectReceipt-modal"
-                                data-modal-toggle="rejectReceipt-modal"
+                            <button type="button" data-modal-target="rejectReceipt-modal-{{ $animals->id }}"
+                                data-modal-toggle="rejectReceipt-modal-{{ $animals->id }}"
                                 class="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-gray-600 rounded-lg focus:ring-4 focus:ring-blue-200 border border-gray-500">
                                 Cancel
                             </button>

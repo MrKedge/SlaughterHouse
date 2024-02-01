@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->string('animal_type')->nullable();
+            $table->string('meat_type')->nullable();
             $table->string('animal_destination')->nullable();
             $table->string('animal_butcher')->nullable();
             $table->string('animal_ageclassify')->nullable();

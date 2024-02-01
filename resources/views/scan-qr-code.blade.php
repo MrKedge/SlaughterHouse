@@ -74,7 +74,7 @@
                                             : (auth()->user()->role === 'butcher'
                                                 ? route('butcher.overview')
                                                 : '#')) }}"
-                                        class="cursor-pointer  text-white font-semibold ">
+                                        class="cursor-pointer  text-gray-600 font-semibold ">
                                         <svg class="w-9" xmlns="http://www.w3.org/2000/svg" fill="none"
                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                             class="w-6 h-6">
@@ -108,22 +108,75 @@
                 if (userRole === 'admin') {
                     scanner.addListener('scan', function(content) {
                         let decodedContent = decodeURIComponent(content);
-                        window.location.href = '/admin/view/animal/reg/form/' + decodedContent;
+                        let url = '/admin/view/animal/reg/form/' + decodedContent;
+                        try {
+                            window.location.href = url;
+                        } catch (error) {
+                            console.error('Error navigating to URL:', error);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
+                        // Check if navigation was successful (optional)
+                        if (window.location.href !== url) {
+                            console.error('Navigation failed. Invalid or inaccessible URL:', url);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
                     });
                 } else if (userRole === 'butcher') {
                     scanner.addListener('scan', function(content) {
                         let decodedContent = decodeURIComponent(content);
-                        window.location.href = '/butcher/view/form/' + decodedContent;
+                        let url = '/butcher/view/form/' + decodedContent;
+                        try {
+                            window.location.href = url;
+                        } catch (error) {
+                            console.error('Error navigating to URL:', error);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
+                        // Check if navigation was successful (optional)
+                        if (window.location.href !== url) {
+                            console.error('Navigation failed. Invalid or inaccessible URL:', url);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
                     });
+
                 } else if (userRole === 'inspector') {
                     scanner.addListener('scan', function(content) {
                         let decodedContent = decodeURIComponent(content);
-                        window.location.href = '/inspector/view/form/' + decodedContent;
+                        let url = '/inspector/view/form/' + decodedContent;
+                        try {
+                            window.location.href = url;
+                        } catch (error) {
+                            console.error('Error navigating to URL:', error);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
+                        // Check if navigation was successful (optional)
+                        if (window.location.href !== url) {
+                            console.error('Navigation failed. Invalid or inaccessible URL:', url);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
                     });
                 } else if (userRole === 'client') {
                     scanner.addListener('scan', function(content) {
                         let decodedContent = decodeURIComponent(content);
-                        window.location.href = '/client/view/animal/form/' + decodedContent;
+                        let url = '/client/view/animal/form/' + decodedContent;
+                        try {
+                            window.location.href = url;
+                        } catch (error) {
+                            console.error('Error navigating to URL:', error);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
+                        // Check if navigation was successful (optional)
+                        if (window.location.href !== url) {
+                            console.error('Navigation failed. Invalid or inaccessible URL:', url);
+                            // Redirect to custom error page route
+                            window.location.href = '/error';
+                        }
                     });
                 }
 

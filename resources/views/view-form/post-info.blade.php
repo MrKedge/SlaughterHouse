@@ -82,7 +82,7 @@
                     <thead class="text-xs text-gray-700  bg-gray-300">
                         <tr>
                             <th scope="col" class="px-6 py-3">
-                                Organ
+                                Part
                             </th>
 
                             <th scope="col" class="px-6 py-3 ">
@@ -91,9 +91,11 @@
                             <th scope="col" class="px-6 py-3">
                                 Cause
                             </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
-                            </th>
+                            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'inspector')
+                                <th scope="col" class="px-6 py-3">
+                                    Action
+                                </th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -141,18 +143,21 @@
                                                 class="hidden p-1 bg-gray-50 border border-gray-500 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full"
                                                 value="{{ optional($condemn)->cause }}">
                                         </td>
-                                        <td class="px-6 py-4 space-x-1">
-                                            <a onclick="editRow({{ $condemn->id }})"
-                                                class="cursor-pointer  font-medium text-blue-600 hover:underline">
-                                                <span id="editSpan_{{ $condemn->id }}">Edit</span>
-                                                <span id="cancelSpan_{{ $condemn->id }}" class="hidden">Cancel</span>
-                                            </a>
+                                        @if (auth()->user()->role == 'admin' || auth()->user()->role == 'inspector')
+                                            <td class="px-6 py-4 space-x-1">
+                                                <a onclick="editRow({{ $condemn->id }})"
+                                                    class="cursor-pointer  font-medium text-blue-600 hover:underline">
+                                                    <span id="editSpan_{{ $condemn->id }}">Edit</span>
+                                                    <span id="cancelSpan_{{ $condemn->id }}"
+                                                        class="hidden">Cancel</span>
+                                                </a>
 
-                                            <button id="button_{{ $condemn->id }}" type="submit"
-                                                class="cursor-pointer hidden  font-medium text-green-600 hover:underline">
-                                                Save
-                                            </button>
-                                        </td>
+                                                <button id="button_{{ $condemn->id }}" type="submit"
+                                                    class="cursor-pointer hidden  font-medium text-green-600 hover:underline">
+                                                    Save
+                                                </button>
+                                            </td>
+                                        @endif
                                     </form>
                                 </tr>
                             @endforeach

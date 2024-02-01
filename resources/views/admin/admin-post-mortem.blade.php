@@ -114,9 +114,9 @@
                                 <th scope="col" class="px-6 py-3">
                                     Slaughtered Time
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                {{-- <th scope="col" class="px-6 py-3">
                                     Status
-                                </th>
+                                </th> --}}
                                 <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
@@ -147,12 +147,12 @@
                                     <td class="px-6 py-4">
                                         {{ \Carbon\Carbon::parse($animals->slaughtered_at)->format('h:i A') }}
                                     </td>
-                                    <td class="px-6 py-4">
+                                    {{-- <td class="px-6 py-4">
                                         <span
                                             class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                             {{ $animals->postMortem->postmortem_status }}
                                         </span>
-                                    </td>
+                                    </td> --}}
                                     <td class="px-6 py-4 text-[#38419D]">
                                         <div class="flex justify-center gap-3">
                                             <form action="{{ route('complete.process', ['id' => $animals->id]) }}"

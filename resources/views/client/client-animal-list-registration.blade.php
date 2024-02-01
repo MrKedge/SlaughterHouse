@@ -145,7 +145,7 @@
                                         {{ \Carbon\Carbon::parse($animals->created_at)->format('h:i a') }}
                                     </td>
                                     <td class="px-6 py-4">
-                                        @if ($animals->status === 'approved')
+                                        @if ($animals->status === 'approved' || $animals->status === 'processed')
                                             <span
                                                 class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                 {{ $animals->status }}
@@ -155,22 +155,12 @@
                                                 class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                 {{ $animals->status }}
                                             </span>
-                                        @elseif($animals->status === 'inspection')
-                                            <span
-                                                class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                {{ $animals->status }}
-                                            </span>
                                         @elseif($animals->status === 'rejected')
                                             <span
                                                 class="bg-red-100 text-red-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                 {{ $animals->status }}
                                             </span>
-                                        @elseif($animals->status === 'for slaughter')
-                                            <span
-                                                class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
-                                                {{ $animals->status }}
-                                            </span>
-                                        @elseif($animals->status === 'slaughtered')
+                                        @else
                                             <span
                                                 class="bg-pink-100 text-pink-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded uppercase">
                                                 {{ $animals->status }}

@@ -1,5 +1,5 @@
 <div class="antialiased bg-transparent text-medium text-sm ">
-    <nav class="bg-white shadow-lg fixed left-0 right-0 top-0 z-50">{{-- header --}}
+    <nav class="bg-white shadow-md  fixed left-0 right-0 top-0 z-50">{{-- header --}}
         <div class="flex flex-wrap justify-between items-center">
             <div class="text-center font-bold w-[239px] h-[50px] flex flex-wrap justify-between items-center text-xl">
                 <div class="flex justify-start items-center">
@@ -22,8 +22,8 @@
                     </button>
 
                     <h1
-                        class="font-exo2 tracking-wide  text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10">
-                        <span class="text-[#EE6C4D] ">Slaugh</span>tech
+                        class="font-exo2 tracking-wide  text-white bg-[#37B5B6] rounded-full p-1 px-2 hidden lg:block ml-10">
+                        <span class="text-gray-600 ">Slaugh</span>tech
                     </h1>
                 </div>
             </div>

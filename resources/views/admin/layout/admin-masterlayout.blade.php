@@ -23,8 +23,8 @@
 
 
                     <h1
-                        class="font-exo2 tracking-wide  text-white bg-gray-600 rounded-lg p-1 px-2 hidden lg:block ml-10">
-                        <span class="text-[#EE6C4D] ">Slaugh</span>tech
+                        class="font-exo2 tracking-wide  text-white bg-[#37B5B6] rounded-full p-1 px-2 hidden lg:block ml-10">
+                        <span class="text-gray-600 ">Slaugh</span>tech
                     </h1>
                 </div>
             </div>

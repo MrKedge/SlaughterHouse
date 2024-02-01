@@ -27,4 +27,14 @@ class Handler extends ExceptionHandler
             //
         });
     }
+
+    public function render($request, Throwable $exception)
+    {
+        // Handle specific exceptions and return custom error view
+        if ($exception instanceof \Illuminate\Routing\Exceptions\UrlGenerationException) {
+            return response()->view('errors.custom', [], 500);
+        }
+
+        return parent::render($request, $exception);
+    }
 }

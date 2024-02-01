@@ -14,5 +14,6 @@ class FormMaintenance extends Model
         'animal_butcher',
         'animal_ageclassify',
         'animal_source',
+        'meat_type',
     ];
 }

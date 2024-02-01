@@ -9,7 +9,7 @@ class CondemnCarcass extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category', 'carcass_weight', 'part', 'cause', 'animal_id'];
+    protected $fillable = ['carcass_weight', 'part', 'cause', 'animal_id'];
 
     public function animal()
     {

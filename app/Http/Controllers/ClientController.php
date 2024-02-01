@@ -58,6 +58,12 @@ class ClientController extends Controller
         }
 
 
+        $animalsQuery->whereNotIn('id', function ($query) {
+            $query->select('animal_id')
+                ->from('archives');
+        });
+
+
         $animal = $animalsQuery->paginate(10);
 
         return view('client.client-animal-list-registration', compact('user', 'animal', 'status'));
@@ -224,15 +230,13 @@ class ClientController extends Controller
 
         if (auth()->check()) {
             if (auth()->user()->role === 'client') {
-                return redirect()->route('client.animal.list.register');
+                return redirect()->route('client.animal.list.register')->with('success', 'Thank you for registering');
             } elseif (auth()->user()->role === 'admin') {
-                return redirect()->route('admin.view.animal.reg.list');
+                return redirect()->route('admin.view.animal.reg.list')->with('success', 'Thank you for registering');
             } else {
-
                 return redirect()->route('log-in');
             }
         } else {
-
             return redirect()->route('log-in');
         }
     }

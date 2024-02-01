@@ -15,6 +15,7 @@ class FormMaintenanceSeeder extends Seeder
     {
         FormMaintenance::create([
             'animal_type' => 'cow',
+            'meat_type' => 'beef',
             'animal_destination' => 'wet market',
             'animal_butcher' => 'public',
             'animal_ageclassify' => 'culled sow/boar',
@@ -23,6 +24,7 @@ class FormMaintenanceSeeder extends Seeder
 
         FormMaintenance::create([
             'animal_type' => 'carabao',
+            'meat_type' => 'carabeef',
             'animal_destination' => 'meat shops',
             'animal_butcher' => 'private',
             'animal_ageclassify' => 'fattener',
@@ -31,6 +33,7 @@ class FormMaintenanceSeeder extends Seeder
 
         FormMaintenance::create([
             'animal_type' => 'horse',
+            'meat_type' => 'chevaline',
             'animal_destination' => 'meat cutting',
             'animal_butcher' => null,
             'animal_ageclassify' => 'grower',
@@ -39,6 +42,7 @@ class FormMaintenanceSeeder extends Seeder
 
         FormMaintenance::create([
             'animal_type' => 'swine',
+            'meat_type' => 'pork',
             'animal_destination' => 'hotel & restaurants',
             'animal_butcher' => null,
             'animal_ageclassify' => null,

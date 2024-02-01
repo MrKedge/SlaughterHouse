@@ -84,6 +84,8 @@ class CompletedController extends Controller
 
     public function GenerateMic(Request $request)
     {
+        $inspector = User::where('role', 'inspector')->get();
+
         // Decode the selected animals from JSON
         $selectedAnimals = json_decode($request->input('selected_animals'));
 
@@ -113,6 +115,6 @@ class CompletedController extends Controller
         // Get the owner of the first animal
         $owner = $animals->first()->user;
 
-        return view('admin.mic', compact('owner', 'newMic', 'animals'));
+        return view('admin.mic', compact('owner', 'newMic', 'animals', 'inspector'));
     }
 }

@@ -3,8 +3,11 @@
     <div class="flex justify-between items-start w-full">
         <div class="flex-col items-center">
             <div class="flex items-center mb-1">
-                <h5 class="text-xl bg-gray-600 p-2 rounded-lg font-bold leading-none text-white  me-1"><span
-                        class="text-[#EE6C4D] ">SLAUGH</span>TECH</h5>
+
+                <h1
+                    class="text-xl me-1 font-bold leading-none font-exo2 tracking-wide  text-white bg-[#37B5B6] rounded-full p-1 px-2 hidden lg:block ml-10">
+                    <span class="text-gray-600 ">Slaugh</span>tech
+                </h1>
                 <svg data-popover-target="chart-info" data-popover-placement="bottom"
                     class="w-3.5 h-3.5 text-gray-500  hover:text-gray-900  cursor-pointer ms-1" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
