@@ -5,7 +5,7 @@
 
 <body class="">
 
-    @extends('inspector.layout.inspector-layout')
+    @extends('layout.masterlayout')
 
     @section('content')
         @include('view-form.all-view-form')
