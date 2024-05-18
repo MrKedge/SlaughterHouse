@@ -137,16 +137,41 @@ class PostMortemController extends Controller
     }
 
 
-    public function ShowAdminPostMortem()
+    public function ShowAdminPostMortem(Request $request)
     {
+        $sortColumn = $request->input('sort_column', 'animals.id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Adjust the sorting column if necessary
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        } elseif ($sortColumn === 'arrived_at') {
+            // If sorting by 'arrived_at', assume it's from the 'ante_mortems' table
+            $sortColumn = 'ante_mortems.arrived_at';
+        } elseif ($sortColumn === 'slaughtered_at') {
+            // If sorting by 'slaughtered_at', assume it's from the 'post_mortems' table
+            $sortColumn = 'post_mortems.slaughtered_at';
+        }
+
+        // Fetch animals with the specified status, post-mortem status, and no completed records
         $animal = Animal::where('status', 'slaughtered')
             ->whereHas('postMortem', function ($query) {
                 $query->where('postmortem_status', 'good');
             })
             ->whereDoesntHave('completed') // Ensure there is no related completed record
+            ->leftJoin('ante_mortems', 'animals.id', '=', 'ante_mortems.animal_id') // Join with ante_mortems table for sorting
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id') // Join with users table
+            ->leftJoin('post_mortems', 'animals.id', '=', 'post_mortems.animal_id') // Join with post_mortems table
+            ->orderBy($sortColumn, $sortOrder) // Apply sorting
+            ->select('animals.*', 'users.first_name as first_name') // Select necessary columns
             ->paginate(5);
 
-        return view('admin.admin-post-mortem', compact('animal'));
+        return view('admin.admin-post-mortem', [
+            'animal' => $animal,
+            'sortColumn' => $sortColumn,
+            'sortOrder' => $sortOrder,
+            'request' => $request,
+        ]);
     }
 
 

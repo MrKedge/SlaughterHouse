@@ -14,6 +14,7 @@ use App\Mail\RejectMail;
 use Illuminate\Support\Facades\Log;
 use App\Models\FormMaintenance;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -39,31 +40,84 @@ class AdminController extends Controller
 
 
 
-    public function ShowForSlaughterList()
+    public function ShowForSlaughterList(Request $request)
     {
-        $animal = Animal::where('status', 'for slaughter')->paginate(5);
-        return view('admin.admin-for-slaughter-list', compact('animal'));
+        $sortColumn = $request->input('sort_column', 'animals.id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Adjust the sorting column if necessary
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        } elseif ($sortColumn === 'user_name') {
+            // Sorting by user name requires joining the users table
+            $sortColumn = 'users.name';
+        }
+
+        // Fetch animals with the specified status
+        $animal = Animal::where('status', 'for slaughter')
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id')
+            ->leftJoin('schedules', 'animals.id', '=', 'schedules.animal_id')
+            ->orderBy($sortColumn, $sortOrder) // Apply sorting
+            ->select('animals.*', 'users.first_name as first_name') // Select necessary columns
+            ->paginate(5);
+
+        return view('admin.admin-for-slaughter-list', [
+            'animal' => $animal,
+            'sortColumn' => $request->input('sort_column', 'animals.id'), // Keep original sort column for UI
+            'sortOrder' => $sortOrder,
+            'request' => $request,
+        ]);
     }
 
 
 
-
-    public function ShowApproveList()
+    public function showApproveList(Request $request)
     {
+        $sortColumn = $request->input('sort_column', 'id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Handle specific sort columns from related tables
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        }
+
         $animal = Animal::with(['user', 'anteMortem'])
-            ->where('status', 'approved')
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id')
+            ->where('animals.status', 'approved')
+            ->orderBy($sortColumn, $sortOrder)
+            ->select('animals.*')
             ->paginate(5);
 
-        return view('admin.admin-approve-list', compact('animal'));
+        // Pass data to the view
+        return view('admin.admin-approve-list', [
+            'animal' => $animal,
+            'sortColumn' => $request->input('sort_column', 'id'),
+            'sortOrder' => $sortOrder,
+            'request' => $request,
+        ]);
     }
 
 
-    public function ShowRegistrationList()      //for showing the animals list on the table//-------------------------------
+    public function ShowRegistrationList(Request $request)      //for showing the animals list on the table//-------------------------------
     {
-        $animal = Animal::with('user')
+        $sortColumn = $request->input('sort_column', 'id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        if ($sortColumn === 'date') {
+            $sortColumn = 'created_at';
+        }
+
+
+        $animal = DB::table('animals')
+            ->select('animals.*', 'users.first_name', 'users.last_name', 'users.email')
+            ->join('users', 'users.id', '=', 'animals.user_id')
             ->where('status', 'pending')
+            ->orderBy($sortColumn, $sortOrder)
             ->paginate(5);
-        return view('admin.admin-animal-reg-list', compact('animal'));
+
+
+
+        return view('admin.admin-animal-reg-list', compact('animal', 'sortColumn', 'sortOrder', 'request'));
     }
 
 
@@ -194,31 +248,74 @@ class AdminController extends Controller
 
 
 
-    public function ShowScheduleList()
+    public function ShowScheduleList(Request $request)
     {
-        $animal = Animal::where('status', 'inspection')
+        $sortColumn = $request->input('sort_column', 'animals.id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Adjust the sorting column if necessary
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        } elseif ($sortColumn === 'arrived_at') {
+            $sortColumn = 'ante_mortems.arrived_at'; // Assuming 'arrived_at' is a column in 'ante_mortems'
+        }
+
+        // Fetch animals with the specified conditions
+        $animal = Animal::where('animals.status', 'inspection')
             ->whereHas('schedule', function ($query) {
                 $query->whereNotNull('scheduled_at');
             })
             ->whereHas('anteMortem', function ($query) {
                 $query->where('inspection_status', 'for slaughter');
             })
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id') // Join with users table
+            ->leftJoin('ante_mortems', 'animals.id', '=', 'ante_mortems.animal_id') // Join with ante_mortems table
+            ->leftJoin('schedules', 'animals.id', '=', 'schedules.animal_id')
+            ->orderBy($sortColumn, $sortOrder) // Apply sorting
+            ->select('animals.*', 'users.first_name as first_name', 'ante_mortems.arrived_at as arrived_at') // Select necessary columns
             ->paginate(5);
 
-        return view('admin.admin-schedule-list', compact('animal'));
+        return view('admin.admin-schedule-list', [
+            'animal' => $animal,
+            'sortColumn' => $request->input('sort_column', 'animals.id'), // Keep original sort column for UI
+            'sortOrder' => $sortOrder,
+            'request' => $request,
+        ]);
     }
 
 
 
-    public function ShowSlaughteredList()
+    public function ShowSlaughteredList(Request $request)
     {
+        $sortColumn = $request->input('sort_column', 'animals.id');
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Adjust the sorting column if necessary
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        } elseif ($sortColumn === 'arrived_at') {
+            // If sorting by 'arrived_at', assume it's from the 'ante_mortems' table
+            $sortColumn = 'ante_mortems.arrived_at';
+        }
+
+        // Fetch animals with the specified status and incomplete post-mortem status
         $animal = Animal::where('status', 'slaughtered')
             ->whereHas('postMortem', function ($query) {
                 $query->whereNull('postmortem_status');
             })
+            ->leftJoin('ante_mortems', 'animals.id', '=', 'ante_mortems.animal_id') // Join with ante_mortems table for sorting
+            ->leftJoin('post_mortems', 'animals.id', '=', 'post_mortems.animal_id')
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id') // Join with users table to select 'users.first_name'
+            ->orderBy($sortColumn, $sortOrder) // Apply sorting
+            ->select('animals.*', 'users.first_name as first_name')
             ->paginate(5);
 
-        return view('admin.admin-slaughter-list', compact('animal'));
+        return view('admin.admin-slaughter-list', [
+            'animal' => $animal,
+            'sortColumn' => $request->input('sort_column', 'animals.id'), // Keep original sort column for UI
+            'sortOrder' => $sortOrder,
+            'request' => $request,
+        ]);
     }
 
 

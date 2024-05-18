@@ -64,7 +64,7 @@ class ClientController extends Controller
         });
 
 
-        $animal = $animalsQuery->paginate(10);
+        $animal = $animalsQuery->latest('created_at')->paginate(10);
 
         return view('client.client-animal-list-registration', compact('user', 'animal', 'status'));
     }

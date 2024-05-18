@@ -35,16 +35,41 @@ class AnteMortemController extends Controller
 
 
 
-    public function AnteMortemList()
+    public function AnteMortemList(Request $request)
     {
+        // Retrieve sorting parameters from the request
+        $sortColumn = $request->input('sort_column', 'animals.id'); // Specify animals.id by default
+        $sortOrder = $request->input('sort_order', 'asc');
+
+        // Adjust the sorting column if necessary
+        if ($sortColumn === 'date') {
+            $sortColumn = 'animals.created_at';
+        }
+
+        // Fetch animals with the specified status and without a schedule
         $animal = Animal::where('status', 'inspection')->doesntHave('schedule')
+            ->leftJoin('users', 'animals.user_id', '=', 'users.id')
+            ->leftJoin('ante_mortems', 'animals.id', '=', 'ante_mortems.animal_id')
+            // Apply sorting
+            ->orderBy($sortColumn, $sortOrder)
+            ->select('animals.*', 'users.first_name as first_name') // Specify select columns to avoid ambiguity
             ->paginate(5);
 
-        // Check user role
+        // Check user role and return the appropriate view
         if (auth()->user()->role === 'admin') {
-            return view('admin.admin-monitoring-list', compact('animal'));
+            return view('admin.admin-monitoring-list', [
+                'animal' => $animal,
+                'sortColumn' => $sortColumn,
+                'sortOrder' => $sortOrder,
+                'request' => $request,
+            ]);
         } elseif (auth()->user()->role === 'inspector') {
-            return view('inspector.inspector-antemortem', compact('animal'));
+            return view('inspector.inspector-antemortem', [
+                'animal' => $animal,
+                'sortColumn' => $sortColumn,
+                'sortOrder' => $sortOrder,
+                'request' => $request,
+            ]);
         }
     }
 
